@@ -1,0 +1,15 @@
+{
+    "name": "secondtruth/startmin",
+    "description": "Admin dashboard template for Bootstrap",
+    "homepage": "http://kevin-fontanoza.dx.am",
+    "keywords": ["backend", "admin", "template", "theme", "web"],
+    "license": "ISC",
+    "authors": [
+        {
+            "name": "Kevin Fontanoza",
+            "email": "kevinfontanoza@gmail.com",
+            "homepage": "http://kevin-fontanoza.dx.am",
+            "role": "Developer"
+        }
+    ]
+}
