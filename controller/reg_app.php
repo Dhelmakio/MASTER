@@ -153,8 +153,8 @@ class Registry extends DatabaseConnection {
            s_period = '$speriod', other_source = '$osource', specify = '$specify' WHERE applicant_code = '$code'";
            return mysqli_query($this->connect(), $sql);
        }
-       function reference_update($code,$source){
-        $sql = "UPDATE applicants_reference SET source = '$source'
+       function reference_update($code, $purpose, $source, $fb){
+        $sql = "UPDATE applicants_reference SET loan_purpose = '$purpose', source = '$source', fb_acct = '$fb'
         WHERE applicant_code = '$code'";
         return mysqli_query($this->connect(), $sql);
        }
@@ -288,9 +288,6 @@ class Registry extends DatabaseConnection {
                 WHERE applicants_personal.applicant_code = '$id'";
                 return mysqli_query($this->connect(), $sql);  
             }
-            
-            
-            
         }
 
        
