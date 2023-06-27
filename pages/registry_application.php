@@ -149,7 +149,7 @@ if(!isset($_SESSION['user_id'])){
                                                                                             placeholder="Nickname">
                                                                                     </div>
                                                                                 </div>
-                                                                                <div class="col-lg-3">
+                                                                                <!-- <div class="col-lg-3">
                                                                                     <div class="form-group">
                                                                                         <label>Age</label>
                                                                                         <input class="form-control input-set-1"
@@ -158,7 +158,7 @@ if(!isset($_SESSION['user_id'])){
                                                                                             placeholder="Age" required
                                                                                             >
                                                                                     </div>
-                                                                                </div>
+                                                                                </div> -->
                                                                                 <div class="col-lg-3">
                                                                                     <div class="form-group">
                                                                                         <label>Gender</label>
@@ -218,7 +218,7 @@ if(!isset($_SESSION['user_id'])){
                                                                                         <select name="pob_province"
                                                                                             id="pob_province" required
                                                                                             class="form-control input-set-1"
-                                                                                            onchange="populate('pob_city', '03', '', this.value)">
+                                                                                            onchange="populate('pob_city', '', this.value)">
                                                                                             <option selected disabled>
                                                                                                 SELECT</option>
                                                                                             <select>
@@ -251,7 +251,7 @@ if(!isset($_SESSION['user_id'])){
                                                                                         <select name="province"
                                                                                             class="form-control input-set-1"
                                                                                             id="province" required
-                                                                                            onchange="populate('city', '03', '', this.value)">
+                                                                                            onchange="populate('city', '', this.value)">
                                                                                             <option value="" selected
                                                                                                 disabled>SELECT</option>
                                                                                         </select>
@@ -265,7 +265,7 @@ if(!isset($_SESSION['user_id'])){
                                                                                         <select name="city"
                                                                                             class="form-control input-set-1"
                                                                                             id="city" required
-                                                                                            onchange="populate('brgy', '03', 'province', this.value)">
+                                                                                            onchange="populate('brgy', 'province', this.value)">
                                                                                             <option value="" selected
                                                                                                 disabled>SELECT</option>
                                                                                         </select>
@@ -457,7 +457,7 @@ if(!isset($_SESSION['user_id'])){
                                                                                             <select name="province2"
                                                                                                 class="form-control input-set-1"
                                                                                                 id="province2" required
-                                                                                                onchange="populate('city2', '03', '', this.value)">
+                                                                                                onchange="populate('city2', '', this.value)">
                                                                                                 <option value=""
                                                                                                     selected disabled>
                                                                                                     SELECT</option>
@@ -471,7 +471,7 @@ if(!isset($_SESSION['user_id'])){
                                                                                             <select name="city2"
                                                                                                 class="form-control input-set-1"
                                                                                                 id="city2" required
-                                                                                                onchange="populate('brgy2', '03', 'province2', this.value)">
+                                                                                                onchange="populate('brgy2', 'province2', this.value)">
                                                                                                 <option value=""
                                                                                                     selected disabled>
                                                                                                     SELECT</option>
@@ -746,7 +746,7 @@ if(!isset($_SESSION['user_id'])){
                                                                                             <select name="spob_province"
                                                                                                 class="form-control input-set-2" required
                                                                                                 id="spob_province"
-                                                                                                onchange="populate('spob_city', '03', '', this.value)"
+                                                                                                onchange="populate('spob_city', '', this.value)"
                                                                                                 required>
                                                                                                 <option value=""
                                                                                                     selected disabled>
@@ -786,7 +786,7 @@ if(!isset($_SESSION['user_id'])){
                                                                                                 name="spouse_province"
                                                                                                 class="form-control input-set-2" required
                                                                                                 id="spouse_province"
-                                                                                                onchange="populate('spouse_city', '03', '', this.value)">
+                                                                                                onchange="populate('spouse_city', '', this.value)">
                                                                                                 <option value=""
                                                                                                     selected disabled>
                                                                                                     SELECT</option>
@@ -801,7 +801,7 @@ if(!isset($_SESSION['user_id'])){
                                                                                             <select name="spouse_city"
                                                                                             class="form-control input-set-2" required
                                                                                                 id="spouse_city"
-                                                                                                onchange="populate('spouse_brgy', '03', 'spouse_province', this.value)">
+                                                                                                onchange="populate('spouse_brgy', 'spouse_province', this.value)">
                                                                                                 <option value=""
                                                                                                     selected disabled>
                                                                                                     SELECT</option>
@@ -1577,8 +1577,8 @@ if(!isset($_SESSION['user_id'])){
         if (val == "Married") {
             // alert("hello");
             document.getElementById('div_spouse').style.display = "block";
-            populate("spob_province", "03", "", "");
-            populate("spouse_province", "03", "", "");
+            populate("spob_province",  "", "");
+            populate("spouse_province", "", "");
         } else {
             document.getElementById('div_spouse').style.display = "none";
         }
@@ -1757,12 +1757,13 @@ if(!isset($_SESSION['user_id'])){
     </script>
 
     <script>
-    populate("pob_province", "03", "", "");
-    populate("province", "03", "", "");
-    populate("province2", "03", "", "");
+    
+    populate("pob_province", "", "");
+    populate("province", "", "");
+    populate("province2", "", "");
 
 
-    function populate(select, region, prevVal, val) {
+    function populate(select, prevVal, val) {
 
         let mainSelect = document.getElementById(select);
 
@@ -1770,7 +1771,7 @@ if(!isset($_SESSION['user_id'])){
             method = 'GET',
             overrideMimeType = 'application/json',
             url =
-            '../philippine_provinces_cities_municipalities_and_barangays_2017v3.1.json'; // ADD THE URL OF THE FILE.
+            '../ph_provinces.json'; // ADD THE URL OF THE FILE.
 
         let frag = document.createDocumentFragment(),
             elOption = null;
@@ -1780,13 +1781,61 @@ if(!isset($_SESSION['user_id'])){
 
                 // PARSE JSON DATA.
                 let data = JSON.parse(xhr.responseText);
+                
+                let compare = (a, b) => {
+                    if(a.province_list < b.province_list){
+                        return -1;
+                    }
+                    if(a.province_list > b.province_list){
+                        return 1;
+                    }
+                    return 0;
+                }
 
-                if (data.hasOwnProperty(region)) {
+                // if (data.hasOwnProperty(region)) {
 
 
 
+                //     if (select !== "province" || select !== "province2" || select != "spob_province" || select !=
+                //         "spouse_province") {
+                //         let index = mainSelect.options.length;
+                //         while (index > 0) {
+                //             mainSelect.remove(index);
+                //             index--;
+                //         }
+                //     }
+
+                //     if (select === "province" || select === "province2" || select === "pob_province" || select ===
+                //         "spouse_province" || select === "spob_province") {
+                //         for (key in Object.keys(data[region].province_list)) {
+                //             elOption = frag.appendChild(document.createElement('option'));
+                //             elOption.value = Object.keys(data[region].province_list)[key];
+                //             elOption.text = `${Object.keys(data[region].province_list)[key]}`;
+                //         }
+                //     } else if (select === "city" || select === "city2" || select === "pob_city" || select ===
+                //         "spob_city" || select === "spouse_city") {
+                //         for (key in Object.keys(data[region].province_list[val].municipality_list)) {
+                //             elOption = frag.appendChild(document.createElement('option'));
+                //             elOption.value = Object.keys(data[region].province_list[val].municipality_list)[key];
+                //             elOption.text =
+                //                 `${Object.keys(data[region].province_list[val].municipality_list)[key]}`;
+                //         }
+
+                //     } else if (select === "brgy" || select === "brgy2" || select === "spouse_brgy") {
+
+                //         for (key in Object.keys(data[region].province_list[document.getElementById(prevVal).value]
+                //                 .municipality_list[val].barangay_list)) {
+                //             elOption = frag.appendChild(document.createElement('option'));
+                //             elOption.value = data[region].province_list[document.getElementById(prevVal).value]
+                //                 .municipality_list[val].barangay_list[key];
+                //             elOption.text =
+                //                 `${data[region].province_list[document.getElementById(prevVal).value].municipality_list[val].barangay_list[key]}`;
+                //         }
+                //     }
+
+                // }
                     if (select !== "province" || select !== "province2" || select != "spob_province" || select !=
-                        "spouse_province") {
+                        "spouse_province" || select !== "pob_province") {
                         let index = mainSelect.options.length;
                         while (index > 0) {
                             mainSelect.remove(index);
@@ -1796,34 +1845,37 @@ if(!isset($_SESSION['user_id'])){
 
                     if (select === "province" || select === "province2" || select === "pob_province" || select ===
                         "spouse_province" || select === "spob_province") {
-                        for (key in Object.keys(data[region].province_list)) {
+                        for (key in Object.keys(data.province_list)) {
                             elOption = frag.appendChild(document.createElement('option'));
-                            elOption.value = Object.keys(data[region].province_list)[key];
-                            elOption.text = `${Object.keys(data[region].province_list)[key]}`;
+                            elOption.value = Object.keys(data.province_list)[key];
+                            elOption.text = `${Object.keys(data.province_list)[key]}`;
                         }
                     } else if (select === "city" || select === "city2" || select === "pob_city" || select ===
                         "spob_city" || select === "spouse_city") {
-                        for (key in Object.keys(data[region].province_list[val].municipality_list)) {
+                        for (key in Object.keys(data.province_list[val].municipality_list)) {
                             elOption = frag.appendChild(document.createElement('option'));
-                            elOption.value = Object.keys(data[region].province_list[val].municipality_list)[key];
+                            elOption.value = Object.keys(data.province_list[val].municipality_list)[key];
                             elOption.text =
-                                `${Object.keys(data[region].province_list[val].municipality_list)[key]}`;
+                                `${Object.keys(data.province_list[val].municipality_list)[key]}`;
                         }
+                        
 
                     } else if (select === "brgy" || select === "brgy2" || select === "spouse_brgy") {
 
-                        for (key in Object.keys(data[region].province_list[document.getElementById(prevVal).value]
+                        for (key in Object.keys(data.province_list[document.getElementById(prevVal).value]
                                 .municipality_list[val].barangay_list)) {
                             elOption = frag.appendChild(document.createElement('option'));
-                            elOption.value = data[region].province_list[document.getElementById(prevVal).value]
+                            elOption.value = data.province_list[document.getElementById(prevVal).value]
                                 .municipality_list[val].barangay_list[key];
                             elOption.text =
-                                `${data[region].province_list[document.getElementById(prevVal).value].municipality_list[val].barangay_list[key]}`;
+                                `${data.province_list[document.getElementById(prevVal).value].municipality_list[val].barangay_list[key]}`;
                         }
                     }
-
-                }
                 mainSelect.appendChild(frag);
+
+                // mainSelect.html(mainSelect.find('option').sort(function(option1, option2){
+                //     return $(option1).text() < $(option2) ? -1 : 1;
+                // }));
             }
         };
         xhr.open(method, url, true);
