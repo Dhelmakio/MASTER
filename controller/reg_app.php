@@ -213,8 +213,7 @@ class Registry extends DatabaseConnection {
             if(($this->checkId($id, 'applicants_personal') == 1) && ($this->checkId($id, 'applicants_spouse') == 1)
             && ($this->checkId($id, 'applicants_work') == 1) && ($this->checkId($id, 'applicants_reference') == 1)
             && ($this->checkId($id, 'applicants_child') == 1) && ($this->checkId($id, 'applicants_relative') == 1)){
-
-                //$query = "INSERT INTO tbl_archive ()";
+                //if complete ang info / naay entry sa tanan table
                 $sql = "DELETE applicants_personal, applicants_spouse, applicants_work, applicants_reference, applicants_child, applicants_relative
                 FROM applicants_personal
                 INNER JOIN applicants_spouse ON applicants_personal.applicant_code = applicants_spouse.applicant_code
@@ -223,9 +222,13 @@ class Registry extends DatabaseConnection {
                 INNER JOIN applicants_child ON applicants_personal.applicant_code = applicants_child.applicant_code
                 INNER JOIN applicants_relative ON applicants_personal.applicant_code = applicants_relative.applicant_code
                 WHERE applicants_personal.applicant_code = '$id'";
-                return mysqli_query($this->connect(), $sql);
+                 return mysqli_query($this->connect(), $sql);
             }else{
+
+                //if incomplete mosud diri
+
                 if(($this->checkId($id, 'applicants_spouse') == 0) && ($this->checkId($id, 'applicants_child') == 0) && ($this->checkId($id, 'applicants_relative') == 0)){
+                    //if walay entry sa  applicants_spouse, applicants_child og applicants_relatives na table
                     $sql = "DELETE applicants_personal, applicants_work, applicants_reference
                      FROM applicants_personal
                      INNER JOIN applicants_work ON applicants_personal.applicant_code = applicants_work.applicant_code
@@ -233,6 +236,7 @@ class Registry extends DatabaseConnection {
                      WHERE applicants_personal.applicant_code = '$id'";
                       return mysqli_query($this->connect(), $sql);
                 }else if(($this->checkId($id, 'applicants_child') == 0) && ($this->checkId($id, 'applicants_relative') == 0)){
+                    //if walay entry sa  applicants_child og applicants_relative na table
                     $sql = "DELETE applicants_personal, applicants_work, applicants_spouse, applicants_reference
                      FROM applicants_personal
                      INNER JOIN applicants_work ON applicants_personal.applicant_code = applicants_work.applicant_code
@@ -241,6 +245,7 @@ class Registry extends DatabaseConnection {
                      WHERE applicants_personal.applicant_code = '$id'";
                       return mysqli_query($this->connect(), $sql);
                 }else if(($this->checkId($id, 'applicants_spouse') == 0) && ($this->checkId($id, 'applicants_child') == 0)){
+                    //if walay entry sa  applicants_spouse og applicants_child na table
                     $sql = "DELETE applicants_personal, applicants_work, applicants_reference, applicants_relative
                      FROM applicants_personal
                      INNER JOIN applicants_work ON applicants_personal.applicant_code = applicants_work.applicant_code
@@ -249,6 +254,7 @@ class Registry extends DatabaseConnection {
                      WHERE applicants_personal.applicant_code = '$id'";
                       return mysqli_query($this->connect(), $sql);
                 }else if(($this->checkId($id, 'applicants_spouse') == 0) && ($this->checkId($id, 'applicants_relative') == 0)){
+                     //if walay entry sa  applicants_spouse og applicants_relative na table
                     $sql = "DELETE applicants_personal, applicants_work, applicants_reference, applicants_child
                      FROM applicants_personal
                      INNER JOIN applicants_work ON applicants_personal.applicant_code = applicants_work.applicant_code
@@ -257,6 +263,7 @@ class Registry extends DatabaseConnection {
                      WHERE applicants_personal.applicant_code = '$id'";
                       return mysqli_query($this->connect(), $sql);
                 }else if($this->checkId($id, 'applicants_child') == 0){
+                     //if walay entry sa  applicants_child na table
                     $sql = "DELETE applicants_personal, applicants_spouse, applicants_work, applicants_reference, applicants_relative
                     FROM applicants_personal
                     INNER JOIN applicants_spouse ON applicants_personal.applicant_code = applicants_spouse.applicant_code
@@ -266,6 +273,7 @@ class Registry extends DatabaseConnection {
                     WHERE applicants_personal.applicant_code = '$id'";
                     return mysqli_query($this->connect(), $sql);
                 }else if(($this->checkId($id, 'applicants_reference') == 0) && ($this->checkId($id, 'applicants_relative') == 0)){
+                     //if walay entry sa  applicants_reference og applicants_relative na table
                     $sql = "DELETE applicants_personal, applicants_work, applicants_spouse, applicants_child
                     FROM applicants_personal
                     INNER JOIN applicants_work ON applicants_personal.applicant_code = applicants_work.applicant_code
