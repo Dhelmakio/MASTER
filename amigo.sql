@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 29, 2023 at 05:10 PM
+-- Generation Time: Jun 29, 2023 at 08:34 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -254,7 +254,7 @@ CREATE TABLE `applicants_child` (
 --
 
 INSERT INTO `applicants_child` (`child_id`, `applicant_code`, `child_name`, `child_dob`, `date_encoded`) VALUES
-(4, 'AMG0010000001', 'Nins', '2023-06-29', '2023-06-29');
+(2, 'AMG0010000002', 'Delise', '2023-06-30', '2023-06-30');
 
 -- --------------------------------------------------------
 
@@ -306,7 +306,7 @@ CREATE TABLE `applicants_personal` (
 --
 
 INSERT INTO `applicants_personal` (`applicant_id`, `applicant_code`, `firstname`, `middlename`, `lastname`, `suffix`, `nickname`, `age`, `gender`, `contact1`, `mstatus`, `dob1`, `pob1`, `block1`, `street1`, `phase1`, `brgy1`, `city1`, `province1`, `map_url`, `residence1`, `lwith1`, `block2`, `street2`, `phase2`, `brgy2`, `city2`, `province2`, `residence2`, `lwith2`, `mothername`, `mothercon`, `fathername`, `fathercon`, `file`, `date_encoded`) VALUES
-(4, 'AMG0010000001', 'June Simeone Elmer', 'Go', 'Ebcas', 'Jr.', 'Simsim', '', 'Male', '09924334454', 'Married', '2023-06-29', 'BATAAN, ORANI', 'Block 2', 'Million', 'Zone 69', 'BAGUTONG', 'FLORA', 'APAYAO', '11.013128996612425, 124.59931147662442', 'Owned', 'Wife/Husband/Live-in Partner', 'Block 2', 'Million', 'Zone 69', 'BAGUTONG', 'FLORA', 'APAYAO', 'Owned', 'Wife/Husband/Live-in Partner', 'Maricel Go Ebcas', '09457545454', 'Jose Elmer C. Ebcas', '09467673275', '', '2023-06-29');
+(2, 'AMG0010000002', 'Dhelmark', 'R.', 'Baylon', '', 'Dhel', '', 'Male', '09924334454', 'Married', '2023-06-30', 'RIZAL, RODRIGUEZ (MONTALBAN)', 'Block 2', 'Streeterns', 'Zone 90', 'SAMPIANO', 'MALITBOG', 'BUKIDNON', '11.38331406236436, 124.41250123320089', 'Renting', 'Relatives', 'Block 2', 'Streeterns', 'Zone 90', 'SAMPIANO', 'MALITBOG', 'BUKIDNON', 'Renting', 'Relatives', 'Mother', '09457545454', 'Father', '09467673275', '', '2023-06-30');
 
 -- --------------------------------------------------------
 
@@ -328,7 +328,7 @@ CREATE TABLE `applicants_reference` (
 --
 
 INSERT INTO `applicants_reference` (`reference_id`, `applicant_code`, `source`, `loan_purpose`, `fb_acct`, `date_encoded`) VALUES
-(4, 'AMG0010000001', 'Leaflets', 'Pay Bills', 'facebook lang', '2023-06-29');
+(2, 'AMG0010000002', 'Flyers', 'Special Occassion', 'facebook lang', '2023-06-30');
 
 -- --------------------------------------------------------
 
@@ -351,7 +351,7 @@ CREATE TABLE `applicants_relative` (
 --
 
 INSERT INTO `applicants_relative` (`relative_id`, `applicant_code`, `relative_name`, `r_contact`, `r_relationship`, `r_ta`, `date_encoded`) VALUES
-(4, 'AMG0010000001', 'Rogelio P. Ebcas', '0944564564', 'Grandfather', '23:09', '0000-00-00');
+(2, 'AMG0010000002', 'Louie', '06445645642', 'Mom', '02:29', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -377,7 +377,7 @@ CREATE TABLE `applicants_spouse` (
 --
 
 INSERT INTO `applicants_spouse` (`spouse_id`, `applicant_code`, `spouse_name`, `contact`, `s_dob`, `s_pob`, `s_address`, `s_occupation`, `s_company`, `date_encoded`) VALUES
-(4, 'AMG0010000001', 'Niña Rova Dejito-Ebcas', '09164574545', '2023-06-29', 'ALBAY, DARAGA (LOCSIN)', 'AGUSAN DEL SUR, LORETO, KATIPUNAN', 'Student', 'EVSU', '2023-06-29');
+(2, 'AMG0010000002', 'Denise Cosens-Baylon', '09164574545', '2023-06-30', 'NEGROS ORIENTAL, MANJUYOD', 'BASILAN, TABUAN-LASA, TAMBULIG BUTON', 'Infrastructure', 'Teradyne', '2023-06-30');
 
 -- --------------------------------------------------------
 
@@ -414,7 +414,7 @@ CREATE TABLE `applicants_work` (
 --
 
 INSERT INTO `applicants_work` (`work_id`, `applicant_code`, `employer`, `sector_type`, `tob`, `com_address`, `a_location`, `sup_name`, `hr_number`, `date_hired`, `e_status`, `m_salary`, `bank_name`, `atm_card`, `loan`, `monthly_salary`, `s_period`, `other_source`, `specify`, `max_loanable_amt`, `date_encoded`) VALUES
-(4, 'AMG0010000001', 'City Hall', 'Government Sector', 'Technology', 'Cogon, Ormoc City', 'Cogon', 'Kevin Fontanoza', '09425454545', '2023-06-29', 'CASUAL', 'Cash', 'BPI', 'ATM Card', 'None actually. It\'s just a joke', '24000', 'Every 2nd Saturday', 'None', 'None to specify', 0, '2023-06-29');
+(2, 'AMG0010000002', 'Teradayne', 'Government Sector', 'Technology', 'Cogon, Ormoc City', 'Basak, Lapu-lapu', 'Kevin Fontanoza', '09425454545', '2023-06-30', 'REGULAR', 'Cash', 'BPI', 'ATM Card', 'None actually. It\'s just a joke', '25000', '10/25', 'None', 'None to specify', 0, '2023-06-30');
 
 -- --------------------------------------------------------
 
@@ -430,6 +430,13 @@ CREATE TABLE `archive_child` (
   `child_dob` date NOT NULL,
   `date_encoded` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `archive_child`
+--
+
+INSERT INTO `archive_child` (`ar_child_id`, `child_id`, `applicant_code`, `child_name`, `child_dob`, `date_encoded`) VALUES
+(1, 1, 'AMG0010000001', 'a', '2023-06-30', '2023-06-30');
 
 -- --------------------------------------------------------
 
@@ -477,6 +484,13 @@ CREATE TABLE `archive_personal` (
   `date_encoded` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `archive_personal`
+--
+
+INSERT INTO `archive_personal` (`ar_personal_id`, `applicant_id`, `applicant_code`, `firstname`, `middlename`, `lastname`, `suffix`, `nickname`, `age`, `gender`, `contact1`, `mstatus`, `dob1`, `pob1`, `block1`, `street1`, `phase1`, `brgy1`, `city1`, `province1`, `map_url`, `residence1`, `lwith1`, `block2`, `street2`, `phase2`, `brgy2`, `city2`, `province2`, `residence2`, `lwith2`, `mothername`, `mothercon`, `fathername`, `fathercon`, `file`, `date_encoded`) VALUES
+(1, 1, 'AMG0010000001', 'a', 'a', 'a', 'a', 'a', '', 'Male', '09123456789', 'Married', '2023-06-30', 'BILIRAN, MARIPIPI', 'a', 'a', 'a', 'SUMNANGA', 'SABTANG', 'BATANES', '11.38331406236436, 124.41250123320089', 'Renting', 'Co-Worker', 'a', 'a', 'a', 'SUMNANGA', 'SABTANG', 'BATANES', 'Renting', 'Co-Worker', 'a', '09457545454', 'a', '09467673275', '', '2023-06-30');
+
 -- --------------------------------------------------------
 
 --
@@ -492,6 +506,13 @@ CREATE TABLE `archive_reference` (
   `fb_acct` text NOT NULL,
   `date_encoded` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `archive_reference`
+--
+
+INSERT INTO `archive_reference` (`ar_reference_id`, `reference_id`, `applicant_code`, `source`, `loan_purpose`, `fb_acct`, `date_encoded`) VALUES
+(1, 1, 'AMG0010000001', 'Flyers', 'Business', 'facebook lang', '2023-06-30');
 
 -- --------------------------------------------------------
 
@@ -509,6 +530,13 @@ CREATE TABLE `archive_relative` (
   `r_ta` text NOT NULL,
   `date_encoded` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `archive_relative`
+--
+
+INSERT INTO `archive_relative` (`ar_relative_id`, `relative_id`, `applicant_code`, `relative_name`, `r_contact`, `r_relationship`, `r_ta`, `date_encoded`) VALUES
+(1, 1, 'AMG0010000001', 'a', '0644564564', 'a', '02:22', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -529,6 +557,13 @@ CREATE TABLE `archive_spouse` (
   `s_company` text NOT NULL,
   `date_encoded` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `archive_spouse`
+--
+
+INSERT INTO `archive_spouse` (`ar_spouse_id`, `spouse_id`, `applicant_code`, `spouse_name`, `contact`, `s_dob`, `s_pob`, `s_address`, `s_occupation`, `s_company`, `date_encoded`) VALUES
+(1, 1, 'AMG0010000001', 'a', '09164574545', '2023-06-30', 'AGUSAN DEL SUR, LORETO', 'APAYAO, LUNA, MARAG', 'a', 'a', '2023-06-30');
 
 -- --------------------------------------------------------
 
@@ -560,6 +595,13 @@ CREATE TABLE `archive_work` (
   `max_loanable_amt` float NOT NULL,
   `date_encoded` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `archive_work`
+--
+
+INSERT INTO `archive_work` (`ar_work_id`, `work_id`, `applicant_code`, `employer`, `sector_type`, `tob`, `com_address`, `a_location`, `sup_name`, `hr_number`, `date_hired`, `e_status`, `m_salary`, `bank_name`, `atm_card`, `loan`, `monthly_salary`, `s_period`, `other_source`, `specify`, `max_loanable_amt`, `date_encoded`) VALUES
+(1, 1, 'AMG0010000001', 'a', 'Private Sector', 'a', 'a', 'a', 'a', '09425454545', '2023-06-30', 'CASUAL', 'Cash', 'a', 'a', 'None actually. It\'s just a joke', '24000', '8/23', 'a', 'None to specify', 0, '2023-06-30');
 
 -- --------------------------------------------------------
 
@@ -1075,73 +1117,73 @@ ALTER TABLE `answers`
 -- AUTO_INCREMENT for table `applicants_child`
 --
 ALTER TABLE `applicants_child`
-  MODIFY `child_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `child_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `applicants_personal`
 --
 ALTER TABLE `applicants_personal`
-  MODIFY `applicant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `applicant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `applicants_reference`
 --
 ALTER TABLE `applicants_reference`
-  MODIFY `reference_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `reference_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `applicants_relative`
 --
 ALTER TABLE `applicants_relative`
-  MODIFY `relative_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `relative_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `applicants_spouse`
 --
 ALTER TABLE `applicants_spouse`
-  MODIFY `spouse_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `spouse_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `applicants_work`
 --
 ALTER TABLE `applicants_work`
-  MODIFY `work_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `work_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `archive_child`
 --
 ALTER TABLE `archive_child`
-  MODIFY `ar_child_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ar_child_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `archive_personal`
 --
 ALTER TABLE `archive_personal`
-  MODIFY `ar_personal_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ar_personal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `archive_reference`
 --
 ALTER TABLE `archive_reference`
-  MODIFY `ar_reference_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ar_reference_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `archive_relative`
 --
 ALTER TABLE `archive_relative`
-  MODIFY `ar_relative_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ar_relative_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `archive_spouse`
 --
 ALTER TABLE `archive_spouse`
-  MODIFY `ar_spouse_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ar_spouse_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `archive_work`
 --
 ALTER TABLE `archive_work`
-  MODIFY `ar_work_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ar_work_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `clients`
