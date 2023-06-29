@@ -213,6 +213,8 @@ class Registry extends DatabaseConnection {
             if(($this->checkId($id, 'applicants_personal') == 1) && ($this->checkId($id, 'applicants_spouse') == 1)
             && ($this->checkId($id, 'applicants_work') == 1) && ($this->checkId($id, 'applicants_reference') == 1)
             && ($this->checkId($id, 'applicants_child') == 1) && ($this->checkId($id, 'applicants_relative') == 1)){
+
+                //$query = "INSERT INTO tbl_archive ()";
                 $sql = "DELETE applicants_personal, applicants_spouse, applicants_work, applicants_reference, applicants_child, applicants_relative
                 FROM applicants_personal
                 INNER JOIN applicants_spouse ON applicants_personal.applicant_code = applicants_spouse.applicant_code
@@ -221,7 +223,7 @@ class Registry extends DatabaseConnection {
                 INNER JOIN applicants_child ON applicants_personal.applicant_code = applicants_child.applicant_code
                 INNER JOIN applicants_relative ON applicants_personal.applicant_code = applicants_relative.applicant_code
                 WHERE applicants_personal.applicant_code = '$id'";
-                 return mysqli_query($this->connect(), $sql);
+                return mysqli_query($this->connect(), $sql);
             }else{
                 if(($this->checkId($id, 'applicants_spouse') == 0) && ($this->checkId($id, 'applicants_child') == 0) && ($this->checkId($id, 'applicants_relative') == 0)){
                     $sql = "DELETE applicants_personal, applicants_work, applicants_reference
