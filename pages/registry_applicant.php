@@ -105,13 +105,6 @@ if($_SESSION['user_id']){
                                                 <td style="text-align:center">
                                                     <div class="tooltip-demo">
                                                         <a
-                                                            href="registry_applicant_archive.php?id=<?php echo $display['applicant_code'];?>">
-                                                            <button type="button" class="btn btn-warning"
-                                                                data-toggle="tooltip" data-placement="top" title="Archive">
-                                                                <i class="fa fa-file-text-o" aria-hidden="true"></i>
-                                                            </button>
-                                                        </a>
-                                                        <a
                                                             href="registry_applicant_view.php?id=<?php echo $display['applicant_code'];?>">
                                                             <button type="button" class="btn btn-info"
                                                                 data-toggle="tooltip" data-placement="top" title="View">
@@ -125,46 +118,52 @@ if($_SESSION['user_id']){
                                                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                                                             </button>
                                                         </a>
-                                                        <button data-target="#modal-<?=  $display['applicant_code'] ?>"
+                                                        <!-- <button data-target="#modal-<?=  $display['applicant_code'] ?>"
                                                             title="Delete" type="button" data-placement="top"
                                                             data-toggle="modal" class="btn btn-danger"><i
                                                                 class="fa fa-trash-o"></i>
-                                                        </button>
+                                                        </button> -->
+                                                        
+                                                            <button data-target="#modal-<?= $display['applicant_code'] ?>" type="button" class="btn btn-warning"
+                                                                data-toggle="modal" data-placement="top" title="Archive">
+                                                                <!-- <i class="fa fa-file-text-o" aria-hidden="true"></i> -->
+                                                                <i class="fa fa-fw" aria-hidden="true" title="Copy to use archive">&#xf187</i>
+                                                            </button>
 
-                                                        <!-- delete modal -->
-                                                        <div class="modal fade text-left"
-                                                            id="modal-<?=  $display['applicant_code'] ?>" tabindex="-1"
-                                                            role="dialog" aria-labelledby="myModalLabel"
-                                                            aria-hidden="true" data-backdrop="static">
-                                                            <div class="modal-dialog modal-md" role="document">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-body">
-                                                                        <p>
-                                                                            <center><i class="fa fa-warning fa-5x"
-                                                                                    style="color:#d9534f;"></i></center>
-                                                                            <center>
-                                                                                <h5>Deleting this data cannot be undone.
-                                                                                    <br>Please think thoroughly.</h5>
-                                                                            </center>
+                                                            <!-- delete modal -->
+                                                            <div class="modal fade text-left"
+                                                                id="modal-<?=  $display['applicant_code'] ?>" tabindex="-1"
+                                                                role="dialog" aria-labelledby="myModalLabel"
+                                                                aria-hidden="true" data-backdrop="static">
+                                                                <div class="modal-dialog modal-md" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-body">
+                                                                            <p>
+                                                                                <center><i class="fa fa-fw fa-5x"
+                                                                                        style="color:#d9534f;"
+                                                                                        aria-hidden="true" title="Copy to use archive">&#xf187</i>
+                                                                                </center>
+                                                                                <center>
+                                                                                    <h5>Save to archive?</h5>
+                                                                                </center>
 
-                                                                        </p>
+                                                                            </p>
+                                                                        </div>
+                                                                        <div class="modal-footer" style="padding: 5px;">
+                                                                            <form action="#" method="post">
+                                                                                <button type="button"
+                                                                                    class="btn btn-default text-small"
+                                                                                    data-dismiss="modal">Cancel</button>
+                                                                                <input type="hidden" name="id"
+                                                                                    value="<?=  $display['applicant_code'] ?>">
+                                                                                <button type="submit" name="delete"
+                                                                                    class="btn btn-danger text-small">Yes</button>
+                                                                            </form>
+                                                                        </div>
                                                                     </div>
-                                                                    <div class="modal-footer" style="padding: 5px;">
-                                                                        <form action="#" method="post">
-                                                                            <button type="button"
-                                                                                class="btn btn-default text-small"
-                                                                                data-dismiss="modal">Cancel</button>
-                                                                            <input type="hidden" name="id"
-                                                                                value="<?=  $display['applicant_code'] ?>">
-                                                                            <button type="submit" name="delete"
-                                                                                class="btn btn-danger text-small">Confirm
-                                                                                Delete</button>
-                                                                        </form>
-                                                                    </div>
+                                                                    <!-- /.modal-content -->
                                                                 </div>
-                                                                <!-- /.modal-content -->
                                                             </div>
-                                                        </div>
                                                 </td>
                                             </tr>
                                             <?php
