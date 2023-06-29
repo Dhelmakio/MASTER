@@ -95,8 +95,11 @@ if($_SESSION['user_id']){
                                                                 <div class="row">
                                                                     <div class="col-lg-12 mx-0">
                                                                         <form id="msform">
+
                                                                             <!-- progressbar -->
                                                                             <input type="hidden" name="id" id=""
+                                                                                value="<?= $_GET['id']; ?>">
+                                                                            <input type="hidden" name="action" id="action"
                                                                                 value="<?= $_GET['id']; ?>">
                                                                             <ul id="progressbar">
                                                                                 <li class="active" id="personal">
@@ -123,7 +126,7 @@ if($_SESSION['user_id']){
                                                                                     <div class="form-group">
                                                                                         <label>Last Name</label>
                                                                                         <input class="form-control"
-                                                                                            name="lname"
+                                                                                            name="lname" id="lname"
                                                                                             placeholder="Last Name"
                                                                                             value="<?= $edit->getClientData($id, 'applicants_personal', 'applicant_code', 'lastname')??null ?>">
                                                                                     </div>
@@ -1848,6 +1851,7 @@ if($_SESSION['user_id']){
                                                                                                 placeholder="Facebook Account"
                                                                                                 value="<?= $edit->getClientData($id, 'applicants_reference', 'applicant_code', 'fb_acct')??null ?>">
                                                                                         </div>
+                                                                                        
                                                                                     </div>
                                                                                     <!-- <div class="col-lg-4">
                                                                                         <div class="form-group">
@@ -1880,8 +1884,9 @@ if($_SESSION['user_id']){
                                                                                     <div class="orbit"></div>
                                                                                 </center>
                                                                             </fieldset>
-
+                                                                            
                                                                         </form>
+
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -1915,6 +1920,31 @@ if($_SESSION['user_id']){
         </div>
         <!-- /#page-wrapper -->
 
+    </div>
+    <div class="modal fade text-left" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p>
+                        <center><i class="fa fa-fw fa-5x" style="color:#d9534f;" aria-hidden="true"
+                                title="Copy to use archive">&#xf187</i>
+                        </center>
+                        <center>
+                            <h5>Save to archive?</h5>
+                        </center>
+
+                    </p>
+                </div>
+                <div class="modal-footer" style="padding: 5px;">
+                        <button type="button" class="btn btn-default text-small" name="update" id="update">No</button>
+                        <!-- <input type="hidden" name="id"
+                                                                                                    value="<?=  $display['applicant_code'] ?>"> -->
+                        <button type="button" name="archive" id="archive" class="btn btn-danger text-small">Yes</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
     </div>
 
     <div class="modal fade text-left" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
@@ -2065,7 +2095,7 @@ if($_SESSION['user_id']){
     populate("spouse_province", "", "", document.getElementById('db_sprovince').value);
 
 
-   
+
 
     if (document.getElementById('tor_spec').value != "") {
         document.getElementById('tor1').value = "Others";
@@ -2095,7 +2125,7 @@ if($_SESSION['user_id']){
         document.getElementById('sources').value = "Others";
     }
 
-    
+
 
     function populate(select, prevVal, val, db) {
         let mainSelect = document.getElementById(select);
@@ -2212,93 +2242,93 @@ if($_SESSION['user_id']){
                 // }
 
                 if (select !== "province" || select !== "province2" || select != "spob_province" || select !=
-                        "spouse_province" || select === "pob_province") {
-                        let index = mainSelect.options.length;
-                        while (index > 0) {
-                            mainSelect.remove(index);
-                            index--;
-                        }
+                    "spouse_province" || select === "pob_province") {
+                    let index = mainSelect.options.length;
+                    while (index > 0) {
+                        mainSelect.remove(index);
+                        index--;
+                    }
+                }
+
+                if (select === "province" || select === "province2" || select === "pob_province" || select ===
+                    "spouse_province" || select === "spob_province") {
+
+                    for (key in Object.keys(data.province_list)) {
+                        elOption = frag.appendChild(document.createElement('option'));
+                        elOption.value = Object.keys(data.province_list)[key];
+                        elOption.text = `${Object.keys(data.province_list)[key]}`;
+                        tempArray.push(Object.keys(data.province_list)[key]);
+                    }
+                    mainSelect.appendChild(frag);
+                    if (tempArray.includes(db)) {
+                        mainSelect.value = tempArray[tempArray.indexOf(db)];
                     }
 
-                    if (select === "province" || select === "province2" || select === "pob_province" || select ===
-                        "spouse_province" || select === "spob_province") {
-
-                        for (key in Object.keys(data.province_list)) {
-                            elOption = frag.appendChild(document.createElement('option'));
-                            elOption.value = Object.keys(data.province_list)[key];
-                            elOption.text = `${Object.keys(data.province_list)[key]}`;
-                            tempArray.push(Object.keys(data.province_list)[key]);
-                        }
-                        mainSelect.appendChild(frag);
-                        if (tempArray.includes(db)) {
-                            mainSelect.value = tempArray[tempArray.indexOf(db)];
-                        }
-
-                        if (select == "pob_province") {
-                            populate("pob_city", "", document.getElementById('pob_province').value, document
-                                .getElementById('db_pobcity').value);
-                        } else if (select == "province") {
-                            populate("city", document.getElementById('province').value, document
-                                .getElementById('province').value, document.getElementById('db_city').value);
-                        } else if (select == "province2") {
-                            populate("city2", document.getElementById('province2').value, document
-                                .getElementById('province2').value, document.getElementById('db_city2').value);
-                        } else if (select == "spob_province") {
-                            populate("spob_city", document.getElementById('spob_province').value, document
-                                .getElementById('spob_province').value, document.getElementById('db_spob2')
-                                .value);
-                        } else if (select == "spouse_province") {
-                            populate("spouse_city", document.getElementById('spouse_province').value, document
-                                .getElementById('spouse_province').value, document.getElementById('db_scity')
-                                .value);
-                        }
-
-                        tempArray = [];
-                    } else if (select === "city" || select === "city2" || select === "spob_city" || select ===
-                        "pob_city" || select === "spouse_city") {
-                        document.getElementById('db_pob1').value = "";
-                        for (key in Object.keys(data.province_list[val].municipality_list)) {
-                            elOption = frag.appendChild(document.createElement('option'));
-                            elOption.value = Object.keys(data.province_list[val].municipality_list)[key];
-                            elOption.text =
-                                `${Object.keys(data.province_list[val].municipality_list)[key]}`;
-                            tempArray.push(Object.keys(data.province_list[val].municipality_list)[key]);
-                        }
-                        mainSelect.appendChild(frag);
-                        if (tempArray.includes(db)) {
-                            mainSelect.value = tempArray[tempArray.indexOf(db)];
-                        }
-
-                        if (select == "city") {
-                            populate("brgy", 'province', document.getElementById('city').value, document
-                                .getElementById('db_brgy').value);
-                        } else if (select == "city2") {
-                            populate("brgy2", 'province2', document.getElementById('city2').value, document
-                                .getElementById('db_brgy2').value);
-                        } else if (select == "spouse_city") {
-                            populate("spouse_brgy", 'spouse_province', document.getElementById('spouse_city')
-                                .value, document.getElementById('db_sbrgy').value);
-                        }
-
-                        tempArray = [];
-
-                    } else if (select === "brgy" || select === "brgy2" || select === "spouse_brgy") {
-                        for (key in Object.keys(data.province_list[document.getElementById(prevVal).value]
-                                .municipality_list[val].barangay_list)) {
-                            elOption = frag.appendChild(document.createElement('option'));
-                            elOption.value = data.province_list[document.getElementById(prevVal).value]
-                                .municipality_list[val].barangay_list[key];
-                            elOption.text =
-                                `${data.province_list[document.getElementById(prevVal).value].municipality_list[val].barangay_list[key]}`;
-                            tempArray.push(data.province_list[document.getElementById(prevVal).value]
-                                .municipality_list[val].barangay_list[key])
-                        }
-                        mainSelect.appendChild(frag);
-                        if (tempArray.includes(db)) {
-                            mainSelect.value = tempArray[tempArray.indexOf(db)];
-                        }
-
+                    if (select == "pob_province") {
+                        populate("pob_city", "", document.getElementById('pob_province').value, document
+                            .getElementById('db_pobcity').value);
+                    } else if (select == "province") {
+                        populate("city", document.getElementById('province').value, document
+                            .getElementById('province').value, document.getElementById('db_city').value);
+                    } else if (select == "province2") {
+                        populate("city2", document.getElementById('province2').value, document
+                            .getElementById('province2').value, document.getElementById('db_city2').value);
+                    } else if (select == "spob_province") {
+                        populate("spob_city", document.getElementById('spob_province').value, document
+                            .getElementById('spob_province').value, document.getElementById('db_spob2')
+                            .value);
+                    } else if (select == "spouse_province") {
+                        populate("spouse_city", document.getElementById('spouse_province').value, document
+                            .getElementById('spouse_province').value, document.getElementById('db_scity')
+                            .value);
                     }
+
+                    tempArray = [];
+                } else if (select === "city" || select === "city2" || select === "spob_city" || select ===
+                    "pob_city" || select === "spouse_city") {
+                    document.getElementById('db_pob1').value = "";
+                    for (key in Object.keys(data.province_list[val].municipality_list)) {
+                        elOption = frag.appendChild(document.createElement('option'));
+                        elOption.value = Object.keys(data.province_list[val].municipality_list)[key];
+                        elOption.text =
+                            `${Object.keys(data.province_list[val].municipality_list)[key]}`;
+                        tempArray.push(Object.keys(data.province_list[val].municipality_list)[key]);
+                    }
+                    mainSelect.appendChild(frag);
+                    if (tempArray.includes(db)) {
+                        mainSelect.value = tempArray[tempArray.indexOf(db)];
+                    }
+
+                    if (select == "city") {
+                        populate("brgy", 'province', document.getElementById('city').value, document
+                            .getElementById('db_brgy').value);
+                    } else if (select == "city2") {
+                        populate("brgy2", 'province2', document.getElementById('city2').value, document
+                            .getElementById('db_brgy2').value);
+                    } else if (select == "spouse_city") {
+                        populate("spouse_brgy", 'spouse_province', document.getElementById('spouse_city')
+                            .value, document.getElementById('db_sbrgy').value);
+                    }
+
+                    tempArray = [];
+
+                } else if (select === "brgy" || select === "brgy2" || select === "spouse_brgy") {
+                    for (key in Object.keys(data.province_list[document.getElementById(prevVal).value]
+                            .municipality_list[val].barangay_list)) {
+                        elOption = frag.appendChild(document.createElement('option'));
+                        elOption.value = data.province_list[document.getElementById(prevVal).value]
+                            .municipality_list[val].barangay_list[key];
+                        elOption.text =
+                            `${data.province_list[document.getElementById(prevVal).value].municipality_list[val].barangay_list[key]}`;
+                        tempArray.push(data.province_list[document.getElementById(prevVal).value]
+                            .municipality_list[val].barangay_list[key])
+                    }
+                    mainSelect.appendChild(frag);
+                    if (tempArray.includes(db)) {
+                        mainSelect.value = tempArray[tempArray.indexOf(db)];
+                    }
+
+                }
             }
         };
         xhr.open(method, url, true);
@@ -2309,8 +2339,24 @@ if($_SESSION['user_id']){
     <script src="../css/toast/beautyToast.js"></script>
     <script>
     $("#submit").click(function() {
+        $('#modal').modal('show');
+    });
+    $('#update').click(() => {
+        $('#action').val('update');
         $('#progressbar').css('display', 'none');
         $('#p-label').css('display', 'none');
+        $('#modal').modal('hide');
+        submit();
+    });
+    $('#archive').click(() => {
+        $('#action').val('archive');
+        $('#progressbar').css('display', 'none');
+        $('#p-label').css('display', 'none');
+        $('#modal').modal('hide');
+        submit();
+    });
+
+    function submit() {
         $.ajax({
             type: 'POST',
             url: '../request/reg_update.php',
@@ -2340,7 +2386,7 @@ if($_SESSION['user_id']){
                 alert(xhr.responseText);
             }
         });
-    });
+    }
     </script>
 
 </body>
