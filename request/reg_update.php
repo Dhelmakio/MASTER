@@ -15,7 +15,7 @@ require_once('../controller/reg_app.php');
                 //if for update pero e archive ang old info
 
                 //e archive usa niya ang old info 
-                $applicant->deletePer($_POST['id']);
+                $applicant->deletePer($_POST['id'], "update");
                 // dapat after archiving dili e delete ang iyang info/row sa original table
                 //after archiving sa old info ang recent nga ge pang input sa form is maoy e update ddto sa iyang row sa table
                 update($applicant);
