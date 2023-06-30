@@ -206,7 +206,7 @@ class Registry extends DatabaseConnection {
             return 0;
         }
        //DELETE
-        function deletePer($id){
+        function deletePer($id, $action){
            
             // unlink('../assets/docs/'.$id.'/'.$id.'.pdf');
             // rmdir('../assets/docs/'.$id);          
@@ -248,7 +248,7 @@ class Registry extends DatabaseConnection {
             bank_name, atm_card, loan, monthly_salary, s_period, other_source, specify, max_loanable_amt, date_encoded
             FROM applicants_work WHERE applicant_code = '$id'";
             $result6 = mysqli_query($this->connect(), $query6);
-            if($result1 && $result2 && $result3 && $result4 && $result5 && $result6){
+            if($result1 && $result2 && $result3 && $result4 && $result5 && $result6 && $action == "archive"){
                     //if complete ang info / naay entry sa tanan table
                     $sql = "DELETE applicants_personal, applicants_spouse, applicants_work, applicants_reference, applicants_child, applicants_relative
                     FROM applicants_personal
@@ -284,7 +284,7 @@ class Registry extends DatabaseConnection {
                     bank_name, atm_card, loan, monthly_salary, s_period, other_source, specify, max_loanable_amt, date_encoded
                     FROM applicants_work WHERE applicant_code = '$id'";
                     $result3 = mysqli_query($this->connect(), $query3);
-                    if($result1 && $result2 && $result3){
+                    if($result1 && $result2 && $result3 && $action == "archive"){
                     //if walay entry sa  applicants_spouse, applicants_child og applicants_relatives na table
                         $sql = "DELETE applicants_personal, applicants_work, applicants_reference
                         FROM applicants_personal
@@ -303,7 +303,7 @@ class Registry extends DatabaseConnection {
                     block2,street2,phase2,brgy2, city2,province2,residence2,lwith2,mothername,mothercon,fathername,fathercon,`file`,date_encoded 
                     FROM applicants_personal WHERE applicant_code = '$id'";
                     $result1 = mysqli_query($this->connect(), $query1);
-                            //reference
+                    //reference
                     $query2 = "INSERT INTO archive_reference(reference_id, applicant_code, source, loan_purpose, fb_acct, date_encoded)
                     SELECT reference_id, applicant_code, source, loan_purpose, fb_acct, date_encoded
                     FROM applicants_reference WHERE applicant_code = '$id'";
@@ -320,7 +320,7 @@ class Registry extends DatabaseConnection {
                     SELECT spouse_id, applicant_code, spouse_name, contact, s_dob, s_pob, s_address, s_occupation, s_company, date_encoded 
                     FROM applicants_spouse WHERE applicant_code = '$id'";
                     $result4 = mysqli_query($this->connect(), $query4);
-                    if($result1 && $result2 && $result3 && $result4){
+                    if($result1 && $result2 && $result3 && $result4 && $action == "archive"){
                     //if walay entry sa  applicants_child og applicants_relative na table
                         $sql = "DELETE applicants_personal, applicants_work, applicants_spouse, applicants_reference
                         FROM applicants_personal
@@ -356,7 +356,7 @@ class Registry extends DatabaseConnection {
                     bank_name, atm_card, loan, monthly_salary, s_period, other_source, specify, max_loanable_amt, date_encoded
                     FROM applicants_work WHERE applicant_code = '$id'";
                     $result4 = mysqli_query($this->connect(), $query4);
-                    if($result1 && $result2 && $result3 && $result4){
+                    if($result1 && $result2 && $result3 && $result4 && $action == "archive"){
                     //if walay entry sa  applicants_spouse og applicants_child na table
                         $sql = "DELETE applicants_personal, applicants_work, applicants_reference, applicants_relative
                         FROM applicants_personal
@@ -388,7 +388,7 @@ class Registry extends DatabaseConnection {
                     bank_name, atm_card, loan, monthly_salary, s_period, other_source, specify, max_loanable_amt, date_encoded
                     FROM applicants_work WHERE applicant_code = '$id'";
                     $result3 = mysqli_query($this->connect(), $query3);
-                    if($result1 && $result2 && $result3){
+                    if($result1 && $result2 && $result3 && $action == "archive"){
                      //if walay entry sa  applicants_spouse og applicants_relative na table
                         $sql = "DELETE applicants_personal, applicants_work, applicants_reference, applicants_child
                         FROM applicants_personal
@@ -430,7 +430,7 @@ class Registry extends DatabaseConnection {
                     bank_name, atm_card, loan, monthly_salary, s_period, other_source, specify, max_loanable_amt, date_encoded
                     FROM applicants_work WHERE applicant_code = '$id'";
                     $result6 = mysqli_query($this->connect(), $query6);
-                    if($result1 && $result3 && $result4 && $result5 && $result6){
+                    if($result1 && $result3 && $result4 && $result5 && $result6  && $action == "archive"){
                      //if walay entry sa  applicants_child na table
                         $sql = "DELETE applicants_personal, applicants_spouse, applicants_work, applicants_reference, applicants_relative
                         FROM applicants_personal
@@ -467,7 +467,7 @@ class Registry extends DatabaseConnection {
                     bank_name, atm_card, loan, monthly_salary, s_period, other_source, specify, max_loanable_amt, date_encoded
                     FROM applicants_work WHERE applicant_code = '$id'";
                     $result6 = mysqli_query($this->connect(), $query6);
-                    if($result1 && $result2 && $result3 && $result6){
+                    if($result1 && $result2 && $result3 && $result6  && $action == "archive"){
                         //if walay entry sa  applicants_reference og applicants_relative na table
                         $sql = "DELETE applicants_personal, applicants_work, applicants_spouse, applicants_child
                         FROM applicants_personal
