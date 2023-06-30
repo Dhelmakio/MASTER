@@ -5,7 +5,7 @@ include('../config/conn.php');
 include('../controller/reg_app.php');
 $applicant = new Registry();
 if(isset($_POST['delete'])){
-    $applicant->deletePer($_POST['id']);
+    $applicant->deletePer($_POST['id'], "archive");
     unset($_POST['delete']);
     unset($_POST['id']);;
 }
