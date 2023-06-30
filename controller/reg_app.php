@@ -206,7 +206,7 @@ class Registry extends DatabaseConnection {
             return 0;
         }
        //DELETE
-        function deletePer($id, $action){
+        function deletePer($id){
            
             // unlink('../assets/docs/'.$id.'/'.$id.'.pdf');
             // rmdir('../assets/docs/'.$id);          
