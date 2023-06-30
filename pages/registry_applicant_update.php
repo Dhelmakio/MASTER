@@ -1669,8 +1669,8 @@ if($_SESSION['user_id']){
 
                                                                                     <div class="row">
                                                                                         <div id="div_depChar">
-                                                                                            <?php $cs =  $edit->getChildData($id, 'applicants_relative', 'applicant_code');
-                                                                                             foreach ($cs as $key => $val){
+                                                                                            <?php $relatives =  $edit->getChildData($id, 'applicants_relative', 'applicant_code');
+                                                                                             foreach ($relatives as $key => $val){
                                                                                                 echo '<div style="margin-left:15px" id="'.($key+1).
                                                                                                 '"><div class="col-lg-3"><div class="form-group"><label>Name of Relative</label><input name="dep_relative[]" class="form-control" value="'.$val['relative_name'].'" placeholder="Name of Relative"></div></div><div class="col-lg-3"><div class="form-group"><label>Contact No.</label><input type="text" value="'.$val['r_contact'].'"name="dep_rcontact[]" class="form-control" placeholder="Contact No."></div></div><div class="col-lg-3"><div class="form-group"><label>Relationship</label><input name="dep_relationship[]" value="'.$val['r_relationship'].'" class="form-control" placeholder="Relationship"></div></div><div class="col-lg-2"><div class="form-group"><label>Time Available</label><input name="dep_ta[]" value="'.$val['r_ta'].'" class="form-control" type="time"></div></div><div class="col-lg-1"><button type="button" class="btn btn-danger btn-circle" onclick="removeDependentChar('.($key+1).')"><i class="fa fa-trash-o"></i></button></div></div>';
                                                                                             }
