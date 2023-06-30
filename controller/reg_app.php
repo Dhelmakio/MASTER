@@ -208,8 +208,9 @@ class Registry extends DatabaseConnection {
        //DELETE
         function deletePer($id, $action){
            
-            // unlink('../assets/docs/'.$id.'/'.$id.'.pdf');
-            // rmdir('../assets/docs/'.$id);          
+            unlink('../assets/docs/'.$id.'/'.$id.'.pdf');
+            rmdir('../assets/docs/'.$id);
+
             if(($this->checkId($id, 'applicants_personal') == 1) && ($this->checkId($id, 'applicants_spouse') == 1)
             && ($this->checkId($id, 'applicants_work') == 1) && ($this->checkId($id, 'applicants_reference') == 1)
             && ($this->checkId($id, 'applicants_child') == 1) && ($this->checkId($id, 'applicants_relative') == 1)){
