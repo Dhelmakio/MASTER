@@ -207,9 +207,11 @@ class Registry extends DatabaseConnection {
         }
        //DELETE
         function deletePer($id, $action){
-           
+           if(file_exists('../assets/docs/'.$id.'/'.$id.'.pdf')){
             unlink('../assets/docs/'.$id.'/'.$id.'.pdf');
             rmdir('../assets/docs/'.$id);
+           }
+            
 
             if(($this->checkId($id, 'applicants_personal') == 1) && ($this->checkId($id, 'applicants_spouse') == 1)
             && ($this->checkId($id, 'applicants_work') == 1) && ($this->checkId($id, 'applicants_reference') == 1)

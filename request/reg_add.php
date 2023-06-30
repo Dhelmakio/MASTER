@@ -35,7 +35,13 @@ if(mkdir("../assets/docs/".$code."/",0777)){
     $ext1 = $info['extension']; 
     $newname = $code.".".$ext1;
     $target = '../assets/docs/'.$code.'/'.$newname;
-    move_uploaded_file($file_tmp1, $target);
+    if(file_exists('../assets/docs/'.$code.'/'.$newname)){
+        unlink('../assets/docs/'.$code.'/'.$newname);
+        rmdir('../assets/docs/'.$code);
+        move_uploaded_file($file_tmp1, $target);
+    }else{
+        move_uploaded_file($file_tmp1, $target);
+    }
 }
 
 //spouse tab 2
