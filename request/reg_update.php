@@ -8,13 +8,14 @@ require_once('../controller/reg_app.php');
         // $tor2 = $applicant->getRadioVal($_POST['tor2']??null, $_POST['tor_spec2']??null);
         // $lw2 = $applicant->getRadioVal($_POST['l_with2']??null, $_POST['lw_spec2']??null);
        if($_POST['action'] == "update"){
-                update();
+                update($applicant);
        }else if($_POST['action'] == "archive"){
                 $applicant->deletePer($_POST['id']);
-                update();
+                update($applicant);
        }
 
-       function update(){
+       function update($applicant){
+
         $tor = (($_POST['tor'] == "Others") ? $_POST['tor_spec'] : $_POST['tor']);
                 $lw = (($_POST['l_with'] == "Others") ? $_POST['lw_spec'] : $_POST['l_with']);
                 $tor2 = ((($_POST['tor2']??null) == "Others") ? $_POST['tor_spec2']??null : $_POST['tor2']??null);
