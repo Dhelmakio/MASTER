@@ -477,6 +477,48 @@ class Registry extends DatabaseConnection {
                         WHERE applicants_personal.applicant_code = '$id'";
                         return mysqli_query($this->connect(), $sql);
                     }
+                }else if(($this->checkId($id, 'applicants_reference') == 0)){
+                    //applicant
+                    $query1 = "INSERT INTO archive_personal(applicant_id, applicant_code, firstname, middlename, lastname, suffix, nickname, age, gender, 
+                    contact1, mstatus, dob1, pob1, block1,street1,phase1,brgy1, city1,province1,map_url,residence1,lwith1,
+                    block2,street2,phase2,brgy2, city2,province2,residence2,lwith2,mothername,mothercon,fathername,fathercon,`file`,date_encoded) 
+                    SELECT applicant_id, applicant_code, firstname, middlename, lastname, suffix, nickname, age, gender, 
+                    contact1, mstatus, dob1, pob1, block1,street1,phase1,brgy1, city1,province1,map_url,residence1,lwith1,
+                    block2,street2,phase2,brgy2, city2,province2,residence2,lwith2,mothername,mothercon,fathername,fathercon,`file`,date_encoded 
+                    FROM applicants_personal WHERE applicant_code = '$id'";
+                    $result1 = mysqli_query($this->connect(), $query1);
+                    //children
+                    $query2 = "INSERT INTO archive_child(child_id, applicant_code, child_name, child_dob, date_encoded)
+                    SELECT child_id, applicant_code, child_name, child_dob, date_encoded FROM applicants_child WHERE applicant_code = '$id'";
+                    $result2 = mysqli_query($this->connect(), $query2);
+                    //spouse
+                    $query3 = "INSERT INTO archive_spouse(spouse_id, applicant_code, spouse_name, contact, s_dob, s_pob, s_address, s_occupation, s_company, date_encoded)
+                    SELECT spouse_id, applicant_code, spouse_name, contact, s_dob, s_pob, s_address, s_occupation, s_company, date_encoded 
+                    FROM applicants_spouse WHERE applicant_code = '$id'";
+                    $result3 = mysqli_query($this->connect(), $query3);
+                    //relative
+                    $query4 = "INSERT INTO archive_relative(relative_id, applicant_code, relative_name, r_contact, r_relationship, r_ta, date_encoded)
+                    SELECT relative_id, applicant_code, relative_name, r_contact, r_relationship, r_ta, date_encoded 
+                    FROM applicants_relative WHERE applicant_code = '$id'";
+                    $result4 = mysqli_query($this->connect(), $query4);
+                    //work
+                    $query6 ="INSERT INTO archive_work(work_id, applicant_code, employer, sector_type, tob, com_address, a_location, sup_name, hr_number, date_hired, e_status, m_salary,
+                    bank_name, atm_card, loan, monthly_salary, s_period, other_source, specify, max_loanable_amt, date_encoded)
+                    SELECT work_id, applicant_code, employer, sector_type, tob, com_address, a_location, sup_name, hr_number, date_hired, e_status, m_salary,
+                    bank_name, atm_card, loan, monthly_salary, s_period, other_source, specify, max_loanable_amt, date_encoded
+                    FROM applicants_work WHERE applicant_code = '$id'";
+                    $result6 = mysqli_query($this->connect(), $query6);
+                    if($result1 && $result2 && $result3 && $result4 && $result6  && $action == "archive"){
+                        //if walay entry sa  applicants_reference og applicants_relative na table
+                        $sql = "DELETE applicants_personal, applicants_work, applicants_spouse, applicants_child
+                        FROM applicants_personal
+                        INNER JOIN applicants_work ON applicants_personal.applicant_code = applicants_work.applicant_code
+                        INNER JOIN applicants_spouse ON applicants_personal.applicant_code = applicants_spouse.applicant_code
+                        INNER JOIN applicants_child ON applicants_personal.applicant_code = applicants_child.applicant_code
+                        INNER JOIN applicants_relative ON applicants_personal.applicant_code = applicants_relative.applicant_code
+                        WHERE applicants_personal.applicant_code = '$id'";
+                        return mysqli_query($this->connect(), $sql);
+                    }
                 }
             }                 
         } 
