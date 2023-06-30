@@ -8,9 +8,16 @@ require_once('../controller/reg_app.php');
         // $tor2 = $applicant->getRadioVal($_POST['tor2']??null, $_POST['tor_spec2']??null);
         // $lw2 = $applicant->getRadioVal($_POST['l_with2']??null, $_POST['lw_spec2']??null);
        if($_POST['action'] == "update"){
+                //if for update lang
                 update($applicant);
        }else if($_POST['action'] == "archive"){
+
+                //if for update pero e archive ang old info
+
+                //e archive usa niya ang old info 
                 $applicant->deletePer($_POST['id']);
+                // dapat after archiving dili e delete ang iyang info/row sa original table
+                //after archiving sa old info ang recent nga ge pang input sa form is maoy e update ddto sa iyang row sa table
                 update($applicant);
        }
 
