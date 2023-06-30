@@ -8,7 +8,14 @@ require_once('../controller/reg_app.php');
         // $tor2 = $applicant->getRadioVal($_POST['tor2']??null, $_POST['tor_spec2']??null);
         // $lw2 = $applicant->getRadioVal($_POST['l_with2']??null, $_POST['lw_spec2']??null);
        if($_POST['action'] == "update"){
-                $tor = (($_POST['tor'] == "Others") ? $_POST['tor_spec'] : $_POST['tor']);
+                update();
+       }else if($_POST['action'] == "archive"){
+                $applicant->deletePer($_POST['id']);
+                update();
+       }
+
+       function update(){
+        $tor = (($_POST['tor'] == "Others") ? $_POST['tor_spec'] : $_POST['tor']);
                 $lw = (($_POST['l_with'] == "Others") ? $_POST['lw_spec'] : $_POST['l_with']);
                 $tor2 = ((($_POST['tor2']??null) == "Others") ? $_POST['tor_spec2']??null : $_POST['tor2']??null);
                 $lw2 = ((($_POST['l_with2']??null) == "Others") ? $_POST['lw_spec2']??null : $_POST['l_with2']??null);
@@ -53,9 +60,6 @@ require_once('../controller/reg_app.php');
                 
                 //reference
                 $applicant->updateChiRef($_POST['id'], 4, $_POST['dep_relative']??null, null,$_POST['dep_rcontact']??null,$_POST['dep_relationship']??null, $_POST['dep_ta']??null);
-                
-       }else if($_POST['action'] == "archive"){
-                die('archive');
        }
        echo json_encode(array("message" => "Successfully Updated.", "code" => $_POST['id']));
 ?>
