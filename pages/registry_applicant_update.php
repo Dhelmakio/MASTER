@@ -1483,7 +1483,7 @@ if($_SESSION['user_id']){
                                                                                             <select
                                                                                                 class="form-control input-set-3"
                                                                                                 required
-                                                                                                onchange="lwChange(this, 'loan_spec')"
+                                                                                                onchange="existLoanChange(this, 'loan_spec')"
                                                                                                 name="loan" id="loan">
                                                                                                 <option value=""
                                                                                                     selected disabled>
@@ -1491,9 +1491,10 @@ if($_SESSION['user_id']){
                                                                                                 <?php 
 
                                                                                                 $loan = $edit->getClientData($id, 'applicants_work', 'applicant_code', 'loan')??null;
-                                                                                                $loanSet = ['Yes', 'No'];
+                                                                                                $exploan =  explode("-", $loan);
+                                                                                                $loanSet = ['Salary Loan', 'Personal Loan', 'Calamity Loan', 'Maternity Loan', 'Paternity Loan','Business Loan', 'Appliance/Gadget Loan', 'Vehicle Loan', 'Home Loan', 'Travel Loan', 'Credit Card', 'OFW Loan', 'None'];
                                                                                                 foreach($loanSet as $key => $val){
-                                                                                                    $op1 = ($loan == $val) ? '<option selected value='.$loan.'>'.$loan.'</option>' : '<option value='.$val.'>'.$val.'</option>';
+                                                                                                    $op1 = ($exploan[0] == $val) ? '<option selected value='.$exploan[0].'>'.$exploan[0].'</option>' : '<option value='.$val.'>'.$val.'</option>';
                                                                                                 echo $op1;
                                                                                                 }
 
@@ -1511,7 +1512,7 @@ if($_SESSION['user_id']){
                                                                                             if($loan == "No"){
                                                                                                 echo "disabled";
                                                                                             }else{
-                                                                                                echo 'value="'.$loan.'"';
+                                                                                                echo 'value="'.$exploan[1].'"';
                                                                                             }
                                                                                         ?>>
                                                                                     </div>
@@ -2077,6 +2078,17 @@ if($_SESSION['user_id']){
         }
 
     }
+    function existLoanChange(val, spec) {
+        var spec = document.getElementById(spec);
+        if (val.value != "None") {
+            spec.disabled = false;
+            spec.required = true;
+        } else {
+            spec.disabled = true;
+            spec.required = false;
+        }
+
+    }
 
 
     function viewMap(url) {
@@ -2113,8 +2125,8 @@ if($_SESSION['user_id']){
         document.getElementById('lw2').value = "Others";
     }
 
-    if (document.getElementById('loan_spec').value != "") {
-        document.getElementById('loan').value = "Yes";
+    if (document.getElementById('loan_spec').value == "") {
+        document.getElementById('loan').value = "None";
     }
 
     if (document.getElementById('specPurp').value != "") {

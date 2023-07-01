@@ -1152,27 +1152,59 @@ if(!isset($_SESSION['user_id'])){
                                                                                             <label>Do you have other
                                                                                                 loan?</label>
                                                                                             <select class="form-control input-set-3" required
-                                                                                                onchange="lwChange(this, 'loan_spec')"
+                                                                                                onchange="existLoanChange(this, 'loan_spec')"
                                                                                                 name="loan">
-                                                                                                <option value=""
-                                                                                                    selected disabled>
-                                                                                                    SELECT</option>
-                                                                                                <option value="Yes">
-                                                                                                    Yes
+                                                                                                <option value="Salary Loan">
+                                                                                                    Salary Loan
                                                                                                 </option>
-                                                                                                <option value="No">
-                                                                                                    No
+                                                                                                <option value="Personal Loan">
+                                                                                                Personal Loan
+                                                                                                </option>
+                                                                                                <option value="Calamity Loan">
+                                                                                                Calamity Loan
+                                                                                                </option>
+                                                                                                <option value="Maternity Loan">
+                                                                                                Maternity Loan
+                                                                                                </option>
+                                                                                                <option value="Paternity Loan">
+                                                                                                Paternity Loan
+                                                                                                </option>
+                                                                                                <option value="Business Loan">
+                                                                                                Business Loan
+                                                                                                </option>
+                                                                                                <option value="Appliance/Gadget Loan">
+                                                                                                Appliance/Gadget Loan
+                                                                                                </option>
+                                                                                                <option value="Vehicle Loan">
+                                                                                                Vehicle Loan
+                                                                                                </option>
+                                                                                                <option value="Home Loan">
+                                                                                                Home Loan
+                                                                                                </option>
+                                                                                                <option value="Travel Loan">
+                                                                                                Travel Loan
+                                                                                                </option>
+                                                                                                <option value="Credit Card">
+                                                                                                Credit Card
+                                                                                                </option>
+                                                                                                <option value="OFW Loan">
+                                                                                                OFW Loan
+                                                                                                </option>
+                                                                                                <option selected value="None">
+                                                                                                None
                                                                                                 </option>
                                                                                             </select>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="col-lg-3">
-                                                                                        <label for="">Specify:
+                                                                                        <label for="">Amount 
                                                                                         </label>
                                                                                         <input type="text"
                                                                                             name="loan_spec"
                                                                                             id="loan_spec"
-                                                                                            class="form-control input-set-3"
+                                                                                            class="form-control text-right input-set-3"
+                                                                                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                                                                            placeholder="₱"
                                                                                             disabled="true">
                                                                                     </div>
                                                                                     <div class="col-lg-3">
@@ -1660,7 +1692,19 @@ if(!isset($_SESSION['user_id'])){
 
     function lwChange(val, spec) {
         var spec = document.getElementById(spec);
-        if (val.value == "Others" || val.value == "Yes") {
+        if (val.value == "Others") {
+            spec.disabled = false;
+            spec.required = true;
+        } else {
+            spec.disabled = true;
+            spec.required = false;
+        }
+
+    }
+
+    function existLoanChange(val, spec) {
+        var spec = document.getElementById(spec);
+        if (val.value != "None") {
             spec.disabled = false;
             spec.required = true;
         } else {

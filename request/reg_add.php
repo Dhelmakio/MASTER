@@ -52,7 +52,7 @@ if($_POST['spouse_name'] != null){
 //work tab 3
 if($_POST['agency'] != null){
 $applicant->work_add($code, $_POST['agency']??null,$_POST['sector']??null,$_POST['business']??null ,$_POST['ca_company']??null,$_POST['location']??null,$_POST['supervisor']??null,
-$_POST['hr_number']??null,$_POST['date_hired']??null,$_POST['e_status']??null,$_POST['m_salary']??null,$_POST['bank']??null,$_POST['t_card']??null, (($_POST['loan'] == "Yes") ? $_POST['loan_spec'] : $_POST['loan'])??null, $_POST['ms_salary']??null,
+$_POST['hr_number']??null,$_POST['date_hired']??null,$_POST['e_status']??null,$_POST['m_salary']??null,$_POST['bank']??null,$_POST['t_card']??null, (($_POST['loan'] != "None") ? $_POST['loan'].'-'.$_POST['loan_spec'] : $_POST['loan'])??null, $_POST['ms_salary']??null,
 $_POST['s_period']??null,$_POST['os_income']??null,$_POST['s_specify']??null);
 }
 // //work tab 4

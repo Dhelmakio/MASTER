@@ -46,6 +46,36 @@ require_once('../controller/reg_app.php');
                 $spouse_pob = (($_POST['spob_province']??null).', '.($_POST['spob_city']??null));
                 $spouse_address = (($_POST['spouse_province']??null).', '.($_POST['spouse_city']??null).', '.($_POST['spouse_brgy']??null));
                 
+                $loan = $_POST['loan'];
+                $tempLoan = "";
+                if($loan == "Salary"){
+                        $tempLoan = $loan." Loan";
+                }else if($loan == "Personal"){
+                        $tempLoan = $loan." Loan";
+                }else if($loan == "Calamity"){
+                        $tempLoan = $loan." Loan";
+                }else if($loan == "Maternity"){
+                        $tempLoan = $loan." Loan";
+                }else if($loan == "Paternity"){
+                        $tempLoan = $loan." Loan";
+                }else if($loan == "Business"){
+                        $tempLoan = $loan." Loan";
+                }else if($loan == "Application/Gadget"){
+                        $tempLoan = $loan." Loan";
+                }else if($loan == "Vehicle"){
+                        $tempLoan = $loan." Loan";
+                }else if($loan == "Home"){
+                        $tempLoan = $loan." Loan";
+                }else if($loan == "Travel"){
+                        $tempLoan = $loan." Loan";
+                }else if($loan == "Credit"){
+                        $tempLoan = $loan." Card";
+                }else if($loan == "OFW"){
+                        $tempLoan = $loan." Loan";
+                }else{
+                        $tempLoan = $loan;
+                }
+
                 
                 //personal tab 1
                 $applicant->personal_update($_POST['id'], $_POST['fname']??null,$_POST['mname']??null,$_POST['lname']??null,$_POST['suffix']??null,$_POST['nname']??null,$_POST['age']??null,$_POST['gender']??null,
@@ -58,7 +88,7 @@ require_once('../controller/reg_app.php');
                 $_POST['spouse_occupation']??null,$_POST['spouse_company']??null);
                 //work tab 3
                 $applicant->work_update($_POST['id'], $_POST['agency']??null,$_POST['sector']." Sector"??null,$_POST['business']??null ,$_POST['ca_company']??null,$_POST['location']??null,$_POST['supervisor']??null,
-                $_POST['hr_number']??null,$_POST['date_hired']??null,$_POST['e_status']??null,$_POST['m_salary']??null,$_POST['bank']??null,$_POST['t_card']??null,(($_POST['loan'] == "Yes") ? $_POST['loan_spec'] : $_POST['loan'])??null,$_POST['ms_salary']??null,
+                $_POST['hr_number']??null,$_POST['date_hired']??null,$_POST['e_status']??null,$_POST['m_salary']??null,$_POST['bank']??null,$_POST['t_card']??null,(($tempLoan != "None") ? $tempLoan.'-'.$_POST['loan_spec'] : $tempLoan)??null,$_POST['ms_salary']??null,
                 $_POST['s_period']??null,$_POST['os_income']??null,$_POST['s_specify']??null);
                 // //work tab 4
                 $applicant->reference_update($_POST['id'], $tempPurp, $sources, $_POST['facebook']);

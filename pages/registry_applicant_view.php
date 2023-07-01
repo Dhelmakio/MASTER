@@ -195,7 +195,11 @@ if($_SESSION['user_id']){
                                         <div class="col-lg-12"><label>Type of ATM Card:
                                                 <u><?php echo $row['atm_card'];?></label></div>
                                         <div class="col-lg-12"><label>Do you have other loan?
-                                                <u><?php echo $row['loan'];?></label></div>
+                                                <u><?php 
+                                                
+                                                $exploan =  explode("-", $row['loan']);
+                                                
+                                                echo $exploan[0].'( '.$exploan[1].' )';?></label></div>
                                         <div class="col-lg-12"><label>Gross (Monthly):
                                                 <u><?php  echo  "₱ ".number_format(floatval($row['monthly_salary']),2)??null;?></label>
                                         </div>
