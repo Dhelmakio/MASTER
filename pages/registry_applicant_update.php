@@ -1509,7 +1509,7 @@ if($_SESSION['user_id']){
                                                                                             name="loan_spec"
                                                                                             id="loan_spec"
                                                                                             class="form-control input-set-3" <?php 
-                                                                                            if($loan == "No"){
+                                                                                            if($exploan[0] == "None"){
                                                                                                 echo "disabled";
                                                                                             }else{
                                                                                                 echo 'value="'.$exploan[1].'"';
