@@ -87,12 +87,12 @@ class Loan extends DbCon {
 
     public function getInterestRate(){
         if(strtoupper($this->clientEmpStatus) == 'REGULAR'){
-            if($this->borrowingHistCount > 1){
-                $this->moInterest = Statics::$ATHREEAFOURINTERESTRATEREG;
-                return Statics::$ATHREEAFOURINTERESTRATEREG;
-            }else{
+            if($this->borrowingHistCount < 5){
                 $this->moInterest = Statics::$AONEATWOINTERESTRATEREG;
                 return Statics::$AONEATWOINTERESTRATEREG;
+            }else{
+                $this->moInterest = Statics::$AMORETHANFIVEBORROWINGHISTORY;
+                return Statics::$AMORETHANFIVEBORROWINGHISTORY;
             }
         } elseif (strtoupper($this->clientEmpStatus) == 'CASUAL' || strtoupper($this->clientEmpStatus) == 'PROBATIONARY' || strtoupper($this->clientEmpStatus) == 'TRAINEE'){
             if($this->borrowingHistCount > 1){

@@ -714,7 +714,7 @@ if(!isset($_SESSION['user_id'])){
                                                                                 <div class="col-lg-12">
                                                                                     <hr>
                                                                                 </div><button type="button" name="next"
-                                                                                    disabled id="first_next"
+                                                                                     id="first_next"
                                                                                     class=" btn btn-primary pull-right"
                                                                                     style="margin-left: 10px;">
                                                                                     Next <i
@@ -900,7 +900,7 @@ if(!isset($_SESSION['user_id'])){
                                                                                     </div>
                                                                                 </div>
                                                                                 <button type="button" name="next"
-                                                                                     id="second_next" disabled
+                                                                                     id="second_next" 
                                                                                     class="next btn  btn-primary text-center pull-right"
                                                                                     style="margin-left: 10px;">
                                                                                     Next <i
@@ -1330,8 +1330,8 @@ if(!isset($_SESSION['user_id'])){
                                                                                     </div>
                                                                                     <div class="col-lg-3">
                                                                                         <label for="">Specify:</label>
-                                                                                        <select class="form-control input-set-3" onchange="specSourceChange(this, 'sma')"
-                                                                                                name="loan_spec" id="loan_spec" disabled>
+                                                                                        <select class="form-control input-set-3"
+                                                                                                name="loan_spec" id="loan_spec" onchange="specSourceChange(this, 'sma')" disabled>
                                                                                                 <option value=""
                                                                                                     selected disabled>
                                                                                                     SELECT</option>
@@ -1553,7 +1553,7 @@ if(!isset($_SESSION['user_id'])){
                                                                                     </div>
                                                                                 </div>
                                                                                 <button type="button" name="next"
-                                                                                     id="third_next" disabled
+                                                                                     id="third_next" 
                                                                                     class="next btn  btn-primary text-center pull-right"
                                                                                     style="margin-left: 10px;">
                                                                                     Next <i

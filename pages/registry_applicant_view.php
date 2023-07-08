@@ -91,14 +91,14 @@ if($_SESSION['user_id']){
                                         <div class="col-lg-12"><label>Address:
                                                 <u><?php echo $row['street1'].", ".$row['brgy1'].", ".$row['city1'].", ".$row['province1'].", ".$row['phase1'];?></label>
                                         </div>
-                                        <div class="col-lg-12"><label>Gender: <u><?php echo $row['gender']?></label>
+                                        <div class="col-lg-12"><label>Gender: <u><?php echo strtoupper($row['gender'])?></label>
                                         </div>
                                         <div class="col-lg-12"><label>Date of Birth:
                                                 <u><?php echo date('F d, Y',strtotime($row['dob1'])) ?></label></div>
                                         <div class="col-lg-12"><label>Place of Birth:
                                                 <u><?php echo $row['pob1']?></label></div>
                                                 <div class="col-lg-12"><label>Marital Status:
-                                                <u><?php echo $row['mstatus']?></label></div>
+                                                <u><?php echo strtoupper($row['mstatus'])?></label></div>
                                         <div class="col-lg-12"><label>Contact No.:
                                                 <u><?php echo $row['contact1']?></label></div>
                                               
@@ -172,9 +172,9 @@ if($_SESSION['user_id']){
                                         <div class="col-lg-12"><label>Employer / Agency Name:
                                                 <u><?php echo $row['employer']?></label></div>
                                         <div class="col-lg-12"><label>Sector Type:
-                                                <u><?php echo $row['sector_type']?></label></div>
+                                                <u><?php echo strtoupper($row['sector_type'])?></label></div>
                                         <div class="col-lg-12"><label>Type of Business:
-                                                <u><?php echo $row['tob']?></label></div>
+                                                <u><?php echo strtoupper($row['tob'])?></label></div>
                                         <div class="col-lg-12"><label>Complete Address of Company:
                                                 <u><?php echo $row['com_address']?></label></div>
                                         <div class="col-lg-12"><label>Assigned Location:
@@ -199,7 +199,7 @@ if($_SESSION['user_id']){
                                                 
                                                 $exploan =  explode("-", $row['loan']);
                                                 
-                                                echo $exploan[0].'( '.$exploan[1].' )';?></label></div>
+                                                echo strtoupper($exploan[0]).'( '.$exploan[1].' : ₱'.number_format(floatval($exploan[2]),2).' )';?></label></div>
                                         <div class="col-lg-12"><label>Gross (Monthly):
                                                 <u><?php  echo  "₱ ".number_format(floatval($row['monthly_salary']),2)??null;?></label>
                                         </div>
@@ -208,7 +208,7 @@ if($_SESSION['user_id']){
                                         <div class="col-lg-12"><label>Other Source of Income:
                                                 <u><?php echo $row['other_source'];?></label></div>
                                         <div class="col-lg-12"><label>(Specify):
-                                                <u><?php echo $row['specify'];?></label></div>
+                                                <u><?php echo strtoupper($row['specify']);?></label></div>
                                         <div class="col-lg-12">
                                             <hr>
                                         </div>
