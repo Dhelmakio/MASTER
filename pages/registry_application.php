@@ -1401,101 +1401,6 @@ if(!isset($_SESSION['user_id'])){
                                                                                                 placeholder="₱">
                                                                                         </div>
                                                                                     </div>
-                                                                                    <!-- <div class="col-lg-12">
-                                                                                        <div class="form-group">
-                                                                                            <label>Salary
-                                                                                                Period:</label>
-                                                                                            <div class="radio">
-                                                                                                <label>
-                                                                                                    <input type="radio"
-                                                                                                        value="5/20"
-                                                                                                        name="s_period">5/20
-                                                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                                                </label>
-                                                                                                <label>
-                                                                                                    <input type="radio"
-                                                                                                        value="6/21"
-                                                                                                        name="s_period">6/21
-                                                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                                                </label>
-                                                                                                <label>
-                                                                                                    <input type="radio"
-                                                                                                        value="7/22"
-                                                                                                        name="s_period">7/22
-                                                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                                                </label>
-                                                                                                <label>
-                                                                                                    <input type="radio"
-                                                                                                        value="8/23"
-                                                                                                        name="s_period">8/23
-                                                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                                                </label>
-                                                                                                <label>
-                                                                                                    <input type="radio"
-                                                                                                        value="10/25"
-                                                                                                        name="s_period">10/25
-                                                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                                                </label>
-                                                                                                <label>
-                                                                                                    <input type="radio"
-                                                                                                        value="15/30"
-                                                                                                        name="s_period">15/30
-                                                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                                                </label>
-                                                                                                <label>
-                                                                                                    <input type="radio"
-                                                                                                        name="s_period">Weekly
-                                                                                                    (every Friday)
-                                                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                                                </label>
-                                                                                                <label>
-                                                                                                    <input type="radio"
-                                                                                                        name="s_period">Every 2nd Saturday
-                                                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                                                </label>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div> -->
-                                                                                    <!-- <div class="col-lg-3">
-                                                                                        <div class="form-group">
-                                                                                            <label>Salary Period:
-                                                                                            </label>
-                                                                                            <select class="form-control"
-                                                                                                name="s_period">
-                                                                                                <option value=""
-                                                                                                    disabled selected>
-                                                                                                    SELECT
-                                                                                                </option>
-                                                                                                <option value="5/20">
-                                                                                                    5/20
-                                                                                                </option>
-                                                                                                <option value="6/21">
-                                                                                                    6/21
-                                                                                                </option>
-                                                                                                <option value="7/22">
-                                                                                                    7/22
-                                                                                                </option>
-                                                                                                <option value="8/23">
-                                                                                                    8/23
-                                                                                                </option>
-                                                                                                <option value="10/25">
-                                                                                                    10/25
-                                                                                                </option>
-                                                                                                <option value="15/30">
-                                                                                                    15/30
-                                                                                                </option>
-                                                                                                <option
-                                                                                                    value="Weekly">
-                                                                                                    Weekly (Every
-                                                                                                    Friday)
-                                                                                                </option>
-                                                                                                <option
-                                                                                                    value="Every 2nd Saturday">
-                                                                                                    Every 2nd Saturday
-                                                                                                </option>
-                                                                                            </select>
-                                                                                        </div>
-                                                                                    </div> -->
                                                                                     <div class="col-lg-12"></div>
                                                                                     <div class="col-lg-6">
                                                                                         <div class="form-group">
@@ -1543,7 +1448,7 @@ if(!isset($_SESSION['user_id'])){
                                                                                                 Income (₱)</label>
                                                                                             <input name="os_income" id="os_income"
                                                                                                 type="text"
-                                                                                                 class="form-control input-set-3" required
+                                                                                                 class="form-control text-right input-set-3" required
                                                                                                 placeholder="₱" disabled>
                                                                                         </div>
                                                                                     </div>

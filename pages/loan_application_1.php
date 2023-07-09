@@ -574,7 +574,7 @@ if(isset($_GET['id'])){
                                                             id="preview_client_btn"><br>
 
                                                             <button type="button" id="preview_client"
-                                                                class="btn btn-primary">
+                                                                class="btn btn-success">
                                                                 <i class="fa fa-plus" aria-hidden="true"
                                                                     title="Copy to use save"></i> Preview for client
                                                             </button>
