@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 29, 2023 at 08:34 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Jul 11, 2023 at 03:41 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -33,7 +33,7 @@ CREATE TABLE `activity_logs` (
   `name` text NOT NULL,
   `activity` text NOT NULL,
   `date_time` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `activity_logs`
@@ -148,7 +148,10 @@ INSERT INTO `activity_logs` (`log_id`, `user_id`, `name`, `activity`, `date_time
 (106, 1, 'Kevin Fontanoza', 'Logged out', '2023-06-26 19:16:28'),
 (107, 1, 'Kevin Fontanoza', 'Logged in', '2023-06-27 00:24:35'),
 (108, 1, 'Kevin Fontanoza', 'Logged out', '2023-06-27 02:21:53'),
-(109, 1, 'Kevin Fontanoza', 'Logged in', '2023-06-29 20:47:44');
+(109, 1, 'Kevin Fontanoza', 'Logged in', '2023-06-29 20:47:44'),
+(110, 1, 'Kevin Fontanoza', 'Logged in', '2023-07-06 15:56:55'),
+(111, 1, 'Kevin Fontanoza', 'Added loan application', '2023-07-11 21:06:53'),
+(112, 1, 'Kevin Fontanoza', 'Added loan application', '2023-07-11 21:22:16');
 
 -- --------------------------------------------------------
 
@@ -220,7 +223,7 @@ CREATE TABLE `answers` (
   `question59` varchar(10) DEFAULT NULL,
   `question60` varchar(10) DEFAULT NULL,
   `date` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `answers`
@@ -247,14 +250,16 @@ CREATE TABLE `applicants_child` (
   `child_name` text NOT NULL,
   `child_dob` date NOT NULL,
   `date_encoded` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `applicants_child`
 --
 
 INSERT INTO `applicants_child` (`child_id`, `applicant_code`, `child_name`, `child_dob`, `date_encoded`) VALUES
-(2, 'AMG0010000002', 'Delise', '2023-06-30', '2023-06-30');
+(8, 'AMG0010000001', 'test', '2023-06-30', '2023-06-30'),
+(11, 'AMG0010000002', 'a', '2023-07-01', '2023-07-01'),
+(13, 'AMG0010000003', 'a', '2023-07-01', '2023-07-01');
 
 -- --------------------------------------------------------
 
@@ -299,14 +304,21 @@ CREATE TABLE `applicants_personal` (
   `fathercon` text NOT NULL,
   `file` text NOT NULL,
   `date_encoded` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `applicants_personal`
 --
 
 INSERT INTO `applicants_personal` (`applicant_id`, `applicant_code`, `firstname`, `middlename`, `lastname`, `suffix`, `nickname`, `age`, `gender`, `contact1`, `mstatus`, `dob1`, `pob1`, `block1`, `street1`, `phase1`, `brgy1`, `city1`, `province1`, `map_url`, `residence1`, `lwith1`, `block2`, `street2`, `phase2`, `brgy2`, `city2`, `province2`, `residence2`, `lwith2`, `mothername`, `mothercon`, `fathername`, `fathercon`, `file`, `date_encoded`) VALUES
-(2, 'AMG0010000002', 'Dhelmark', 'R.', 'Baylon', '', 'Dhel', '', 'Male', '09924334454', 'Married', '2023-06-30', 'RIZAL, RODRIGUEZ (MONTALBAN)', 'Block 2', 'Streeterns', 'Zone 90', 'SAMPIANO', 'MALITBOG', 'BUKIDNON', '11.38331406236436, 124.41250123320089', 'Renting', 'Relatives', 'Block 2', 'Streeterns', 'Zone 90', 'SAMPIANO', 'MALITBOG', 'BUKIDNON', 'Renting', 'Relatives', 'Mother', '09457545454', 'Father', '09467673275', '', '2023-06-30');
+(7, 'AMG0010000001', 'aaaaassss', 'testssss', 'Shemssss', 'test', 'a', '', 'Male', '09999999999', 'Married', '2023-06-30', 'BATANGAS, MABINI', 'a', 'a', 'a', 'BULAKLAKAN', 'LIPA CITY', 'BATANGAS', '11.039238, 124.657092', 'Renting', 'Wife/Husband/Live-in', 'a', 'a', 'a', 'BULAKLAKAN', 'LIPA CITY', 'BATANGAS', 'Renting', '', 'a', '09999999999', 'a', '09999999999', '', '2023-06-30'),
+(10, 'AMG0010000002', 'a', 'a', 'a', 'a', 'a', '', 'Male', '09999999999', 'Married', '2023-07-01', 'BILIRAN, CAIBIRAN', 'test', 'test', 'test', 'GUINAOANG', 'MANKAYAN', 'BENGUET', '11.039238, 124.657092', 'Owned', 'Relatives', 'test', 'test', 'test', 'GUINAOANG', 'MANKAYAN', 'BENGUET', 'Owned', '', 'a', '09999999999', 'a', '09999999999', '', '2023-07-01'),
+(12, 'AMG0010000003', 'a', 'a', 'a', 'a', 'a', '', 'Male', '09999999999', 'Married', '2023-07-01', 'AGUSAN DEL NORTE, CABADBARAN CITY', 'a', 'a', 'a', 'BADEO', 'KIBUNGAN', 'BENGUET', '11.039238, 124.657092', 'Owned', 'Relatives', 'a', 'a', 'a', 'BADEO', 'KIBUNGAN', 'BENGUET', 'Owned', '', 'a', '09999999999', 'a', '09999999999', '', '2023-07-01'),
+(13, 'AMG0010000004', 'A', 'A', 'A', 'JR', 'A', '', 'Male', '09999999999', 'Married', '2023-07-07', 'BILIRAN, BILIRAN', 'A', 'A', 'A', '', 'LA PAZ', 'AGUSAN DEL SUR', 'a', 'AAAAAA', 'AAAAA', 'A', 'A', 'A', '', 'LA PAZ', 'AGUSAN DEL SUR', 'AAAAAA', 'AAAAA', 'AA', '1', 'AA', '1', '', '2023-07-07'),
+(14, 'AMG0010000005', 'A', 'A', 'BAYLON', 'IV', 'A', '', 'Female', '09999999999', 'Single', '2023-07-07', 'BUKIDNON, QUEZON', 'A', 'A', 'A', 'BUNGA', 'CABUCGAYAN', 'BILIRAN', 'a', 'A', 'A', 'A', 'A', 'A', 'BUNGA', 'CABUCGAYAN', 'BILIRAN', 'A', 'A', 'A', '09999999999', 'A', '09999999999', '', '2023-07-07'),
+(15, 'AMG0010000006', 'A', 'A', 'A', 'SR', 'D', '', 'Male', '111111', 'Single', '1999-11-11', 'BATANGAS, CALATAGAN', 'A', 'A', 'A', 'JAMORAWON', 'ALMERIA', 'BILIRAN', 'a', 'A', 'A', 'A', 'A', 'A', 'JAMORAWON', 'ALMERIA', 'BILIRAN', 'A', 'A', 'AAAAAAAAAAA', '2', 'AAAAAAAAAAAAAAAAA', '3', '', '2023-07-07'),
+(16, 'AMG0010000007', 'DHEL MARK', 'SALIDAGA', 'BAYLON', 'IV', 'DHEL', '', 'Male', '09999999999', 'Single', '2023-07-07', 'BATAAN, DINALUPIHAN', 'BLOCK', 'STREET', 'PHASE', 'HUMAYINGAN', 'LIAN', 'BATANGAS', '11.039238, 124.657092', 'ABANG', 'ABANG', 'BLOCK', 'STREET', 'PHASE', 'HUMAYINGAN', 'LIAN', 'BATANGAS', 'ABANG', 'ABANG', 'DELMA SALIDAGA BAYLON', '09999999999', 'ALBERTO PEREZ BAYLON', '09999999999', '', '2023-07-07'),
+(17, 'AMG0010000008', 'DHEL MARK', 'SALIDAGA', 'BAYLON', '', 'FLUX', '', 'Male', '09999999999', 'Single', '2023-07-07', 'BATANGAS, LAUREL', 'BLOCK', 'STREET', 'PHASE', 'MABAYO', 'MORONG', 'BATAAN', '11.039238, 124.657092', 'ABANG', 'ABANG', 'BLOCK', 'STREET', 'PHASE', 'MABAYO', 'MORONG', 'BATAAN', 'ABANG', 'ABANG', 'DELMA SALIDAGA BAYLON', '09999999999', 'ALBERTO PEREZ BAYLON', '09999999999', '', '2023-07-07');
 
 -- --------------------------------------------------------
 
@@ -321,14 +333,21 @@ CREATE TABLE `applicants_reference` (
   `loan_purpose` text NOT NULL,
   `fb_acct` text NOT NULL,
   `date_encoded` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `applicants_reference`
 --
 
 INSERT INTO `applicants_reference` (`reference_id`, `applicant_code`, `source`, `loan_purpose`, `fb_acct`, `date_encoded`) VALUES
-(2, 'AMG0010000002', 'Flyers', 'Special Occassion', 'facebook lang', '2023-06-30');
+(7, 'AMG0010000001', 'Signage/Posters', 'Educational', 'dhelmark', '2023-06-30'),
+(10, 'AMG0010000002', 'Referral', 'Pay Bills', 'dhelmark', '2023-07-01'),
+(12, 'AMG0010000003', 'Leaflets', 'Pay Bills', 'dhelmark', '2023-07-01'),
+(13, 'AMG0010000004', 'X', 'XXX', 'xxxxxxxx', '2023-07-07'),
+(14, 'AMG0010000005', ' ', 'Pay Bills', 'dhelmark', '2023-07-07'),
+(15, 'AMG0010000006', 'BBBBBBBBBB', 'AAAAAAAA', 'dhelmark', '2023-07-07'),
+(16, 'AMG0010000007', 'DIRI', 'KUAN', 'dhelmark', '2023-07-07'),
+(17, 'AMG0010000008', 'DIRI', 'KUAN', 'dhelmark', '2023-07-07');
 
 -- --------------------------------------------------------
 
@@ -344,14 +363,17 @@ CREATE TABLE `applicants_relative` (
   `r_relationship` text NOT NULL,
   `r_ta` text NOT NULL,
   `date_encoded` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `applicants_relative`
 --
 
 INSERT INTO `applicants_relative` (`relative_id`, `applicant_code`, `relative_name`, `r_contact`, `r_relationship`, `r_ta`, `date_encoded`) VALUES
-(2, 'AMG0010000002', 'Louie', '06445645642', 'Mom', '02:29', '0000-00-00');
+(7, 'AMG0010000001', 'HASHDUAH', '09999999999', 'test', '20:21', '0000-00-00'),
+(10, 'AMG0010000002', 'a', '09999999999', 'a', '11:25', '0000-00-00'),
+(12, 'AMG0010000003', 'a', '09999999999', 'test', '13:10', '0000-00-00'),
+(13, 'AMG0010000008', 'test', '09999999999', 'test', '17:28', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -370,14 +392,17 @@ CREATE TABLE `applicants_spouse` (
   `s_occupation` text NOT NULL,
   `s_company` text NOT NULL,
   `date_encoded` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `applicants_spouse`
 --
 
 INSERT INTO `applicants_spouse` (`spouse_id`, `applicant_code`, `spouse_name`, `contact`, `s_dob`, `s_pob`, `s_address`, `s_occupation`, `s_company`, `date_encoded`) VALUES
-(2, 'AMG0010000002', 'Denise Cosens-Baylon', '09164574545', '2023-06-30', 'NEGROS ORIENTAL, MANJUYOD', 'BASILAN, TABUAN-LASA, TAMBULIG BUTON', 'Infrastructure', 'Teradyne', '2023-06-30');
+(7, 'AMG0010000001', 'AHAHAHAHHA', '09999999999', '2023-06-30', 'BENGUET, BUGUIAS', 'BATAAN, LIMAY, LANDING', 'test', 'test', '2023-06-30'),
+(10, 'AMG0010000002', 'a', '09999999999', '2023-07-01', 'BASILAN, HADJI MUHTAMAD', 'BENGUET, KABAYAN, EDDET', 'a', 'a', '2023-07-01'),
+(12, 'AMG0010000003', 'a', '09999999999', '2023-07-01', 'BENGUET, BAGUIO CITY', 'BATANGAS, LOBO, MABILOG NA BUNDOK', 'a', 'a', '2023-07-01'),
+(13, 'AMG0010000004', 'AAAA', '1', '2023-07-07', 'ANTIQUE, CULASI', 'BATANGAS, LEMERY, DISTRICT II (POB.)', 'AAAAAAAAAA', 'AAAAAAAAA', '2023-07-07');
 
 -- --------------------------------------------------------
 
@@ -407,14 +432,21 @@ CREATE TABLE `applicants_work` (
   `specify` text NOT NULL,
   `max_loanable_amt` float NOT NULL,
   `date_encoded` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `applicants_work`
 --
 
 INSERT INTO `applicants_work` (`work_id`, `applicant_code`, `employer`, `sector_type`, `tob`, `com_address`, `a_location`, `sup_name`, `hr_number`, `date_hired`, `e_status`, `m_salary`, `bank_name`, `atm_card`, `loan`, `monthly_salary`, `s_period`, `other_source`, `specify`, `max_loanable_amt`, `date_encoded`) VALUES
-(2, 'AMG0010000002', 'Teradayne', 'Government Sector', 'Technology', 'Cogon, Ormoc City', 'Basak, Lapu-lapu', 'Kevin Fontanoza', '09425454545', '2023-06-30', 'REGULAR', 'Cash', 'BPI', 'ATM Card', 'None actually. It\'s just a joke', '25000', '10/25', 'None', 'None to specify', 0, '2023-06-30');
+(7, 'AMG0010000001', 'a', 'Government Sector', 'test', 'test', 'test', 'test', '09999999999', '2023-06-30', 'PROBATIONARY', 'Check', 'test', 'test', 'No', '2000000', '6/21', 'test', 'test', 0, '2023-06-30'),
+(10, 'AMG0010000002', 'a', 'Private Sector', 'a', 'a', 'a', 'a', '09999999999', '2023-07-01', 'REGULAR', 'ATM', 'test', 'test', 'None', '2000000', '6/21', 'a', 'a', 0, '2023-07-01'),
+(12, 'AMG0010000003', 'a', 'Private Sector', 'a', 'a', 'a', 'a', '09999999999', '2023-07-01', 'REGULAR', 'ATM', 'test', 'test', 'None', '2000000', '6/21', 'a', 'a', 0, '2023-07-01'),
+(13, 'AMG0010000004', 'AAAAAAAA', 'Private Sector', 'Apartments', 'AAAAAAAAA', 'AAAAAA', 'AAAAAAAAA', '1', '2023-07-07', 'REGULAR', 'ATM', 'AAAAAAA', 'AAAAAAA', 'Yes-Vehicle Loan', '11111', '8/23', '111111111', 'Pension', 0, '2023-07-07'),
+(14, 'AMG0010000005', 'A', 'Private Sector', 'Transportation companies, such as airlines, shipping, land tours and forwarders', 'A', 'A', 'A', '1', '2023-07-07', 'PROBATIONARY', 'Check', 'A', 'A', 'No', '1', '6/21', '1111111111', 'Commission', 0, '2023-07-07'),
+(15, 'AMG0010000006', 'AAAAAAA', 'Private Sector', 'Apartments', 'AAAAAAA', 'AAAAAAA', 'AAAAAAAAA', '111111', '1999-11-11', 'REGULAR', 'ATM', '111111', '2', 'Yes-Salary Loan', '111111111', '5/20', '19999999', 'Pension', 0, '2023-07-07'),
+(16, 'AMG0010000007', 'COMPTIA', 'Private Sector', 'Apartments', 'PALID II LEYTE LEYTE', 'ORMOC', 'TEST', '09999999999', '2023-07-07', 'REGULAR', 'Cash', 'DHELMARK', 'TEST', 'Yes-Personal Loan-2000000', '200000', '', '1111111111', 'Allotment', 0, '2023-07-07'),
+(17, 'AMG0010000008', 'COMPTIA', 'Private Sector', 'Apartments', 'PALID II LEYTE LEYTE', 'ORMOC', 'TEST', '09999999999', '2023-07-07', 'REGULAR', 'ATM', 'TEEST', 'TEST', 'Yes-Personal Loan-2000000', '2000000', '', '1111111111', 'Part time Job', 0, '2023-07-07');
 
 -- --------------------------------------------------------
 
@@ -429,14 +461,29 @@ CREATE TABLE `archive_child` (
   `child_name` text NOT NULL,
   `child_dob` date NOT NULL,
   `date_encoded` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `archive_child`
 --
 
 INSERT INTO `archive_child` (`ar_child_id`, `child_id`, `applicant_code`, `child_name`, `child_dob`, `date_encoded`) VALUES
-(1, 1, 'AMG0010000001', 'a', '2023-06-30', '2023-06-30');
+(1, 1, 'AMG0010000001', 'a', '2023-06-30', '2023-06-30'),
+(2, 2, 'AMG0010000002', 'Delise', '2023-06-30', '2023-06-30'),
+(3, 4, 'AMG0010000001', 'test', '2023-06-30', '2023-06-30'),
+(4, 5, 'AMG0010000001', 'test', '2023-06-30', '2023-06-30'),
+(6, 6, 'AMG0010000001', 'a', '2023-06-30', '2023-06-30'),
+(7, 7, 'AMG0010000001', 'a', '2023-06-30', '2023-06-30'),
+(8, 7, 'AMG0010000001', 'a', '2023-06-30', '2023-06-30'),
+(9, 8, 'AMG0010000001', 'test', '2023-06-30', '2023-06-30'),
+(10, 8, 'AMG0010000001', 'test', '2023-06-30', '2023-06-30'),
+(11, 8, 'AMG0010000001', 'test', '2023-06-30', '2023-06-30'),
+(12, 9, 'AMG0010000002', 'a', '2023-06-30', '2023-06-30'),
+(13, 10, 'AMG0010000002', 'a', '2023-06-30', '2023-06-30'),
+(14, 12, 'AMG0010000003', 'a', '2023-07-01', '2023-07-01'),
+(15, 12, 'AMG0010000003', 'a', '2023-07-01', '2023-07-01'),
+(16, 13, 'AMG0010000003', 'a', '2023-07-01', '2023-07-01'),
+(17, 13, 'AMG0010000003', 'a', '2023-07-01', '2023-07-01');
 
 -- --------------------------------------------------------
 
@@ -482,14 +529,28 @@ CREATE TABLE `archive_personal` (
   `fathercon` text NOT NULL,
   `file` text NOT NULL,
   `date_encoded` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `archive_personal`
 --
 
 INSERT INTO `archive_personal` (`ar_personal_id`, `applicant_id`, `applicant_code`, `firstname`, `middlename`, `lastname`, `suffix`, `nickname`, `age`, `gender`, `contact1`, `mstatus`, `dob1`, `pob1`, `block1`, `street1`, `phase1`, `brgy1`, `city1`, `province1`, `map_url`, `residence1`, `lwith1`, `block2`, `street2`, `phase2`, `brgy2`, `city2`, `province2`, `residence2`, `lwith2`, `mothername`, `mothercon`, `fathername`, `fathercon`, `file`, `date_encoded`) VALUES
-(1, 1, 'AMG0010000001', 'a', 'a', 'a', 'a', 'a', '', 'Male', '09123456789', 'Married', '2023-06-30', 'BILIRAN, MARIPIPI', 'a', 'a', 'a', 'SUMNANGA', 'SABTANG', 'BATANES', '11.38331406236436, 124.41250123320089', 'Renting', 'Co-Worker', 'a', 'a', 'a', 'SUMNANGA', 'SABTANG', 'BATANES', 'Renting', 'Co-Worker', 'a', '09457545454', 'a', '09467673275', '', '2023-06-30');
+(1, 1, 'AMG0010000001', 'a', 'a', 'a', 'a', 'a', '', 'Male', '09123456789', 'Married', '2023-06-30', 'BILIRAN, MARIPIPI', 'a', 'a', 'a', 'SUMNANGA', 'SABTANG', 'BATANES', '11.38331406236436, 124.41250123320089', 'Renting', 'Co-Worker', 'a', 'a', 'a', 'SUMNANGA', 'SABTANG', 'BATANES', 'Renting', 'Co-Worker', 'a', '09457545454', 'a', '09467673275', '', '2023-06-30'),
+(2, 2, 'AMG0010000002', 'Dhelmark', 'R.', 'Baylon', '', 'Dhel', '', 'Male', '09924334454', 'Married', '2023-06-30', 'RIZAL, RODRIGUEZ (MONTALBAN)', 'Block 2', 'Streeterns', 'Zone 90', 'SAMPIANO', 'MALITBOG', 'BUKIDNON', '11.38331406236436, 124.41250123320089', 'Renting', 'Relatives', 'Block 2', 'Streeterns', 'Zone 90', 'SAMPIANO', 'MALITBOG', 'BUKIDNON', 'Renting', 'Relatives', 'Mother', '09457545454', 'Father', '09467673275', '', '2023-06-30'),
+(3, 4, 'AMG0010000001', 'test', 'test', 'test', 'test', 'test', '', 'Male', '09999999999', 'Married', '2023-06-30', 'BATANES, SABTANG', 'test', 'test', 'test', 'PALENGKE (POB.)', 'CAIBIRAN', 'BILIRAN', '11.039238, 124.657092', 'Owned', 'Parents', 'test', 'test', 'test', 'PALENGKE (POB.)', 'CAIBIRAN', 'BILIRAN', 'Owned', '', 'test', '09999999999', 'test', '09999999999', '', '2023-06-30'),
+(4, 5, 'AMG0010000001', 'a', 'a', 'a', 'a', 'a', '', 'Male', '09999999999', 'Married', '2023-06-30', 'ANTIQUE, BELISON', 'a', 'a', 'a', 'KAUMBAKAN', 'MAHATAO', 'BATANES', '11.039238, 124.657092', 'Owned', 'Parents', 'a', 'a', 'a', 'KAUMBAKAN', 'MAHATAO', 'BATANES', 'Owned', 'Parents', 'a', '09999999999', 'a', '09999999999', '', '2023-06-30'),
+(5, 6, 'AMG0010000001', 'sim', 'sim', 'Sim', 'test', 'test', '', 'Male', '09999999999', 'Married', '2023-06-30', 'BILIRAN, CAIBIRAN', 'test', 'test', 'test', 'CAWAYAN', 'LANTAPAN', 'BUKIDNON', '11.039238, 124.657092', 'Owned', 'Parents', 'test', 'test', 'test', 'CAWAYAN', 'LANTAPAN', 'BUKIDNON', 'Owned', '', 'a', '09999999999', 'test', '09999999999', '', '2023-06-30'),
+(6, 6, 'AMG0010000001', 'simeme', 'simemoe', 'Simeomie', 'test', 'test', '', 'Male', '09999999999', 'Married', '2023-06-30', 'BILIRAN, CAIBIRAN', 'test', 'test', 'test', 'CAWAYAN', 'LANTAPAN', 'BUKIDNON', '11.039238, 124.657092', 'Owned', 'Parents', 'test', 'test', 'test', 'CAWAYAN', 'LANTAPAN', 'BUKIDNON', 'Owned', '', 'a', '09999999999', 'test', '09999999999', '', '2023-06-30'),
+(7, 7, 'AMG0010000001', 'BAYLON', 'test', 'DHel', 'test', 'a', '', 'Male', '09999999999', 'Married', '2023-06-30', 'BATANGAS, MABINI', 'a', 'a', 'a', 'BULAKLAKAN', 'LIPA CITY', 'BATANGAS', '11.039238, 124.657092', 'Renting', 'Wife/Husband/Live-in Partner', 'a', 'a', 'a', 'BULAKLAKAN', 'LIPA CITY', 'BATANGAS', 'Renting', 'Wife/Husband/Live-in Partner', 'a', '09999999999', 'a', '09999999999', '', '2023-06-30'),
+(8, 7, 'AMG0010000001', 'aaaaa', 'test', 'Shems', 'test', 'a', '', 'Male', '09999999999', 'Married', '2023-06-30', 'BATANGAS, MABINI', 'a', 'a', 'a', 'BULAKLAKAN', 'LIPA CITY', 'BATANGAS', '11.039238, 124.657092', 'Renting', 'Wife/Husband/Live-in', 'a', 'a', 'a', 'BULAKLAKAN', 'LIPA CITY', 'BATANGAS', 'Renting', '', 'a', '09999999999', 'a', '09999999999', '', '2023-06-30'),
+(9, 7, 'AMG0010000001', 'aaaaa', 'test', 'Shems', 'test', 'a', '', 'Male', '09999999999', 'Married', '2023-06-30', 'BATANGAS, MABINI', 'a', 'a', 'a', 'BULAKLAKAN', 'LIPA CITY', 'BATANGAS', '11.039238, 124.657092', 'Renting', 'Wife/Husband/Live-in', 'a', 'a', 'a', 'BULAKLAKAN', 'LIPA CITY', 'BATANGAS', 'Renting', '', 'a', '09999999999', 'a', '09999999999', '', '2023-06-30'),
+(10, 8, 'AMG0010000002', 'a', 'a', 'a', 'a', 'a', '', 'Female', '09999999999', 'Married', '2023-06-30', 'BENGUET, LA TRINIDAD', 'a', 'a', 'a', 'CUMBA', 'LIAN', 'BATANGAS', '11.039238, 124.657092', 'Renting', 'Relatives', 'a', 'a', 'a', 'CUMBA', 'LIAN', 'BATANGAS', 'Renting', 'Relatives', 'a', '09999999999', 'a', '09999999999', '', '2023-06-30'),
+(11, 9, 'AMG0010000002', 'a', 'a', 'a', 'a', 'a', '', 'Female', '09999999999', 'Married', '2023-06-30', 'BUKIDNON, MALITBOG', 'a', 'a', 'a', 'BOHESAPA', 'LAMITAN CITY', 'BASILAN', '11.039238, 124.657092', 'Renting', 'Wife/Husband/Live-in Partner', 'a', 'a', 'a', 'BOHESAPA', 'LAMITAN CITY', 'BASILAN', 'Renting', 'Wife/Husband/Live-in Partner', 'a', '09999999999', 'a', '09999999999', '', '2023-06-30'),
+(12, 11, 'AMG0010000003', 'a', 'a', 'a', 'a', 'a', '', 'Female', '09999999999', 'Married', '2023-07-01', 'BENGUET, BAKUN', 'a', 'a', 'a', 'HUGPA', 'BILIRAN', 'BILIRAN', '11.039238, 124.657092', 'Renting', 'Relatives', 'a', 'a', 'a', 'HUGPA', 'BILIRAN', 'BILIRAN', 'Renting', '', 'a', '09999999999', 'a', '09999999999', '', '2023-07-01'),
+(13, 11, 'AMG0010000003', 'a', 'a', 'a', 'a', 'a', '', 'Female', '09999999999', 'Married', '2023-07-01', 'BENGUET, BAKUN', 'a', 'a', 'a', 'HUGPA', 'BILIRAN', 'BILIRAN', '11.039238, 124.657092', 'Renting', 'Relatives', 'a', 'a', 'a', 'HUGPA', 'BILIRAN', 'BILIRAN', 'Renting', '', 'a', '09999999999', 'a', '09999999999', '', '2023-07-01'),
+(14, 12, 'AMG0010000003', 'a', 'a', 'a', 'a', 'a', '', 'Male', '09999999999', 'Married', '2023-07-01', 'AGUSAN DEL NORTE, CABADBARAN CITY', 'a', 'a', 'a', 'BADEO', 'KIBUNGAN', 'BENGUET', '11.039238, 124.657092', 'Owned', 'Relatives', 'a', 'a', 'a', 'BADEO', 'KIBUNGAN', 'BENGUET', 'Owned', '', 'a', '09999999999', 'a', '09999999999', '', '2023-07-01'),
+(15, 12, 'AMG0010000003', 'a', 'a', 'a', 'a', 'a', '', 'Male', '09999999999', 'Married', '2023-07-01', 'AGUSAN DEL NORTE, CABADBARAN CITY', 'a', 'a', 'a', 'BADEO', 'KIBUNGAN', 'BENGUET', '11.039238, 124.657092', 'Owned', 'Relatives', 'a', 'a', 'a', 'BADEO', 'KIBUNGAN', 'BENGUET', 'Owned', '', 'a', '09999999999', 'a', '09999999999', '', '2023-07-01');
 
 -- --------------------------------------------------------
 
@@ -505,14 +566,28 @@ CREATE TABLE `archive_reference` (
   `loan_purpose` text NOT NULL,
   `fb_acct` text NOT NULL,
   `date_encoded` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `archive_reference`
 --
 
 INSERT INTO `archive_reference` (`ar_reference_id`, `reference_id`, `applicant_code`, `source`, `loan_purpose`, `fb_acct`, `date_encoded`) VALUES
-(1, 1, 'AMG0010000001', 'Flyers', 'Business', 'facebook lang', '2023-06-30');
+(1, 1, 'AMG0010000001', 'Flyers', 'Business', 'facebook lang', '2023-06-30'),
+(2, 2, 'AMG0010000002', 'Flyers', 'Special Occassion', 'facebook lang', '2023-06-30'),
+(3, 4, 'AMG0010000001', 'Signage/Posters', 'Travel', 'dhelmark', '2023-06-30'),
+(4, 5, 'AMG0010000001', 'Banners', 'Educational', 'dhelmark', '2023-06-30'),
+(5, 6, 'AMG0010000001', 'Flyers', 'Pay Bills', 'ccccccccc1', '2023-06-30'),
+(6, 6, 'AMG0010000001', 'Flyers', 'Pay Bills', 'ccccccccc1', '2023-06-30'),
+(7, 7, 'AMG0010000001', 'Signage/Posters', 'Educational', 'dhelmark', '2023-06-30'),
+(8, 7, 'AMG0010000001', 'Signage/Posters', 'Educational', 'dhelmark', '2023-06-30'),
+(9, 7, 'AMG0010000001', 'Signage/Posters', 'Educational', 'dhelmark', '2023-06-30'),
+(10, 8, 'AMG0010000002', 'Signage/Posters', 'Medical', 'dhelmark', '2023-06-30'),
+(11, 9, 'AMG0010000002', 'Facebook', 'Pay Bills', 'dhelmark', '2023-06-30'),
+(12, 11, 'AMG0010000003', 'Signage/Posters', 'Educational', 'dhelmark', '2023-07-01'),
+(13, 11, 'AMG0010000003', 'Signage/Posters', 'Educational', 'dhelmark', '2023-07-01'),
+(14, 12, 'AMG0010000003', 'Leaflets', 'Pay Bills', 'dhelmark', '2023-07-01'),
+(15, 12, 'AMG0010000003', 'Leaflets', 'Pay Bills', 'dhelmark', '2023-07-01');
 
 -- --------------------------------------------------------
 
@@ -529,14 +604,29 @@ CREATE TABLE `archive_relative` (
   `r_relationship` text NOT NULL,
   `r_ta` text NOT NULL,
   `date_encoded` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `archive_relative`
 --
 
 INSERT INTO `archive_relative` (`ar_relative_id`, `relative_id`, `applicant_code`, `relative_name`, `r_contact`, `r_relationship`, `r_ta`, `date_encoded`) VALUES
-(1, 1, 'AMG0010000001', 'a', '0644564564', 'a', '02:22', '0000-00-00');
+(1, 1, 'AMG0010000001', 'a', '0644564564', 'a', '02:22', '0000-00-00'),
+(2, 2, 'AMG0010000002', 'Louie', '06445645642', 'Mom', '02:29', '0000-00-00'),
+(3, 3, 'AMG0010000001', 'test', '09999999999', 'test', '17:43', '0000-00-00'),
+(4, 4, 'AMG0010000001', 'test', '09999999999', 'test', '17:44', '0000-00-00'),
+(6, 5, 'AMG0010000001', 'a', 'test', 'test', '18:48', '0000-00-00'),
+(7, 6, 'AMG0010000001', 'a', '09999999999', 'test', '18:51', '0000-00-00'),
+(8, 6, 'AMG0010000001', 'a', '09999999999', 'test', '18:51', '0000-00-00'),
+(9, 7, 'AMG0010000001', 'HASHDUAH', '09999999999', 'test', '20:21', '0000-00-00'),
+(10, 7, 'AMG0010000001', 'HASHDUAH', '09999999999', 'test', '20:21', '0000-00-00'),
+(11, 7, 'AMG0010000001', 'HASHDUAH', '09999999999', 'test', '20:21', '0000-00-00'),
+(12, 8, 'AMG0010000002', 'a', '09999999999', 'a', '20:32', '0000-00-00'),
+(13, 9, 'AMG0010000002', 'a', '09999999999', 'test', '20:33', '0000-00-00'),
+(14, 11, 'AMG0010000003', 'a', '09999999999', 'test', '11:27', '0000-00-00'),
+(15, 11, 'AMG0010000003', 'a', '09999999999', 'test', '11:27', '0000-00-00'),
+(16, 12, 'AMG0010000003', 'a', '09999999999', 'test', '13:10', '0000-00-00'),
+(17, 12, 'AMG0010000003', 'a', '09999999999', 'test', '13:10', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -556,14 +646,28 @@ CREATE TABLE `archive_spouse` (
   `s_occupation` text NOT NULL,
   `s_company` text NOT NULL,
   `date_encoded` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `archive_spouse`
 --
 
 INSERT INTO `archive_spouse` (`ar_spouse_id`, `spouse_id`, `applicant_code`, `spouse_name`, `contact`, `s_dob`, `s_pob`, `s_address`, `s_occupation`, `s_company`, `date_encoded`) VALUES
-(1, 1, 'AMG0010000001', 'a', '09164574545', '2023-06-30', 'AGUSAN DEL SUR, LORETO', 'APAYAO, LUNA, MARAG', 'a', 'a', '2023-06-30');
+(1, 1, 'AMG0010000001', 'a', '09164574545', '2023-06-30', 'AGUSAN DEL SUR, LORETO', 'APAYAO, LUNA, MARAG', 'a', 'a', '2023-06-30'),
+(2, 2, 'AMG0010000002', 'Denise Cosens-Baylon', '09164574545', '2023-06-30', 'NEGROS ORIENTAL, MANJUYOD', 'BASILAN, TABUAN-LASA, TAMBULIG BUTON', 'Infrastructure', 'Teradyne', '2023-06-30'),
+(3, 4, 'AMG0010000001', 'test', '09999999999', '2023-06-30', 'BATANGAS, MABINI', 'BENGUET, BUGUIAS, BUYACAOAN', 'test', 'test', '2023-06-30'),
+(4, 5, 'AMG0010000001', 'AHAHAHAHHA', '09999999999', '2023-06-30', 'BOHOL, CATIGBIAN', 'BULACAN, MARILAO, PATUBIG', 'test', 'test', '2023-06-30'),
+(5, 6, 'AMG0010000001', 'AHAHAHAHHA', '09999999999', '2023-06-16', 'AKLAN, BANGA', 'BUKIDNON, LIBONA, GANGO', 'test', 'test', '2023-06-30'),
+(6, 6, 'AMG0010000001', 'AHAHAHAHHA', '09999999999', '2023-06-16', 'AKLAN, BANGA', 'BUKIDNON, LIBONA, GANGO', 'test', 'test', '2023-06-30'),
+(7, 7, 'AMG0010000001', 'AHAHAHAHHA', '09999999999', '2023-06-30', 'BENGUET, BUGUIAS', 'BATAAN, LIMAY, LANDING', 'test', 'test', '2023-06-30'),
+(8, 7, 'AMG0010000001', 'AHAHAHAHHA', '09999999999', '2023-06-30', 'BENGUET, BUGUIAS', 'BATAAN, LIMAY, LANDING', 'test', 'test', '2023-06-30'),
+(9, 7, 'AMG0010000001', 'AHAHAHAHHA', '09999999999', '2023-06-30', 'BENGUET, BUGUIAS', 'BATAAN, LIMAY, LANDING', 'test', 'test', '2023-06-30'),
+(10, 8, 'AMG0010000002', 'a', '09999999999', '2023-06-30', 'BOHOL, CLARIN', 'BUKIDNON, LANTAPAN, CAPITAN JUAN', 'a', 'a', '2023-06-30'),
+(11, 9, 'AMG0010000002', 'a', '09999999999', '2023-06-30', 'ALBAY, CITY OF LIGAO', 'BOHOL, CANDIJAY, PANAS', 'test', 'test', '2023-06-30'),
+(12, 11, 'AMG0010000003', 'a', '09999999999', '2023-07-01', 'BILIRAN, ALMERIA', 'BENGUET, MANKAYAN, GUINAOANG', 'a', 'a', '2023-07-01'),
+(13, 11, 'AMG0010000003', 'a', '09999999999', '2023-07-01', 'BILIRAN, ALMERIA', 'BENGUET, MANKAYAN, GUINAOANG', 'a', 'a', '2023-07-01'),
+(14, 12, 'AMG0010000003', 'a', '09999999999', '2023-07-01', 'BENGUET, BAGUIO CITY', 'BATANGAS, LOBO, MABILOG NA BUNDOK', 'a', 'a', '2023-07-01'),
+(15, 12, 'AMG0010000003', 'a', '09999999999', '2023-07-01', 'BENGUET, BAGUIO CITY', 'BATANGAS, LOBO, MABILOG NA BUNDOK', 'a', 'a', '2023-07-01');
 
 -- --------------------------------------------------------
 
@@ -594,14 +698,28 @@ CREATE TABLE `archive_work` (
   `specify` text NOT NULL,
   `max_loanable_amt` float NOT NULL,
   `date_encoded` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `archive_work`
 --
 
 INSERT INTO `archive_work` (`ar_work_id`, `work_id`, `applicant_code`, `employer`, `sector_type`, `tob`, `com_address`, `a_location`, `sup_name`, `hr_number`, `date_hired`, `e_status`, `m_salary`, `bank_name`, `atm_card`, `loan`, `monthly_salary`, `s_period`, `other_source`, `specify`, `max_loanable_amt`, `date_encoded`) VALUES
-(1, 1, 'AMG0010000001', 'a', 'Private Sector', 'a', 'a', 'a', 'a', '09425454545', '2023-06-30', 'CASUAL', 'Cash', 'a', 'a', 'None actually. It\'s just a joke', '24000', '8/23', 'a', 'None to specify', 0, '2023-06-30');
+(1, 1, 'AMG0010000001', 'a', 'Private Sector', 'a', 'a', 'a', 'a', '09425454545', '2023-06-30', 'CASUAL', 'Cash', 'a', 'a', 'None actually. It\'s just a joke', '24000', '8/23', 'a', 'None to specify', 0, '2023-06-30'),
+(2, 2, 'AMG0010000002', 'Teradayne', 'Government Sector', 'Technology', 'Cogon, Ormoc City', 'Basak, Lapu-lapu', 'Kevin Fontanoza', '09425454545', '2023-06-30', 'REGULAR', 'Cash', 'BPI', 'ATM Card', 'None actually. It\'s just a joke', '25000', '10/25', 'None', 'None to specify', 0, '2023-06-30'),
+(3, 4, 'AMG0010000001', 'test', 'Government Sector', 'test', 'test', 'test', 'test', '09999999999', '2023-06-30', 'REGULAR', 'Cash', 'test', 'test', 'test', '2000000', '8/23', 'test', 'test', 0, '2023-06-30'),
+(4, 5, 'AMG0010000001', 'a', 'Private Sector', 'a', 'a', 'a', 'a', '09999999999', '2023-06-30', 'REGULAR', 'ATM', 'h', 'test', 'bbbbbbbbbbbbbbbbbbbb', '100000', '8/23', 'test', 'test', 0, '2023-06-30'),
+(5, 6, 'AMG0010000001', 'a', 'Private Sector', 'a', 'a', 'test', 'test', '09999999999', '2023-06-30', 'REGULAR', 'Cash', 'a', '1', 'No', '1111111', '6/21', 'a', 'a', 0, '2023-06-30'),
+(6, 6, 'AMG0010000001', 'a', 'Private Sector', 'a', 'a', 'test', 'test', '09999999999', '2023-06-30', 'REGULAR', 'Cash', 'a', '1', 'No', '1111111', '6/21', 'a', 'a', 0, '2023-06-30'),
+(7, 7, 'AMG0010000001', 'a', 'Government Sector', 'test', 'test', 'test', 'test', '09999999999', '2023-06-30', 'PROBATIONARY', 'Check', 'test', 'test', 'No', '2000000', '6/21', 'test', 'test', 0, '2023-06-30'),
+(8, 7, 'AMG0010000001', 'a', 'Government Sector', 'test', 'test', 'test', 'test', '09999999999', '2023-06-30', 'PROBATIONARY', 'Check', 'test', 'test', 'No', '2000000', '6/21', 'test', 'test', 0, '2023-06-30'),
+(9, 7, 'AMG0010000001', 'a', 'Government Sector', 'test', 'test', 'test', 'test', '09999999999', '2023-06-30', 'PROBATIONARY', 'Check', 'test', 'test', 'No', '2000000', '6/21', 'test', 'test', 0, '2023-06-30'),
+(10, 8, 'AMG0010000002', 'a', 'Private Sector', 'a', 'a', 'a', 'a', '09999999999', '2023-06-30', 'REGULAR', 'Cash', 'a', 'a', 'a', '111111111', '6/21', 'a', 'a', 0, '2023-06-30'),
+(11, 9, 'AMG0010000002', 'aaa', 'Private Sector', 'a', 'a', 'aa', 'aa', '09999999999', '2023-06-30', 'REGULAR', 'ATM', 'test', 'test', 'No', '20000000', '15/30', 'test', 'test', 0, '2023-06-30'),
+(12, 11, 'AMG0010000003', 'a', 'Government Sector', 'a', 'a', 'a', 'a', '09999999999', '2023-07-01', 'REGULAR', 'ATM', 'a', 'a', 'Credit Card-3000000001', '2000000', '5/20', 'a', 'a', 0, '2023-07-01'),
+(13, 11, 'AMG0010000003', 'a', 'Government Sector', 'a', 'a', 'a', 'a', '09999999999', '2023-07-01', 'REGULAR', 'ATM', 'a', 'a', 'OFW Loan-30000000012', '2000000', '5/20', 'a', 'a', 0, '2023-07-01'),
+(14, 12, 'AMG0010000003', 'a', 'Private Sector', 'a', 'a', 'a', 'a', '09999999999', '2023-07-01', 'REGULAR', 'ATM', 'test', 'test', 'Credit Card-2000000001', '2000000', '6/21', 'a', 'a', 0, '2023-07-01'),
+(15, 12, 'AMG0010000003', 'a', 'Private Sector', 'a', 'a', 'a', 'a', '09999999999', '2023-07-01', 'REGULAR', 'ATM', 'test', 'test', 'Salary Loan-2000000001123', '2000000', '6/21', 'a', 'a', 0, '2023-07-01');
 
 -- --------------------------------------------------------
 
@@ -628,7 +746,7 @@ CREATE TABLE `clients` (
   `yrs_res` int(11) NOT NULL,
   `status` int(11) NOT NULL,
   `date_encoded` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `clients`
@@ -673,7 +791,7 @@ CREATE TABLE `client_info` (
   `spouse_position` text NOT NULL,
   `spouse_employer` text NOT NULL,
   `spouse_employer_contact` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `client_info`
@@ -704,7 +822,7 @@ CREATE TABLE `dependents` (
   `client_id` int(11) NOT NULL,
   `name` text NOT NULL,
   `dob` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `dependents`
@@ -737,7 +855,7 @@ CREATE TABLE `employer` (
   `hr_contact` text NOT NULL,
   `supervisor` text NOT NULL,
   `supervisor_contact` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `employer`
@@ -767,7 +885,7 @@ CREATE TABLE `gov_issued_id` (
   `client_id` int(11) NOT NULL,
   `id_type` text NOT NULL,
   `id_no` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -786,6 +904,7 @@ CREATE TABLE `loan_applications` (
   `other_fee` double NOT NULL,
   `total_cashout` double NOT NULL,
   `monthly_amortization` int(11) NOT NULL,
+  `mop` text NOT NULL,
   `application_date` datetime NOT NULL DEFAULT current_timestamp(),
   `ci_status` int(11) NOT NULL,
   `ci_by` text NOT NULL,
@@ -795,21 +914,23 @@ CREATE TABLE `loan_applications` (
   `date_flagged` datetime DEFAULT NULL,
   `remarks` text NOT NULL,
   `paid` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `loan_applications`
 --
 
-INSERT INTO `loan_applications` (`loan_id`, `contract_no`, `client_id`, `loan_type`, `loan_duration`, `loan_amount`, `interest_amount`, `other_fee`, `total_cashout`, `monthly_amortization`, `application_date`, `ci_status`, `ci_by`, `ci_date`, `approval`, `processed_by`, `date_flagged`, `remarks`, `paid`) VALUES
-(1, 'AMG202302080204317', 3, 2, 3, 12000, 2880, 300, 8820, 2000, '2023-02-17 15:28:04', 1, 'Kevin Fontanoza', '2023-02-17 08:28:39', 1, 'Kevin Fontanoza', '2023-02-17 08:28:49', 'paid', 1),
-(2, 'AMG202302080237317', 3, 2, 2, 16000, 2560, 300, 13140, 4000, '2023-02-17 15:30:37', 1, 'Kevin Fontanoza', '2023-02-17 08:31:03', 1, 'Kevin Fontanoza', '2023-02-17 08:31:23', 'paid', 1),
-(3, 'AMG202302080201417', 4, 2, 3, 24000, 5760, 300, 17940, 4000, '2023-02-17 15:34:01', 1, 'Kevin Fontanoza', '2023-02-17 08:34:22', 1, 'Kevin Fontanoza', '2023-02-17 08:34:26', 'paid', 1),
-(4, 'AMG202302080247417', 4, 2, 3, 12000, 2880, 300, 8820, 2000, '2023-02-17 15:45:47', 1, 'Kevin Fontanoza', '2023-02-17 09:02:49', 1, 'Kevin Fontanoza', '2023-02-17 09:03:00', 'paid', 1),
-(5, 'AMG202302100235917', 9, 2, 3, 24000, 5760, 300, 17940, 4000, '2023-02-17 17:41:35', 1, 'Kevin Fontanoza', '2023-02-17 10:50:24', 1, 'Kevin Fontanoza', '2023-03-13 08:57:03', '', 0),
-(6, 'AMG202303050342116', 1, 1, 3, 24000, 5760, 300, 17940, 4000, '2023-03-17 00:32:42', 1, 'Kevin Fontanoza', '2023-03-17 00:42:52', 2, 'Kevin Fontanoza', '2023-03-17 04:15:30', 'Not qualified', 0),
-(7, 'AMG2023030203001017', 10, 2, 3, 13650, 3276, 300, 10074, 2275, '2023-03-17 09:21:00', 1, 'Kevin Fontanoza', '2023-03-17 02:31:07', 1, 'Kevin Fontanoza', '2023-03-17 04:13:23', '', 0),
-(8, 'AMG2023030303491117', 11, 2, 3, 13650, 3276, 300, 10074, 2275, '2023-03-17 10:05:49', 0, '', NULL, 0, '', NULL, '', 0);
+INSERT INTO `loan_applications` (`loan_id`, `contract_no`, `client_id`, `loan_type`, `loan_duration`, `loan_amount`, `interest_amount`, `other_fee`, `total_cashout`, `monthly_amortization`, `mop`, `application_date`, `ci_status`, `ci_by`, `ci_date`, `approval`, `processed_by`, `date_flagged`, `remarks`, `paid`) VALUES
+(1, 'AMG202302080204317', 3, 2, 3, 12000, 2880, 300, 8820, 2000, '', '2023-02-17 15:28:04', 1, 'Kevin Fontanoza', '2023-02-17 08:28:39', 1, 'Kevin Fontanoza', '2023-02-17 08:28:49', 'paid', 1),
+(2, 'AMG202302080237317', 3, 2, 2, 16000, 2560, 300, 13140, 4000, '', '2023-02-17 15:30:37', 1, 'Kevin Fontanoza', '2023-02-17 08:31:03', 1, 'Kevin Fontanoza', '2023-02-17 08:31:23', 'paid', 1),
+(3, 'AMG202302080201417', 4, 2, 3, 24000, 5760, 300, 17940, 4000, '', '2023-02-17 15:34:01', 1, 'Kevin Fontanoza', '2023-02-17 08:34:22', 1, 'Kevin Fontanoza', '2023-02-17 08:34:26', 'paid', 1),
+(4, 'AMG202302080247417', 4, 2, 3, 12000, 2880, 300, 8820, 2000, '', '2023-02-17 15:45:47', 1, 'Kevin Fontanoza', '2023-02-17 09:02:49', 1, 'Kevin Fontanoza', '2023-02-17 09:03:00', 'paid', 1),
+(5, 'AMG202302100235917', 9, 2, 3, 24000, 5760, 300, 17940, 4000, '', '2023-02-17 17:41:35', 1, 'Kevin Fontanoza', '2023-02-17 10:50:24', 1, 'Kevin Fontanoza', '2023-03-13 08:57:03', '', 0),
+(6, 'AMG202303050342116', 1, 1, 3, 24000, 5760, 300, 17940, 4000, '', '2023-03-17 00:32:42', 1, 'Kevin Fontanoza', '2023-03-17 00:42:52', 2, 'Kevin Fontanoza', '2023-03-17 04:15:30', 'Not qualified', 0),
+(7, 'AMG2023030203001017', 10, 2, 3, 13650, 3276, 300, 10074, 2275, '', '2023-03-17 09:21:00', 1, 'Kevin Fontanoza', '2023-03-17 02:31:07', 1, 'Kevin Fontanoza', '2023-03-17 04:13:23', '', 0),
+(8, 'AMG2023030303491117', 11, 2, 3, 13650, 3276, 300, 10074, 2275, '', '2023-03-17 10:05:49', 0, '', NULL, 0, '', NULL, '', 0),
+(9, 'AMG202307030752AMG001000000711', 0, 0, 4, 784000, 250880, 300, 579260, 196000, '1', '2023-07-11 21:06:52', 0, '', NULL, 0, '', NULL, '', 0),
+(10, 'AMG0010000007', 0, 0, 4, 784000, 250880, 300, 579260, 196000, '3', '2023-07-11 21:22:16', 0, '', NULL, 0, '', NULL, '', 0);
 
 -- --------------------------------------------------------
 
@@ -824,7 +945,7 @@ CREATE TABLE `loan_types` (
   `min` int(11) NOT NULL,
   `max` int(11) NOT NULL,
   `description` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `loan_types`
@@ -848,7 +969,7 @@ CREATE TABLE `payments` (
   `due_date` date NOT NULL,
   `payment_date` datetime DEFAULT NULL,
   `payment_type` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -859,7 +980,7 @@ CREATE TABLE `payments` (
 CREATE TABLE `questions` (
   `question_id` int(11) NOT NULL,
   `question` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `questions`
@@ -940,7 +1061,7 @@ CREATE TABLE `users` (
   `username` text NOT NULL,
   `password` text NOT NULL,
   `access_level` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
@@ -1105,7 +1226,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `activity_logs`
 --
 ALTER TABLE `activity_logs`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
 
 --
 -- AUTO_INCREMENT for table `answers`
@@ -1117,73 +1238,73 @@ ALTER TABLE `answers`
 -- AUTO_INCREMENT for table `applicants_child`
 --
 ALTER TABLE `applicants_child`
-  MODIFY `child_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `child_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `applicants_personal`
 --
 ALTER TABLE `applicants_personal`
-  MODIFY `applicant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `applicant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `applicants_reference`
 --
 ALTER TABLE `applicants_reference`
-  MODIFY `reference_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `reference_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `applicants_relative`
 --
 ALTER TABLE `applicants_relative`
-  MODIFY `relative_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `relative_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `applicants_spouse`
 --
 ALTER TABLE `applicants_spouse`
-  MODIFY `spouse_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `spouse_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `applicants_work`
 --
 ALTER TABLE `applicants_work`
-  MODIFY `work_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `work_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `archive_child`
 --
 ALTER TABLE `archive_child`
-  MODIFY `ar_child_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ar_child_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `archive_personal`
 --
 ALTER TABLE `archive_personal`
-  MODIFY `ar_personal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ar_personal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `archive_reference`
 --
 ALTER TABLE `archive_reference`
-  MODIFY `ar_reference_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ar_reference_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `archive_relative`
 --
 ALTER TABLE `archive_relative`
-  MODIFY `ar_relative_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ar_relative_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `archive_spouse`
 --
 ALTER TABLE `archive_spouse`
-  MODIFY `ar_spouse_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ar_spouse_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `archive_work`
 --
 ALTER TABLE `archive_work`
-  MODIFY `ar_work_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ar_work_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `clients`
@@ -1219,7 +1340,7 @@ ALTER TABLE `gov_issued_id`
 -- AUTO_INCREMENT for table `loan_applications`
 --
 ALTER TABLE `loan_applications`
-  MODIFY `loan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `loan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `loan_types`
