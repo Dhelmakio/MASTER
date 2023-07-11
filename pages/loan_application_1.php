@@ -134,12 +134,12 @@ if(isset($_GET['id'])){
                                                      while($rowApp = mysqli_fetch_assoc($applcaintQuery)) {
                                                     ?>
                                                     <div class="col-lg-12">
-                                                        <div class="col-lg-6">
+                                                        <div class="col-lg-8">
                                                             <h4>Name of Borrower:
                                                                 &nbsp;<b><?php echo $rowApp['firstname']." ".$rowApp['middlename']." ". $rowApp['lastname']; ?></b>
                                                             </h4>
                                                         </div>
-                                                        <div class="col-lg-6" align="right">
+                                                        <div class="col-lg-4" align="right">
                                                             <h4>Date of Application: <b><?php echo date('F d, Y');?></b>
                                                             </h4>
                                                         </div>
@@ -149,7 +149,7 @@ if(isset($_GET['id'])){
                                                     }
                                                     ?>
                                                     <br><br>
-                                                    <div class="col-lg-8" style="font-size:15px;"><br>
+                                                    <div class="col-lg-11" style="font-size:15px;"><br>
                                                         <div class="col-lg-3">Employee Status: </div>
                                                         <div class="col-lg-3"><label>
                                                                 <?php echo $loan->clientEmpStatus; ?></label></div>
@@ -291,7 +291,6 @@ if(isset($_GET['id'])){
                                                                             <!-- <input hidden type="text" name="interest" id="interest-amount" value="" style="text-align:right"> -->
                                                                         </div>
                                                                     </div>
-
                                                                 </div>
                                                                 <div class="col-lg-12">
                                                                     <div class="col-lg-6" align="right">
@@ -418,9 +417,9 @@ if(isset($_GET['id'])){
                                                                         </div>
                                                                     </div>
                                                                 </div> -->
-                                                                <div class="col-lg-12">
+                                                                <!-- <div class="col-lg-12">
                                                                     <Br>
-                                                                    <!-- <h4><b>Cashout:</b></h4><br> -->
+                                                                    
                                                                     <div class="col-lg-6" align="right">
                                                                         <div class="form-group">
                                                                             <label>Total Cashout (₱):</label>
@@ -440,7 +439,7 @@ if(isset($_GET['id'])){
                                                                                 hidden>
                                                                         </div>
                                                                     </div>
-                                                                </div>
+                                                                </div> -->
                                                                 <div class="col-lg-12">
                                                                     <Br>
                                                                     <!-- <h4><b>Cashout:</b></h4><br> -->
@@ -453,12 +452,12 @@ if(isset($_GET['id'])){
                                                                         <div class="form-group">
                                                                             <input type="number"
                                                                                 style="color:blue;text-align:right;font-weight:bold;"
-                                                                                name="proceeds_loan_" class="form-control"
-                                                                                step="0.01" id="proceeds_loan_"
+                                                                                name="cashout_" class="form-control"
+                                                                                step="0.01" id="cashout_"
                                                                                 style="text-align:right" value=""
                                                                                 disabled>
-                                                                            <input type="text" name="proceeds_loan"
-                                                                                id="proceeds_loan"
+                                                                            <input type="text" name="cashout"
+                                                                                id="cashout"
                                                                                 style="text-align:right" value=""
                                                                                 hidden>
                                                                         </div>
@@ -678,6 +677,11 @@ if(isset($_GET['id'])){
                 let processingFeePer = 0.03;
                 let totalDeductions = interestAmount + notarialFee;
                 let totalCashout = $("#lamt").val() - totalDeductions;
+
+                // let collectionPerCut = $("#lamt").val() / (duration);
+                // let collectionPerCut2 = ($("#lamt").val() / (duration)) / 2;
+                // let collectionPerCut3 = ($("#lamt").val() / (duration)) / 4;
+
                 let collectionPerCut = $("#lamt").val() / (duration);
                 let collectionPerCut2 = ($("#lamt").val() / (duration)) / 2;
                 let collectionPerCut3 = ($("#lamt").val() / (duration)) / 4;
@@ -693,8 +697,8 @@ if(isset($_GET['id'])){
                 $("#udi_value").val(parseFloat(udiValue).toFixed(2));
                 $("#total_deduction_").val(parseFloat(totalDeduction).toFixed(2));
                 $("#total_deduction").val(parseFloat(totalDeduction).toFixed(2));
-                $("#proceeds_loan_").val(parseFloat(proceedLoan).toFixed(2));
-                $("#proceeds_loan").val(parseFloat(proceedLoan).toFixed(2));
+                $("#cashout_").val(parseFloat(proceedLoan).toFixed(2));
+                $("#cashout").val(parseFloat(proceedLoan).toFixed(2));
 
                 $("#lamt").val(parseFloat(x).toFixed(2));
                 $("#loan_amount_").val(parseFloat(x).toFixed(2));
@@ -827,7 +831,7 @@ if(isset($_GET['id'])){
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <input type="number" style="color:blue;text-align:right;font-weight:bold;" name="cashout_" class="form-control" step="0.01" id="total-cashout_" style="text-align:right" value="${parseFloat(totalCashout).toFixed(2)}" disabled>
+                                        <input type="number" style="color:blue;text-align:right;font-weight:bold;" name="cashout_" class="form-control" step="0.01" id="total-cashout_" style="text-align:right" value="${parseFloat(proceedLoan).toFixed(2)}" disabled>
                                     </div>
                                 </div>
                             </div>

@@ -23,7 +23,7 @@ if(isset($_POST['client_id'])){
 
     $cno = 'AMG'.date('Ymhms').$cid.date('d');
     $sql = "INSERT INTO loan_applications (contract_no,client_id,loan_type,loan_duration,loan_amount,interest_amount,other_fee,total_cashout,monthly_amortization,mop)
-     VALUES ('$cno','$cid','$ltype','$duration','$lamt','$int_amt','$fee','$cashout','$mamort','$mop')";
+     VALUES ('$cid','$cid','$ltype','$duration','$lamt','$int_amt','$fee','$cashout','$mamort','$mop')";
     if(mysqli_query($con, $sql)){
         echo "<script>alert('Success.');</script>";
         $alog_id = $_SESSION['user_id'];
