@@ -14,14 +14,14 @@ class Loan extends DbCon {
 
     public function __construct(String $id){
         //get emp status, income sources, monthly net salary
-        $sql = "SELECT e_status, max_loanable_amt, monthly_salary FROM applicants_work WHERE applicant_code= ?";
+        $sql = "SELECT e_status, other_source, monthly_salary FROM applicants_work WHERE applicant_code= ?";
         $stmt = $this->connect()->prepare($sql);
         $stmt->execute([$id]);
         $result = $stmt->fetch();
 
         $this->clientID = $id;
         $this->clientEmpStatus = $result['e_status'];
-        $this->incomeSourceFlag = $result['max_loanable_amt'];
+        $this->incomeSourceFlag = $result['other_source'];
         $this->monthlyNetSal = $result['monthly_salary'];
         // $this->clientID = $id;
 
@@ -105,7 +105,7 @@ class Loan extends DbCon {
         }
     }
     // public function checkEligible(String $id){
-    //     $sql = "Select employment_status, max_loanable_amt, gross_monthly from employer where client_id= ?";
+    //     $sql = "Select employment_status, other_source, gross_monthly from employer where client_id= ?";
     //     $stmt = $this->connect()->prepare($sql);
     //     $stmt->execute([$id]);
     //     $result = $stmt->fetch();

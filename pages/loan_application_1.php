@@ -22,6 +22,7 @@ $max_loan;
 $min_mo;
 $max_mo;
 $name;
+$MA;
 $loan_type = "New";
 if(isset($_GET['id'])){
     $cid = $_GET['id'];
@@ -36,10 +37,11 @@ if(isset($_GET['id'])){
     $res = mysqli_query($con,$sql);
     if(mysqli_num_rows($res) > 0){
     while($row = mysqli_fetch_assoc($res)) {
-        $max_loan = $row['max_loanable_amt'];
+        $max_loan = $row['other_source'];
     }
     }
 
+    
     // $lid = $_POST['loan_type'];
     $loan_type = "NEW";
     // $sql = "SELECT * FROM loan_types where loan_type_id='$lid'";
@@ -193,11 +195,22 @@ if(isset($_GET['id'])){
                                                             $mo_int;
                                                             $variation = $loan->clientEmpStatus;
                                                             $max_month;
-                                                                if($variation == "REGULAR"){
+                                                                if($variation == "REGULAR" && strtoupper($loan->incomeEarning) == "MULTIPLE"){
+                                                                    $max_month = 6;
+                                                                    $MA = Statics::$MULTIPLEREGULARAMORT;
+                                                                }else  if($variation == "REGULAR" && strtoupper($loan->incomeEarning) == "SINGLE"){
                                                                     $max_month = 4;
-                                                                }else{
-                                                                    $max_month = 3;
+                                                                    $MA = Statics::$SINGLEREGULARAMORT;
                                                                 }
+                                                                else if($variation == "CASUAL" && strtoupper($loan->incomeEarning) == "MULTIPLE"){
+                                                                    $max_month = 3;
+                                                                    $MA = Statics::$MULTIPLECASUALAMORT;
+                                                                } else if($variation == "CASUAL" && strtoupper($loan->incomeEarning) == "SINGLE"){
+                                                                    $max_month = 3;
+                                                                    $MA = Statics::$SINGLECASUALAMORT;
+                                                                }
+
+                                                                $max_loan = $MA * $max_month;
                                                             // if(mysqli_num_rows($res) > 0){
                                                                 // while($row = mysqli_fetch_assoc($res)) {
                                                                     ?>
@@ -330,29 +343,12 @@ if(isset($_GET['id'])){
                                                                         </div>
                                                                     </div>
                                                                 </div>
+                                                                
                                                                 <div class="col-lg-12">
                                                                     <div class="col-lg-6" align="right">
                                                                         <div class="form-group">
-                                                                            <label>Notarial Fee (₱):</label>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-lg-6">
-                                                                        <div class="form-group">
-                                                                            <input type="number" name="notarial_"
-                                                                                class="form-control" step="0.01"
-                                                                                id="notarial-fee_" value="" disabled
-                                                                                style="color:red;text-align:right">
-                                                                            <input type="text" name="notarial"
-                                                                                id="notarial-fee" value="" hidden
-                                                                                style="text-align:right">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg-12">
-                                                                    <div class="col-lg-6" align="right">
-                                                                        <div class="form-group">
-                                                                            <label>UDI (%):</label>
-                                                                        </div>
+                                                                            <label>UDI (<span id="udiper"></span>%):</label>
+                                                                        </div> 
                                                                     </div>
                                                                     <div class="col-lg-6">
                                                                         <div class="form-group">
@@ -369,17 +365,53 @@ if(isset($_GET['id'])){
                                                                 <div class="col-lg-12">
                                                                     <div class="col-lg-6" align="right">
                                                                         <div class="form-group">
-                                                                            <label>UDI VALUE (₱):</label>
+                                                                            <label>Processing Fee (<span id="pfper"></span>%):</label>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-lg-6">
                                                                         <div class="form-group">
-                                                                            <input type="number" name="udi_value_"
+                                                                            <input type="number" name="processing_value_"
                                                                                 class="form-control" step="0.01"
-                                                                                id="udi_value_" value="" disabled
+                                                                                id="processing_value_" value="" disabled
                                                                                 style="color:red;text-align:right">
-                                                                            <input type="text" name="udi_value"
-                                                                                id="udi_value" value="" hidden
+                                                                            <input type="text" name="processing_value"
+                                                                                id="processing_value" value="" hidden
+                                                                                style="text-align:right">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-12">
+                                                                    <div class="col-lg-6" align="right">
+                                                                        <div class="form-group">
+                                                                            <label>Collection Fee (<span id="cfper"></span>%):</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-6">
+                                                                        <div class="form-group">
+                                                                            <input type="number" name="collection_value_"
+                                                                                class="form-control" step="0.01"
+                                                                                id="collection_value_" value="" disabled
+                                                                                style="color:red;text-align:right">
+                                                                            <input type="text" name="collection_fee"
+                                                                                id="collection_fee" value="" hidden
+                                                                                style="text-align:right">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-12">
+                                                                    <div class="col-lg-6" align="right">
+                                                                        <div class="form-group">
+                                                                            <label>Notarial Fee (₱):</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-6">
+                                                                        <div class="form-group">
+                                                                            <input type="number" name="notarial_"
+                                                                                class="form-control" step="0.01"
+                                                                                id="notarial-fee_" value="" disabled
+                                                                                style="color:red;text-align:right">
+                                                                            <input type="text" name="notarial"
+                                                                                id="notarial-fee" value="" hidden
                                                                                 style="text-align:right">
                                                                         </div>
                                                                     </div>
@@ -643,7 +675,7 @@ if(isset($_GET['id'])){
         }
 
         duration = $("#months").val();
-        maxLoanAmount = duration * <?php echo $loan->netLoanPerMonth; ?>;
+        maxLoanAmount = duration * <?php echo $MA; ?>;
 
         $("#max-loanable").text("Maximum Loanable for desired duration: ₱ " + maxLoanAmount);
         $('#use-max').click(() => {
@@ -671,10 +703,14 @@ if(isset($_GET['id'])){
                 // alert($loan->moInterest+"");
                 let interestAmount = ($("#lamt").val() * <?php echo $loan->moInterest; ?>) * duration;
                 let notarialFee = <?php echo Statics::$NOTARIALFEE; ?>;
-                let collectionFee = <?php echo Statics::$PROCESSINGFEE; ?>;
-                let processingFee = <?php echo Statics::$COLLECTIONFEE; ?>;
+                
+
+
+                
                 let collectionFeePer = 0.03;
                 let processingFeePer = 0.03;
+                let collectionFee = $("#lamt").val() * collectionFeePer;
+                let processingFee = $("#lamt").val() * processingFeePer;
                 let totalDeductions = interestAmount + notarialFee;
                 let totalCashout = $("#lamt").val() - totalDeductions;
 
@@ -691,10 +727,17 @@ if(isset($_GET['id'])){
                 let totalDeduction = udiValue + processingFee + collectionFee + notarialFee;  
                 let proceedLoan = $("#lamt").val() - totalDeduction;
 
-                $("#udi_").val(parseFloat(udi).toFixed(2));
+                $("#udi_").val(parseFloat(udiValue).toFixed(2));
+
+                $("#udiper").text(udi * 100);
+                $("#pfper").text(processingFeePer * 100);
+                $("#cfper").text(collectionFeePer * 100);
+
                 $("#udi").val(parseFloat(udi).toFixed(2));
-                $("#udi_value_").val(parseFloat(udiValue).toFixed(2));
-                $("#udi_value").val(parseFloat(udiValue).toFixed(2));
+                $('#processing_value_').val(parseFloat(processingFee).toFixed(2));
+                $('#collection_value_').val(parseFloat(collectionFee).toFixed(2));
+                // $("#udi_value_").val(parseFloat(udiValue).toFixed(2));
+                // $("#udi_value").val(parseFloat(udiValue).toFixed(2));
                 $("#total_deduction_").val(parseFloat(totalDeduction).toFixed(2));
                 $("#total_deduction").val(parseFloat(totalDeduction).toFixed(2));
                 $("#cashout_").val(parseFloat(proceedLoan).toFixed(2));

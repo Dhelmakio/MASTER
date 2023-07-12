@@ -8,6 +8,8 @@ class Statics{
     public static $AONEATWOINTERESTRATECAS = .08;
     public static $ATHREEAFOURINTERESTRATECAS = .07;
     public static $NOTARIALFEE = 300;
-    public static $PROCESSINGFEE = 300;
-    public static $COLLECTIONFEE = 300;
+    public static $SINGLEREGULARAMORT = 6000;
+    public static $SINGLECASUALAMORT = 5000;
+    public static $MULTIPLEREGULARAMORT = 8000;
+    public static $MULTIPLECASUALAMORT = 7000;
 }
