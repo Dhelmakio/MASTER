@@ -78,7 +78,7 @@ require_once('../controller/reg_app.php');
 
                 
                 //personal tab 1
-                $applicant->personal_update($_POST['id'], $_POST['fname']??null,$_POST['mname']??null,$_POST['lname']??null,$_POST['suffix']??null,$_POST['nname']??null,$_POST['age']??null,$_POST['gender']??null,
+                $applicant->personal_update($_POST['id'], $_POST['fname']??null,$_POST['mname']??null,$_POST['lname']??null,$_POST['suffix']??null,$_POST['nname']??null,$_POST['gender']??null,
                 $_POST['contact_num']??null,$_POST['m_status']??null,$_POST['dob']??null,(($_POST['pob_province']??null).', '.($_POST['pob_city']??null)), $_POST['blk']??null,$_POST['street']??null,$_POST['phase']??null,$_POST['brgy']??null,
                 $_POST['city']??null,$_POST['province']??null,$_POST['coordinates']??null,$tor, $lw,$_POST['blk2']??null,$_POST['street2']??null,$_POST['phase2']??null,
                 $_POST['brgy2']??null,$_POST['city2']??null,$_POST['province2']??null,$tor2, $lw2,$_POST['mother_name']??null,$_POST['mother_contact']??null,

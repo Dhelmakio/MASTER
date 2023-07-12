@@ -99,8 +99,8 @@ if($_SESSION['user_id']){
                                                                             <!-- progressbar -->
                                                                             <input type="hidden" name="id" id=""
                                                                                 value="<?= $_GET['id']; ?>">
-                                                                            <input type="hidden" name="action" id="action"
-                                                                                value="<?= $_GET['id']; ?>">
+                                                                            <input type="hidden" name="action"
+                                                                                id="action" value="<?= $_GET['id']; ?>">
                                                                             <ul id="progressbar">
                                                                                 <li class="active" id="personal">
                                                                                     <strong>Personal
@@ -152,10 +152,23 @@ if($_SESSION['user_id']){
                                                                                 <div class="col-lg-3">
                                                                                     <div class="form-group">
                                                                                         <label>Suffix</label>
-                                                                                        <input class="form-control"
-                                                                                            name="suffix"
-                                                                                            placeholder="Suffix"
-                                                                                            value="<?= $edit->getClientData($id, 'applicants_personal', 'applicant_code', 'suffix')??null ?>">
+                                                                                        
+                                                                                        <select class="form-control"
+                                                                                            name="suffix">
+                                                                                            <option value="" disabled
+                                                                                                selected>
+                                                                                                SELECT
+                                                                                            </option>
+                                                                                            <?php 
+                                                                                            $suffix = $edit->getClientData($id, 'applicants_personal', 'applicant_code', 'suffix')??null;
+                                                                                            $suffixSet = ['SR', 'JR', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
+
+                                                                                            foreach($suffixSet as $key => $val){
+                                                                                                $op = ($suffix == $val) ? '<option selected value='.$suffix.'>'.$val.'</option>' : '<option value='.$val.'>'.$val.'</option>';
+                                                                                             echo $op;
+                                                                                            }
+                                                                                            ?>
+                                                                                        </select>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-lg-3">
@@ -165,14 +178,6 @@ if($_SESSION['user_id']){
                                                                                             name="nname"
                                                                                             placeholder="Nickname"
                                                                                             value="<?= $edit->getClientData($id, 'applicants_personal', 'applicant_code', 'nickname')??null ?>">
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="col-lg-3">
-                                                                                    <div class="form-group">
-                                                                                        <label>Age</label>
-                                                                                        <input class="form-control"
-                                                                                            name="age" placeholder="Age"
-                                                                                            value="<?= $edit->getClientData($id, 'applicants_personal', 'applicant_code', 'age')??null ?>">
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-lg-3">
@@ -194,6 +199,15 @@ if($_SESSION['user_id']){
                                                                                             }
                                                                                             ?>
                                                                                         </select>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-lg-3">
+                                                                                    <div class="form-group">
+                                                                                        <label>Date of birth</label>
+                                                                                        <input type="date" name="dob"
+                                                                                            class="form-control"
+                                                                                            placeholder="Date of birth"
+                                                                                            value="<?= $edit->getClientData($id, 'applicants_personal', 'applicant_code', 'dob1')??null; ?>">
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-lg-3">
@@ -231,15 +245,7 @@ if($_SESSION['user_id']){
                                                                                             value="<?= $edit->getClientData($id, 'applicants_personal', 'applicant_code', 'contact1')??null ?>">
                                                                                     </div>
                                                                                 </div> -->
-                                                                                <div class="col-lg-4">
-                                                                                    <div class="form-group">
-                                                                                        <label>Date of birth</label>
-                                                                                        <input type="date" name="dob"
-                                                                                            class="form-control"
-                                                                                            placeholder="Date of birth"
-                                                                                            value="<?= $edit->getClientData($id, 'applicants_personal', 'applicant_code', 'dob1')??null; ?>">
-                                                                                    </div>
-                                                                                </div>
+
                                                                                 <!-- <div class="col-lg-4">
                                                                                     <div class="form-group">
                                                                                         <label>Place of
@@ -265,7 +271,7 @@ if($_SESSION['user_id']){
                                                                                 $res =  explode(", ", $pob1); echo $res[0]; ?>">
                                                                                 <input type="hidden" id="db_pobcity"
                                                                                     value="<?php echo $res[1]; ?>">
-                                                                                <div class="col-lg-4">
+                                                                                <div class="col-lg-3">
                                                                                     <div class="form-group">
                                                                                         <label>Place of
                                                                                             birth ( Province )</label>
@@ -277,7 +283,7 @@ if($_SESSION['user_id']){
                                                                                             <select>
                                                                                     </div>
                                                                                 </div>
-                                                                                <div class="col-lg-4">
+                                                                                <div class="col-lg-3">
                                                                                     <div class="form-group">
                                                                                         <label> Place of
                                                                                             birth ( City ) </label>
@@ -391,28 +397,25 @@ if($_SESSION['user_id']){
                                                                                             value="<?= $edit->getClientData($id, 'applicants_personal', 'applicant_code', 'phase1')??null; ?>">
                                                                                     </div>
                                                                                 </div>
-                                                                                <div class="col-lg-6">
+                                                                                <div class="col-lg-12">
                                                                                     <div class="form-group">
-                                                                                        <label>Provide Map URL</label>
+                                                                                        <label>*Provide Map URL</label>
+                                                                                        <a href="https://www.google.com/maps/place/San+Fernando,+Pampanga/@15.0650161,120.6456575,12073m/data=!3m1!1e3!4m15!1m8!3m7!1s0x3396f79f47a8aadb:0x2c4be1dddb81922a!2sSan+Fernando,+Pampanga!3b1!8m2!3d15.0593937!4d120.6567054!16zL20vMDZwZ3pu!3m5!1s0x3396f79f47a8aadb:0x2c4be1dddb81922a!8m2!3d15.0593937!4d120.6567054!16zL20vMDZwZ3pu?hl=en-US&entry=ttu"
+                                                                                            target="_blank">
+                                                                                            <label for="">
+                                                                                                ( Open Google Map <i
+                                                                                                    class="fa fa-map"></i>
+                                                                                                )
+                                                                                            </label>
+                                                                                        </a>
                                                                                         <input name="coordinates"
-                                                                                            id="map_url"
-                                                                                            class="form-control"
+                                                                                            id="map_url" required
+                                                                                            class="form-control input-set-1"
                                                                                             placeholder="Provide Map URL"
                                                                                             onchange="viewMap('map_url')"
                                                                                             value="<?= $edit->getClientData($id, 'applicants_personal', 'applicant_code', 'map_url')??null; ?>">
 
                                                                                     </div>
-                                                                                </div>
-                                                                                <div class="col-lg-6">
-                                                                                    <label for="">Google Map
-                                                                                        Preview</label>
-                                                                                    <iframe class="form-control"
-                                                                                        style="height: 300px"
-                                                                                        id="gmap_canvas"
-                                                                                        src="https://maps.google.com/maps?q=Ormoc&t=&z=13&ie=UTF8&iwloc=&output=embed"
-                                                                                        frameborder="0" scrolling="no"
-                                                                                        marginheight="0"
-                                                                                        marginwidth="0"></iframe>
                                                                                 </div>
                                                                                 <!--type of residence and living with-->
                                                                                 <!-- <div class="col-lg-12">
@@ -1852,7 +1855,7 @@ if($_SESSION['user_id']){
                                                                                                 placeholder="Facebook Account"
                                                                                                 value="<?= $edit->getClientData($id, 'applicants_reference', 'applicant_code', 'fb_acct')??null ?>">
                                                                                         </div>
-                                                                                        
+
                                                                                     </div>
                                                                                     <!-- <div class="col-lg-4">
                                                                                         <div class="form-group">
@@ -1885,7 +1888,7 @@ if($_SESSION['user_id']){
                                                                                     <div class="orbit"></div>
                                                                                 </center>
                                                                             </fieldset>
-                                                                            
+
                                                                         </form>
 
                                                                     </div>
@@ -1938,10 +1941,10 @@ if($_SESSION['user_id']){
                     </p>
                 </div>
                 <div class="modal-footer" style="padding: 5px;">
-                        <button type="button" class="btn btn-default text-small" name="update" id="update">No</button>
-                        <!-- <input type="hidden" name="id"
+                    <button type="button" class="btn btn-default text-small" name="update" id="update">No</button>
+                    <!-- <input type="hidden" name="id"
                                                                                                     value="<?=  $display['applicant_code'] ?>"> -->
-                        <button type="button" name="archive" id="archive" class="btn btn-danger text-small">Yes</button>
+                    <button type="button" name="archive" id="archive" class="btn btn-danger text-small">Yes</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -2078,6 +2081,7 @@ if($_SESSION['user_id']){
         }
 
     }
+
     function existLoanChange(val, spec) {
         var spec = document.getElementById(spec);
         if (val.value != "None") {

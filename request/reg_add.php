@@ -20,7 +20,7 @@ $spouse_pob = (($_POST['spob_province']??null).', '.($_POST['spob_city']??null))
 $spouse_address = (($_POST['spouse_province']??null).', '.($_POST['spouse_city']??null).', '.($_POST['spouse_brgy']??null));
 
 //personal tab 1
-$applicant->personal_add($code, strtoupper($_POST['fname']??null), strtoupper($_POST['mname']??null),strtoupper($_POST['lname']??null) , strtoupper($_POST['suffix']??null),strtoupper($_POST['nname']??null),$_POST['age']??null,$_POST['gender']??null,
+$applicant->personal_add($code, strtoupper($_POST['fname']??null), strtoupper($_POST['mname']??null),strtoupper($_POST['lname']??null) , strtoupper($_POST['suffix']??null),strtoupper($_POST['nname']??null),$_POST['gender']??null,
 $_POST['contact_num']??null,$_POST['m_status']??null,$_POST['dob']??null, (($_POST['pob_province']??null).', '.($_POST['pob_city']??null)),strtoupper($_POST['blk'])??null,strtoupper($_POST['street']??null),strtoupper($_POST['phase']??null),strtoupper($_POST['brgy']??null),
 $_POST['city']??null,$_POST['province']??null,$_POST['coordinates']??null,$tor, $lw,((($_POST['blk2']??null) == null) ? strtoupper($_POST['blk']??null) : strtoupper($_POST['blk2']??null)),((($_POST['street2']??null) == null) ? strtoupper($_POST['street']??null) : strtoupper($_POST['street2']??null)),((($_POST['phase2']??null) == null) ? strtoupper($_POST['phase']??null) : strtoupper($_POST['phase2']??null)),
 ((($_POST['brgy2']??null) == null) ? strtoupper($_POST['brgy']??null) : strtoupper($_POST['brgy2']??null)), ((($_POST['city2']??null) == null) ? $_POST['city'] : $_POST['city2']??null), ((($_POST['province2']??null) == null) ? $_POST['province'] : $_POST['province2']??null),$tor2??$tor, $lw2??$lw,strtoupper($_POST['mother_name']??null),$_POST['mother_contact']??null,

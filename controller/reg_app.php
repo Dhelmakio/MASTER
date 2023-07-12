@@ -5,16 +5,16 @@ require_once('../controller/generate.php');
 class Registry extends DatabaseConnection {
 
     //Personal Information
-    function personal_add($code, $fname,$mname,$lname,$suffix,$nname,$age,$gender,$contact1,$mstatus,$dob1,$pob1,
+    function personal_add($code, $fname,$mname,$lname,$suffix,$nname,$gender,$contact1,$mstatus,$dob1,$pob1,
     $block1,$street1,$phase1,$brgy1,$city1,$province1,$url,$residence1,$lwith1,
     $block2,$street2,$phase2,$brgy2,$city2,$province2,$residence2,$lwith2,$mothername,$mothercon,$fathername,$fathercon, $file){
         $sql = "INSERT INTO applicants_personal
-        (applicant_code, firstname, middlename, lastname, suffix, nickname, age, gender, contact1, mstatus, dob1, pob1, 
+        (applicant_code, firstname, middlename, lastname, suffix, nickname, gender, contact1, mstatus, dob1, pob1, 
         block1,street1,phase1,brgy1, city1,province1,map_url,residence1,lwith1,
         block2,street2,phase2,brgy2, city2,province2,residence2,lwith2,mothername,mothercon,fathername,fathercon,`file`,
         date_encoded) 
         VALUES
-        ('$code', '$fname','$mname','$lname','$suffix','$nname','$age','$gender','$contact1','$mstatus','$dob1','$pob1',
+        ('$code', '$fname','$mname','$lname','$suffix','$nname','$gender','$contact1','$mstatus','$dob1','$pob1',
         '$block1','$street1','$phase1','$brgy1','$city1','$province1','$url','$residence1','$lwith1',
         '$block2','$street2','$phase2','$brgy2','$city2','$province2','$residence2','$lwith2',
         '$mothername','$mothercon', '$fathername','$fathercon', '$file', CURRENT_DATE());";
@@ -120,12 +120,12 @@ class Registry extends DatabaseConnection {
     }
         //Edit or Update
         //Personal Information
-        function personal_update($code, $fname,$mname,$lname,$suffix,$nname,$age,$gender,$contact1,$mstatus,$dob1,$pob1,
+        function personal_update($code, $fname,$mname,$lname,$suffix,$nname,$gender,$contact1,$mstatus,$dob1,$pob1,
         $block1,$street1,$phase1,$brgy1,$city1,$province1,$url,$residence1,$lwith1,
         $block2,$street2,$phase2,$brgy2,$city2,$province2,$residence2,$lwith2,$mothername,$mothercon,$fathername,$fathercon){
             $sql = "UPDATE applicants_personal SET 
             firstname = '$fname', middlename = '$mname', lastname = '$lname', 
-            suffix = '$suffix', nickname = '$nname', age = '$age', gender = '$gender', 
+            suffix = '$suffix', nickname = '$nname', gender = '$gender', 
             contact1 = '$contact1', mstatus = '$mstatus', dob1 = '$dob1', pob1 = '$pob1', 
             block1 = '$block1', street1 = '$street1', phase1 = '$phase1', brgy1 = '$brgy1', city1 = '$city1', 
             province1 = '$province1', map_url = '$url', residence1 = '$residence1', lwith1 = '$lwith1',
