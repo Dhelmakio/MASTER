@@ -40,6 +40,18 @@ if(!isset($_SESSION['user_id'])){
         <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
     <link href="../css/loader.css" rel="stylesheet">
+
+    <link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/south-street/jquery-ui.css"
+        rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="../css/jquery.signature.css">
+
+
+
+
+
+
+
 </head>
 
 <body>
@@ -114,7 +126,7 @@ if(!isset($_SESSION['user_id'])){
                                                                                             required>
                                                                                     </div>
                                                                                 </div>
-                                                                                
+
                                                                                 <div class="col-lg-3">
                                                                                     <div class="form-group">
                                                                                         <label>*First Name</label>
@@ -129,24 +141,24 @@ if(!isset($_SESSION['user_id'])){
                                                                                 <div class="col-lg-3">
                                                                                     <div class="form-group">
                                                                                         <label>Middle Name</label>
-                                                                                        <input
-                                                                                            class="form-control"
+                                                                                        <input class="form-control"
                                                                                             name="mname"
                                                                                             placeholder="Middle Name">
                                                                                     </div>
                                                                                 </div>
-                                                                                
+
                                                                                 <div class="col-lg-3">
                                                                                     <div class="form-group">
                                                                                         <label>Suffix</label>
                                                                                         <!-- <input class="form-control"
                                                                                             name="suffix"
                                                                                             placeholder="Suffix"> -->
-                                                                                        <select class="form-control input-set-1"
+                                                                                        <select
+                                                                                            class="form-control input-set-1"
                                                                                             name="suffix">
-                                                                                            
+
                                                                                             <option value="" selected=1>
-                                                                                                
+
                                                                                             </option>
                                                                                             <option value="Sr">
                                                                                                 Sr.
@@ -182,7 +194,7 @@ if(!isset($_SESSION['user_id'])){
                                                                                                 X
                                                                                             </option>
                                                                                         </select>
-                                                                                        
+
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-lg-3">
@@ -206,8 +218,9 @@ if(!isset($_SESSION['user_id'])){
                                                                                 <div class="col-lg-3">
                                                                                     <div class="form-group">
                                                                                         <label>*Gender</label>
-                                                                                        <select class="form-control input-set-1" required
-                                                                                            name="gender">
+                                                                                        <select
+                                                                                            class="form-control input-set-1"
+                                                                                            required name="gender">
                                                                                             <option value="" disabled
                                                                                                 selected=1>
                                                                                                 SELECT
@@ -228,16 +241,18 @@ if(!isset($_SESSION['user_id'])){
                                                                                         <label>*Date of birth</label>
                                                                                         <input type="date" name="dob"
                                                                                             class="form-control input-set-1"
-                                                                                            placeholder="Date of birth" required>
+                                                                                            placeholder="Date of birth"
+                                                                                            required>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-lg-3">
                                                                                     <div class="form-group">
                                                                                         <label>*Marital
                                                                                             Status</label>
-                                                                                        <select class="form-control input-set-1"
+                                                                                        <select
+                                                                                            class="form-control input-set-1"
                                                                                             name="m_status" required
-                                                                                            id="m_status" 
+                                                                                            id="m_status"
                                                                                             onchange="showSpouse(this.value)">
                                                                                             <option value="" disabled
                                                                                                 selected>
@@ -254,7 +269,7 @@ if(!isset($_SESSION['user_id'])){
                                                                                         </select>
                                                                                     </div>
                                                                                 </div>
-                                                                                
+
                                                                                 <div class="col-lg-4">
                                                                                     <div class="form-group">
                                                                                         <label>*Place of
@@ -320,8 +335,8 @@ if(!isset($_SESSION['user_id'])){
                                                                                     <div class="form-group">
                                                                                         <label>*Barangay</label>
                                                                                         <select name="brgy"
-                                                                                            class="form-control input-set-1" required
-                                                                                            id="brgy">
+                                                                                            class="form-control input-set-1"
+                                                                                            required id="brgy">
                                                                                             <option value="" selected
                                                                                                 disabled>SELECT</option>
                                                                                         </select>
@@ -358,9 +373,12 @@ if(!isset($_SESSION['user_id'])){
                                                                                 <div class="col-lg-12">
                                                                                     <div class="form-group">
                                                                                         <label>*Provide Map URL</label>
-                                                                                        <a href="https://www.google.com/maps/place/San+Fernando,+Pampanga/@15.0650161,120.6456575,12073m/data=!3m1!1e3!4m15!1m8!3m7!1s0x3396f79f47a8aadb:0x2c4be1dddb81922a!2sSan+Fernando,+Pampanga!3b1!8m2!3d15.0593937!4d120.6567054!16zL20vMDZwZ3pu!3m5!1s0x3396f79f47a8aadb:0x2c4be1dddb81922a!8m2!3d15.0593937!4d120.6567054!16zL20vMDZwZ3pu?hl=en-US&entry=ttu" target="_blank">
+                                                                                        <a href="https://www.google.com/maps/place/San+Fernando,+Pampanga/@15.0650161,120.6456575,12073m/data=!3m1!1e3!4m15!1m8!3m7!1s0x3396f79f47a8aadb:0x2c4be1dddb81922a!2sSan+Fernando,+Pampanga!3b1!8m2!3d15.0593937!4d120.6567054!16zL20vMDZwZ3pu!3m5!1s0x3396f79f47a8aadb:0x2c4be1dddb81922a!8m2!3d15.0593937!4d120.6567054!16zL20vMDZwZ3pu?hl=en-US&entry=ttu"
+                                                                                            target="_blank">
                                                                                             <label for="">
-                                                                                            ( Open Google Map <i class="fa fa-map"></i> )
+                                                                                                ( Open Google Map <i
+                                                                                                    class="fa fa-map"></i>
+                                                                                                )
                                                                                             </label>
                                                                                         </a>
                                                                                         <input name="coordinates"
@@ -413,7 +431,9 @@ if(!isset($_SESSION['user_id'])){
                                                                                     <div class="form-group">
                                                                                         <label>*Type of
                                                                                             Residency:</label>
-                                                                                        <select name="tor" class="form-control input-set-1" required
+                                                                                        <select name="tor"
+                                                                                            class="form-control input-set-1"
+                                                                                            required
                                                                                             onchange="lwChange(this, 'tor_spec')">
                                                                                             <option value="" selected
                                                                                                 disabled>SELECT</option>
@@ -434,13 +454,15 @@ if(!isset($_SESSION['user_id'])){
                                                                                     </label>
                                                                                     <input type="text" name="tor_spec"
                                                                                         id="tor_spec"
-                                                                                        class="form-control input-set-1" 
+                                                                                        class="form-control input-set-1"
                                                                                         disabled="true">
                                                                                 </div>
                                                                                 <div class="col-lg-3">
                                                                                     <div class="form-group">
                                                                                         <label>*Living With:</label>
-                                                                                        <select class="form-control input-set-1" required
+                                                                                        <select
+                                                                                            class="form-control input-set-1"
+                                                                                            required
                                                                                             onchange="lwChange(this, 'spec')"
                                                                                             name="l_with" id="lw1">
                                                                                             <option value="" selected
@@ -468,8 +490,9 @@ if(!isset($_SESSION['user_id'])){
                                                                                 <div class="col-lg-3">
                                                                                     <label for="">Others (Specify):
                                                                                     </label>
-                                                                                    <input type="text" name="lw_spec" 
-                                                                                        id="spec" class="form-control input-set-1"
+                                                                                    <input type="text" name="lw_spec"
+                                                                                        id="spec"
+                                                                                        class="form-control input-set-1"
                                                                                         disabled="true">
                                                                                 </div>
                                                                                 <div class="col-lg-12">
@@ -597,7 +620,9 @@ if(!isset($_SESSION['user_id'])){
                                                                                         <div class="form-group">
                                                                                             <label>*Type of
                                                                                                 Residency:</label>
-                                                                                            <select class="form-control input-set-1" required
+                                                                                            <select
+                                                                                                class="form-control input-set-1"
+                                                                                                required
                                                                                                 onchange="lwChange(this, 'tor_spec2')"
                                                                                                 name="tor2">
                                                                                                 <option value=""
@@ -621,13 +646,15 @@ if(!isset($_SESSION['user_id'])){
                                                                                         <input type="text"
                                                                                             name="tor_spec2"
                                                                                             id="tor_spec2"
-                                                                                            class="form-control input-set-1" 
+                                                                                            class="form-control input-set-1"
                                                                                             disabled="true">
                                                                                     </div>
                                                                                     <div class="col-lg-3">
                                                                                         <div class="form-group">
                                                                                             <label>*Living With:</label>
-                                                                                            <select class="form-control input-set-1" required
+                                                                                            <select
+                                                                                                class="form-control input-set-1"
+                                                                                                required
                                                                                                 onchange="lwChange(this, 'spec2')"
                                                                                                 name="l_with" id="lw1">
                                                                                                 <option value=""
@@ -672,7 +699,8 @@ if(!isset($_SESSION['user_id'])){
                                                                                         <label>*Mother's
                                                                                             Name:</label>
                                                                                         <input name="mother_name"
-                                                                                            class="form-control input-set-1" required
+                                                                                            class="form-control input-set-1"
+                                                                                            required
                                                                                             onclick="console.log('block: '+document.getElementById('blk2').value)"
                                                                                             placeholder="Mother's name">
                                                                                     </div>
@@ -682,8 +710,8 @@ if(!isset($_SESSION['user_id'])){
                                                                                         <label>*Contact No.</label>
                                                                                         <input type="text"
                                                                                             name="mother_contact"
-                                                                                            class="form-control input-set-1" required
-                                                                                            minlength="11"
+                                                                                            class="form-control input-set-1"
+                                                                                            required minlength="11"
                                                                                             maxlength="11"
                                                                                             onkeypress="return onlyNumberKey(event)"
                                                                                             placeholder="Mobile number (e.g. 09123456789)">
@@ -694,7 +722,8 @@ if(!isset($_SESSION['user_id'])){
                                                                                         <label>*Father's
                                                                                             Name:</label>
                                                                                         <input name="father_name"
-                                                                                            class="form-control input-set-1" required
+                                                                                            class="form-control input-set-1"
+                                                                                            required
                                                                                             placeholder="Father's name">
                                                                                     </div>
                                                                                 </div>
@@ -703,8 +732,8 @@ if(!isset($_SESSION['user_id'])){
                                                                                         <label>*Contact No.</label>
                                                                                         <input type="text"
                                                                                             name="father_contact"
-                                                                                            class="form-control input-set-1" required
-                                                                                            minlength="11"
+                                                                                            class="form-control input-set-1"
+                                                                                            required minlength="11"
                                                                                             maxlength="11"
                                                                                             onkeypress="return onlyNumberKey(event)"
                                                                                             placeholder="Mobile number (e.g. 09123456789)">
@@ -736,8 +765,7 @@ if(!isset($_SESSION['user_id'])){
                                                                                         <div class="form-group">
                                                                                             <label>*Name of
                                                                                                 Spouse/Live-in</label>
-                                                                                            <input
-                                                                                                name="spouse_name"
+                                                                                            <input name="spouse_name"
                                                                                                 type="text"
                                                                                                 class="form-control input-set-2"
                                                                                                 placeholder="Name of spouse"
@@ -763,8 +791,9 @@ if(!isset($_SESSION['user_id'])){
                                                                                                 birth</label>
                                                                                             <input type="date"
                                                                                                 name="spouse_dob"
-                                                                                                class="form-control input-set-2" required
-                                                                                                placeholder="Date of birth" >
+                                                                                                class="form-control input-set-2"
+                                                                                                required
+                                                                                                placeholder="Date of birth">
                                                                                         </div>
                                                                                     </div>
                                                                                     <!-- <div class="col-lg-6">
@@ -782,7 +811,8 @@ if(!isset($_SESSION['user_id'])){
                                                                                             <label>*Place of birth
                                                                                                 (Province)</label>
                                                                                             <select name="spob_province"
-                                                                                                class="form-control input-set-2" required
+                                                                                                class="form-control input-set-2"
+                                                                                                required
                                                                                                 id="spob_province"
                                                                                                 onchange="populate('spob_city', '', this.value)"
                                                                                                 required>
@@ -798,8 +828,8 @@ if(!isset($_SESSION['user_id'])){
                                                                                                 /
                                                                                                 Municipality)</label>
                                                                                             <select name="spob_city"
-                                                                                                class="form-control input-set-2" required
-                                                                                                id="spob_city">
+                                                                                                class="form-control input-set-2"
+                                                                                                required id="spob_city">
                                                                                                 <option value=""
                                                                                                     selected disabled>
                                                                                                     SELECT</option>
@@ -822,7 +852,8 @@ if(!isset($_SESSION['user_id'])){
                                                                                                 (Province)</label>
                                                                                             <select
                                                                                                 name="spouse_province"
-                                                                                                class="form-control input-set-2" required
+                                                                                                class="form-control input-set-2"
+                                                                                                required
                                                                                                 id="spouse_province"
                                                                                                 onchange="populate('spouse_city', '', this.value)">
                                                                                                 <option value=""
@@ -833,11 +864,13 @@ if(!isset($_SESSION['user_id'])){
                                                                                     </div>
                                                                                     <div class="col-lg-4">
                                                                                         <div class="form-group">
-                                                                                            <label>*Present Address (City
+                                                                                            <label>*Present Address
+                                                                                                (City
                                                                                                 /
                                                                                                 Municipality)</label>
                                                                                             <select name="spouse_city"
-                                                                                            class="form-control input-set-2" required
+                                                                                                class="form-control input-set-2"
+                                                                                                required
                                                                                                 id="spouse_city"
                                                                                                 onchange="populate('spouse_brgy', 'spouse_province', this.value)">
                                                                                                 <option value=""
@@ -850,9 +883,9 @@ if(!isset($_SESSION['user_id'])){
                                                                                         <div class="form-group">
                                                                                             <label>*Present Address
                                                                                                 (Barangay)</label>
-                                                                                            <select name="spouse_brgy" 
+                                                                                            <select name="spouse_brgy"
                                                                                                 id="spouse_brgy"
-                                                                                                class="form-control input-set-2"  >
+                                                                                                class="form-control input-set-2">
                                                                                                 <option value=""
                                                                                                     selected disabled>
                                                                                                     SELECT</option>
@@ -864,7 +897,7 @@ if(!isset($_SESSION['user_id'])){
                                                                                             <label>Occupation</label>
                                                                                             <input type="text"
                                                                                                 name="spouse_occupation"
-                                                                                                class="form-control input-set-2" 
+                                                                                                class="form-control input-set-2"
                                                                                                 placeholder="Occupation">
                                                                                         </div>
                                                                                     </div>
@@ -872,7 +905,7 @@ if(!isset($_SESSION['user_id'])){
                                                                                         <div class="form-group">
                                                                                             <label>Company Name</label>
                                                                                             <input name="spouse_company"
-                                                                                            class="form-control input-set-2" 
+                                                                                                class="form-control input-set-2"
                                                                                                 type="text"
                                                                                                 placeholder="Company">
                                                                                         </div>
@@ -900,7 +933,7 @@ if(!isset($_SESSION['user_id'])){
                                                                                     </div>
                                                                                 </div>
                                                                                 <button type="button" name="next"
-                                                                                     id="second_next" disabled
+                                                                                    id="second_next" disabled
                                                                                     class="next btn  btn-primary text-center pull-right"
                                                                                     style="margin-left: 10px;">
                                                                                     Next <i
@@ -950,8 +983,9 @@ if(!isset($_SESSION['user_id'])){
                                                                                         <div class="form-group">
                                                                                             <label>*Choose Sector:
                                                                                             </label>
-                                                                                            <select class="form-control input-set-3" required
-                                                                                                name="sector">
+                                                                                            <select
+                                                                                                class="form-control input-set-3"
+                                                                                                required name="sector">
                                                                                                 <option value=""
                                                                                                     disabled selected>
                                                                                                     SELECT
@@ -972,7 +1006,9 @@ if(!isset($_SESSION['user_id'])){
                                                                                         <div class="form-group">
                                                                                             <label>*Type of
                                                                                                 Business</label>
-                                                                                            <select class="form-control input-set-3" required
+                                                                                            <select
+                                                                                                class="form-control input-set-3"
+                                                                                                required
                                                                                                 name="business">
                                                                                                 <option value=""
                                                                                                     disabled selected>
@@ -982,119 +1018,146 @@ if(!isset($_SESSION['user_id'])){
                                                                                                     disabled>
                                                                                                     SERVICES
                                                                                                 </option>
-                                                                                                <option value="Firms which offer professional services, such as accounting, legal, engineering, business consulting, customer service and architecture"
-                                                                                                    >
-                                                                                                    Firms which offer professional services, such as accounting, legal, engineering, business consulting, customer service and architecture
+                                                                                                <option
+                                                                                                    value="Firms which offer professional services, such as accounting, legal, engineering, business consulting, customer service and architecture">
+                                                                                                    Firms which offer
+                                                                                                    professional
+                                                                                                    services, such as
+                                                                                                    accounting, legal,
+                                                                                                    engineering,
+                                                                                                    business consulting,
+                                                                                                    customer service and
+                                                                                                    architecture
                                                                                                 </option>
-                                                                                                <option value="Transportation companies, such as airlines, shipping, land tours and forwarders"
-                                                                                                    >
-                                                                                                    Transportation companies, such as airlines, shipping, land tours and forwarders    
+                                                                                                <option
+                                                                                                    value="Transportation companies, such as airlines, shipping, land tours and forwarders">
+                                                                                                    Transportation
+                                                                                                    companies, such as
+                                                                                                    airlines, shipping,
+                                                                                                    land tours and
+                                                                                                    forwarders
                                                                                                 </option>
-                                                                                                <option value="Entertainment, such as artists and movie houses"
-                                                                                                    >
-                                                                                                    Entertainment, such as artists and movie houses
+                                                                                                <option
+                                                                                                    value="Entertainment, such as artists and movie houses">
+                                                                                                    Entertainment, such
+                                                                                                    as artists and movie
+                                                                                                    houses
                                                                                                 </option>
-                                                                                                <option value="Hotels & Restaurants"
-                                                                                                    >
+                                                                                                <option
+                                                                                                    value="Hotels & Restaurants">
                                                                                                     Hotels & Restaurants
                                                                                                 </option>
-                                                                                                <option value="Apartments"
-                                                                                                    >
+                                                                                                <option
+                                                                                                    value="Apartments">
                                                                                                     Apartments
                                                                                                 </option>
-                                                                                                <option value="Banks, lending companies and other financial institutions"
-                                                                                                    >
-                                                                                                    Banks, lending companies and other financial institutions
+                                                                                                <option
+                                                                                                    value="Banks, lending companies and other financial institutions">
+                                                                                                    Banks, lending
+                                                                                                    companies and other
+                                                                                                    financial
+                                                                                                    institutions
                                                                                                 </option>
-                                                                                                <option value="Telecommunication companies"
-                                                                                                    >
-                                                                                                    Telecommunication companies
+                                                                                                <option
+                                                                                                    value="Telecommunication companies">
+                                                                                                    Telecommunication
+                                                                                                    companies
                                                                                                 </option>
-                                                                                                <option value="Event planners"
-                                                                                                    >
+                                                                                                <option
+                                                                                                    value="Event planners">
                                                                                                     Event planners
                                                                                                 </option>
-                                                                                                <option value="Medical and dental services"
-                                                                                                    >
-                                                                                                    Medical and dental services
+                                                                                                <option
+                                                                                                    value="Medical and dental services">
+                                                                                                    Medical and dental
+                                                                                                    services
                                                                                                 </option>
-                                                                                                <option value="Security and janitorial services"
-                                                                                                    >
-                                                                                                    Security and janitorial services
+                                                                                                <option
+                                                                                                    value="Security and janitorial services">
+                                                                                                    Security and
+                                                                                                    janitorial services
                                                                                                 </option>
-                                                                                                <option value="Media, blogging and advertising"
-                                                                                                    >
-                                                                                                    Media, blogging and advertising
+                                                                                                <option
+                                                                                                    value="Media, blogging and advertising">
+                                                                                                    Media, blogging and
+                                                                                                    advertising
                                                                                                 </option>
-                                                                                                <option value="Website developers"
-                                                                                                    >
+                                                                                                <option
+                                                                                                    value="Website developers">
                                                                                                     Website developers
                                                                                                 </option>
-                                                                                                <option value="Graphic designers"
-                                                                                                    >
+                                                                                                <option
+                                                                                                    value="Graphic designers">
                                                                                                     Graphic designers
                                                                                                 </option>
-                                                                                                <option value="Business process outsourcing (BPO) companies"
-                                                                                                    >
-                                                                                                    Business process outsourcing (BPO) companies
+                                                                                                <option
+                                                                                                    value="Business process outsourcing (BPO) companies">
+                                                                                                    Business process
+                                                                                                    outsourcing (BPO)
+                                                                                                    companies
                                                                                                 </option>
-                                                                                                <option value="MERCHANDISING"
+                                                                                                <option
+                                                                                                    value="MERCHANDISING"
                                                                                                     disabled>
                                                                                                     MERCHANDISING
                                                                                                 </option>
-                                                                                                <option value="Department Store"
-                                                                                                    >
-                                                                                                    Department Stores  
+                                                                                                <option
+                                                                                                    value="Department Store">
+                                                                                                    Department Stores
                                                                                                 </option>
-                                                                                                <option value="Distributor"
-                                                                                                    >
-                                                                                                    Distributors 
+                                                                                                <option
+                                                                                                    value="Distributor">
+                                                                                                    Distributors
                                                                                                 </option>
-                                                                                                <option value="Real Estate Dealer"
-                                                                                                    >
+                                                                                                <option
+                                                                                                    value="Real Estate Dealer">
                                                                                                     Real Estate Dealers
                                                                                                 </option>
-                                                                                                <option value="Car Dealer"
-                                                                                                    >
+                                                                                                <option
+                                                                                                    value="Car Dealer">
                                                                                                     Car Dealers
                                                                                                 </option>
-                                                                                                <option value="Grocery Store"
-                                                                                                    >
+                                                                                                <option
+                                                                                                    value="Grocery Store">
                                                                                                     Grocery Stores
                                                                                                 </option>
                                                                                                 <option value=""
                                                                                                     disabled>
                                                                                                     MANUFACTURING
                                                                                                 </option>
-                                                                                                <option value="Car Manufacturer"
-                                                                                                    >
-                                                                                                    Car Manufacturers    
+                                                                                                <option
+                                                                                                    value="Car Manufacturer">
+                                                                                                    Car Manufacturers
                                                                                                 </option>
-                                                                                                <option value="Wine and Softdrinks Producer"
-                                                                                                    >
-                                                                                                    Wine and Softdrinks Producers   
+                                                                                                <option
+                                                                                                    value="Wine and Softdrinks Producer">
+                                                                                                    Wine and Softdrinks
+                                                                                                    Producers
                                                                                                 </option>
-                                                                                                <option value="Electronic Parts Manufacturer"
-                                                                                                    >
-                                                                                                    Electronic Parts Manufacturer   
+                                                                                                <option
+                                                                                                    value="Electronic Parts Manufacturer">
+                                                                                                    Electronic Parts
+                                                                                                    Manufacturer
                                                                                                 </option>
-                                                                                                <option value="Producer of drugs and other medical products"
-                                                                                                    >
-                                                                                                    Producer of drugs and other medical products   
+                                                                                                <option
+                                                                                                    value="Producer of drugs and other medical products">
+                                                                                                    Producer of drugs
+                                                                                                    and other medical
+                                                                                                    products
                                                                                                 </option>
                                                                                                 <option value=""
                                                                                                     disabled>
                                                                                                     OTHERS
                                                                                                 </option>
-                                                                                                <option value="Agriculture"
-                                                                                                    >
-                                                                                                    Agriculture   
+                                                                                                <option
+                                                                                                    value="Agriculture">
+                                                                                                    Agriculture
                                                                                                 </option>
-                                                                                                <option value="Mining Company"
-                                                                                                    >
-                                                                                                    Mining Company  
+                                                                                                <option
+                                                                                                    value="Mining Company">
+                                                                                                    Mining Company
                                                                                                 </option>
-                                                                                                
+
                                                                                             </select>
                                                                                             <!-- <input name="business"
                                                                                                 type="text"
@@ -1108,7 +1171,8 @@ if(!isset($_SESSION['user_id'])){
                                                                                                 Company</label>
                                                                                             <input type="text"
                                                                                                 name="ca_company"
-                                                                                                class="form-control input-set-3" required
+                                                                                                class="form-control input-set-3"
+                                                                                                required
                                                                                                 placeholder="Complete Address of Company">
                                                                                         </div>
                                                                                     </div>
@@ -1118,7 +1182,8 @@ if(!isset($_SESSION['user_id'])){
                                                                                                 Location</label>
                                                                                             <input name="location"
                                                                                                 type="text"
-                                                                                                class="form-control input-set-3" required
+                                                                                                class="form-control input-set-3"
+                                                                                                required
                                                                                                 placeholder="Assigned Location">
                                                                                         </div>
                                                                                     </div>
@@ -1127,8 +1192,8 @@ if(!isset($_SESSION['user_id'])){
                                                                                             <label>*Name of
                                                                                                 Supervisor/COOR/Supervisor</label>
                                                                                             <input name="supervisor"
-                                                                                                class="form-control input-set-3" required
-                                                                                                type="text"
+                                                                                                class="form-control input-set-3"
+                                                                                                required type="text"
                                                                                                 placeholder="Name of Supervisor/COOR/Supervisor">
                                                                                         </div>
                                                                                     </div>
@@ -1138,7 +1203,8 @@ if(!isset($_SESSION['user_id'])){
                                                                                                 HR/COOR/Supervisor</label>
                                                                                             <input type="text"
                                                                                                 name="hr_number"
-                                                                                                class="form-control input-set-3" required
+                                                                                                class="form-control input-set-3"
+                                                                                                required
                                                                                                 onkeypress="return onlyNumberKey(event)"
                                                                                                 maxlength="11"
                                                                                                 placeholder="Mobile number (e.g. 09123456789)">
@@ -1149,7 +1215,8 @@ if(!isset($_SESSION['user_id'])){
                                                                                             <label>*Date Hired</label>
                                                                                             <input name="date_hired"
                                                                                                 type="date"
-                                                                                                class="form-control input-set-3" required
+                                                                                                class="form-control input-set-3"
+                                                                                                required
                                                                                                 placeholder="Date Hired">
                                                                                         </div>
                                                                                     </div>
@@ -1190,7 +1257,9 @@ if(!isset($_SESSION['user_id'])){
                                                                                         <div class="form-group">
                                                                                             <label>*Employment Status:
                                                                                             </label>
-                                                                                            <select  class="form-control input-set-3" required
+                                                                                            <select
+                                                                                                class="form-control input-set-3"
+                                                                                                required
                                                                                                 name="e_status">
                                                                                                 <option value=""
                                                                                                     disabled selected>
@@ -1203,8 +1272,7 @@ if(!isset($_SESSION['user_id'])){
                                                                                                     value="PROBATIONARY">
                                                                                                     Probationary
                                                                                                 </option>
-                                                                                                <option
-                                                                                                    value="CASUAL">
+                                                                                                <option value="CASUAL">
                                                                                                     Casual
                                                                                                 </option>
                                                                                                 <option value="TRAINEE">
@@ -1243,7 +1311,9 @@ if(!isset($_SESSION['user_id'])){
                                                                                         <div class="form-group">
                                                                                             <label>*Mode of Salary:
                                                                                             </label>
-                                                                                            <select  class="form-control input-set-3" required
+                                                                                            <select
+                                                                                                class="form-control input-set-3"
+                                                                                                required
                                                                                                 name="m_salary">
                                                                                                 <option value=""
                                                                                                     disabled selected>
@@ -1266,7 +1336,8 @@ if(!isset($_SESSION['user_id'])){
                                                                                             <label>*Bank Name</label>
                                                                                             <input type="text"
                                                                                                 name="bank"
-                                                                                                class="form-control input-set-3" required
+                                                                                                class="form-control input-set-3"
+                                                                                                required
                                                                                                 placeholder="Bank Name">
                                                                                         </div>
                                                                                     </div>
@@ -1313,8 +1384,10 @@ if(!isset($_SESSION['user_id'])){
                                                                                         <div class="form-group">
                                                                                             <label>*Do you have other
                                                                                                 loan?</label>
-                                                                                            <select class="form-control input-set-3" required
-                                                                                                onchange="lwChange(this, 'loan_spec')"
+                                                                                            <select
+                                                                                                class="form-control input-set-3"
+                                                                                                required
+                                                                                                onchange="specSourceChange(this, 'loan_spec')"
                                                                                                 name="loan">
                                                                                                 <option value=""
                                                                                                     selected disabled>
@@ -1322,55 +1395,65 @@ if(!isset($_SESSION['user_id'])){
                                                                                                 <option value="Yes">
                                                                                                     Yes
                                                                                                 </option>
-                                                                                                <option value="No">
-                                                                                                    No
+                                                                                                <option value="None">
+                                                                                                    None
                                                                                                 </option>
                                                                                             </select>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="col-lg-3">
                                                                                         <label for="">Specify:</label>
-                                                                                        <select class="form-control input-set-3" onchange="specSourceChange(this, 'sma')"
-                                                                                                name="loan_spec" id="loan_spec" disabled>
-                                                                                                <option value=""
-                                                                                                    selected disabled>
-                                                                                                    SELECT</option>
-                                                                                                <option value="Salary Loan">
-                                                                                                    Salary Loan
-                                                                                                </option>
-                                                                                                <option value="Personal Loan">
+                                                                                        <select
+                                                                                            class="form-control input-set-3"
+                                                                                            onchange="specSourceChange(this, 'sma')"
+                                                                                            name="loan_spec"
+                                                                                            id="loan_spec" disabled>
+                                                                                            <option value="" selected
+                                                                                                disabled>
+                                                                                                SELECT</option>
+                                                                                            <option value="Salary Loan">
+                                                                                                Salary Loan
+                                                                                            </option>
+                                                                                            <option
+                                                                                                value="Personal Loan">
                                                                                                 Personal Loan
-                                                                                                </option>
-                                                                                                <option value="Calamity Loan">
+                                                                                            </option>
+                                                                                            <option
+                                                                                                value="Calamity Loan">
                                                                                                 Calamity Loan
-                                                                                                </option>
-                                                                                                <option value="Maternity Loan">
+                                                                                            </option>
+                                                                                            <option
+                                                                                                value="Maternity Loan">
                                                                                                 Maternity Loan
-                                                                                                </option>
-                                                                                                <option value="Paternity Loan">
+                                                                                            </option>
+                                                                                            <option
+                                                                                                value="Paternity Loan">
                                                                                                 Paternity Loan
-                                                                                                </option>
-                                                                                                <option value="Business Loan">
+                                                                                            </option>
+                                                                                            <option
+                                                                                                value="Business Loan">
                                                                                                 Business Loan
-                                                                                                </option>
-                                                                                                <option value="Appliance/Gadget Loan">
+                                                                                            </option>
+                                                                                            <option
+                                                                                                value="Appliance/Gadget Loan">
                                                                                                 Appliance/Gadget Loan
-                                                                                                </option>
-                                                                                                <option value="Vehicle Loan">
+                                                                                            </option>
+                                                                                            <option
+                                                                                                value="Vehicle Loan">
                                                                                                 Vehicle Loan
-                                                                                                </option>
-                                                                                                <option value="Home Loan">
+                                                                                            </option>
+                                                                                            <option value="Home Loan">
                                                                                                 Home Loan
-                                                                                                </option>
-                                                                                                <option value="Travel Loan">
+                                                                                            </option>
+                                                                                            <option value="Travel Loan">
                                                                                                 Travel Loan
-                                                                                                </option>
-                                                                                                <option value="Credit Card">
+                                                                                            </option>
+                                                                                            <option value="Credit Card">
                                                                                                 Credit Card
-                                                                                                </option>
-                                                                                                <option value="OFW Loan">
+                                                                                            </option>
+                                                                                            <option value="OFW Loan">
                                                                                                 Travel Loan
-                                                                                                </option>
+                                                                                            </option>
                                                                                         </select>
                                                                                         <!-- <input type="text"
                                                                                             name="loan_spec"
@@ -1380,11 +1463,12 @@ if(!isset($_SESSION['user_id'])){
                                                                                     </div>
                                                                                     <div class="col-lg-3">
                                                                                         <div class="form-group">
-                                                                                            <label>Specify Monthly Amortization</label>
-                                                                                            <input name="sma" id="sma" disabled
-                                                                                                type="text"
-                                                                                                class="form-control text-right input-set-3" required
-                                                                                                maxlength="10"
+                                                                                            <label>Specify Monthly
+                                                                                                Amortization</label>
+                                                                                            <input name="sma" id="sma"
+                                                                                                disabled type="text"
+                                                                                                class="form-control text-right input-set-3"
+                                                                                                 maxlength="10"
                                                                                                 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                                                                                                 placeholder="₱">
                                                                                         </div>
@@ -1395,8 +1479,8 @@ if(!isset($_SESSION['user_id'])){
                                                                                                 (Net/Gross)</label>
                                                                                             <input name="ms_salary"
                                                                                                 type="text"
-                                                                                                class="form-control text-right input-set-3" required
-                                                                                                maxlength="10"
+                                                                                                class="form-control text-right input-set-3"
+                                                                                                required maxlength="10"
                                                                                                 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                                                                                                 placeholder="₱">
                                                                                         </div>
@@ -1404,38 +1488,49 @@ if(!isset($_SESSION['user_id'])){
                                                                                     <div class="col-lg-12"></div>
                                                                                     <div class="col-lg-6">
                                                                                         <div class="form-group">
-                                                                                            <label>*Specify Other Source of Income</label>
-                                                                                            <select class="form-control input-set-3"
-                                                                                                name="s_specify" onchange="specSourceChange(this, 'os_income')" required>
+                                                                                            <label>*Specify Other Source
+                                                                                                of Income</label>
+                                                                                            <select
+                                                                                                class="form-control input-set-3"
+                                                                                                name="s_specify"
+                                                                                                onchange="specSourceChange(this, 'os_income')"
+                                                                                                required>
                                                                                                 <option value=""
                                                                                                     selected disabled>
                                                                                                     SELECT</option>
                                                                                                 <option value="None">
-                                                                                                None
+                                                                                                    None
                                                                                                 </option>
-                                                                                                <option value="Business">
-                                                                                                Business
+                                                                                                <option
+                                                                                                    value="Business">
+                                                                                                    Business
                                                                                                 </option>
-                                                                                                <option value="Allowance">
-                                                                                                Allowance
+                                                                                                <option
+                                                                                                    value="Allowance">
+                                                                                                    Allowance
                                                                                                 </option>
                                                                                                 <option value="Pension">
-                                                                                                Pension
+                                                                                                    Pension
                                                                                                 </option>
-                                                                                                <option value="Commission">
-                                                                                                Commission
+                                                                                                <option
+                                                                                                    value="Commission">
+                                                                                                    Commission
                                                                                                 </option>
-                                                                                                <option value="Part time Job">
-                                                                                                Part time Job
+                                                                                                <option
+                                                                                                    value="Part time Job">
+                                                                                                    Part time Job
                                                                                                 </option>
-                                                                                                <option value="Allotment">
-                                                                                                Allotment
+                                                                                                <option
+                                                                                                    value="Allotment">
+                                                                                                    Allotment
                                                                                                 </option>
-                                                                                                <option value="Family Financial Support">
-                                                                                                Family Financial Support
+                                                                                                <option
+                                                                                                    value="Family Financial Support">
+                                                                                                    Family Financial
+                                                                                                    Support
                                                                                                 </option>
-                                                                                                
-                                                                                        </select>
+
+                                                                                            </select>
                                                                                             <!-- <input name="s_specify"
                                                                                                 type="text"
                                                                                                  class="form-control input-set-3" required
@@ -1446,10 +1541,12 @@ if(!isset($_SESSION['user_id'])){
                                                                                         <div class="form-group">
                                                                                             <label>*Total Other
                                                                                                 Income (₱)</label>
-                                                                                            <input name="os_income" id="os_income"
+                                                                                            <input name="os_income"
+                                                                                                id="os_income"
                                                                                                 type="text"
-                                                                                                 class="form-control text-right input-set-3" required
-                                                                                                placeholder="₱" disabled>
+                                                                                                class="form-control text-right input-set-3"
+                                                                                                required placeholder="₱"
+                                                                                                disabled>
                                                                                         </div>
                                                                                     </div>
                                                                                     <!-- separator -->
@@ -1458,7 +1555,7 @@ if(!isset($_SESSION['user_id'])){
                                                                                     </div>
                                                                                 </div>
                                                                                 <button type="button" name="next"
-                                                                                     id="third_next" disabled
+                                                                                    id="third_next" disabled
                                                                                     class="next btn  btn-primary text-center pull-right"
                                                                                     style="margin-left: 10px;">
                                                                                     Next <i
@@ -1490,8 +1587,11 @@ if(!isset($_SESSION['user_id'])){
                                                                                     </div>
                                                                                     <div class="col-lg-4">
                                                                                         <div class="form-group">
-                                                                                            <label>*Loan Purpose:</label>
-                                                                                            <select  class="form-control input-set-4" required
+                                                                                            <label>*Loan
+                                                                                                Purpose:</label>
+                                                                                            <select
+                                                                                                class="form-control input-set-4"
+                                                                                                required
                                                                                                 onchange="lwChange(this, 'specPurp')"
                                                                                                 name="loan_purpose">
                                                                                                 <option value=""
@@ -1541,7 +1641,7 @@ if(!isset($_SESSION['user_id'])){
                                                                                         <input type="text"
                                                                                             name="specPurp"
                                                                                             id="specPurp"
-                                                                                             class="form-control"
+                                                                                            class="form-control"
                                                                                             disabled="true">
                                                                                     </div>
 
@@ -1551,14 +1651,17 @@ if(!isset($_SESSION['user_id'])){
                                                                                             <input name="contact_num"
                                                                                                 maxlength="11"
                                                                                                 onkeypress="return onlyNumberKey(event)"
-                                                                                                class="form-control input-set-4" required
+                                                                                                class="form-control input-set-4"
+                                                                                                required
                                                                                                 placeholder="Mobile number (e.g. 09123456789)">
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="col-lg-4">
                                                                                         <div class="form-group">
                                                                                             <label>*Source:</label>
-                                                                                            <select class="form-control input-set-4" required
+                                                                                            <select
+                                                                                                class="form-control input-set-4"
+                                                                                                required
                                                                                                 onchange="lwChange(this, 'specSource')"
                                                                                                 name="source">
                                                                                                 <option value=""
@@ -1611,9 +1714,15 @@ if(!isset($_SESSION['user_id'])){
                                                                                     </div>
                                                                                     <div class="col-lg-4">
                                                                                         <div class="form-group">
-                                                                                            <label>*Select file to upload</label>
-                                                                                           
-                                                                                            <input type="file" name="myFile" class="form-control input-set-4" id="fileToUpload" accept="application/pdf" required>
+                                                                                            <label>*Select file to
+                                                                                                upload</label>
+
+                                                                                            <input type="file"
+                                                                                                name="myFile"
+                                                                                                class="form-control input-set-4"
+                                                                                                id="fileToUpload"
+                                                                                                accept="application/pdf"
+                                                                                                required>
                                                                                         </div>
                                                                                     </div>
                                                                                     <br><br><br><br>
@@ -1680,7 +1789,7 @@ if(!isset($_SESSION['user_id'])){
                                                                                     <div class="orbit"></div>
                                                                                 </center>
                                                                             </fieldset>
-
+                                                                            <textarea id="sigpad" name="signature_image" style="display: none"></textarea>
                                                                         </form>
 
                                                                     </div>
@@ -1708,9 +1817,42 @@ if(!isset($_SESSION['user_id'])){
         </div>
         <!-- /#page-wrapper -->
     </div>
+    <!-- Signature Pad Modal END -->
+    <div class="modal fade" id="sig_pad_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h1>E-Signature:</h1>
+                    <label class="" for="">*Attach Signature</label>
+                    <br />
+                    <div class="" id="signature"></div>
+                    <br />
+                    <br />
+                    <button class="btn btn-default" id="clear">Clear Signature</button>
+                    
+
+                </div>
+                <div class="modal-footer" style="padding: 5px;">
+                    <form action="#" method="post">
+                        <button type="button" class="btn btn-default text-small" data-dismiss="modal">Cancel</button>
+                        <button type="button" name="confirm" id="confirm_sig"
+                            class="btn btn-primary text-small">Confirm</button>
+                    </form>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+    </div>
+    <!-- Signature Pad Modal END -->
     <!-- /#wrapper -->
     <!-- jQuery -->
     <script src="../js/jquery.min.js"></script>
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+    <script type="text/javascript" src="../js/jquery.signature.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="../js/bootstrap.min.js"></script>
@@ -1727,7 +1869,7 @@ if(!isset($_SESSION['user_id'])){
         if (val == "Married") {
             // alert("hello");
             document.getElementById('div_spouse').style.display = "block";
-            populate("spob_province",  "", "");
+            populate("spob_province", "", "");
             populate("spouse_province", "", "");
         } else {
             document.getElementById('div_spouse').style.display = "none";
@@ -1810,25 +1952,48 @@ if(!isset($_SESSION['user_id'])){
 
     function lwChange(val, spec) {
         var spec = document.getElementById(spec);
-        
-            if (val.value == "Others" || val.value == "Yes") {
-            spec.disabled = false;
-            spec.required = true;
-            } else {
-                spec.disabled = true;
-                spec.required = false;
-            }
-    }
 
-    function specSourceChange(val, spec) {
-        var spec = document.getElementById(spec);
-        if (val.value != "None") {
+        if (val.value == "Others" || val.value == "Yes") {
             spec.disabled = false;
             spec.required = true;
         } else {
             spec.disabled = true;
             spec.required = false;
         }
+    }
+
+    function specSourceChange(val, spec) {
+        let temp = spec;
+        var spec = document.getElementById(spec);
+        if(temp == "loan_spec"){
+            if (val.value != "None") {
+
+                spec.disabled = false;
+                spec.required = true;
+
+            } else {
+
+                document.getElementById("sma").disabled = true;
+                spec.disabled = true;
+                spec.required = false;
+                
+            }
+           
+        }else{
+
+            if (val.value != "None") {
+
+                spec.disabled = false;
+                spec.required = true;
+
+            } else {
+
+                spec.disabled = true;
+                spec.required = false;
+
+            }
+        }
+        
     }
 
     function viewMap(url) {
@@ -1869,12 +2034,12 @@ if(!isset($_SESSION['user_id'])){
         $('.input-set-4').on("input", () => {
             controlStep('#set4', '#agree');
         });
-        
+
         $('.input-set-4').change(() => {
             controlStep('#set4', '#agree');
         });
 
-        
+
 
 
         // $('#first_next').click(() => {
@@ -1918,7 +2083,6 @@ if(!isset($_SESSION['user_id'])){
     </script>
 
     <script>
-    
     populate("pob_province", "", "");
     populate("province", "", "");
     populate("province2", "", "");
@@ -1942,12 +2106,12 @@ if(!isset($_SESSION['user_id'])){
 
                 // PARSE JSON DATA.
                 let data = JSON.parse(xhr.responseText);
-                
+
                 let compare = (a, b) => {
-                    if(a.province_list < b.province_list){
+                    if (a.province_list < b.province_list) {
                         return -1;
                     }
-                    if(a.province_list > b.province_list){
+                    if (a.province_list > b.province_list) {
                         return 1;
                     }
                     return 0;
@@ -1995,43 +2159,43 @@ if(!isset($_SESSION['user_id'])){
                 //     }
 
                 // }
-                    if (select !== "province" || select !== "province2" || select != "spob_province" || select !=
-                        "spouse_province" || select !== "pob_province") {
-                        let index = mainSelect.options.length;
-                        while (index > 0) {
-                            mainSelect.remove(index);
-                            index--;
-                        }
+                if (select !== "province" || select !== "province2" || select != "spob_province" || select !=
+                    "spouse_province" || select !== "pob_province") {
+                    let index = mainSelect.options.length;
+                    while (index > 0) {
+                        mainSelect.remove(index);
+                        index--;
+                    }
+                }
+
+                if (select === "province" || select === "province2" || select === "pob_province" || select ===
+                    "spouse_province" || select === "spob_province") {
+                    for (key in Object.keys(data.province_list)) {
+                        elOption = frag.appendChild(document.createElement('option'));
+                        elOption.value = Object.keys(data.province_list)[key];
+                        elOption.text = `${Object.keys(data.province_list)[key]}`;
+                    }
+                } else if (select === "city" || select === "city2" || select === "pob_city" || select ===
+                    "spob_city" || select === "spouse_city") {
+                    for (key in Object.keys(data.province_list[val].municipality_list)) {
+                        elOption = frag.appendChild(document.createElement('option'));
+                        elOption.value = Object.keys(data.province_list[val].municipality_list)[key];
+                        elOption.text =
+                            `${Object.keys(data.province_list[val].municipality_list)[key]}`;
                     }
 
-                    if (select === "province" || select === "province2" || select === "pob_province" || select ===
-                        "spouse_province" || select === "spob_province") {
-                        for (key in Object.keys(data.province_list)) {
-                            elOption = frag.appendChild(document.createElement('option'));
-                            elOption.value = Object.keys(data.province_list)[key];
-                            elOption.text = `${Object.keys(data.province_list)[key]}`;
-                        }
-                    } else if (select === "city" || select === "city2" || select === "pob_city" || select ===
-                        "spob_city" || select === "spouse_city") {
-                        for (key in Object.keys(data.province_list[val].municipality_list)) {
-                            elOption = frag.appendChild(document.createElement('option'));
-                            elOption.value = Object.keys(data.province_list[val].municipality_list)[key];
-                            elOption.text =
-                                `${Object.keys(data.province_list[val].municipality_list)[key]}`;
-                        }
-                        
 
-                    } else if (select === "brgy" || select === "brgy2" || select === "spouse_brgy") {
+                } else if (select === "brgy" || select === "brgy2" || select === "spouse_brgy") {
 
-                        for (key in Object.keys(data.province_list[document.getElementById(prevVal).value]
-                                .municipality_list[val].barangay_list)) {
-                            elOption = frag.appendChild(document.createElement('option'));
-                            elOption.value = data.province_list[document.getElementById(prevVal).value]
-                                .municipality_list[val].barangay_list[key];
-                            elOption.text =
-                                `${data.province_list[document.getElementById(prevVal).value].municipality_list[val].barangay_list[key]}`;
-                        }
+                    for (key in Object.keys(data.province_list[document.getElementById(prevVal).value]
+                            .municipality_list[val].barangay_list)) {
+                        elOption = frag.appendChild(document.createElement('option'));
+                        elOption.value = data.province_list[document.getElementById(prevVal).value]
+                            .municipality_list[val].barangay_list[key];
+                        elOption.text =
+                            `${data.province_list[document.getElementById(prevVal).value].municipality_list[val].barangay_list[key]}`;
                     }
+                }
                 mainSelect.appendChild(frag);
 
                 // mainSelect.html(mainSelect.find('option').sort(function(option1, option2){
@@ -2044,17 +2208,80 @@ if(!isset($_SESSION['user_id'])){
     }
     </script>
 
+
+    <!-- Signature Pad Script -->
+    <script type="text/javascript">
+    var signature = $('#signature').signature({
+        syncField: '#sigpad',
+        syncFormat: 'PNG'
+    });
+    $('#clear').click(function(e) {
+        e.preventDefault();
+        signature.signature('clear');
+        $("#sigpad").val('');
+    });
+    </script>
+
     <script>
     $("#submit_add").click(function() {
         $('#progressbar').css('display', 'none');
         $('#p-label').css('display', 'none');
+        $('#sig_pad_modal').modal("show");
+        // $.ajax({
+        //     type: 'POST',
+        //     url: '../request/reg_add.php',
+        //     enctype: 'multipart/form-data',
+        //     data: _data,
+        //     processData: false,
+        //     contentType: false,
+        //     dataType: 'json',
+        //     success: function(response) {
 
-        var form = $('#msform')[0];
-        // Create an FormData object 
+        //         setTimeout(() => {
 
-        var _data = new FormData(form);
+        //             beautyToast.success({
+        //                 title: '',
+        //                 message: response.message,
+        //                 darkTheme: false,
+        //                 iconColor: 'green',
+        //                 iconWidth: 24,
+        //                 iconHeight: 24,
+        //                 animationTime: 100,
+        //             });
 
-        $.ajax({
+        //             setTimeout(() => {
+        //                 window.location.replace(`loan_application_1.php?id=${response.code}`);
+        //             }, 2500);
+        //         }, 2000);
+        //     },
+        //     error: function(xhr, status, error) {
+        //         alert(xhr.responseText);
+        //     }
+        // });
+    });
+    $('#confirm_sig').click(() => {
+        if($('#sigpad').val() == ""){
+            $('#sig_pad_modal').modal("hide");
+            beautyToast.error({
+                title: '',
+                message: 'Please attach a signature.',
+                darkTheme: false,
+                iconColor: 'red',
+                iconWidth: 24,
+                iconHeight: 24,
+                animationTime: 100,
+            });
+            setTimeout(() => {
+                $('#sig_pad_modal').modal("show");
+            }, 1000);
+        }else{
+            $('#sig_pad_modal').modal("hide");
+            var form = $('#msform')[0];
+            // Create an FormData object 
+
+            var _data = new FormData(form);
+
+            $.ajax({
             type: 'POST',
             url: '../request/reg_add.php',
             enctype: 'multipart/form-data',
@@ -2085,11 +2312,13 @@ if(!isset($_SESSION['user_id'])){
                 alert(xhr.responseText);
             }
         });
+        }
     });
     </script>
 
 </body>
 <?php require_once('footer.php'); ?>
+
 </html>
 <?php
 //}else{

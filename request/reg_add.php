@@ -3,6 +3,8 @@
 require_once('../controller/generate.php');
 require_once('../controller/reg_app.php');
 
+
+
 $applicant = new Registry();
 $generate = new Generate();
 $code = $generate->generateId("AMG", "001", "applicants_personal", "applicant_code");
@@ -35,12 +37,27 @@ if(mkdir("../assets/docs/".$code."/",0777)){
     $ext1 = $info['extension']; 
     $newname = $code.".".$ext1;
     $target = '../assets/docs/'.$code.'/'.$newname;
+
+    $folderPath = '../assets/docs/'.$code.'/';
+
+    $image_parts = explode(";base64,", $_POST['signature_image']);
+ 
+    $image_type_aux = explode("image/", $image_parts[0]);
+    
+    $image_type = $image_type_aux[1];
+    
+    $image_base64 = base64_decode($image_parts[1]);
+    
+    $file = $folderPath . $code . '.'.$image_type;
+
     if(file_exists('../assets/docs/'.$code.'/'.$newname)){
         unlink('../assets/docs/'.$code.'/'.$newname);
         rmdir('../assets/docs/'.$code);
         move_uploaded_file($file_tmp1, $target);
+        file_put_contents($file, $image_base64);
     }else{
         move_uploaded_file($file_tmp1, $target);
+        file_put_contents($file, $image_base64);
     }
 }
 
