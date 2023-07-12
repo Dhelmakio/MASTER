@@ -270,7 +270,7 @@ if(!isset($_SESSION['user_id'])){
                                                                                     </div>
                                                                                 </div>
 
-                                                                                <div class="col-lg-4">
+                                                                                <div class="col-lg-3">
                                                                                     <div class="form-group">
                                                                                         <label>*Place of
                                                                                             birth ( Province )</label>
@@ -283,7 +283,7 @@ if(!isset($_SESSION['user_id'])){
                                                                                             <select>
                                                                                     </div>
                                                                                 </div>
-                                                                                <div class="col-lg-4">
+                                                                                <div class="col-lg-3">
                                                                                     <div class="form-group">
                                                                                         <label>*Place of
                                                                                             birth ( City ) </label>
