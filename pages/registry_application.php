@@ -2223,7 +2223,7 @@ if(!isset($_SESSION['user_id'])){
         );
 
         $('#disp_gender').text(
-            `${$('select[name=gender]').val()}`
+            `${$('select[name=gender]').val().toUpperCase()}`
         );
 
         $('#disp_dob').text(
@@ -2266,7 +2266,7 @@ if(!isset($_SESSION['user_id'])){
 
         //spouse
         $('#disp_spouse').text(
-            `${($('select[name=m_status]').val() != "Married") ? 'NONE' : $('input[name=spouse_name]').val()}`
+            `${($('select[name=m_status]').val() != "Married") ? 'NONE' : $('input[name=spouse_name]').val().toUpperCase()}`
         );
 
         $('#disp_scontact').text(
@@ -2327,15 +2327,15 @@ if(!isset($_SESSION['user_id'])){
         );
 
         $('#disp_mos').text(
-            `${$('select[name=m_salary]').val()}`
+            `${$('select[name=m_salary]').val().toUpperCase()}`
         );
 
         $('#disp_bank').text(
-            `${$('input[name=bank]').val()}`
+            `${$('input[name=bank]').val().toUpperCase()}`
         );
 
         $('#disp_atm').text(
-            `${$('input[name=t_card]').val()}`
+            `${$('input[name=t_card]').val().toUpperCase()}`
         );
 
         $('#disp_loan').text(
