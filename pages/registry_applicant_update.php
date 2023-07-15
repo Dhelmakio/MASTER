@@ -152,7 +152,7 @@ if($_SESSION['user_id']){
                                                                                 <div class="col-lg-3">
                                                                                     <div class="form-group">
                                                                                         <label>Suffix</label>
-                                                                                        
+
                                                                                         <select class="form-control"
                                                                                             name="suffix">
                                                                                             <option value="" disabled
@@ -1446,39 +1446,6 @@ if($_SESSION['user_id']){
                                                                                                 value="<?= $edit->getClientData($id, 'applicants_work', 'applicant_code', 'atm_card')??null; ?>">
                                                                                         </div>
                                                                                     </div>
-                                                                                    <!-- <div class="col-lg-6">
-                                                                                        <div class="form-group">
-                                                                                            <label>Do you have other
-                                                                                                loan?</label>
-                                                                                            <div class="radio">
-                                                                                                <?php $loan = $edit->getClientData($id, 'applicants_work', 'applicant_code', 'loan')??null; ?>
-                                                                                                <label>
-                                                                                                    <input type="radio"
-                                                                                                        name="loan"
-                                                                                                        id="Yes"
-                                                                                                        value="Specify"
-                                                                                                        <?= ($loan != "No")?'checked':''; ?>
-                                                                                                        onclick="enableField('Yes', 'yes')">Yes
-                                                                                                    (Specify):
-                                                                                                </label>
-                                                                                                <input type="text"
-                                                                                                    name="loan_spec"
-                                                                                                    id="yes"
-                                                                                                    class="form-group"
-                                                                                                    value="<?= ($loan != "No")? $loan : 'disabled="true"' ; ?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                                                <label>
-                                                                                                    <input type="radio"
-                                                                                                        name="loan"
-                                                                                                        id="No"
-                                                                                                        value="No"
-                                                                                                        <?= ($loan == "No")? 'checked':''; ?>
-                                                                                                        onclick="enableField('No', 'yes')">No
-
-                                                                                                </label>
-
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div> -->
                                                                                     <div class="col-lg-3">
                                                                                         <div class="form-group">
                                                                                             <label>Do you have other
@@ -1500,13 +1467,12 @@ if($_SESSION['user_id']){
                                                                                                     $op1 = ($exploan[0] == $val) ? '<option selected value='.$exploan[0].'>'.$exploan[0].'</option>' : '<option value='.$val.'>'.$val.'</option>';
                                                                                                 echo $op1;
                                                                                                 }
-
                                                                                                 ?>
                                                                                             </select>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="col-lg-3">
-                                                                                        <label for="">Others (Specify):
+                                                                                        <label for="">Specify:
                                                                                         </label>
                                                                                         <input type="text"
                                                                                             name="loan_spec"
@@ -1519,85 +1485,61 @@ if($_SESSION['user_id']){
                                                                                             }
                                                                                         ?>>
                                                                                     </div>
+                                                                                    <!--MASTERRRRRRRRRRRRRRRRRRRRRRRRRR-->
+                                                                                    <div class="col-lg-3">
+                                                                                        <div class="form-group">
+                                                                                            <label>Specify Monthly
+                                                                                                Amortization</label>
+                                                                                            <input name="sma" id="sma"
+                                                                                                type="text"
+                                                                                                class="form-control text-right input-set-3" 
+                                                                                                maxlength="10"
+                                                                                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                                                                                placeholder="₱"
+                                                                                                <?php 
+                                                                                                    if($exploan[1] == "Salary Loan"){
+                                                                                                        echo 'value="'.$exploan[2].'"';
+                                                                                                    }else if($exploan[1] == "Personal Loan"){
+                                                                                                        echo 'value="'.$exploan[2].'"';
+                                                                                                    }else if($exploan[1] == "Calamity Loan"){
+                                                                                                        echo 'value="'.$exploan[2].'"';
+                                                                                                    }else if($exploan[1] == "Maternity Loan"){
+                                                                                                        echo 'value="'.$exploan[2].'"';
+                                                                                                    }else if($exploan[1] == "Paternity Loan"){
+                                                                                                        echo 'value="'.$exploan[2].'"';
+                                                                                                    }else if($exploan[1] == "Business Loan"){
+                                                                                                        echo 'value="'.$exploan[2].'"';
+                                                                                                    }else if($exploan[1] == "Appliance/Gadget Loan"){
+                                                                                                        echo 'value="'.$exploan[2].'"';
+                                                                                                    }else if($exploan[1] == "Vehicle Loan"){
+                                                                                                        echo 'value="'.$exploan[2].'"';
+                                                                                                    }else if($exploan[1] == "Home Loan"){
+                                                                                                        echo 'value="'.$exploan[2].'"';
+                                                                                                    }else if($exploan[1] == "Travel Loan"){
+                                                                                                        echo 'value="'.$exploan[2].'"';
+                                                                                                    }else if($exploan[1] == "Credit Card"){
+                                                                                                        echo 'value="'.$exploan[2].'"';
+                                                                                                    }else if($exploan[1] == "OFW Loan"){
+                                                                                                        echo 'value="'.$exploan[2].'"';
+                                                                                                    }else{
+                                                                                                        echo "disabled";
+                                                                                                    }
+                                                                                                ?>
+                                                                                                >
+                                                                                        </div>
+                                                                                    </div>
                                                                                     <div class="col-lg-3">
                                                                                         <div class="form-group">
                                                                                             <label>Monthly Salary
                                                                                                 (Net/Gross)</label>
                                                                                             <input name="ms_salary"
                                                                                                 type="text"
-                                                                                                class="form-control"
+                                                                                                class="form-control text-right"
                                                                                                 placeholder="Monthly Salary"
                                                                                                 value="<?= $edit->getClientData($id, 'applicants_work', 'applicant_code', 'monthly_salary')??null; ?>">
                                                                                         </div>
                                                                                     </div>
-                                                                                    <!-- <div class="col-lg-12">
-                                                                                        <div class="form-group">
-                                                                                            <label>Salary
-                                                                                                Period:</label>
-                                                                                            <?php $period = $edit->getClientData($id, 'applicants_work', 'applicant_code', 's_period')??null; ?>>
-                                                                                            <div class="radio">
-                                                                                                <label>
-                                                                                                    <input type="radio"
-                                                                                                        name="s_period"
-                                                                                                        value="5/20"
-                                                                                                        <?= ($period == "5/20")?'checked':''; ?>>5/20
-                                                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                                                </label>
-                                                                                                <label>
-                                                                                                    <input type="radio"
-                                                                                                        name="s_period"
-                                                                                                        value="6/21"
-                                                                                                        <?= ($period == "6/21")?'checked':''; ?>>6/21
-                                                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                                                </label>
-                                                                                                <label>
-                                                                                                    <input type="radio"
-                                                                                                        name="s_period"
-                                                                                                        value="7/22"
-                                                                                                        <?= ($period == "7/22")?'checked':''; ?>>7/22
-                                                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                                                </label>
-                                                                                                <label>
-                                                                                                    <input type="radio"
-                                                                                                        name="s_period"
-                                                                                                        value="8/23"
-                                                                                                        <?= ($period == "8/23")?'checked':''; ?>>8/23
-                                                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                                                </label>
-                                                                                                <label>
-                                                                                                    <input type="radio"
-                                                                                                        name="s_period"
-                                                                                                        value="10/25"
-                                                                                                        <?= ($period == "10/25")?'checked':''; ?>>10/25
-                                                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                                                </label>
-                                                                                                <label>
-                                                                                                    <input type="radio"
-                                                                                                        name="s_period"
-                                                                                                        value="15/30"
-                                                                                                        <?= ($period == "15/30")?'checked':''; ?>>15/30
-                                                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                                                </label>
-                                                                                                <label>
-                                                                                                    <input type="radio"
-                                                                                                        name="s_period"
-                                                                                                        value="Weekly"
-                                                                                                        <?= ($period == "Weekly")?'checked':''; ?>>Weekly
-                                                                                                    (every Friday)
-                                                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                                                </label>
-                                                                                                <label>
-                                                                                                    <input type="radio"
-                                                                                                        name="s_period"
-                                                                                                        value="Every 2nd Saturday"
-                                                                                                        <?= ($period == "Every 2nd Saturday")?'checked':''; ?>>Every
-                                                                                                    2nd Saturday
-                                                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                                                </label>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div> -->
-                                                                                    <div class="col-lg-3">
+                                                                                    <!-- <div class="col-lg-3">
                                                                                         <div class="form-group">
                                                                                             <label>Salary Period</label>
                                                                                             <select class="form-control"
@@ -1617,7 +1559,7 @@ if($_SESSION['user_id']){
                                                                                             ?>
                                                                                             </select>
                                                                                         </div>
-                                                                                    </div>
+                                                                                    </div> -->
                                                                                     <div class="col-lg-12"></div>
                                                                                     <div class="col-lg-6">
                                                                                         <div class="form-group">
