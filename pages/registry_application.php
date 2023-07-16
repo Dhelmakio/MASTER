@@ -1468,7 +1468,7 @@ if(!isset($_SESSION['user_id'])){
                                                                                             <input name="sma" id="sma"
                                                                                                 disabled type="text"
                                                                                                 class="form-control text-right input-set-3"
-                                                                                                 maxlength="10"
+                                                                                                maxlength="10"
                                                                                                 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                                                                                                 placeholder="₱">
                                                                                         </div>
@@ -1729,7 +1729,7 @@ if(!isset($_SESSION['user_id'])){
                                                                                     <div class="col-lg-12">
                                                                                         <hr>
                                                                                     </div><br><br><br>
-                                                                                    <div class="col-lg-12">
+                                                                                    <!-- <div class="col-lg-12">
                                                                                         <span>
                                                                                             I hereby certify that the
                                                                                             information provided in
@@ -1769,7 +1769,7 @@ if(!isset($_SESSION['user_id'])){
                                                                                                 type="checkbox">
                                                                                             <br><br>
                                                                                         </span>
-                                                                                    </div>
+                                                                                    </div> -->
 
                                                                                 </div><br><br>
                                                                                 <button type="button" name="submit_add"
@@ -1789,7 +1789,8 @@ if(!isset($_SESSION['user_id'])){
                                                                                     <div class="orbit"></div>
                                                                                 </center>
                                                                             </fieldset>
-                                                                            <textarea id="sigpad" name="signature_image" style="display: none"></textarea>
+                                                                            <textarea id="sigpad" name="signature_image"
+                                                                                style="display: none"></textarea>
                                                                         </form>
 
                                                                     </div>
@@ -1817,40 +1818,13 @@ if(!isset($_SESSION['user_id'])){
         </div>
         <!-- /#page-wrapper -->
     </div>
-    <!-- Signature Pad Modal END -->
-    <div class="modal fade" id="sig_pad_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-        aria-hidden="true" data-backdrop="static">
-        <div class="modal-dialog modal-md" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <h1>E-Signature:</h1>
-                    <label class="" for="">*Attach Signature</label>
-                    <br />
-                    <div class="" id="signature"></div>
-                    <br />
-                    <br />
-                    <button class="btn btn-default" id="clear">Clear Signature</button>
-                    
-
-                </div>
-                <div class="modal-footer" style="padding: 5px;">
-                    <form action="#" method="post">
-                        <button type="button" class="btn btn-default text-small" data-dismiss="modal">Cancel</button>
-                        <button type="button" name="confirm" id="confirm_sig"
-                            class="btn btn-primary text-small">Confirm</button>
-                    </form>
-                </div>
-            </div>
-            <!-- /.modal-content -->
-        </div>
-    </div>
-    <!-- Signature Pad Modal END -->
+    <?php require_once('application_summary.php'); ?>
     <!-- /#wrapper -->
     <!-- jQuery -->
     <script src="../js/jquery.min.js"></script>
 
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
+    <script type="text/javascript" src="../js/jqueryui2.js"></script>
 
     <script type="text/javascript" src="../js/jquery.signature.min.js"></script>
 
@@ -1928,11 +1902,13 @@ if(!isset($_SESSION['user_id'])){
 
     function enableButton() {
         if ($('#agree').val() == "disagree") {
-            $('#agree').val("agree")
-            $('#submit_add').attr('disabled', false);
+            $('#agree').val("agree");
+            $('#confirm_sig').attr('disabled', false);
+            $('#signature').signature('enable');
         } else if ($('#agree').val() == "agree") {
-            $('#agree').val("disagree")
-            $('#submit_add').attr('disabled', true);
+            $('#agree').val("disagree");
+            $('#confirm_sig').attr('disabled', true);
+            $('#signature').signature('disable');
         };
     }
 
@@ -1965,7 +1941,7 @@ if(!isset($_SESSION['user_id'])){
     function specSourceChange(val, spec) {
         let temp = spec;
         var spec = document.getElementById(spec);
-        if(temp == "loan_spec"){
+        if (temp == "loan_spec") {
             if (val.value != "None") {
 
                 spec.disabled = false;
@@ -1976,10 +1952,10 @@ if(!isset($_SESSION['user_id'])){
                 document.getElementById("sma").disabled = true;
                 spec.disabled = true;
                 spec.required = false;
-                
+
             }
-           
-        }else{
+
+        } else {
 
             if (val.value != "None") {
 
@@ -1993,7 +1969,7 @@ if(!isset($_SESSION['user_id'])){
 
             }
         }
-        
+
     }
 
     function viewMap(url) {
@@ -2036,7 +2012,7 @@ if(!isset($_SESSION['user_id'])){
         });
 
         $('.input-set-4').change(() => {
-            controlStep('#set4', '#agree');
+            controlStep('#set4', '#submit_add');
         });
 
 
@@ -2215,6 +2191,7 @@ if(!isset($_SESSION['user_id'])){
         syncField: '#sigpad',
         syncFormat: 'PNG'
     });
+    signature.signature('disable');
     $('#clear').click(function(e) {
         e.preventDefault();
         signature.signature('clear');
@@ -2223,10 +2200,163 @@ if(!isset($_SESSION['user_id'])){
     </script>
 
     <script>
+
     $("#submit_add").click(function() {
         $('#progressbar').css('display', 'none');
         $('#p-label').css('display', 'none');
         $('#sig_pad_modal').modal("show");
+
+        //displays : application summary
+        //perosnal
+        $('#disp_name').text(
+            `${$('input[name=lname]').val().toUpperCase()} 
+            ${$('input[name=fname]').val().toUpperCase()} 
+            ${($('input[name=mname]').val() == "") ? '' : $('input[name=mname]').val().toUpperCase()}`
+        );
+
+        $('#disp_address').text(
+            `${$('select[name=province]').val()} 
+            ${$('select[name=city]').val()} 
+            ${$('select[name=brgy]').val()} 
+            ${($('input[name=street]').val() == "") ? '' : $('input[name=street]').val().toUpperCase()} 
+            ${($('input[name=blk]').val() == "") ? '' : $('input[name=blk]').val().toUpperCase()}`
+        );
+
+        $('#disp_gender').text(
+            `${$('select[name=gender]').val().toUpperCase()}`
+        );
+
+        $('#disp_dob').text(
+            `${$('input[name=dob]').val()}`
+        );
+
+        $('#disp_pob').text(
+            `${$('select[name=pob_province]').val()}, ${$('select[name=pob_city]').val()}`
+        );
+
+        $('#disp_mstatus').text(
+            `${$('select[name=m_status]').val().toUpperCase()}`
+        );
+
+        $('#disp_contact').text(
+            `${$('input[name=contact_num]').val()}`
+        );
+        
+
+        //family
+        $('#disp_mother').text(
+            `${$('input[name=mother_name]').val().toUpperCase()}`
+        );
+
+        $('#disp_mcontact').text(
+            `${$('input[name=mother_contact]').val()}`
+        );
+
+        $('#disp_father').text(
+            `${$('input[name=father_name]').val().toUpperCase()}`
+        );
+
+        $('#disp_fcontact').text(
+            `${$('input[name=father_contact]').val().toUpperCase()}`
+        );
+
+        $('#disp_lw').text(
+            `${($('select[name=tor]').val() == "Others") ? $('input[name=tor_spec]').val().toUpperCase() : $('select[name=tor]').val().toUpperCase()}`
+        );
+
+        //spouse
+        $('#disp_spouse').text(
+            `${($('select[name=m_status]').val() != "Married") ? 'NONE' : $('input[name=spouse_name]').val().toUpperCase()}`
+        );
+
+        $('#disp_scontact').text(
+            `${($('select[name=m_status]').val() != "Married") ? 'NONE' : $('input[name=spouse_contact]').val()}`
+        );
+
+        $('#disp_sdob').text(
+            `${($('select[name=m_status]').val() != "Married") ? 'NONE' :  $('input[name=spouse_dob]').val()}`
+        );
+
+        $('#disp_spob').text(
+            `${($('select[name=m_status]').val() != "Married") ? 'NONE' : $('select[name=spob_province]').val() + ", " + $('select[name=spob_city]').val()}`
+        );
+
+        $('#disp_saddress').text(
+            `${($('select[name=m_status]').val() != "Married") ? 'NONE' : $('select[name=spouse_province]').val() +", "+$('select[name=spouse_city]').val()+", "+$('select[name=spouse_brgy]').val()}`
+        );
+
+        $('#disp_soccupation').text(
+            `${($('select[name=m_status]').val() != "Married") ? 'NONE' : $('input[name=spouse_occupation]').val().toUpperCase()}`
+        );
+
+        //work
+        $('#disp_agency').text(
+            `${$('input[name=agency]').val().toUpperCase()}`
+        );
+
+        $('#disp_sector').text(
+            `${$('select[name=sector]').val().toUpperCase()}`
+        );
+
+        $('#disp_tob').text(
+            `${$('select[name=business]').val().toUpperCase()}`
+        );
+
+        $('#disp_comaddress').text(
+            `${$('input[name=ca_company]').val().toUpperCase()}`
+        );
+
+        $('#disp_location').text(
+            `${$('input[name=location]').val().toUpperCase()}`
+        );
+
+        $('#disp_wsupervisor').text(
+            `${$('input[name=supervisor]').val().toUpperCase()}`
+        );
+
+        $('#disp_wscontact').text(
+            `${$('input[name=hr_number]').val()}`
+        );
+
+        $('#disp_hired').text(
+            `${$('input[name=date_hired]').val()}`
+        );
+
+        $('#disp_estatus').text(
+            `${$('select[name=e_status]').val().toUpperCase()}`
+        );
+
+        $('#disp_mos').text(
+            `${$('select[name=m_salary]').val().toUpperCase()}`
+        );
+
+        $('#disp_bank').text(
+            `${$('input[name=bank]').val().toUpperCase()}`
+        );
+
+        $('#disp_atm').text(
+            `${$('input[name=t_card]').val().toUpperCase()}`
+        );
+
+        $('#disp_loan').text(
+            `${($('select[name=loan]').val() == "None" ) ? $('select[name=loan]').val().toUpperCase() : $('select[name=loan_spec]').val().toUpperCase() + " (₱ " + parseFloat($('input[name=sma]').val()).toFixed(2) + ")"}`
+        );
+
+        $('#disp_gross').text(
+            `${$('input[name=ms_salary]').val()}`
+        );
+
+        $('#disp_osincome').text(
+            `${$('select[name=s_specify]').val().toUpperCase()}`
+        );
+
+        $('#disp_os').text(
+            `${($('select[name=s_specify]').val() == "None") ? "₱ 0.00" : "₱ " + parseFloat($('input[name=os_income]').val()).toFixed(2)}`
+        );
+
+
+
+
         // $.ajax({
         //     type: 'POST',
         //     url: '../request/reg_add.php',
@@ -2259,8 +2389,9 @@ if(!isset($_SESSION['user_id'])){
         //     }
         // });
     });
+
     $('#confirm_sig').click(() => {
-        if($('#sigpad').val() == ""){
+        if ($('#sigpad').val() == "") {
             $('#sig_pad_modal').modal("hide");
             beautyToast.error({
                 title: '',
@@ -2274,7 +2405,7 @@ if(!isset($_SESSION['user_id'])){
             setTimeout(() => {
                 $('#sig_pad_modal').modal("show");
             }, 1000);
-        }else{
+        } else {
             $('#sig_pad_modal').modal("hide");
             var form = $('#msform')[0];
             // Create an FormData object 
@@ -2282,36 +2413,37 @@ if(!isset($_SESSION['user_id'])){
             var _data = new FormData(form);
 
             $.ajax({
-            type: 'POST',
-            url: '../request/reg_add.php',
-            enctype: 'multipart/form-data',
-            data: _data,
-            processData: false,
-            contentType: false,
-            dataType: 'json',
-            success: function(response) {
-
-                setTimeout(() => {
-
-                    beautyToast.success({
-                        title: '',
-                        message: response.message,
-                        darkTheme: false,
-                        iconColor: 'green',
-                        iconWidth: 24,
-                        iconHeight: 24,
-                        animationTime: 100,
-                    });
+                type: 'POST',
+                url: '../request/reg_add.php',
+                enctype: 'multipart/form-data',
+                data: _data,
+                processData: false,
+                contentType: false,
+                dataType: 'json',
+                success: function(response) {
 
                     setTimeout(() => {
-                        window.location.replace(`loan_application_1.php?id=${response.code}`);
-                    }, 2500);
-                }, 2000);
-            },
-            error: function(xhr, status, error) {
-                alert(xhr.responseText);
-            }
-        });
+
+                        beautyToast.success({
+                            title: '',
+                            message: response.message,
+                            darkTheme: false,
+                            iconColor: 'green',
+                            iconWidth: 24,
+                            iconHeight: 24,
+                            animationTime: 100,
+                        });
+
+                        setTimeout(() => {
+                            window.location.replace(
+                                `loan_application_1.php?id=${response.code}`);
+                        }, 2500);
+                    }, 2000);
+                },
+                error: function(xhr, status, error) {
+                    alert(xhr.responseText);
+                }
+            });
         }
     });
     </script>

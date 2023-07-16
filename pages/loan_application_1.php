@@ -138,7 +138,7 @@ if(isset($_GET['id'])){
                                                     <div class="col-lg-12">
                                                         <div class="col-lg-8">
                                                             <h4>Name of Borrower:
-                                                                &nbsp;<b><?php echo $rowApp['firstname']." ".$rowApp['middlename']." ". $rowApp['lastname']; ?></b>
+                                                                &nbsp;<b><?php echo $rowApp['lastname']." ".$rowApp['firstname']." ".$rowApp['middlename']; ?></b>
                                                             </h4>
                                                         </div>
                                                         <div class="col-lg-4" align="right">
