@@ -201,7 +201,19 @@ if(isset($_POST['id'])){
                                                                 else if($variation == "CASUAL" && strtoupper($loan->incomeEarning) == "MULTIPLE"){
                                                                     $max_month = 3;
                                                                     $MA = Statics::$MULTIPLECASUALAMORT;
-                                                                } else if($variation == "CASUAL" && strtoupper($loan->incomeEarning) == "SINGLE"){
+                                                                }else if($variation == "CASUAL" && strtoupper($loan->incomeEarning) == "SINGLE"){
+                                                                    $max_month = 3;
+                                                                    $MA = Statics::$SINGLECASUALAMORT;
+                                                                }else if($variation == "PROBATIONARY" && strtoupper($loan->incomeEarning) == "MULTIPLE"){
+                                                                    $max_month = 3;
+                                                                    $MA = Statics::$MULTIPLECASUALAMORT;
+                                                                }else if($variation == "PROBATIONARY" && strtoupper($loan->incomeEarning) == "SINGLE"){
+                                                                    $max_month = 3;
+                                                                    $MA = Statics::$SINGLECASUALAMORT;
+                                                                }else if($variation == "TRAINEE" && strtoupper($loan->incomeEarning) == "MULTIPLE"){
+                                                                    $max_month = 3;
+                                                                    $MA = Statics::$MULTIPLECASUALAMORT;
+                                                                }else if($variation == "TRAINEE" && strtoupper($loan->incomeEarning) == "SINGLE"){
                                                                     $max_month = 3;
                                                                     $MA = Statics::$SINGLECASUALAMORT;
                                                                 }
