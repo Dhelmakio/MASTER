@@ -23,16 +23,16 @@ $name;
 $loan_type = $_POST['loan_type'];
 if(isset($_POST['id'])){
     $cid = $_POST['id'];
-    $sel = "select * from clients where client_id='$cid'";
+    $sel = "SELECT * FROM applicants_personal WHERE applicant_code='$cid'";
     $resel = mysqli_query($con,$sel);
     if(mysqli_num_rows($resel) > 0){
     while($rowsel = mysqli_fetch_assoc($resel)) {
-        $name = $rowsel['first_name']." ".$rowsel['middle_name']." ".$rowsel['last_name']." ".$rowsel['suffix'];
+        $name = $rowsel['firstname']." ".$rowsel['middlename']." ".$rowsel['lastname']." ".$rowsel['suffix'];
     }
     }
 
     
-    $sql = "SELECT * FROM employer where client_id='$cid'";
+    $sql = "SELECT * FROM applicants_work where applicant_code='$cid'";
     $res = mysqli_query($con,$sql);
     if(mysqli_num_rows($res) > 0){
     while($row = mysqli_fetch_assoc($res)) {

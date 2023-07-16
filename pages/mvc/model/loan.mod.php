@@ -20,9 +20,9 @@ class Loan extends DbCon {
         $result = $stmt->fetch();
 
         $this->clientID = $id;
-        $this->clientEmpStatus = $result['e_status'];
-        $this->incomeSourceFlag = $result['other_source'];
-        $this->monthlyNetSal = $result['monthly_salary'];
+        $this->clientEmpStatus = $result['e_status']??null;
+        $this->incomeSourceFlag = $result['other_source']??null;
+        $this->monthlyNetSal = $result['monthly_salary']??null;
         // $this->clientID = $id;
 
         if($this->incomeSourceFlag > 0 ){
@@ -49,7 +49,7 @@ class Loan extends DbCon {
     }
 
     public function getSukli(){
-        $sql = "Select sum(monthly_amortization) from loan_applications where paid=0 and client_id=?";
+        $sql = "SELECT SUM(monthly_amortization) FROM loan_applications WHERE paid=0 AND client_id=?";
         $stmt = $this->connect()->prepare($sql);
         $stmt->execute([$this->clientID]);
         $result = $stmt->fetchColumn();
@@ -58,7 +58,7 @@ class Loan extends DbCon {
     }
 
     public function getBorrowingCount(){
-        $sql = "Select Count(client_id) from loan_applications where paid=1 and client_id=?";
+        $sql = "SELECT COUNT(client_id) FROM loan_applications WHERE paid=1 AND client_id=?";
         $stmt = $this->connect()->prepare($sql);
         $stmt->execute([$this->clientID]);
         $result = $stmt->fetchColumn();
@@ -67,7 +67,7 @@ class Loan extends DbCon {
     }
 
     public function getBorrowCount(){
-        $sql = "Select Count(client_id) from loan_applications where client_id=?";
+        $sql = "SELECT COUNT(client_id) FROM loan_applications WHERE client_id=?";
         $stmt = $this->connect()->prepare($sql);
         $stmt->execute([$this->clientID]);
         $result = $stmt->fetchColumn();
@@ -77,7 +77,7 @@ class Loan extends DbCon {
     
 
     public function getBorrowingSum(){
-        $sql = "Select Sum(monthly_amortization) from loan_applications where paid=0 and client_id=?";
+        $sql = "SELECT SUM(monthly_amortization) FROM loan_applications WHERE paid=0 AND client_id=?";
         $stmt = $this->connect()->prepare($sql);
         $stmt->execute([$this->clientID]);
         $result = $stmt->fetchColumn();
