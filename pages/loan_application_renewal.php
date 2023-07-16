@@ -146,7 +146,7 @@ if(!isset($_SESSION['user_id'])){
                                                                                 }
                                                                                 ?>                                                                                
                                                                                 <!-- Modal -->
-                                                                                    <div class="modal fade" id="myModal_<?php echo $cid?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" align="left">
+                                                                                    <div class="modal fade" id="myModal_<?php echo $cid?>" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true" align="left">
                                                                                         <div class="modal-dialog" role="document">
                                                                                             <div class="modal-content">
                                                                                                 <div class="modal-header">
