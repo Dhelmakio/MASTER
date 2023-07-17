@@ -10,6 +10,9 @@ class Loan extends DbCon {
     public $netLoanPerMonth;
     public $incomeEarning;
     public $moInterest;
+    public $outStandingBalance;
+    public $contractNo;
+    public $recLoanAmount;
 
 
     public function __construct(String $id){
@@ -42,6 +45,8 @@ class Loan extends DbCon {
         $this->getBorrowingSum();
         $this->getSukli();
         $this->getBorrowCount();
+        $this->getRenewalBasesInfo();
+        $this->getOutstandingBalance();
     }
 
     public function getSemiMonthly(){
@@ -104,6 +109,30 @@ class Loan extends DbCon {
             }
         }
     }
+
+    //functions below are for renewal
+    public function getRenewalBasesInfo(){
+        $sql = "SELECT contract_no, loan_amount FROM loan_applications WHERE client_id = ?";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute([$this->clientID]);
+        $result = $stmt->fetch();
+        $this->contractNo = $result['contract_no']??null;
+        $this->recLoanAmount = $result['loan_amount']??null;
+    }
+
+    public function getOutstandingBalance(){
+        $sql = "SELECT SUM(amount) FROM payments WHERE contract_no = ?";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute([$this->clientID]);
+        $result = $stmt->fetchColumn();
+        
+        //paras tinood na data
+        // $this->outStandingBalance = floatval($this->recLoanAmount) - floatval($result);
+
+        //static data //dummy 
+        $this->outStandingBalance = floatval($this->recLoanAmount) - 3000;
+    }
+
     // public function checkEligible(String $id){
     //     $sql = "Select employment_status, other_source, gross_monthly from employer where client_id= ?";
     //     $stmt = $this->connect()->prepare($sql);

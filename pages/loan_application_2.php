@@ -14,6 +14,7 @@ if(isset($_POST['id'])){
 
 $loan = new Loan($_POST['id']);
 
+
 // var_dump($loan);
 
 $max_loan;
@@ -427,6 +428,24 @@ if(isset($_POST['id'])){
                                                                 <div class="col-lg-12">
                                                                     <div class="col-lg-6" align="right">
                                                                         <div class="form-group">
+                                                                            <label>Outstanding Balance (₱):</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-6">
+                                                                        <div class="form-group">
+                                                                            <input type="number" name="outstanding_balance_"
+                                                                                class="form-control" step="0.01"
+                                                                                id="outstanding_balance_" value="<?= $loan->outStandingBalance ?>" disabled
+                                                                                style="color:red;text-align:right">
+                                                                            <input type="text" name="outstanding_balance"
+                                                                                id="outstanding_balance_" value="" hidden
+                                                                                style="text-align:right">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-12">
+                                                                    <div class="col-lg-6" align="right">
+                                                                        <div class="form-group">
                                                                             <label>Total Deduction (₱):</label>
                                                                         </div>
                                                                     </div>
@@ -727,7 +746,7 @@ if(isset($_POST['id'])){
 
                 let udi = (<?php echo $loan->moInterest; ?> * duration) - (collectionFeePer + processingFeePer);
                 let udiValue = $("#lamt").val() * udi;
-                let totalDeduction = udiValue + processingFee + collectionFee + notarialFee;  
+                let totalDeduction = udiValue + processingFee + collectionFee + notarialFee + <?= $loan->outStandingBalance ?>;  
                 let proceedLoan = $("#lamt").val() - totalDeduction;
 
                 $("#udi_").val(parseFloat(udiValue).toFixed(2));
