@@ -93,6 +93,7 @@ if(!isset($_SESSION['user_id'])){
                                                     $sql = "SELECT * FROM applicants_personal 
                                                     LEFT JOIN loan_applications ON 
                                                     applicants_personal.applicant_code=loan_applications.client_id 
+                                                    WHERE loan_applications.paid=0 
                                                     GROUP BY applicants_personal.applicant_code 
                                                     ORDER BY applicants_personal.lastname ASC";
                                                     $res = mysqli_query($con,$sql);
