@@ -134,7 +134,7 @@ class Loan extends DbCon {
     public function getOutstandingBalance(){
         $sql = "SELECT SUM(amount) FROM payments WHERE contract_no = ?";
         $stmt = $this->connect()->prepare($sql);
-        $stmt->execute([$this->clientID]);
+        $stmt->execute([$this->contractNo]);
         $result = $stmt->fetchColumn();
         
         //paras tinood na data

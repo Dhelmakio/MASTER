@@ -156,24 +156,32 @@ if(isset($_POST['id'])){
                                                                 <?php echo $loan->clientEmpStatus; ?></label></div>
                                                         <div class="col-lg-3">Net Salary per Month: </div>
                                                         <div class="col-lg-3"><label>₱
-                                                                <?php echo $loan->monthlyNetSal; ?></label></div>
+                                                                <?php echo number_format(floatval( $loan->monthlyNetSal), 2) ?></label></div>
                                                         <div class="col-lg-3">Income Earning: </div>
                                                         <div class="col-lg-3"><label>
                                                                 <?php echo $loan->incomeEarning; ?></label></div>
-                                                        <div class="col-lg-3">Minimum Sukli: </div>
-                                                        <div class="col-lg-3"><label>₱ <?php echo $loan->clientSukli; ?>
-                                                        </div>
-                                                        <div class="col-lg-3">Borrowing History: </div>
+                                                                <div class="col-lg-3">Borrowing History: </div>
                                                         <div class="col-lg-3"><label>
                                                                 <?php echo $loan->borrowingHistCount; ?></label></div>
-                                                        <div class="col-lg-3">Net Loanable per month: </div>
-                                                        <div class="col-lg-3"><label>₱
-                                                                <?php echo $loan->netLoanPerMonth; ?></label></div>
 
                                                     </div>
                                                     <div class="col-lg-12">
                                                         <hr>
                                                     </div>
+                                                    <div class="col-lg-11" style="font-size:15px;"><br>
+                                                        <div class="col-lg-3">Contract No.: </div>
+                                                        <div class="col-lg-3"><label>
+                                                                <?php echo $loan->contractNo; ?></label></div>
+                                                        <div class="col-lg-3">Outstanding Balance: </div>
+                                                        <div class="col-lg-3"><label>₱
+                                                                <?php echo number_format(floatval($loan->outStandingBalance), 2); ?></label></div>
+                                                        
+
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <hr>
+                                                    </div>
+
 
                                                     <div class="col-lg-12"><i style="color:red;">NOTE: All fields are
                                                             required.</i><br><br></div>
@@ -468,7 +476,7 @@ if(isset($_POST['id'])){
                                                                                 name="outstanding_balance_"
                                                                                 class="form-control" step="0.01"
                                                                                 id="outstanding_balance_"
-                                                                                value="<?= $loan->outStandingBalance ?>"
+                                                                                value=""
                                                                                 disabled
                                                                                 style="color:red;text-align:right">
                                                                             <input type="text"
@@ -748,6 +756,7 @@ if(isset($_POST['id'])){
 
     function calculate() {
         // if($("#lamt").val() != 0 && $("#cout").val() == 0 ){
+        
         if ($("#lamt").val() > maxLoanAmount) {
             alert('Loan amount is greater than the Maximum Loanable: ' + maxLoanAmount);
         } else {
@@ -756,13 +765,10 @@ if(isset($_POST['id'])){
             var y = document.getElementById("months").value;
 
             if (x != "" && y != "") {
-                document.getElementById("submit_btn").style.visibility = "visible";
-                document.getElementById("preview_client_btn").style.visibility = "visible";
-                // alert(mo_amt);
-                document.getElementById('calculation').style.display = "block";
-
+               
                 // alert($loan->moInterest+"");
-                let interestAmount = ($("#lamt").val() * <?php echo $loan->moInterest; ?>) * duration;
+                // let interestAmount = ($("#lamt").val() * <?php echo $loan->moInterest; ?>) * duration;
+                let interestAmount = ($("#lamt").val() * <?php echo $loan->moInterest; ?>) ;
                 let notarialFee = <?php echo $loan->notarialFee ?>;
 
 
@@ -783,19 +789,22 @@ if(isset($_POST['id'])){
                 let collectionPerCut2 = ($("#lamt").val() / (duration)) / 2;
                 let collectionPerCut3 = ($("#lamt").val() / (duration)) / 4;
 
-                let udi = ( ($('#udi').val() / 100) * duration) - (collectionFeePer + processingFeePer);
-                let udiValue = $("#lamt").val() * udi;
+                let udi = ( <?php echo $loan->moInterest * 100 ?> * duration) - ( (collectionFeePer * 100) + (processingFeePer * 100));
+                let udiValue = $("#lamt").val() * (udi / 100);
                 let totalDeduction = udiValue + processingFee + collectionFee + notarialFee +
                     <?= $loan->outStandingBalance ?>;
                 let proceedLoan = $("#lamt").val() - totalDeduction;
+               
+                 
 
+              
                 $("#udi_").val(parseFloat(udiValue).toFixed(2));
-
+                $("#outstanding_balance_").val(parseFloat(<?=  $loan->outStandingBalance; ?>).toFixed(2));
                 $("#udiper").text($('#udi').val());
                 $("#pfper").text(processingFeePer * 100);
                 $("#cfper").text(collectionFeePer * 100);
 
-                $("#prevudi").val(parseFloat(udi).toFixed(2));
+                $("#prevudi").val(parseFloat(udiValue).toFixed(2));
                 $('#processing_value_').val(parseFloat(processingFee).toFixed(2));
                 $('#collection_value_').val(parseFloat(collectionFee).toFixed(2));
                 // $("#udi_value_").val(parseFloat(udiValue).toFixed(2));
@@ -991,7 +1000,15 @@ if(isset($_POST['id'])){
                     //     "<script>window.oponer.document.body.innerHTML= 'Test'<\/script>"
                     // );
                 });
-
+               
+                if(totalDeduction > x){
+                    alert('Cannot avail for renewal');
+                }else{
+                    document.getElementById("submit_btn").style.visibility = "visible";
+                    document.getElementById("preview_client_btn").style.visibility = "visible";
+                    // alert(mo_amt);
+                    document.getElementById('calculation').style.display = "block";
+                }
             } else {
                 alert("Please fill required fields.");
             }

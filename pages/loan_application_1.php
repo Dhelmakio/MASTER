@@ -157,19 +157,19 @@ if(isset($_GET['id'])){
                                                                 <?php echo $loan->clientEmpStatus; ?></label></div>
                                                         <div class="col-lg-3">Net Salary per Month: </div>
                                                         <div class="col-lg-3"><label>₱
-                                                                <?php echo $loan->monthlyNetSal; ?></label></div>
+                                                                <?php echo number_format(floatval($loan->monthlyNetSal), 2); ?></label></div>
                                                         <div class="col-lg-3">Income Earning: </div>
                                                         <div class="col-lg-3"><label>
                                                                 <?php echo $loan->incomeEarning; ?></label></div>
                                                         <div class="col-lg-3">Minimum Sukli: </div>
-                                                        <div class="col-lg-3"><label>₱ <?php echo $loan->clientSukli; ?>
+                                                        <div class="col-lg-3"><label>₱ <?php echo number_format(floatval($loan->clientSukli), 2); ?>
                                                         </div>
                                                         <div class="col-lg-3">Borrowing History: </div>
                                                         <div class="col-lg-3"><label>
                                                                 <?php echo $loan->borrowingHistCount; ?></label></div>
                                                         <div class="col-lg-3">Net Loanable per month: </div>
                                                         <div class="col-lg-3"><label>₱
-                                                                <?php echo $loan->netLoanPerMonth; ?></label></div>
+                                                                <?php echo number_format(floatval($loan->netLoanPerMonth), 2); ?></label></div>
 
                                                     </div>
                                                     <div class="col-lg-12">
@@ -242,8 +242,7 @@ if(isset($_GET['id'])){
                                                                 <input type="number" id="udi" class="form-control"
                                                                     step="0.01" min="1" max="<?php echo $max_loan?>"
                                                                     name="udi" placeholder="UDI Percent" required>
-                                                                <input hidden type="text" id="udi_" name="udi_"
-                                                                    value="">
+                                                                
                                                                 <!-- <i id="max-loanable" style="color:red;"></i>
                                                                 &nbsp;&nbsp;&nbsp; Use maximum loanable?
                                                                 <input type="checkbox" id="use-max" value=""> -->
@@ -745,7 +744,8 @@ if(isset($_GET['id'])){
                 document.getElementById('calculation').style.display = "block";
 
                 // alert($loan->moInterest+"");
-                let interestAmount = ($("#lamt").val() * <?php echo $loan->moInterest; ?>) * duration;
+                // let interestAmount = ($("#lamt").val() * <?php echo $loan->moInterest; ?>) * duration;
+                let interestAmount = ($("#lamt").val() * <?php echo $loan->moInterest; ?>);
                 let notarialFee = <?php echo $loan->notarialFee ?>;
 
 
@@ -766,8 +766,8 @@ if(isset($_GET['id'])){
                 let collectionPerCut2 = ($("#lamt").val() / (duration)) / 2;
                 let collectionPerCut3 = ($("#lamt").val() / (duration)) / 4;
 
-                let udi = ( ($('#udi').val() / 100) * duration) - (collectionFeePer + processingFeePer);
-                let udiValue = $("#lamt").val() * udi;
+                let udi = ( <?php echo $loan->moInterest * 100 ?>  * duration) - ( (collectionFeePer * 100) + (processingFeePer * 100));
+                let udiValue = $("#lamt").val() * (udi / 100);
                 let totalDeduction = udiValue + processingFee + collectionFee + notarialFee;
                 let proceedLoan = $("#lamt").val() - totalDeduction;
 
@@ -777,7 +777,7 @@ if(isset($_GET['id'])){
                 $("#pfper").text(processingFeePer * 100);
                 $("#cfper").text(collectionFeePer * 100);
 
-                $("#prevudi").val(parseFloat(udi).toFixed(2));
+                $("#prevudi").val(parseFloat(udiValue).toFixed(2));
                 $('#processing_value_').val(parseFloat(processingFee).toFixed(2));
                 $('#collection_value_').val(parseFloat(collectionFee).toFixed(2));
                 // $("#udi_value_").val(parseFloat(udiValue).toFixed(2));
