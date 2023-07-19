@@ -789,7 +789,7 @@ if(isset($_POST['id'])){
                 let collectionPerCut2 = ($("#lamt").val() / (duration)) / 2;
                 let collectionPerCut3 = ($("#lamt").val() / (duration)) / 4;
 
-                let udi = ( <?php echo $loan->moInterest * 100 ?> * duration) - ( (collectionFeePer * 100) + (processingFeePer * 100));
+                let udi = ( <?php echo $loan->moInterest * 100 ?>  * duration) - ( (collectionFeePer * 100) + (processingFeePer * 100));
                 let udiValue = $("#lamt").val() * (udi / 100);
                 let totalDeduction = udiValue + processingFee + collectionFee + notarialFee +
                     <?= $loan->outStandingBalance ?>;
