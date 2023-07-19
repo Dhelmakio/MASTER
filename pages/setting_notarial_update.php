@@ -94,7 +94,8 @@ if($_SESSION['user_id']){
                                                                     foreach($result as $row){
                                                                     ?>
                                                                     <div class="col-lg-12 mx-0">
-                                                                        <form id="msform" action="../reg_notarial.php">
+                                                                        <form id="msform" method="POST"
+                                                                            action="../request/reg_notarial.php">
                                                                             <!-- fieldsets -->
                                                                             <div class="col-lg-12">
                                                                                 <div class="form-group">
@@ -105,14 +106,14 @@ if($_SESSION['user_id']){
                                                                                         value="<?php echo $row['notarial_fee'] ?>">
                                                                                 </div>
                                                                             </div>
-                                                                            <a href="setting_notarial.php" id="submit_add"
-                                                                                class="btn-default btn"
+                                                                            <a href="setting_notarial.php"
+                                                                                id="submit_add" class="btn-default btn"
                                                                                 style="margin-left: 10px;">
                                                                                 <i class="fa fa-arrow-left"></i>
                                                                                 Cancel</a>
-                                                                                
-                                                                            <button type="button" name="submit_add"
-                                                                                id="submit_notarial" class="btn-primary btn"
+
+                                                                            <button type="submit" name="submit_notarial"
+                                                                                class="btn-primary btn"
                                                                                 style="margin-left: 10px;">
                                                                                 Save <i class="fa fa-save"></i></button>
                                                                         </form>
