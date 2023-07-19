@@ -20,11 +20,23 @@ if(isset($_POST['client_id'])){
     $int_amt = $_POST['interest'];
     $fee = $_POST['notarial'];
     $cashout = $_POST['cashout'];
+    $ltypeTemp = 0;
+    if($ltype == "NEW"){
+        $ltypeTemp = 1;
+    }else if($ltype == "RENEWAL"){
+        $ltypeTemp = 2;
+    }if($ltype == "RELOAN"){
+        $ltypeTemp = 3;
+    }if($ltype == "ADDITIONAL"){
+        $ltypeTemp = 4;
+    }
+
+
 
     // $cno = 'AMG'.date('Ymhms').$cid.date('d');
     $cno = $cid.date('Ymhms').date('d');
     $sql = "INSERT INTO loan_applications (contract_no,client_id,loan_type,loan_duration,loan_amount,interest_amount,other_fee,total_cashout,monthly_amortization,mop)
-     VALUES ('$cno','$cid','$ltype','$duration','$lamt','$int_amt','$fee','$cashout','$mamort','$mop')";
+     VALUES ('$cno','$cid','$ltypeTemp','$duration','$lamt','$int_amt','$fee','$cashout','$mamort','$mop')";
     if(mysqli_query($con, $sql)){
         echo "<script>alert('Success.');</script>";
         $alog_id = $_SESSION['user_id'];
