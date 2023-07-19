@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 16, 2023 at 05:07 PM
+-- Generation Time: Jul 19, 2023 at 05:33 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -157,7 +157,14 @@ INSERT INTO `activity_logs` (`log_id`, `user_id`, `name`, `activity`, `date_time
 (115, 1, 'Kevin Fontanoza', 'Logged out', '2023-07-14 20:34:04'),
 (116, 1, 'Kevin Fontanoza', 'Logged in', '2023-07-14 20:34:13'),
 (117, 1, 'Kevin Fontanoza', 'Logged in', '2023-07-14 20:35:26'),
-(118, 1, 'Kevin Fontanoza', 'Added loan application', '2023-07-15 14:05:55');
+(118, 1, 'Kevin Fontanoza', 'Added loan application', '2023-07-15 14:05:55'),
+(119, 1, 'Kevin Fontanoza', 'Logged in', '2023-07-17 12:52:29'),
+(120, 1, 'Kevin Fontanoza', 'Logged in', '2023-07-17 12:52:47'),
+(121, 1, 'Kevin Fontanoza', 'Added loan application', '2023-07-18 00:43:27'),
+(122, 1, 'Kevin Fontanoza', 'Logged in', '2023-07-18 04:11:32'),
+(123, 1, 'Kevin Fontanoza', 'Added loan application', '2023-07-19 11:27:50'),
+(124, 1, 'Kevin Fontanoza', 'Added loan application', '2023-07-19 11:27:51'),
+(125, 1, 'Kevin Fontanoza', 'Added loan application', '2023-07-19 11:31:50');
 
 -- --------------------------------------------------------
 
@@ -929,6 +936,24 @@ INSERT INTO `employer` (`employer_id`, `client_id`, `employer_name`, `address`, 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `fees`
+--
+
+CREATE TABLE `fees` (
+  `notarial_id` int(11) DEFAULT NULL,
+  `notarial_fee` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `fees`
+--
+
+INSERT INTO `fees` (`notarial_id`, `notarial_fee`) VALUES
+(1, 400);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `gov_issued_id`
 --
 
@@ -981,9 +1006,13 @@ INSERT INTO `loan_applications` (`loan_id`, `contract_no`, `client_id`, `loan_ty
 (6, 'AMG202303050342116', '1', 1, 3, 24000, 5760, 300, 17940, 4000, '', '2023-03-17 00:32:42', 1, 'Kevin Fontanoza', '2023-03-17 00:42:52', 2, 'Kevin Fontanoza', '2023-03-17 04:15:30', 'Not qualified', 0),
 (7, 'AMG2023030203001017', '10', 2, 3, 13650, 3276, 300, 10074, 2275, '', '2023-03-17 09:21:00', 1, 'Kevin Fontanoza', '2023-03-17 02:31:07', 1, 'Kevin Fontanoza', '2023-03-17 04:13:23', '', 0),
 (8, 'AMG2023030303491117', '11', 2, 3, 13650, 3276, 300, 10074, 2275, '', '2023-03-17 10:05:49', 0, '', NULL, 0, '', NULL, '', 0),
-(9, 'AMG202307030752AMG001000000711', '0', 0, 4, 784000, 250880, 300, 579260, 196000, '1', '2023-07-11 21:06:52', 0, '', NULL, 0, '', NULL, '', 0),
-(10, 'AMG0010000007', '0', 0, 4, 784000, 250880, 300, 579260, 196000, '3', '2023-07-11 21:22:16', 0, '', NULL, 0, '', NULL, '', 0),
-(11, 'AMG0010000016', 'AMG0010000016', 0, 2, 16000, 2560, 300, 13140, 8000, '2', '2023-07-15 14:05:55', 0, '', NULL, 0, '', NULL, '', 1);
+(9, 'AMG202307030752AMG001000000711', 'AMG0010000006', 0, 4, 784000, 250880, 300, 579260, 196000, '1', '2023-07-11 21:06:52', 0, '', NULL, 0, '', NULL, '', 0),
+(10, 'AMG0010000007', 'AMG0010000007', 0, 4, 784000, 250880, 300, 579260, 196000, '3', '2023-07-11 21:22:16', 0, '', NULL, 0, '', NULL, '', 0),
+(11, 'AMG0010000016', 'AMG0010000016', 0, 2, 16000, 2560, 300, 13140, 8000, '2', '2023-07-15 14:05:55', 0, '', NULL, 0, '', NULL, '', 1),
+(12, 'AMG001000001620230706072617', 'AMG0010000016', 0, 6, 48000, 23040, 300, 8660, 8000, '1', '2023-07-18 00:43:26', 0, '', NULL, 0, '', NULL, '', 0),
+(13, 'AMG001000000720230705075019', 'AMG0010000007', 0, 4, 32000, 10240, 400, 25200, 8000, '1', '2023-07-19 11:27:50', 0, '', NULL, 0, '', NULL, '', 0),
+(14, 'AMG001000000720230705075119', 'AMG0010000007', 0, 4, 32000, 10240, 400, 25200, 8000, '1', '2023-07-19 11:27:51', 0, '', NULL, 0, '', NULL, '', 0),
+(15, 'AMG001000001620230705075019', 'AMG0010000016', 0, 4, 32000, 10240, 400, 12700, 8000, '1', '2023-07-19 11:31:50', 0, '', NULL, 0, '', NULL, '', 0);
 
 -- --------------------------------------------------------
 
@@ -1023,6 +1052,14 @@ CREATE TABLE `payments` (
   `payment_date` datetime DEFAULT NULL,
   `payment_type` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `payments`
+--
+
+INSERT INTO `payments` (`payment_id`, `contract_no`, `payment_code`, `amount`, `due_date`, `payment_date`, `payment_type`) VALUES
+(2, 'AMG0010000016', '1', 3000, '2023-07-18', '2023-07-28 01:52:39', 'ATM'),
+(3, 'AMG0010000016', '2', 500, '2023-07-18', '2023-07-29 01:57:12', 'ATM');
 
 -- --------------------------------------------------------
 
@@ -1279,7 +1316,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `activity_logs`
 --
 ALTER TABLE `activity_logs`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=126;
 
 --
 -- AUTO_INCREMENT for table `answers`
@@ -1393,7 +1430,7 @@ ALTER TABLE `gov_issued_id`
 -- AUTO_INCREMENT for table `loan_applications`
 --
 ALTER TABLE `loan_applications`
-  MODIFY `loan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `loan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `loan_types`
@@ -1405,7 +1442,7 @@ ALTER TABLE `loan_types`
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `questions`

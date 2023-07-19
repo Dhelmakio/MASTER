@@ -13,6 +13,7 @@ class Loan extends DbCon {
     public $outStandingBalance;
     public $contractNo;
     public $recLoanAmount;
+    public $notarialFee;
 
 
     public function __construct(String $id){
@@ -47,6 +48,7 @@ class Loan extends DbCon {
         $this->getBorrowCount();
         $this->getRenewalBasesInfo();
         $this->getOutstandingBalance();
+        $this->getNotarialFee();
     }
 
     public function getSemiMonthly(){
@@ -110,6 +112,15 @@ class Loan extends DbCon {
         }
     }
 
+    public function getNotarialFee(){
+        $sql = "SELECT notarial_fee FROM fees WHERE notarial_id = ?";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute([1]);
+        $result = $stmt->fetchColumn();
+        
+        $this->notarialFee = $result;
+    }
+
     //functions below are for renewal
     public function getRenewalBasesInfo(){
         $sql = "SELECT contract_no, loan_amount FROM loan_applications WHERE client_id = ?";
@@ -127,10 +138,10 @@ class Loan extends DbCon {
         $result = $stmt->fetchColumn();
         
         //paras tinood na data
-        // $this->outStandingBalance = floatval($this->recLoanAmount) - floatval($result);
+        $this->outStandingBalance = floatval($this->recLoanAmount) - floatval($result);
 
         //static data //dummy 
-        $this->outStandingBalance = floatval($this->recLoanAmount) - 3000;
+        // $this->outStandingBalance = floatval($this->recLoanAmount) - 3000;
     }
 
     // public function checkEligible(String $id){

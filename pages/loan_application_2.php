@@ -60,51 +60,53 @@ if(isset($_POST['id'])){
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="">
-        <meta name="author" content="">
 
-        <title>Lending System - Client Maintenance</title>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-        <!-- Bootstrap Core CSS -->
-        <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <title>Lending System - Client Maintenance</title>
 
-        <!-- MetisMenu CSS -->
-        <link href="../css/metisMenu.min.css" rel="stylesheet">
+    <!-- Bootstrap Core CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
 
-        <!-- Custom CSS -->
-        <link href="../css/startmin.css" rel="stylesheet">
+    <!-- MetisMenu CSS -->
+    <link href="../css/metisMenu.min.css" rel="stylesheet">
 
-        <!-- Custom Fonts -->
-        <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- Custom CSS -->
+    <link href="../css/startmin.css" rel="stylesheet">
 
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
+    <!-- Custom Fonts -->
+    <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
-    </head>
-    <body>
+</head>
 
-        <div id="wrapper">
+<body>
 
-            <!-- Navigation -->
-            <?php include('nav.php');?>
+    <div id="wrapper">
 
-            <div id="page-wrapper">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <h1 class="page-header">Loan Application</h1>
-                        </div>
-                        <!-- /.col-lg-12 -->
+        <!-- Navigation -->
+        <?php include('nav.php');?>
+
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">Loan Application</h1>
                     </div>
-                    <!-- /.row -->
-                    <div class="row">
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /.row -->
+                <div class="row">
 
                     <div class="col-lg-12">
                         <div class="panel tabbed-panel panel-default">
@@ -193,10 +195,18 @@ if(isset($_POST['id'])){
                                                             $variation = $loan->clientEmpStatus;
                                                             $max_month;
                                                                 if($variation == "REGULAR" && strtoupper($loan->incomeEarning) == "MULTIPLE"){
-                                                                    $max_month = 6;
+                                                                    if($loan->borrowingHistCount > 5){
+                                                                        $max_month = 6; 
+                                                                    }else {
+                                                                        $max_month = 4; 
+                                                                    }
                                                                     $MA = Statics::$MULTIPLEREGULARAMORT;
                                                                 }else  if($variation == "REGULAR" && strtoupper($loan->incomeEarning) == "SINGLE"){
-                                                                    $max_month = 4;
+                                                                    if($loan->borrowingHistCount > 5){
+                                                                        $max_month = 6; 
+                                                                    }else {
+                                                                        $max_month = 4; 
+                                                                    }
                                                                     $MA = Statics::$SINGLEREGULARAMORT;
                                                                 }
                                                                 else if($variation == "CASUAL" && strtoupper($loan->incomeEarning) == "MULTIPLE"){
@@ -226,6 +236,22 @@ if(isset($_POST['id'])){
 
                                                         <div class="col-lg-4">
                                                             <div class="form-group">
+                                                                <label>UDI (%) </label>
+
+                                                                <input type="number" id="udi" class="form-control"
+                                                                    step="0.01" min="1" max="<?php echo $max_loan?>"
+                                                                    name="udi" placeholder="UDI Percent" required>
+                                                                <input hidden type="text" id="udi_" name="udi_"
+                                                                    value="">
+                                                                <!-- <i id="max-loanable" style="color:red;"></i>
+                                                                &nbsp;&nbsp;&nbsp; Use maximum loanable?
+                                                                <input type="checkbox" id="use-max" value=""> -->
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-lg-4">
+                                                            <div class="form-group" id="term-section" style="visibility:hidden">
                                                                 <label>Loan Duration </label>
                                                                 <!-- <input class="form-control" id="months" type="number" name="duration" min="1" max="<?php echo $max_month?>" placeholder=""?> -->
                                                                 <input hidden type="text" id="months_" name="months_"
@@ -352,21 +378,22 @@ if(isset($_POST['id'])){
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                
+
                                                                 <div class="col-lg-12">
                                                                     <div class="col-lg-6" align="right">
                                                                         <div class="form-group">
-                                                                            <label>UDI (<span id="udiper"></span>%):</label>
-                                                                        </div> 
+                                                                            <label>UDI (<span
+                                                                                    id="udiper"></span>%):</label>
+                                                                        </div>
                                                                     </div>
                                                                     <div class="col-lg-6">
                                                                         <div class="form-group">
-                                                                            <input type="number" name="udi_"
+                                                                            <input type="number" name="prevudi"
                                                                                 class="form-control" step="0.01"
-                                                                                id="udi_" value="" disabled
+                                                                                id="prevudi" value="" disabled
                                                                                 style="color:red;text-align:right">
-                                                                            <input type="text" name="udi"
-                                                                                id="udi" value="" hidden
+                                                                            <input type="text" name="prevudi_" id="prevudi_"
+                                                                                value="" hidden
                                                                                 style="text-align:right">
                                                                         </div>
                                                                     </div>
@@ -374,12 +401,14 @@ if(isset($_POST['id'])){
                                                                 <div class="col-lg-12">
                                                                     <div class="col-lg-6" align="right">
                                                                         <div class="form-group">
-                                                                            <label>Processing Fee (<span id="pfper"></span>%):</label>
+                                                                            <label>Processing Fee (<span
+                                                                                    id="pfper"></span>%):</label>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-lg-6">
                                                                         <div class="form-group">
-                                                                            <input type="number" name="processing_value_"
+                                                                            <input type="number"
+                                                                                name="processing_value_"
                                                                                 class="form-control" step="0.01"
                                                                                 id="processing_value_" value="" disabled
                                                                                 style="color:red;text-align:right">
@@ -392,12 +421,14 @@ if(isset($_POST['id'])){
                                                                 <div class="col-lg-12">
                                                                     <div class="col-lg-6" align="right">
                                                                         <div class="form-group">
-                                                                            <label>Collection Fee (<span id="cfper"></span>%):</label>
+                                                                            <label>Collection Fee (<span
+                                                                                    id="cfper"></span>%):</label>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-lg-6">
                                                                         <div class="form-group">
-                                                                            <input type="number" name="collection_value_"
+                                                                            <input type="number"
+                                                                                name="collection_value_"
                                                                                 class="form-control" step="0.01"
                                                                                 id="collection_value_" value="" disabled
                                                                                 style="color:red;text-align:right">
@@ -433,13 +464,17 @@ if(isset($_POST['id'])){
                                                                     </div>
                                                                     <div class="col-lg-6">
                                                                         <div class="form-group">
-                                                                            <input type="number" name="outstanding_balance_"
+                                                                            <input type="number"
+                                                                                name="outstanding_balance_"
                                                                                 class="form-control" step="0.01"
-                                                                                id="outstanding_balance_" value="<?= $loan->outStandingBalance ?>" disabled
+                                                                                id="outstanding_balance_"
+                                                                                value="<?= $loan->outStandingBalance ?>"
+                                                                                disabled
                                                                                 style="color:red;text-align:right">
-                                                                            <input type="text" name="outstanding_balance"
-                                                                                id="outstanding_balance_" value="" hidden
-                                                                                style="text-align:right">
+                                                                            <input type="text"
+                                                                                name="outstanding_balance"
+                                                                                id="outstanding_balance_" value=""
+                                                                                hidden style="text-align:right">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -516,9 +551,8 @@ if(isset($_POST['id'])){
                                                                                 style="text-align:right" value=""
                                                                                 disabled>
                                                                             <input type="text" name="cashout"
-                                                                                id="cashout"
-                                                                                style="text-align:right" value=""
-                                                                                hidden>
+                                                                                id="cashout" style="text-align:right"
+                                                                                value="" hidden>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -655,31 +689,36 @@ if(isset($_POST['id'])){
                     </div>
                     <!-- /.panel -->
                 </div>
-                    <!-- /.row -->
-                </div>
-                <!-- /.container-fluid -->
+                <!-- /.row -->
             </div>
-            <!-- /#page-wrapper -->
-
+            <!-- /.container-fluid -->
         </div>
-        <!-- /#wrapper -->
+        <!-- /#page-wrapper -->
 
-        <!-- jQuery -->
-        <script src="../js/jquery.min.js"></script>
+    </div>
+    <!-- /#wrapper -->
 
-        <!-- Bootstrap Core JavaScript -->
-        <script src="../js/bootstrap.min.js"></script>
+    <!-- jQuery -->
+    <script src="../js/jquery.min.js"></script>
 
-        <!-- Metis Menu Plugin JavaScript -->
-        <script src="../js/metisMenu.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../js/bootstrap.min.js"></script>
 
-        <!-- Custom Theme JavaScript -->
-        <script src="../js/startmin.js"></script>
-        <script>
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="../js/metisMenu.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="../js/startmin.js"></script>
+    <script>
     let duration;
     let maxLoanAmount;
     var maxdur = document.getElementById("max_dur").value;
 
+    $('#udi').change(() => {
+        ($('#udi').val() == "") ? $('#term-section').attr('style', 'visibility: hidden') : $('#term-section').attr('style', 'visibility: visible');
+        
+    });
+    
     $("#months").change(function() {
         if ($("#months").val() > 0 && $("#months").val() <= maxdur) {
             $('#loan-amnt-section').attr('style', 'visibility: visible');
@@ -724,11 +763,11 @@ if(isset($_POST['id'])){
 
                 // alert($loan->moInterest+"");
                 let interestAmount = ($("#lamt").val() * <?php echo $loan->moInterest; ?>) * duration;
-                let notarialFee = <?php echo Statics::$NOTARIALFEE; ?>;
-                
+                let notarialFee = <?php echo $loan->notarialFee ?>;
 
 
-                
+
+
                 let collectionFeePer = 0.03;
                 let processingFeePer = 0.03;
                 let collectionFee = $("#lamt").val() * collectionFeePer;
@@ -744,18 +783,19 @@ if(isset($_POST['id'])){
                 let collectionPerCut2 = ($("#lamt").val() / (duration)) / 2;
                 let collectionPerCut3 = ($("#lamt").val() / (duration)) / 4;
 
-                let udi = (<?php echo $loan->moInterest; ?> * duration) - (collectionFeePer + processingFeePer);
+                let udi = ( ($('#udi').val() / 100) * duration) - (collectionFeePer + processingFeePer);
                 let udiValue = $("#lamt").val() * udi;
-                let totalDeduction = udiValue + processingFee + collectionFee + notarialFee + <?= $loan->outStandingBalance ?>;  
+                let totalDeduction = udiValue + processingFee + collectionFee + notarialFee +
+                    <?= $loan->outStandingBalance ?>;
                 let proceedLoan = $("#lamt").val() - totalDeduction;
 
                 $("#udi_").val(parseFloat(udiValue).toFixed(2));
 
-                $("#udiper").text(udi * 100);
+                $("#udiper").text($('#udi').val());
                 $("#pfper").text(processingFeePer * 100);
                 $("#cfper").text(collectionFeePer * 100);
 
-                $("#udi").val(parseFloat(udi).toFixed(2));
+                $("#prevudi").val(parseFloat(udi).toFixed(2));
                 $('#processing_value_').val(parseFloat(processingFee).toFixed(2));
                 $('#collection_value_').val(parseFloat(collectionFee).toFixed(2));
                 // $("#udi_value_").val(parseFloat(udiValue).toFixed(2));
@@ -1019,5 +1059,6 @@ if(isset($_POST['id'])){
     }
     </script>
 
-    </body>
+</body>
+
 </html>
