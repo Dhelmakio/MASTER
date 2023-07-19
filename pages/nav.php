@@ -101,26 +101,16 @@
                             <?php
                               //  }
                             ?>
-
-                                    <!-- <li>
-                                        <a href="#"><i class="fa fa-address-card fa-fw"></i> Loan Approval & Validation<span class="fa arrow"></span></a>
-                                        <ul class="nav nav-second-level">
-                                            <li>
-                                                <a href="loan_credit_investigation.php">Credit Investigation</a>
-                                            </li>
-                                            <li>
-                                                <a href="loan_approval.php">Approval</a>
-                                            </li>
-                                            
-                                        </ul>
-                                    </li> -->
                             
-                           
-                            
-
-                            
-                            
-                            
+                            <?php 
+                               // if($_SESSION['access'] == 1 || $_SESSION['access'] == 2){ // approver
+                            ?>
+                                <li>
+                                <a href="setting_notarial.php" class="active"><i class="fa fa-money fa-fw"></i> Notarial Fee</a>
+                                </li>
+                            <?php
+                              //  }
+                            ?>
                         </ul>
                     </div>
                 </div>
