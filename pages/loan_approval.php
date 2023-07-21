@@ -77,18 +77,18 @@ if(!isset($_SESSION['user_id'])){
                                             </thead>
                                             <tbody>
                                                 <?php
-                                                    $sql ="SELECT * FROM loan_applications inner join clients on clients.client_id = loan_applications.client_id where approval=0 ORDER BY clients.last_name ASC";
+                                                    $sql ="SELECT * FROM loan_applications inner join applicants_personal on applicants_personal.applicant_code = loan_applications.client_id where approval=0 ORDER BY applicants_personal.lastname ASC";
                                                     $res = mysqli_query($con,$sql);
                                                         if(mysqli_num_rows($res) > 0){
                                                             while($row = mysqli_fetch_assoc($res)) {
                                                                 // $name = $row['last_name'].', '.$row['first_name'].' '.$row['middle_name'];
                                                                 // $suffix = $row['suffix'];
                                                                 $cid = $row['client_id'];
-                                                                $name = $row['last_name'].', '.$row['first_name'].' '.$row['suffix'].' '.$row['middle_name'].' '.$row['suffix'];
+                                                                $name = $row['lastname'].', '.$row['firstname'].' '.$row['suffix'].' '.$row['middlename'].' '.$row['suffix'];
                                                                 $cis;
                                                                 ?><tr class="odd gradeX">
                                                                     <td><?php echo $row['contract_no'];?></td>
-                                                                    <td><?php echo $row['last_name'].', '.$row['first_name'].' '.$row['suffix'].' '.$row['middle_name'];?></td>
+                                                                    <td><?php echo $row['lastname'].', '.$row['firstname'].' '.$row['suffix'].' '.$row['middlename'];?></td>
                                                                     <td style="text-align:right;">₱ <?php echo number_format($row['loan_amount'],2);?></td>
                                                                     <td style="text-align:center"><?php 
                                                                     if($row['ci_status']==1){

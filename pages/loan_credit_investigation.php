@@ -79,24 +79,24 @@ if(!isset($_SESSION['user_id'])){
                                             </thead>
                                             <tbody>
                                                 <?php
-                                                    $sql ="SELECT * FROM loan_applications inner join clients on clients.client_id = loan_applications.client_id WHERE loan_applications.ci_status=0 ORDER BY clients.last_name ASC";
+                                                    $sql ="SELECT * FROM loan_applications inner join applicants_personal on applicants_personal.applicant_code = loan_applications.client_id WHERE loan_applications.ci_status=0 ORDER BY applicants_personal.lastname ASC";
                                                     $res = mysqli_query($con,$sql);
                                                         if(mysqli_num_rows($res) > 0){
                                                             while($row = mysqli_fetch_assoc($res)) {
                                                                 // $name = $row['last_name'].', '.$row['first_name'].' '.$row['middle_name'];
                                                                 // $suffix = $row['suffix'];
-                                                                $cid = $row['client_id'];
+                                                                $cid = $row['applicant_code'];
                                                                 $lid = $row['loan_id'];
-                                                                $name = $row['last_name'].', '.$row['first_name'].' '.$row['suffix'].' '.$row['middle_name'].' '.$row['suffix'];
+                                                                $name = $row['lastname'].', '.$row['firstname'].' '.$row['suffix'].' '.$row['middlename'].' '.$row['suffix'];
                                                                 $adate = $row['application_date'];
                                                                 $cis;
                                                                 ?><tr class="odd gradeX">
                                                                     <td><?php echo $row['contract_no'];?></td>
-                                                                    <td><?php echo $row['last_name'].', '.$row['first_name'].' '.$row['suffix'].' '.$row['middle_name'];?></td>
+                                                                    <td><?php echo $row['lastname'].', '.$row['firstname'].' '.$row['suffix'].' '.$row['middlename'];?></td>
                                                                     <td style="text-align:right;">₱ <?php echo number_format($row['loan_amount'],2);?></td>
                                                                     <td><?php echo date('F d, Y',strtotime($adate));?></td>
-                                                                    <td style="text-align:center;"><a href="<?php echo $row['map'];?>" target="_blank">View Map</a></td>
-                                                                    <td style="text-align:center;"><a href="reg_applicant_view.php?id=<?php echo $cid?>">View info</td>
+                                                                    <td style="text-align:center;"><a href="<?php echo $row['map_url'];?>" target="_blank">View Map</a></td>
+                                                                    <td style="text-align:center;"><a href="registry_applicant_view.php?id=<?php echo $cid?>">View info</td>
                                                                     <td style="text-align:center">
                                                                                 <a href="loan_credit_investigation_validate.php?id=<?php echo $row['contract_no']?>">
                                                                                     <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Validate">

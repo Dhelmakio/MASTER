@@ -23,7 +23,7 @@ if(isset($_GET['con'])){
     $duration = $row['loan_duration'];
     $amt = $row['loan_amount'];
     $monthly = $row['monthly_amortization'];
-    $interest = $row['interest'];
+    $interest = $row['interest_percentage'];
     }
     }
 }

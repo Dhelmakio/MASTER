@@ -23,7 +23,7 @@ $date_answered;
 if(isset($_GET['id'])){
     $contract = $_GET['id'];
 
-    $sql = "select concat(clients.first_name,' ',clients.middle_name,' ',clients.last_name,' ',clients.suffix) as name, loan_applications.* from loan_applications inner join clients on clients.client_id = loan_applications.client_id where contract_no='$contract'";
+    $sql = "select concat(applicants_personal.firstname,' ',applicants_personal.middlename,' ',applicants_personal.lastname,' ',applicants_personal.suffix) as name, loan_applications.* from loan_applications inner join applicants_personal on applicants_personal.applicant_code = loan_applications.client_id where contract_no='$contract'";
     $res = mysqli_query($con,$sql);
     if(mysqli_num_rows($res) > 0){
         while($row = mysqli_fetch_assoc($res)) {
