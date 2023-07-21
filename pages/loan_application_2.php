@@ -197,6 +197,13 @@ if(isset($_POST['id'])){
                                                             hidden>
                                                         <input type="text" name="ltype" value="<?php echo $loan_type?>"
                                                             hidden>
+                                                        <input type="text" name="interest_percentage" id="interest_percentage"
+                                                            hidden>
+                                                        
+                                                        <input type="text" name="udi_percentage"  id="udi_percentage"
+                                                            hidden>
+                                                        
+                                                           
 
                                                         <?php
                                                             $mo_int;
@@ -348,7 +355,7 @@ if(isset($_POST['id'])){
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-lg-12">
+                                                                <!-- <div class="col-lg-12">
                                                                     <div class="col-lg-6" align="right">
                                                                         <div class="form-group">
                                                                             <label>Interest Amount
@@ -367,7 +374,7 @@ if(isset($_POST['id'])){
                                                                         </div>
                                                                     </div>
 
-                                                                </div>
+                                                                </div> -->
                                                                 <div class="col-lg-12">
                                                                     <div class="col-lg-6" align="right">
                                                                         <div class="form-group">
@@ -467,28 +474,6 @@ if(isset($_POST['id'])){
                                                                 <div class="col-lg-12">
                                                                     <div class="col-lg-6" align="right">
                                                                         <div class="form-group">
-                                                                            <label>Outstanding Balance (₱):</label>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-lg-6">
-                                                                        <div class="form-group">
-                                                                            <input type="number"
-                                                                                name="outstanding_balance_"
-                                                                                class="form-control" step="0.01"
-                                                                                id="outstanding_balance_"
-                                                                                value=""
-                                                                                disabled
-                                                                                style="color:red;text-align:right">
-                                                                            <input type="text"
-                                                                                name="outstanding_balance"
-                                                                                id="outstanding_balance_" value=""
-                                                                                hidden style="text-align:right">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg-12">
-                                                                    <div class="col-lg-6" align="right">
-                                                                        <div class="form-group">
                                                                             <label>Total Deduction (₱):</label>
                                                                         </div>
                                                                     </div>
@@ -554,6 +539,52 @@ if(isset($_POST['id'])){
                                                                         <div class="form-group">
                                                                             <input type="number"
                                                                                 style="color:blue;text-align:right;font-weight:bold;"
+                                                                                name="init_cashout_" class="form-control"
+                                                                                step="0.01" id="init_cashout_"
+                                                                                style="text-align:right" value=""
+                                                                                disabled>
+                                                                            <input type="text" name="init_cashout"
+                                                                                id="init_cashout" style="text-align:right"
+                                                                                value="" hidden>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-12">
+                                                                    <div class="col-lg-6" align="right">
+                                                                        <div class="form-group">
+                                                                            <label>Outstanding Balance (₱):</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-6">
+                                                                        <div class="form-group">
+                                                                            <input type="number"
+                                                                                name="outstanding_balance_"
+                                                                                class="form-control" step="0.01"
+                                                                                id="outstanding_balance_"
+                                                                                value=""
+                                                                                disabled
+                                                                                style="color:red;text-align:right">
+                                                                            <input type="text"
+                                                                                name="outstanding_balance"
+                                                                                id="outstanding_balance" value=""
+                                                                                hidden style="text-align:right">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-12"
+                                                                    style="border-top: 2px solid gray;"></div>
+                                                                <div class="col-lg-12">
+                                                                    <Br>
+                                                                    <!-- <h4><b>Cashout:</b></h4><br> -->
+                                                                    <div class="col-lg-6" align="right">
+                                                                        <div class="form-group">
+                                                                            <label>New Proceeds of Loan (₱):</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-6">
+                                                                        <div class="form-group">
+                                                                            <input type="number"
+                                                                                style="color:blue;text-align:right;font-weight:bold;"
                                                                                 name="cashout_" class="form-control"
                                                                                 step="0.01" id="cashout_"
                                                                                 style="text-align:right" value=""
@@ -564,6 +595,8 @@ if(isset($_POST['id'])){
                                                                         </div>
                                                                     </div>
                                                                 </div>
+                                                                <div class="col-lg-12"
+                                                                    style="border-top: 2px solid gray;"></div>
                                                                 <div class="col-lg-12"><br>
                                                                     <center>
                                                                         <h5><b><u>PAYMENT OPTIONS:</u></b></h5>
@@ -791,28 +824,38 @@ if(isset($_POST['id'])){
 
                 let udi = ( <?php echo $loan->moInterest * 100 ?>  * duration) - ( (collectionFeePer * 100) + (processingFeePer * 100));
                 let udiValue = $("#lamt").val() * (udi / 100);
-                let totalDeduction = udiValue + processingFee + collectionFee + notarialFee +
-                    <?= $loan->outStandingBalance ?>;
+                let totalDeduction = udiValue + processingFee + collectionFee + notarialFee;
                 let proceedLoan = $("#lamt").val() - totalDeduction;
+                let newPL = proceedLoan - <?= $loan->outStandingBalance ?>;
                
                  
 
               
                 $("#udi_").val(parseFloat(udiValue).toFixed(2));
+                $("#udi").val(parseFloat(udiValue).toFixed(2));
                 $("#outstanding_balance_").val(parseFloat(<?=  $loan->outStandingBalance; ?>).toFixed(2));
+                $("#outstanding_balance").val(parseFloat(<?=  $loan->outStandingBalance; ?>).toFixed(2));
                 $("#udiper").text($('#udi').val());
                 $("#pfper").text(processingFeePer * 100);
                 $("#cfper").text(collectionFeePer * 100);
 
+                $("#udi_percentage").val(udi);
+                $('#interest_percentage').val(<?php echo $loan->moInterest * 100 ?>);
+               
+
                 $("#prevudi").val(parseFloat(udiValue).toFixed(2));
+                $("#prevudi_").val(parseFloat(udiValue).toFixed(2));
                 $('#processing_value_').val(parseFloat(processingFee).toFixed(2));
                 $('#collection_value_').val(parseFloat(collectionFee).toFixed(2));
                 // $("#udi_value_").val(parseFloat(udiValue).toFixed(2));
                 // $("#udi_value").val(parseFloat(udiValue).toFixed(2));
                 $("#total_deduction_").val(parseFloat(totalDeduction).toFixed(2));
                 $("#total_deduction").val(parseFloat(totalDeduction).toFixed(2));
-                $("#cashout_").val(parseFloat(proceedLoan).toFixed(2));
-                $("#cashout").val(parseFloat(proceedLoan).toFixed(2));
+
+                $("#init_cashout_").val(parseFloat(proceedLoan).toFixed(2));
+                $("#innit_cashout").val(parseFloat(proceedLoan).toFixed(2));
+                $("#cashout_").val(parseFloat(newPL).toFixed(2));
+                $("#cashout").val(parseFloat(newPL).toFixed(2));
 
                 $("#lamt").val(parseFloat(x).toFixed(2));
                 $("#loan_amount_").val(parseFloat(x).toFixed(2));

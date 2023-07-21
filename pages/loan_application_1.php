@@ -190,6 +190,11 @@ if(isset($_GET['id'])){
                                                             hidden>
                                                         <input type="text" name="ltype" value="<?php echo $loan_type?>"
                                                             hidden>
+                                                        <input type="text" name="interest_percentage" id="interest_percentage" 
+                                                            hidden>
+                                                            <input type="text" name="udi_percentage"  id="udi_percentage"
+                                                            hidden>
+                                                        
 
                                                         <?php
                                                             $mo_int;
@@ -772,12 +777,16 @@ if(isset($_GET['id'])){
                 let proceedLoan = $("#lamt").val() - totalDeduction;
 
                 $("#udi_").val(parseFloat(udiValue).toFixed(2));
+                $("#udi_percentage").val(udi);
+
+                $("#interest_percentage").val(<?php echo $loan->moInterest * 100 ?>);
 
                 $("#udiper").text($('#udi').val());
                 $("#pfper").text(processingFeePer * 100);
                 $("#cfper").text(collectionFeePer * 100);
 
                 $("#prevudi").val(parseFloat(udiValue).toFixed(2));
+                $("#prevudi_").val(parseFloat(udiValue).toFixed(2));
                 $('#processing_value_').val(parseFloat(processingFee).toFixed(2));
                 $('#collection_value_').val(parseFloat(collectionFee).toFixed(2));
                 // $("#udi_value_").val(parseFloat(udiValue).toFixed(2));

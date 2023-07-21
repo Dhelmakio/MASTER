@@ -21,6 +21,11 @@ if(isset($_POST['client_id'])){
     $fee = $_POST['notarial'];
     $cashout = $_POST['cashout'];
     $ltypeTemp = 0;
+    $ob = $_POST['outstanding_balance']??0;
+    $udi_percentage = $_POST['udi_percentage']??0;
+    $udi_value = $_POST['prevudi_']??0;
+    $interest_percentage = $_POST['interest_percentage']??0;
+
     if($ltype == "NEW"){
         $ltypeTemp = 1;
     }else if($ltype == "RENEWAL"){
@@ -35,8 +40,8 @@ if(isset($_POST['client_id'])){
 
     // $cno = 'AMG'.date('Ymhms').$cid.date('d');
     $cno = $cid.date('Ymhms').date('d');
-    $sql = "INSERT INTO loan_applications (contract_no,client_id,loan_type,loan_duration,loan_amount,interest_amount,other_fee,total_cashout,monthly_amortization,mop)
-     VALUES ('$cno','$cid','$ltypeTemp','$duration','$lamt','$int_amt','$fee','$cashout','$mamort','$mop')";
+    $sql = "INSERT INTO loan_applications (contract_no,client_id,loan_type,loan_duration,loan_amount,interest_amount,other_fee,total_cashout,monthly_amortization,mop,ob,udi_percentage,udi_value,interest_percentage)
+     VALUES ('$cno','$cid','$ltypeTemp','$duration','$lamt','$int_amt','$fee','$cashout','$mamort','$mop', '$ob', '$udi_percentage', '$udi_value', '$interest_percentage')";
     if(mysqli_query($con, $sql)){
         echo "<script>alert('Success.');</script>";
         $alog_id = $_SESSION['user_id'];
