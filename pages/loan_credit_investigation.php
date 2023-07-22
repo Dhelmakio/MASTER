@@ -113,7 +113,7 @@ if(!isset($_SESSION['user_id'])){
                                                 <td style="text-align:center">
                                                     <a
                                                         href="loan_credit_investigation_validate.php?id=<?php echo $row['contract_no']?>">
-                                                        <button type="button" class="btn btn-success"
+                                                        <button type="button" class="btn btn-primary"
                                                             data-toggle="tooltip" data-placement="top" title="Validate">
                                                             <i class="fa fa-search" aria-hidden="true"></i> Validate
                                                         </button>

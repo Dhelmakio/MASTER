@@ -90,7 +90,7 @@ if(!isset($_SESSION['user_id'])){
                                                             <div class="card">
                                                                 <p class="pull-left" id="p-label">Fill all form field to
                                                                     go to next
-                                                                    step</p>
+                                                                    step</p><br>
                                                                 <div class="row">
                                                                     <div class="col-lg-12 mx-0">
                                                                         <form id="msform">
@@ -114,11 +114,16 @@ if(!isset($_SESSION['user_id'])){
                                                                                     </strong>
                                                                                 </li>
                                                                             </ul>
+                                                                            <div class="col-lg-12" align="left"><i
+                                                                                    style="color:red;">NOTE:
+                                                                                    All fields that has (*) are required.</i><br><br>
+                                                                            </div>
                                                                             <!-- fieldsets -->
                                                                             <fieldset id="set1" class="text-left">
                                                                                 <div class="col-lg-3">
                                                                                     <div class="form-group">
-                                                                                        <label><span style="color:red">* </span>Last Name</label>
+                                                                                        <label><span style="color:red">*
+                                                                                            </span>Last Name</label>
                                                                                         <input
                                                                                             class="form-control input-set-1"
                                                                                             name="lname"
@@ -129,7 +134,8 @@ if(!isset($_SESSION['user_id'])){
 
                                                                                 <div class="col-lg-3">
                                                                                     <div class="form-group">
-                                                                                        <label><span style="color:red">* </span>First Name</label>
+                                                                                        <label><span style="color:red">*
+                                                                                            </span>First Name</label>
                                                                                         <input type="text"
                                                                                             class="form-control input-set-1"
                                                                                             name="fname"
@@ -217,7 +223,8 @@ if(!isset($_SESSION['user_id'])){
                                                                                 </div> -->
                                                                                 <div class="col-lg-3">
                                                                                     <div class="form-group">
-                                                                                        <label><span style="color:red">* </span>Gender</label>
+                                                                                        <label><span style="color:red">*
+                                                                                            </span>Gender</label>
                                                                                         <select
                                                                                             class="form-control input-set-1"
                                                                                             required name="gender">
@@ -238,7 +245,8 @@ if(!isset($_SESSION['user_id'])){
                                                                                 </div>
                                                                                 <div class="col-lg-3">
                                                                                     <div class="form-group">
-                                                                                        <label><span style="color:red">* </span>Date of birth</label>
+                                                                                        <label><span style="color:red">*
+                                                                                            </span>Date of birth</label>
                                                                                         <input type="date" name="dob"
                                                                                             class="form-control input-set-1"
                                                                                             placeholder="Date of birth"
@@ -247,7 +255,8 @@ if(!isset($_SESSION['user_id'])){
                                                                                 </div>
                                                                                 <div class="col-lg-3">
                                                                                     <div class="form-group">
-                                                                                        <label><span style="color:red">* </span>Marital
+                                                                                        <label><span style="color:red">*
+                                                                                            </span>Marital
                                                                                             Status</label>
                                                                                         <select
                                                                                             class="form-control input-set-1"
@@ -272,7 +281,8 @@ if(!isset($_SESSION['user_id'])){
 
                                                                                 <div class="col-lg-3">
                                                                                     <div class="form-group">
-                                                                                        <label><span style="color:red">* </span>Place of
+                                                                                        <label><span style="color:red">*
+                                                                                            </span>Place of
                                                                                             birth ( Province )</label>
                                                                                         <select name="pob_province"
                                                                                             id="pob_province" required
@@ -285,7 +295,8 @@ if(!isset($_SESSION['user_id'])){
                                                                                 </div>
                                                                                 <div class="col-lg-3">
                                                                                     <div class="form-group">
-                                                                                        <label><span style="color:red">* </span>Place of
+                                                                                        <label><span style="color:red">*
+                                                                                            </span>Place of
                                                                                             birth ( City ) </label>
                                                                                         <select name="pob_city"
                                                                                             id="pob_city" required
@@ -306,7 +317,8 @@ if(!isset($_SESSION['user_id'])){
 
                                                                                 <div class="col-lg-4">
                                                                                     <div class="form-group">
-                                                                                        <label><span style="color:red">* </span>Province</label>
+                                                                                        <label><span style="color:red">*
+                                                                                            </span>Province</label>
                                                                                         <select name="province"
                                                                                             class="form-control input-set-1"
                                                                                             id="province" required
@@ -319,7 +331,8 @@ if(!isset($_SESSION['user_id'])){
 
                                                                                 <div class="col-lg-4">
                                                                                     <div class="form-group">
-                                                                                        <label><span style="color:red">* </span>City /
+                                                                                        <label><span style="color:red">*
+                                                                                            </span>City /
                                                                                             Municipality</label>
                                                                                         <select name="city"
                                                                                             class="form-control input-set-1"
@@ -333,7 +346,8 @@ if(!isset($_SESSION['user_id'])){
 
                                                                                 <div class="col-lg-4">
                                                                                     <div class="form-group">
-                                                                                        <label><span style="color:red">* </span>Barangay</label>
+                                                                                        <label><span style="color:red">*
+                                                                                            </span>Barangay</label>
                                                                                         <select name="brgy"
                                                                                             class="form-control input-set-1"
                                                                                             required id="brgy">
@@ -372,7 +386,9 @@ if(!isset($_SESSION['user_id'])){
 
                                                                                 <div class="col-lg-12">
                                                                                     <div class="form-group">
-                                                                                        <label><span style="color:red">* </span>Provide Map URL</label>
+                                                                                        <label><span style="color:red">*
+                                                                                            </span>Provide Map
+                                                                                            URL</label>
                                                                                         <a href="https://www.google.com/maps/place/San+Fernando,+Pampanga/@15.0650161,120.6456575,12073m/data=!3m1!1e3!4m15!1m8!3m7!1s0x3396f79f47a8aadb:0x2c4be1dddb81922a!2sSan+Fernando,+Pampanga!3b1!8m2!3d15.0593937!4d120.6567054!16zL20vMDZwZ3pu!3m5!1s0x3396f79f47a8aadb:0x2c4be1dddb81922a!8m2!3d15.0593937!4d120.6567054!16zL20vMDZwZ3pu?hl=en-US&entry=ttu"
                                                                                             target="_blank">
                                                                                             <label for="">
@@ -429,7 +445,8 @@ if(!isset($_SESSION['user_id'])){
                                                                                 </div> -->
                                                                                 <div class="col-lg-3">
                                                                                     <div class="form-group">
-                                                                                        <label><span style="color:red">* </span>Type of
+                                                                                        <label><span style="color:red">*
+                                                                                            </span>Type of
                                                                                             Residency:</label>
                                                                                         <select name="tor"
                                                                                             class="form-control input-set-1"
@@ -459,7 +476,8 @@ if(!isset($_SESSION['user_id'])){
                                                                                 </div>
                                                                                 <div class="col-lg-3">
                                                                                     <div class="form-group">
-                                                                                        <label><span style="color:red">* </span>Living With:</label>
+                                                                                        <label><span style="color:red">*
+                                                                                            </span>Living With:</label>
                                                                                         <select
                                                                                             class="form-control input-set-1"
                                                                                             required
@@ -514,7 +532,9 @@ if(!isset($_SESSION['user_id'])){
                                                                                 <div id="permanent">
                                                                                     <div class="col-lg-4">
                                                                                         <div class="form-group">
-                                                                                            <label><span style="color:red">* </span>Province</label>
+                                                                                            <label><span
+                                                                                                    style="color:red">*
+                                                                                                </span>Province</label>
                                                                                             <select name="province2"
                                                                                                 class="form-control input-set-1"
                                                                                                 id="province2" required
@@ -527,7 +547,9 @@ if(!isset($_SESSION['user_id'])){
                                                                                     </div>
                                                                                     <div class="col-lg-4">
                                                                                         <div class="form-group">
-                                                                                            <label><span style="color:red">* </span>City /
+                                                                                            <label><span
+                                                                                                    style="color:red">*
+                                                                                                </span>City /
                                                                                                 Municipality</label>
                                                                                             <select name="city2"
                                                                                                 class="form-control input-set-1"
@@ -541,7 +563,9 @@ if(!isset($_SESSION['user_id'])){
                                                                                     </div>
                                                                                     <div class="col-lg-4">
                                                                                         <div class="form-group">
-                                                                                            <label><span style="color:red">* </span>Barangay</label>
+                                                                                            <label><span
+                                                                                                    style="color:red">*
+                                                                                                </span>Barangay</label>
                                                                                             <select name="brgy2"
                                                                                                 id="brgy2" required
                                                                                                 class="form-control input-set-1">
@@ -618,7 +642,9 @@ if(!isset($_SESSION['user_id'])){
                                                                                     </div> -->
                                                                                     <div class="col-lg-3">
                                                                                         <div class="form-group">
-                                                                                            <label><span style="color:red">* </span>Type of
+                                                                                            <label><span
+                                                                                                    style="color:red">*
+                                                                                                </span>Type of
                                                                                                 Residency:</label>
                                                                                             <select
                                                                                                 class="form-control input-set-1"
@@ -651,7 +677,10 @@ if(!isset($_SESSION['user_id'])){
                                                                                     </div>
                                                                                     <div class="col-lg-3">
                                                                                         <div class="form-group">
-                                                                                            <label><span style="color:red">* </span>Living With:</label>
+                                                                                            <label><span
+                                                                                                    style="color:red">*
+                                                                                                </span>Living
+                                                                                                With:</label>
                                                                                             <select
                                                                                                 class="form-control input-set-1"
                                                                                                 required
@@ -696,7 +725,8 @@ if(!isset($_SESSION['user_id'])){
                                                                                 </div>
                                                                                 <div class="col-lg-8">
                                                                                     <div class="form-group">
-                                                                                        <label><span style="color:red">* </span>Mother's
+                                                                                        <label><span style="color:red">*
+                                                                                            </span>Mother's
                                                                                             Name:</label>
                                                                                         <input name="mother_name"
                                                                                             class="form-control input-set-1"
@@ -707,7 +737,8 @@ if(!isset($_SESSION['user_id'])){
                                                                                 </div>
                                                                                 <div class="col-lg-4">
                                                                                     <div class="form-group">
-                                                                                        <label><span style="color:red">* </span>Contact No.</label>
+                                                                                        <label><span style="color:red">*
+                                                                                            </span>Contact No.</label>
                                                                                         <input type="text"
                                                                                             name="mother_contact"
                                                                                             class="form-control input-set-1"
@@ -719,7 +750,8 @@ if(!isset($_SESSION['user_id'])){
                                                                                 </div>
                                                                                 <div class="col-lg-8">
                                                                                     <div class="form-group">
-                                                                                        <label><span style="color:red">* </span>Father's
+                                                                                        <label><span style="color:red">*
+                                                                                            </span>Father's
                                                                                             Name:</label>
                                                                                         <input name="father_name"
                                                                                             class="form-control input-set-1"
@@ -729,7 +761,8 @@ if(!isset($_SESSION['user_id'])){
                                                                                 </div>
                                                                                 <div class="col-lg-4">
                                                                                     <div class="form-group">
-                                                                                        <label><span style="color:red">* </span>Contact No.</label>
+                                                                                        <label><span style="color:red">*
+                                                                                            </span>Contact No.</label>
                                                                                         <input type="text"
                                                                                             name="father_contact"
                                                                                             class="form-control input-set-1"
@@ -763,7 +796,9 @@ if(!isset($_SESSION['user_id'])){
                                                                                 <div id="div_spouse" class="text-left">
                                                                                     <div class="col-lg-6">
                                                                                         <div class="form-group">
-                                                                                            <label><span style="color:red">* </span>Name of
+                                                                                            <label><span
+                                                                                                    style="color:red">*
+                                                                                                </span>Name of
                                                                                                 Spouse/Live-in</label>
                                                                                             <input name="spouse_name"
                                                                                                 type="text"
@@ -774,7 +809,9 @@ if(!isset($_SESSION['user_id'])){
                                                                                     </div>
                                                                                     <div class="col-lg-6">
                                                                                         <div class="form-group">
-                                                                                            <label><span style="color:red">* </span>Contact
+                                                                                            <label><span
+                                                                                                    style="color:red">*
+                                                                                                </span>Contact
                                                                                                 No.</label>
                                                                                             <input name="spouse_contact"
                                                                                                 type="text"
@@ -787,7 +824,9 @@ if(!isset($_SESSION['user_id'])){
                                                                                     </div>
                                                                                     <div class="col-lg-4">
                                                                                         <div class="form-group">
-                                                                                            <label><span style="color:red">* </span>Date of
+                                                                                            <label><span
+                                                                                                    style="color:red">*
+                                                                                                </span>Date of
                                                                                                 birth</label>
                                                                                             <input type="date"
                                                                                                 name="spouse_dob"
@@ -808,7 +847,9 @@ if(!isset($_SESSION['user_id'])){
                                                                                     </div> -->
                                                                                     <div class="col-lg-4">
                                                                                         <div class="form-group">
-                                                                                            <label><span style="color:red">* </span>Place of birth
+                                                                                            <label><span
+                                                                                                    style="color:red">*
+                                                                                                </span>Place of birth
                                                                                                 (Province)</label>
                                                                                             <select name="spob_province"
                                                                                                 class="form-control input-set-2"
@@ -824,7 +865,10 @@ if(!isset($_SESSION['user_id'])){
                                                                                     </div>
                                                                                     <div class="col-lg-4">
                                                                                         <div class="form-group">
-                                                                                            <label><span style="color:red">* </span>Place of birth (City
+                                                                                            <label><span
+                                                                                                    style="color:red">*
+                                                                                                </span>Place of birth
+                                                                                                (City
                                                                                                 /
                                                                                                 Municipality)</label>
                                                                                             <select name="spob_city"
@@ -848,7 +892,9 @@ if(!isset($_SESSION['user_id'])){
                                                                                     </div> -->
                                                                                     <div class="col-lg-4">
                                                                                         <div class="form-group">
-                                                                                            <label><span style="color:red">* </span>Present Address
+                                                                                            <label><span
+                                                                                                    style="color:red">*
+                                                                                                </span>Present Address
                                                                                                 (Province)</label>
                                                                                             <select
                                                                                                 name="spouse_province"
@@ -864,7 +910,9 @@ if(!isset($_SESSION['user_id'])){
                                                                                     </div>
                                                                                     <div class="col-lg-4">
                                                                                         <div class="form-group">
-                                                                                            <label><span style="color:red">* </span>Present Address
+                                                                                            <label><span
+                                                                                                    style="color:red">*
+                                                                                                </span>Present Address
                                                                                                 (City
                                                                                                 /
                                                                                                 Municipality)</label>
@@ -881,7 +929,9 @@ if(!isset($_SESSION['user_id'])){
                                                                                     </div>
                                                                                     <div class="col-lg-4">
                                                                                         <div class="form-group">
-                                                                                            <label><span style="color:red">* </span>Present Address
+                                                                                            <label><span
+                                                                                                    style="color:red">*
+                                                                                                </span>Present Address
                                                                                                 (Barangay)</label>
                                                                                             <select name="spouse_brgy"
                                                                                                 id="spouse_brgy"
@@ -949,7 +999,9 @@ if(!isset($_SESSION['user_id'])){
                                                                                 <div class="text-left">
                                                                                     <div class="col-lg-8">
                                                                                         <div class="form-group">
-                                                                                            <label><span style="color:red">* </span>Employer/Agency
+                                                                                            <label><span
+                                                                                                    style="color:red">*
+                                                                                                </span>Employer/Agency
                                                                                                 Name</label>
                                                                                             <input name="agency"
                                                                                                 class="form-control input-set-3"
@@ -981,7 +1033,9 @@ if(!isset($_SESSION['user_id'])){
                                                                                     </div> -->
                                                                                     <div class="col-lg-4">
                                                                                         <div class="form-group">
-                                                                                            <label><span style="color:red">* </span>Choose Sector:
+                                                                                            <label><span
+                                                                                                    style="color:red">*
+                                                                                                </span>Choose Sector:
                                                                                             </label>
                                                                                             <select
                                                                                                 class="form-control input-set-3"
@@ -1004,7 +1058,9 @@ if(!isset($_SESSION['user_id'])){
                                                                                     <div class="col-lg-12"></div>
                                                                                     <div class="col-lg-4">
                                                                                         <div class="form-group">
-                                                                                            <label><span style="color:red">* </span>Type of
+                                                                                            <label><span
+                                                                                                    style="color:red">*
+                                                                                                </span>Type of
                                                                                                 Business</label>
                                                                                             <select
                                                                                                 class="form-control input-set-3"
@@ -1167,7 +1223,10 @@ if(!isset($_SESSION['user_id'])){
                                                                                     </div>
                                                                                     <div class="col-lg-4">
                                                                                         <div class="form-group">
-                                                                                            <label><span style="color:red">* </span>Complete Address of
+                                                                                            <label><span
+                                                                                                    style="color:red">*
+                                                                                                </span>Complete Address
+                                                                                                of
                                                                                                 Company</label>
                                                                                             <input type="text"
                                                                                                 name="ca_company"
@@ -1178,7 +1237,9 @@ if(!isset($_SESSION['user_id'])){
                                                                                     </div>
                                                                                     <div class="col-lg-4">
                                                                                         <div class="form-group">
-                                                                                            <label><span style="color:red">* </span>Assigned
+                                                                                            <label><span
+                                                                                                    style="color:red">*
+                                                                                                </span>Assigned
                                                                                                 Location</label>
                                                                                             <input name="location"
                                                                                                 type="text"
@@ -1189,7 +1250,9 @@ if(!isset($_SESSION['user_id'])){
                                                                                     </div>
                                                                                     <div class="col-lg-4">
                                                                                         <div class="form-group">
-                                                                                            <label><span style="color:red">* </span>Name of
+                                                                                            <label><span
+                                                                                                    style="color:red">*
+                                                                                                </span>Name of
                                                                                                 Supervisor/COOR/Supervisor</label>
                                                                                             <input name="supervisor"
                                                                                                 class="form-control input-set-3"
@@ -1199,7 +1262,9 @@ if(!isset($_SESSION['user_id'])){
                                                                                     </div>
                                                                                     <div class="col-lg-4">
                                                                                         <div class="form-group">
-                                                                                            <label><span style="color:red">* </span>Contact Number of
+                                                                                            <label><span
+                                                                                                    style="color:red">*
+                                                                                                </span>Contact Number of
                                                                                                 HR/COOR/Supervisor</label>
                                                                                             <input type="text"
                                                                                                 name="hr_number"
@@ -1212,7 +1277,10 @@ if(!isset($_SESSION['user_id'])){
                                                                                     </div>
                                                                                     <div class="col-lg-4">
                                                                                         <div class="form-group">
-                                                                                            <label><span style="color:red">* </span>Date Hired</label>
+                                                                                            <label><span
+                                                                                                    style="color:red">*
+                                                                                                </span>Date
+                                                                                                Hired</label>
                                                                                             <input name="date_hired"
                                                                                                 type="date"
                                                                                                 class="form-control input-set-3"
@@ -1255,7 +1323,10 @@ if(!isset($_SESSION['user_id'])){
                                                                                     <div class="col-lg-12"></div> -->
                                                                                     <div class="col-lg-3">
                                                                                         <div class="form-group">
-                                                                                            <label><span style="color:red">* </span>Employment Status:
+                                                                                            <label><span
+                                                                                                    style="color:red">*
+                                                                                                </span>Employment
+                                                                                                Status:
                                                                                             </label>
                                                                                             <select
                                                                                                 class="form-control input-set-3"
@@ -1309,7 +1380,9 @@ if(!isset($_SESSION['user_id'])){
                                                                                     </div> -->
                                                                                     <div class="col-lg-3">
                                                                                         <div class="form-group">
-                                                                                            <label><span style="color:red">* </span>Mode of Salary:
+                                                                                            <label><span
+                                                                                                    style="color:red">*
+                                                                                                </span>Mode of Salary:
                                                                                             </label>
                                                                                             <select
                                                                                                 class="form-control input-set-3"
@@ -1333,7 +1406,9 @@ if(!isset($_SESSION['user_id'])){
                                                                                     </div>
                                                                                     <div class="col-lg-3">
                                                                                         <div class="form-group">
-                                                                                            <label><span style="color:red">* </span>Bank Name</label>
+                                                                                            <label><span
+                                                                                                    style="color:red">*
+                                                                                                </span>Bank Name</label>
                                                                                             <input type="text"
                                                                                                 name="bank"
                                                                                                 class="form-control input-set-3"
@@ -1343,7 +1418,9 @@ if(!isset($_SESSION['user_id'])){
                                                                                     </div>
                                                                                     <div class="col-lg-3">
                                                                                         <div class="form-group">
-                                                                                            <label><span style="color:red">* </span>Type of ATM
+                                                                                            <label><span
+                                                                                                    style="color:red">*
+                                                                                                </span>Type of ATM
                                                                                                 Card</label>
                                                                                             <input name="t_card"
                                                                                                 type="text"
@@ -1382,7 +1459,9 @@ if(!isset($_SESSION['user_id'])){
                                                                                     </div> -->
                                                                                     <div class="col-lg-3">
                                                                                         <div class="form-group">
-                                                                                            <label><span style="color:red">* </span>Do you have other
+                                                                                            <label><span
+                                                                                                    style="color:red">*
+                                                                                                </span>Do you have other
                                                                                                 loan?</label>
                                                                                             <select
                                                                                                 class="form-control input-set-3"
@@ -1475,7 +1554,9 @@ if(!isset($_SESSION['user_id'])){
                                                                                     </div>
                                                                                     <div class="col-lg-3">
                                                                                         <div class="form-group">
-                                                                                            <label><span style="color:red">* </span>Monthly Salary
+                                                                                            <label><span
+                                                                                                    style="color:red">*
+                                                                                                </span>Monthly Salary
                                                                                                 (Net/Gross)</label>
                                                                                             <input name="ms_salary"
                                                                                                 type="text"
@@ -1488,7 +1569,10 @@ if(!isset($_SESSION['user_id'])){
                                                                                     <div class="col-lg-12"></div>
                                                                                     <div class="col-lg-6">
                                                                                         <div class="form-group">
-                                                                                            <label><span style="color:red">* </span>Specify Other Source
+                                                                                            <label><span
+                                                                                                    style="color:red">*
+                                                                                                </span>Specify Other
+                                                                                                Source
                                                                                                 of Income</label>
                                                                                             <select
                                                                                                 class="form-control input-set-3"
@@ -1539,7 +1623,9 @@ if(!isset($_SESSION['user_id'])){
                                                                                     </div>
                                                                                     <div class="col-lg-6">
                                                                                         <div class="form-group">
-                                                                                            <label><span style="color:red">* </span>Total Other
+                                                                                            <label><span
+                                                                                                    style="color:red">*
+                                                                                                </span>Total Other
                                                                                                 Income (₱)</label>
                                                                                             <input name="os_income"
                                                                                                 id="os_income"
@@ -1587,7 +1673,9 @@ if(!isset($_SESSION['user_id'])){
                                                                                     </div>
                                                                                     <div class="col-lg-4">
                                                                                         <div class="form-group">
-                                                                                            <label><span style="color:red">* </span>Loan
+                                                                                            <label><span
+                                                                                                    style="color:red">*
+                                                                                                </span>Loan
                                                                                                 Purpose:</label>
                                                                                             <select
                                                                                                 class="form-control input-set-4"
@@ -1647,7 +1735,10 @@ if(!isset($_SESSION['user_id'])){
 
                                                                                     <div class="col-lg-4">
                                                                                         <div class="form-group">
-                                                                                            <label><span style="color:red">* </span>Contact No.</label>
+                                                                                            <label><span
+                                                                                                    style="color:red">*
+                                                                                                </span>Contact
+                                                                                                No.</label>
                                                                                             <input name="contact_num"
                                                                                                 maxlength="11"
                                                                                                 onkeypress="return onlyNumberKey(event)"
@@ -1658,7 +1749,9 @@ if(!isset($_SESSION['user_id'])){
                                                                                     </div>
                                                                                     <div class="col-lg-4">
                                                                                         <div class="form-group">
-                                                                                            <label><span style="color:red">* </span>Source:</label>
+                                                                                            <label><span
+                                                                                                    style="color:red">*
+                                                                                                </span>Source:</label>
                                                                                             <select
                                                                                                 class="form-control input-set-4"
                                                                                                 required
@@ -1714,7 +1807,9 @@ if(!isset($_SESSION['user_id'])){
                                                                                     </div>
                                                                                     <div class="col-lg-4">
                                                                                         <div class="form-group">
-                                                                                            <label><span style="color:red">* </span>Select file to
+                                                                                            <label><span
+                                                                                                    style="color:red">*
+                                                                                                </span>Select file to
                                                                                                 upload</label>
 
                                                                                             <input type="file"
@@ -2200,7 +2295,6 @@ if(!isset($_SESSION['user_id'])){
     </script>
 
     <script>
-
     $("#submit_add").click(function() {
         $('#progressbar').css('display', 'none');
         $('#p-label').css('display', 'none');
@@ -2241,7 +2335,7 @@ if(!isset($_SESSION['user_id'])){
         $('#disp_contact').text(
             `${$('input[name=contact_num]').val()}`
         );
-        
+
 
         //family
         $('#disp_mother').text(

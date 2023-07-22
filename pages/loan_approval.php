@@ -77,7 +77,10 @@ if(!isset($_SESSION['user_id'])){
                                             </thead>
                                             <tbody>
                                                 <?php
-                                                    $sql ="SELECT * FROM loan_applications inner join applicants_personal on applicants_personal.applicant_code = loan_applications.client_id where approval=0 ORDER BY applicants_personal.lastname ASC";
+                                                    $sql ="SELECT * FROM loan_applications 
+                                                    INNER JOIN applicants_personal 
+                                                    ON applicants_personal.applicant_code = loan_applications.client_id 
+                                                    WHERE approval=0 ORDER BY applicants_personal.lastname ASC";
                                                     $res = mysqli_query($con,$sql);
                                                         if(mysqli_num_rows($res) > 0){
                                                             while($row = mysqli_fetch_assoc($res)) {

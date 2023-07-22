@@ -197,10 +197,10 @@ if(isset($_GET['id'])){
                                                             }
                                                         }
                                                     ?>
-                                                        <div class="col-lg-12" align="center"><br>
+                                                        <div class="col-lg-12" align="right"><br>
                                                             <button onclick="" class="btn btn-primary" name="submit">
                                                                 <i class="fa fa-send" aria-hidden="true"
-                                                                    title="Copy to use save"></i> Submit Questionnaire
+                                                                    title="Copy to use save"></i> Submit
                                                             </button>
                                                             <!-- <button type="reset" class="btn btn-warning">Reset Button</button> -->
                                                         </div>

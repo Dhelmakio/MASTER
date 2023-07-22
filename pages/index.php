@@ -89,11 +89,10 @@ if($_SESSION['access'] == 4){
                                         </div>
                                     </div>
                                 </div>
-                                <a href="#">
+                                <a href="loan_credit_investigation.php">
                                     <div class="panel-footer">
                                         <span class="pull-left">View Details</span>
                                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-
                                         <div class="clearfix"></div>
                                     </div>
                                 </a>
@@ -124,7 +123,7 @@ if($_SESSION['access'] == 4){
                                         </div>
                                     </div>
                                 </div>
-                                <a href="#">
+                                <a href="loan_approval.php">
                                     <div class="panel-footer">
                                         <span class="pull-left">View Details</span>
                                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -223,13 +222,13 @@ if($_SESSION['access'] == 4){
                                             <thead>
                                                 <tr>
                                                     <!-- <th>#</th> -->
-                                                    <th>CONTRACT NO.</th>
-                                                    <th>LOAN AMOUNT</th>
-                                                    <th>APPLICATION DATE</th>
-                                                    <th>CI</th>
-                                                    <th>APPROVED</th>
+                                                    <th class="text-left">CONTRACT NO.</th>
+                                                    <th class="text-center">LOAN AMOUNT</th>
+                                                    <th class="text-center">APPLICATION DATE</th>
+                                                    <th class="text-center">CI</th>
+                                                    <th class="text-center">APPROVED</th>
                                                     <!-- <th>REJECTED</th> -->
-                                                    <th>ACTIONS</th>
+                                                    <th class="text-center">ACTIONS</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -243,11 +242,11 @@ if($_SESSION['access'] == 4){
                                                                 // $cid = $row['client_id'];
                                                                 // $name = $row['last_name'].', '.$row['first_name'].' '.$row['suffix'].' '.$row['middle_name'].' '.$row['suffix'];
                                                                 ?><tr class="odd gradeX">
-                                                                    <!-- <td><?php echo $row['last_name'].', '.$row['first_name'].' '.$row['suffix'].' '.$row['middle_name'];?></td> -->
+                                                                    <!-- <td><?php echo $row['lastname'].', '.$row['firstname'].' '.$row['suffix'].' '.$row['middlename'];?></td> -->
                                                                     <td><?php echo $row['contract_no'];?></td>
-                                                                    <td><?php echo $row['loan_amount'];?></td>
-                                                                    <td><?php echo $row['application_date'];?></td>
-                                                                    <td><?php 
+                                                                    <td class="text-right">₱ <?php echo number_format($row['loan_amount'],2);?></td>
+                                                                    <td class="text-center"><?php echo $row['application_date'];?></td>
+                                                                    <td class="text-center"><?php 
                                                                     if($row['ci_status']==1){
                                                                         echo '<button type="button" class="btn btn-success btn-circle"><i class="fa fa-check"></i></button>';}
                                                                     else if($row['ci_status']==2){
@@ -256,7 +255,7 @@ if($_SESSION['access'] == 4){
                                                                         echo '<button type="button" class="btn btn-warning btn-circle"><i class="fa fa-spinner"></i></button>';
                                                                     }
                                                                     ?></td>
-                                                                    <td><?php 
+                                                                    <td class="text-center"><?php 
                                                                     if($row['approval']==1 && $row['ci_status'] != 2){
                                                                         echo '<button type="button" class="btn btn-success btn-circle"><i class="fa fa-check"></i></button>';}
                                                                     else if($row['approval']==2 || $row['ci_status'] == 2){
@@ -296,7 +295,7 @@ if($_SESSION['access'] == 4){
                                 <div class="panel-body">
                                     <div class="list-group">
                                         <?php
-                                                $recent_approved = "SELECT * FROM loan_applications where approval=1 order by date_flagged desc LIMIT 10";
+                                                $recent_approved = "SELECT * FROM loan_applications WHERE approval=1 ORDER BY date_flagged DESC LIMIT 10";
                                                 $res_app = mysqli_query($con,$recent_approved);
                                                 if(mysqli_num_rows($res_app) > 0){
                                                     while($row_approved = mysqli_fetch_assoc($res_app)) {
@@ -332,7 +331,7 @@ if($_SESSION['access'] == 4){
                                 <div class="panel-body">
                                     <div class="list-group">
                                         <?php
-                                                $recent_reject = "SELECT * FROM loan_applications where approval=2 OR ci_status=2 order by date_flagged desc LIMIT 10";
+                                                $recent_reject = "SELECT * FROM loan_applications WHERE approval=2 OR ci_status=2 ORDER BY date_flagged DESC LIMIT 10";
                                                 $res_rej = mysqli_query($con,$recent_reject);
                                                 if(mysqli_num_rows($res_rej) > 0){
                                                     while($row_reject = mysqli_fetch_assoc($res_rej)) {
