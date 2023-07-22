@@ -96,7 +96,7 @@ if($_SESSION['user_id']){
                                                 <td class="text-center">
                                                     <a
                                                         href="setting_notarial_update.php?id=<?php echo $display['notarial_id'];?>">
-                                                        <button type="button" class="btn btn-info" data-toggle="tooltip"
+                                                        <button type="button" class="btn btn-success" data-toggle="tooltip"
                                                             data-placement="top" title="Update  ">
                                                             <i class="fa fa-pencil" aria-hidden="true"></i> Update
                                                         </button>

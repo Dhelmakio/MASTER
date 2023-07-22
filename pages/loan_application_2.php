@@ -306,7 +306,7 @@ if(isset($_POST['id'])){
                                                                 style="visibility:hidden">
                                                                 <label>Loan Amount (₱) </label>
 
-                                                                <input type="number" id="lamt" class="form-control"
+                                                                <input type="number" id="lamt" class="form-control text-right"
                                                                     step="0.01" min="1" max="<?php echo $max_loan?>"
                                                                     name="loan_amt" placeholder="Loan Amount" required>
                                                                 <input hidden type="text" id="lamt_" name="lamt_"
