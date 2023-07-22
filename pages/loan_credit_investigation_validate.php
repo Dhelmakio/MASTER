@@ -122,10 +122,10 @@ if(isset($_GET['id'])){
                                                         <div class="col-lg-4 col-sm-12" align="left">
                                                             <h5>Contract No.: <b><?php echo $contract;?></b></h5>
                                                         </div>
-                                                        <div class="col-lg-4 col-sm-12">
+                                                        <div class="col-lg-4 col-sm-12" align="center">
                                                             <h5>Borrower: <b><?php echo $name;?></b></h5>
                                                         </div>
-                                                        <div class="col-lg-4 col-sm-12" align="left">
+                                                        <div class="col-lg-4 col-sm-12" align="right">
                                                             <h5>Date: <b><?php echo date('F d, Y');?></b></h5>
                                                         </div>
                                                     </div>
@@ -145,6 +145,7 @@ if(isset($_GET['id'])){
                                                         <div class="col-lg-12" align="center">
                                                             <hr><br>
                                                             <h3>Questionnaire | For Relative</h3>
+                                                            <br>
                                                         </div>
                                                         <div class="col-lg-12" align="left"><i style="color:red;">NOTE:
                                                                 All fields are required.</i><br><br></div>
