@@ -196,12 +196,15 @@ if($_SESSION['user_id']){
                                                 <u><?php echo $row['atm_card'];?></label></div>
                                         <div class="col-lg-12"><label>Do you have other loan?
                                                 <u><?php 
-                                                
                                                 $exploan =  explode("-", $row['loan']);
-                                                
-                                                echo strtoupper($exploan[0]).'( '.$exploan[1].')';?></label></div>
+                                                if(count($exploan) > 1){
+                                                    echo strtoupper($exploan[0]).' ('.$exploan[1].')';
+                                                }else{
+                                                    echo strtoupper($exploan[0]);
+                                                }
+                                                ?></label></div>
                                         <div class="col-lg-12"><label>Gross (Monthly):
-                                                <u><?php  echo  "₱ ".number_format(floatval($row['monthly_salary']),2)??null;?></label>
+                                                <u><?php  echo  "₱ ".number_format(floatval($row['monthly_salary']),2);?></label>
                                         </div>
                                         <div class="col-lg-12"><label>Salary Period:
                                                 <u><?php echo $row['s_period'];?></label></div>
