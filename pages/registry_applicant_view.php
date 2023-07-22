@@ -199,7 +199,7 @@ if($_SESSION['user_id']){
                                                 
                                                 $exploan =  explode("-", $row['loan']);
                                                 
-                                                echo strtoupper($exploan[0]).'( '.$exploan[1].' : ₱'.number_format(floatval($exploan[2]),2).' )';?></label></div>
+                                                echo strtoupper($exploan[0]).'( '.$exploan[1].')';?></label></div>
                                         <div class="col-lg-12"><label>Gross (Monthly):
                                                 <u><?php  echo  "₱ ".number_format(floatval($row['monthly_salary']),2)??null;?></label>
                                         </div>
