@@ -234,38 +234,6 @@ if($_SESSION['user_id']){
                                                                                         </select>
                                                                                     </div>
                                                                                 </div>
-                                                                                <!-- Mobile -->
-                                                                                <!-- <div class="col-lg-3">
-                                                                                    <div class="form-group">
-                                                                                        <label>Contact No.</label>
-                                                                                        <input name="contact_num"
-                                                                                            maxlength="11"
-                                                                                            class="form-control"
-                                                                                            placeholder="Mobile No."
-                                                                                            value="<?= $edit->getClientData($id, 'applicants_personal', 'applicant_code', 'contact1')??null ?>">
-                                                                                    </div>
-                                                                                </div> -->
-
-                                                                                <!-- <div class="col-lg-4">
-                                                                                    <div class="form-group">
-                                                                                        <label>Place of
-                                                                                            birth ( Province )</label>
-                                                                                        <input name="pob"
-                                                                                            class="form-control"
-                                                                                            placeholder="Place of birth"
-                                                                                            value="<?= $edit->getClientData($id, 'applicants_personal', 'applicant_code', 'pob1')??null; ?>">
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="col-lg-4">
-                                                                                    <div class="form-group">
-                                                                                        <label>Place of
-                                                                                            birth ( City )</label>
-                                                                                        <input name="pob"
-                                                                                            class="form-control"
-                                                                                            placeholder="Place of birth"
-                                                                                            value="<?= $edit->getClientData($id, 'applicants_personal', 'applicant_code', 'pob1')??null; ?>">
-                                                                                    </div>
-                                                                                </div>-->
                                                                                 <input type="hidden" id="db_pob1"
                                                                                     value="<?php  $pob1 = $edit->getClientData($id, 'applicants_personal', 'applicant_code', 'pob1')??null;
                                                                                 $res =  explode(", ", $pob1); echo $res[0]; ?>">
@@ -298,35 +266,7 @@ if($_SESSION['user_id']){
                                                                                 <!--All goods-->
                                                                                 <div class="col-lg-12">
                                                                                     <h3><b>Present Address</b></h3>
-                                                                                </div>
-                                                                                <!-- <div class="col-lg-4">
-                                                                                    <div class="form-group">
-                                                                                        <label>Province</label>
-                                                                                        <input name="province"
-                                                                                            class="form-control"
-                                                                                            placeholder="Province"
-                                                                                            value="<?= $edit->getClientData($id, 'applicants_personal', 'applicant_code', 'province1')??null; ?>">
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="col-lg-4">
-                                                                                    <div class="form-group">
-                                                                                        <label>City /
-                                                                                            Municipality</label>
-                                                                                        <input name="city"
-                                                                                            class="form-control"
-                                                                                            placeholder="City/Municipality"
-                                                                                            value="<?= $edit->getClientData($id, 'applicants_personal', 'applicant_code', 'city1')??null; ?>">
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="col-lg-4">
-                                                                                    <div class="form-group">
-                                                                                        <label>Barangay</label>
-                                                                                        <input name="brgy"
-                                                                                            class="form-control"
-                                                                                            placeholder="Barangay"
-                                                                                            value="<?= $edit->getClientData($id, 'applicants_personal', 'applicant_code', 'brgy1')??null; ?>">
-                                                                                    </div>
-                                                                                </div> -->
+                                                                                </div>                                                                             
                                                                                 <input type="hidden" id="db_province"
                                                                                     value="<?php echo $edit->getClientData($id, 'applicants_personal', 'applicant_code', 'province1')??null;?>">
                                                                                 <div class="col-lg-4">
@@ -417,108 +357,6 @@ if($_SESSION['user_id']){
 
                                                                                     </div>
                                                                                 </div>
-                                                                                <!--type of residence and living with-->
-                                                                                <!-- <div class="col-lg-12">
-                                                                                    <div class="form-group">
-                                                                                        <label>Type of
-                                                                                            Residency:</label>
-                                                                                        <div class="radio">
-                                                                                            <?php $tor = $edit->getClientData($id, 'applicants_personal', 'applicant_code', 'residence1')??null; ?>
-                                                                                            <label>
-                                                                                                <input type="radio"
-                                                                                                    name="tor"
-                                                                                                    id="owned"
-                                                                                                    value="Owned"
-                                                                                                    <?= ($tor == "Owned") ? 'checked' : '' ?>
-                                                                                                    onclick="enableField('owned', 'specific')">Owned
-                                                                                                &nbsp;
-                                                                                            </label>
-                                                                                            <label>
-                                                                                                <input type="radio"
-                                                                                                    name="tor"
-                                                                                                    id="renting"
-                                                                                                    value="Renting"
-                                                                                                    <?= ($tor == "Renting") ? 'checked' : '' ?>
-                                                                                                    onclick="enableField('renting', 'specific')">Renting/Leasing
-                                                                                                &nbsp;
-                                                                                            </label>
-                                                                                            <label>
-                                                                                                <input type="radio"
-                                                                                                    name="tor"
-                                                                                                    id="specify"
-                                                                                                    value="Specify"
-                                                                                                    <?= ($tor != "Owned" || $tor != "Renting") ? '' : 'checked' ?>
-                                                                                                    onclick="enableField('specify', 'specific')">Others
-                                                                                                (Specify):
-                                                                                            </label>
-                                                                                            <input type="text"
-                                                                                                name="tor_spec"
-                                                                                                id="specific"
-                                                                                                class="form-group"
-                                                                                                disabled="true"
-                                                                                                <?= ($tor != "Owned" || $tor != "Renting") ? $tor : '' ?>>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="col-lg-12">
-                                                                                    <div class="form-group">
-                                                                                        <label>Living With:</label>
-                                                                                        <div class="radio">
-                                                                                            <?php $lwith1 = $edit->getClientData($id, 'applicants_personal', 'applicant_code', 'lwith1')??null; ?>
-                                                                                            <label>
-                                                                                                <input type="radio"
-                                                                                                    name="l_with"
-                                                                                                    id="parent"
-                                                                                                    value="Parents"
-                                                                                                    <?= ($lwith1 == "Parents") ? 'checked' : '' ; ?>
-                                                                                                    onclick="enableField('parent', 'spec')">Parents
-                                                                                                &nbsp;
-                                                                                            </label>
-                                                                                            <label>
-                                                                                                <input type="radio"
-                                                                                                    name="l_with"
-                                                                                                    id="relative"
-                                                                                                    value="Relatives"
-                                                                                                    <?= ($lwith1 == "Relatives") ? 'checked' : '' ; ?>
-                                                                                                    onclick="enableField('relative', 'spec')">Relatives
-                                                                                                &nbsp;
-                                                                                            </label>
-                                                                                            <label>
-                                                                                                <input type="radio"
-                                                                                                    name="l_with"
-                                                                                                    id="wife"
-                                                                                                    value="Wife/Husband"
-                                                                                                    <?= ($lwith1 == "Wife/Husband") ? 'checked' : '' ; ?>
-                                                                                                    onclick="enableField('wife', 'spec')">Wife/Husband/Live-in
-                                                                                                Partner
-                                                                                                &nbsp;
-                                                                                            </label>
-                                                                                            <label>
-                                                                                                <input type="radio"
-                                                                                                    name="l_with"
-                                                                                                    id="coworker"
-                                                                                                    value="Co-Worker"
-                                                                                                    <?= ($lwith1 == "Co-Worker") ? 'checked' : '' ; ?>
-                                                                                                    onclick="enableField('coworker', 'spec')">Co-Worker
-                                                                                                &nbsp;
-                                                                                            </label>
-                                                                                            <label>
-                                                                                                <input type="radio"
-                                                                                                    name="l_with"
-                                                                                                    id="others"
-                                                                                                    value="Others"
-                                                                                                    <?= ($lwith1 != "Parents" || $lwith1 != "Relatives" || $lwith1 != "Wife/Husband" || $lwith1 != "Co-Worker" ) ? '' : 'checked' ; ?>
-                                                                                                    onclick="enableField('others', 'spec')">Others
-                                                                                                (Specify):
-                                                                                            </label>
-                                                                                            <input type="text"
-                                                                                                name="lw_spec" id="spec"
-                                                                                                class="form-group"
-                                                                                                disabled="true"
-                                                                                                value="<?= ($lwith1 != "Parents" || $lwith1 != "Relatives" || $lwith1 != "Wife/Husband" || $lwith1 != "Co-Worker" ) ? '' : $lwith1 ; ?>">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div> -->
                                                                                 <div class="col-lg-3">
                                                                                     <div class="form-group">
                                                                                         <label>Type of
@@ -605,43 +443,6 @@ if($_SESSION['user_id']){
                                                                                     <h3><b>Permanent Address</b>
                                                                                     </h3>
                                                                                 </div>
-                                                                                <!-- <div class="col-lg-4">
-                                                                                    <div class="form-group">
-                                                                                        <label>Province</label>
-                                                                                        <select name="province"
-                                                                                            class="form-control input-set-1"
-                                                                                            id="province" required
-                                                                                            onchange="populate('city', '', this.value)">
-                                                                                            <option value="" selected
-                                                                                                disabled>SELECT</option>
-                                                                                        </select>
-                                                                                    </div>
-                                                                                </div>
-
-                                                                                <div class="col-lg-4">
-                                                                                    <div class="form-group">
-                                                                                        <label>City /
-                                                                                            Municipality</label>
-                                                                                        <select name="city"
-                                                                                            class="form-control input-set-1"
-                                                                                            id="city" required
-                                                                                            onchange="populate('brgy', 'province', this.value)">
-                                                                                            <option value="" selected
-                                                                                                disabled>SELECT</option>
-                                                                                        </select>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="col-lg-4">
-                                                                                    <div class="form-group">
-                                                                                        <label>Barangay</label>
-                                                                                        <select name="brgy"
-                                                                                            class="form-control input-set-1" required
-                                                                                            id="brgy">
-                                                                                            <option value="" selected
-                                                                                                disabled>SELECT</option>
-                                                                                        </select>
-                                                                                    </div>
-                                                                                </div> -->
                                                                                 <input type="hidden" id="db_province2"
                                                                                     value="<?php echo $edit->getClientData($id, 'applicants_personal', 'applicant_code', 'province2')??null;?>">
                                                                                 <div class="col-lg-4">
@@ -715,137 +516,6 @@ if($_SESSION['user_id']){
                                                                                             value="<?= $edit->getClientData($id, 'applicants_personal', 'applicant_code', 'phase2')??null ?>">
                                                                                     </div>
                                                                                 </div>
-                                                                                <!-- <div class="col-lg-4">
-                                                                                    <div class="form-group">
-                                                                                        <label>Barangay</label>
-                                                                                        <input name="brgy2"
-                                                                                            class="form-control"
-                                                                                            placeholder="Barangay"
-                                                                                            value="<?= $edit->getClientData($id, 'applicants_personal', 'applicant_code', 'brgy2')??null ?>">
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="col-lg-4">
-                                                                                    <div class="form-group">
-                                                                                        <label>City /
-                                                                                            Municipality</label>
-                                                                                        <input name="city2"
-                                                                                            class="form-control"
-                                                                                            placeholder="City/Municipality"
-                                                                                            value="<?= $edit->getClientData($id, 'applicants_personal', 'applicant_code', 'city2')??null ?>">
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="col-lg-4">
-                                                                                    <div class="form-group">
-                                                                                        <label>Province</label>
-                                                                                        <input name="province2"
-                                                                                            class="form-control"
-                                                                                            placeholder="Province"
-                                                                                            value="<?= $edit->getClientData($id, 'applicants_personal', 'applicant_code', 'province2')??null ?>">
-                                                                                    </div>
-                                                                                </div> -->
-
-                                                                                <!-- <div class="col-lg-12">
-                                                                                    <div class="form-group">
-                                                                                        <label>Type of
-                                                                                            Residency:</label>
-                                                                                        <?php $tor2 = $edit->getClientData($id, 'applicants_personal', 'applicant_code', 'residence2')??null ?>
-                                                                                        <div class="radio">
-                                                                                            <label>
-                                                                                                <input type="radio"
-                                                                                                    name="tor2"
-                                                                                                    id="owned1"
-                                                                                                    value="Owned"
-                                                                                                    <?= ($tor2 == "Owned") ? 'checked' : '' ?>
-                                                                                                    onclick="enableField('owned1', 'specific1')">Owned
-                                                                                                &nbsp;
-                                                                                            </label>
-                                                                                            <label>
-                                                                                                <input type="radio"
-                                                                                                    name="tor2"
-                                                                                                    id="renting1"
-                                                                                                    value="Renting/leasing"
-                                                                                                    <?= ($tor2 == "Renting") ? 'checked' : '' ?>
-                                                                                                    onclick="enableField('renting1', 'specific1')">Renting/Leasing
-                                                                                                &nbsp;
-                                                                                            </label>
-                                                                                            <label>
-                                                                                                <input type="radio"
-                                                                                                    name="tor2"
-                                                                                                    id="specify1"
-                                                                                                    value="Specify"
-                                                                                                    <?= ($tor2 != "Owned" || $tor != "Renting") ? '' : 'checked' ?>
-                                                                                                    onclick="enableField('specify1', 'specific1')">Others
-                                                                                                (Specify):
-                                                                                            </label>
-                                                                                            <input type="text"
-                                                                                                name="tor_spec2"
-                                                                                                id="specific1"
-                                                                                                class="form-group"
-                                                                                                disabled="true"
-                                                                                                value="<?= ($tor2 != "Owned" || $tor != "Renting") ? '' : $tor2 ?>">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="col-lg-12">
-                                                                                    <div class="form-group">
-                                                                                        <label>Living With:</label>
-                                                                                        <?php $lwith2 = $edit->getClientData($id, 'applicants_personal', 'applicant_code', 'lwith2')??null ?>
-                                                                                        <div class="radio">
-                                                                                            <label>
-                                                                                                <input type="radio"
-                                                                                                    name="l_with2"
-                                                                                                    id="parent1"
-                                                                                                    value="Parents"
-                                                                                                    <?= ($lwith2 == "Parents") ? 'checked' : '' ?>
-                                                                                                    onclick="enableField('parent1', 'spec1')">Parents
-                                                                                                &nbsp;
-                                                                                            </label>
-                                                                                            <label>
-                                                                                                <input type="radio"
-                                                                                                    name="l_with2"
-                                                                                                    id="relative1"
-                                                                                                    value="Relatives"
-                                                                                                    <?= ($lwith2 == "Relatives") ? 'checked' : '' ?>
-                                                                                                    onclick="enableField('relative1', 'spec1')">Relatives
-                                                                                                &nbsp;
-                                                                                            </label>
-                                                                                            <label>
-                                                                                                <input type="radio"
-                                                                                                    name="l_with2"
-                                                                                                    id="wife1"
-                                                                                                    value="Wife/Husband"
-                                                                                                    <?= ($lwith2 == "Wife/Husband") ? 'checked' : '' ?>
-                                                                                                    onclick="enableField('wife1', 'spec1')">Wife/Husband/Live-in
-                                                                                                Partner
-                                                                                                &nbsp;
-                                                                                            </label>
-                                                                                            <label>
-                                                                                                <input type="radio"
-                                                                                                    name="l_with2"
-                                                                                                    id="coworker1"
-                                                                                                    value="Co-Worker"
-                                                                                                    <?= ($lwith2 == "Co-Worker") ? 'checked' : '' ?>
-                                                                                                    onclick="enableField('coworker1', 'spec1')">Co-Worker
-                                                                                                &nbsp;
-                                                                                            </label>
-                                                                                            <label>
-                                                                                                <input type="radio"
-                                                                                                    name="l_with2"
-                                                                                                    id="others1"
-                                                                                                    value="Others"
-                                                                                                    <?= ($lwith2 != "Parents" || $lwith2 != "Relatives" || $lwith2 != "Wife/Husbands" || $lwith2 != "Co-Worker") ? '' : 'checked' ?>
-                                                                                                    onclick="enableField('others1', 'spec1')">Others
-                                                                                                (Specify):
-                                                                                            </label>
-                                                                                            <input type="text"
-                                                                                                name="lw_spec2"
-                                                                                                id="spec1"
-                                                                                                class="form-group"
-                                                                                                disabled="true"
-                                                                                                value="<?= ($lwith2 != "Parents" || $lwith2 != "Relatives" || $lwith2 != "Wife/Husbands" || $lwith2 != "Co-Worker") ? '' : 'checked' ?>">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div> -->
                                                                                 <div class="col-lg-3">
                                                                                     <div class="form-group">
                                                                                         <label>Type of
@@ -1020,17 +690,6 @@ if($_SESSION['user_id']){
                                                                                                 value="<?= $edit->getClientData($id, 'applicants_spouse', 'applicant_code', 's_dob')??null ?>">
                                                                                         </div>
                                                                                     </div>
-                                                                                    <!-- <div class="col-lg-4">
-                                                                                        <div class="form-group">
-                                                                                            <label>Place of
-                                                                                                birth</label>
-                                                                                            <input name="spouse_pob"
-                                                                                                type="text"
-                                                                                                class="form-control"
-                                                                                                placeholder="Place of birth"
-                                                                                                value="<?= $edit->getClientData($id, 'applicants_spouse', 'applicant_code', 's_pob')??null ?>">
-                                                                                        </div>
-                                                                                    </div> -->
                                                                                     <input type="hidden" id="db_spob1"
                                                                                         value="<?php  $pob2 = $edit->getClientData($id, 'applicants_spouse', 'applicant_code', 's_pob')??null;
                                                                                     $res2 =  explode(", ", $pob2); echo $res2[0]; ?>">
@@ -1067,17 +726,6 @@ if($_SESSION['user_id']){
                                                                                             </select>
                                                                                         </div>
                                                                                     </div>
-                                                                                    <!-- <div class="col-lg-6">
-                                                                                        <div class="form-group">
-                                                                                            <label>Present
-                                                                                                Address</label>
-                                                                                            <input name="spouse_address"
-                                                                                                type="text"
-                                                                                                class="form-control"
-                                                                                                placeholder="Present Address"
-                                                                                                value="<?= $edit->getClientData($id, 'applicants_spouse', 'applicant_code', 's_address')??null ?>">
-                                                                                        </div>
-                                                                                    </div> -->
                                                                                     <input type="hidden"
                                                                                         id="db_sprovince"
                                                                                         value="<?php  $province = $edit->getClientData($id, 'applicants_spouse', 'applicant_code', 's_address')??null;
@@ -1202,31 +850,6 @@ if($_SESSION['user_id']){
                                                                                                 value="<?= $edit->getClientData($id, 'applicants_work', 'applicant_code', 'employer')??null ?>">
                                                                                         </div>
                                                                                     </div>
-                                                                                    <!-- <div class="col-lg-6">
-                                                                                        <div class="form-group">
-                                                                                            <label>Choose
-                                                                                                Sector:</label>
-                                                                                            <div class="radio">
-                                                                                                <label>
-                                                                                                    <?php $sector = $edit->getClientData($id, 'applicants_work', 'applicant_code', 'sector_type')??null; ?>
-                                                                                                    <input type="radio"
-                                                                                                        <?= ($sector == "Private Sector") ? 'checked' : '' ; ?>
-                                                                                                        name="sector"
-                                                                                                        value="<?= $sector; ?>">Private
-                                                                                                    Sector
-                                                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                                                </label>
-                                                                                                <label>
-                                                                                                    <input type="radio"
-                                                                                                        name="sector"
-                                                                                                        <?= ($sector == "Government Sector") ? 'checked' : '' ; ?>
-                                                                                                        value="<?= $sector; ?>">Government
-                                                                                                    Sector
-                                                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                                                </label>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div> -->
                                                                                     <div class="col-lg-4">
                                                                                         <div class="form-group">
                                                                                             <label>Choose Sector</label>
@@ -1239,7 +862,6 @@ if($_SESSION['user_id']){
                                                                                                 <?php 
                                                                                             $sector = $edit->getClientData($id, 'applicants_work', 'applicant_code', 'sector_type')??null;
                                                                                             $sectorSet = ["Private Sector", "Government Sector"];
-
                                                                                             foreach($sectorSet as $key => $val){
                                                                                                 $sec = ($sector == $val) ? '<option selected value='.$sector.'>'.$val.'</option>' : '<option value='.$val.'>'.$val.'</option>';
                                                                                              echo $sec;
@@ -1253,11 +875,27 @@ if($_SESSION['user_id']){
                                                                                         <div class="form-group">
                                                                                             <label>Type of
                                                                                                 Business</label>
-                                                                                            <input name="business"
+                                                                                            <select id="business"
+                                                                                                name="business"
                                                                                                 type="text"
-                                                                                                class="form-control"
-                                                                                                placeholder="Type of Business"
-                                                                                                value="<?= $edit->getClientData($id, 'applicants_work', 'applicant_code', 'tob')??null ?>">
+                                                                                                class="form-control">
+                                                                                                <option value=""
+                                                                                                    selected disabled>
+                                                                                                    SELECT</option>
+                                                                                                <?php 
+                                                                                            $typeOfBusiness = $edit->getClientData($id, 'applicants_work', 'applicant_code', 'tob')??null;
+                                                                                            $businessSet = ['Firms which offer professional services, such as accounting, legal, engineering, business consulting, customer service and architecture',
+                                                                                            'Transportation companies, such as airlines, shipping, land tours and forwarders', 'Entertainment, such as artists and movie houses', 'Hotels & Restaurants',
+                                                                                            'Apartments','Banks, lending companies and other financial institutions','Telecommunication companies', 'Event planners', 'Medical and dental services',
+                                                                                            'Security and janitorial services', 'Media, blogging and advertising', 'Website developers', 'Graphic designers','Business process outsourcing (BPO) companies',
+                                                                                            'Department Store','Distributor', 'Real Estate Dealer' ,'Car Dealer','Grocery Store','Car Manufacturer','Wine and Softdrinks Producer',
+                                                                                            'Electronic Parts Manufacturer','Producer of drugs and other medical products','Agriculture','Mining Company'];
+                                                                                            foreach($businessSet as $key => $val){
+                                                                                              $typeOf = ($typeOfBusiness == $val) ? '<option selected value='.$typeOfBusiness.'>'.$val.'</option>' : '<option value='.$val.'>'.$val.'</option>';
+                                                                                             echo $typeOf;
+                                                                                            }
+                                                                                            ?>
+                                                                                            </select>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="col-lg-4">
@@ -1314,43 +952,6 @@ if($_SESSION['user_id']){
                                                                                                 value="<?= $edit->getClientData($id, 'applicants_work', 'applicant_code', 'date_hired')??null ?>">
                                                                                         </div>
                                                                                     </div>
-                                                                                    <!-- <div class="col-lg-12">
-                                                                                        <div class="form-group">
-                                                                                            <label>Employment
-                                                                                                Status:</label>
-                                                                                            <div class="radio">
-                                                                                                <?php $status = $edit->getClientData($id, 'applicants_work', 'applicant_code', 'e_status')??null; ?>
-                                                                                                <label>
-                                                                                                    <input type="radio"
-                                                                                                        name="e_status"
-                                                                                                        <?= ($status == "Regular")?'checked':''; ?>
-                                                                                                        value="Regular">Regular
-                                                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                                                </label>
-                                                                                                <label>
-                                                                                                    <input type="radio"
-                                                                                                        name="e_status"
-                                                                                                        <?= ($status == "Probationary")?'checked':''; ?>
-                                                                                                        value="Probationary">Probationary
-                                                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                                                </label>
-                                                                                                <label>
-                                                                                                    <input type="radio"
-                                                                                                        name="e_status"
-                                                                                                        <?= ($status == "Contractuary")?'checked':''; ?>
-                                                                                                        value="Contractuary">Contractuary
-                                                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                                                </label>
-                                                                                                <label>
-                                                                                                    <input type="radio"
-                                                                                                        name="e_status"
-                                                                                                        <?= ($status == "Trainee")?'checked':''; ?>
-                                                                                                        value="Trainee">Trainee
-                                                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                                                </label>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div> -->
                                                                                     <div class="col-lg-3">
                                                                                         <div class="form-group">
                                                                                             <label>Employment
@@ -1373,36 +974,6 @@ if($_SESSION['user_id']){
                                                                                             </select>
                                                                                         </div>
                                                                                     </div>
-                                                                                    <!-- <div class="col-lg-12">
-                                                                                        <div class="form-group">
-                                                                                            <label>Mode of
-                                                                                                Salary:</label>
-                                                                                            <div class="radio">
-                                                                                                <?php $msalary = $edit->getClientData($id, 'applicants_work', 'applicant_code', 'm_salary')??null; ?>
-                                                                                                <label>
-                                                                                                    <input type="radio"
-                                                                                                        name="m_salary"
-                                                                                                        <?= ($msalary == "Cash")?'checked':''; ?>
-                                                                                                        value="Cash">Cash
-                                                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                                                </label>
-                                                                                                <label>
-                                                                                                    <input type="radio"
-                                                                                                        name="m_salary"
-                                                                                                        <?= ($msalary == "ATM")?'checked':''; ?>
-                                                                                                        value="ATM">ATM
-                                                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                                                </label>
-                                                                                                <label>
-                                                                                                    <input type="radio"
-                                                                                                        name="m_salary"
-                                                                                                        <?= ($msalary == "Check")?'checked':''; ?>
-                                                                                                        value="Check">Check
-                                                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                                                </label>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div> -->
                                                                                     <div class="col-lg-3">
                                                                                         <div class="form-group">
                                                                                             <label>Mode of
@@ -1416,7 +987,6 @@ if($_SESSION['user_id']){
                                                                                                 <?php 
                                                                                             $msalary = $edit->getClientData($id, 'applicants_work', 'applicant_code', 'm_salary')??null;
                                                                                             $modeSet = ['Cash', 'ATM', 'Check'];
-
                                                                                             foreach($modeSet as $key => $val){
                                                                                               $ms = ($msalary == $val) ? '<option selected value='.$msalary.'>'.$val.'</option>' : '<option value='.$val.'>'.$val.'</option>';
                                                                                              echo $ms;
@@ -1453,19 +1023,18 @@ if($_SESSION['user_id']){
                                                                                             <select
                                                                                                 class="form-control input-set-3"
                                                                                                 required
-                                                                                                onchange="existLoanChange(this, 'loan_spec')"
+                                                                                                onchange="disabling()"
                                                                                                 name="loan" id="loan">
                                                                                                 <option value=""
                                                                                                     selected disabled>
                                                                                                     SELECT</option>
                                                                                                 <?php 
-
                                                                                                 $loan = $edit->getClientData($id, 'applicants_work', 'applicant_code', 'loan')??null;
                                                                                                 $exploan =  explode("-", $loan);
-                                                                                                $loanSet = ['Salary Loan', 'Personal Loan', 'Calamity Loan', 'Maternity Loan', 'Paternity Loan','Business Loan', 'Appliance/Gadget Loan', 'Vehicle Loan', 'Home Loan', 'Travel Loan', 'Credit Card', 'OFW Loan', 'None'];
+                                                                                                $loanSet = ['Yes', 'None'];
                                                                                                 foreach($loanSet as $key => $val){
-                                                                                                    $op1 = ($exploan[0] == $val) ? '<option selected value='.$exploan[0].'>'.$exploan[0].'</option>' : '<option value='.$val.'>'.$val.'</option>';
-                                                                                                echo $op1;
+                                                                                                echo  $op1 = ($exploan[0] == $val) ? '<option selected value='.$exploan[0].'>'.$exploan[0].'</option>' : '<option value='.$val.'>'.$val.'</option>';
+                                                                                                
                                                                                                 }
                                                                                                 ?>
                                                                                             </select>
@@ -1474,30 +1043,37 @@ if($_SESSION['user_id']){
                                                                                     <div class="col-lg-3">
                                                                                         <label for="">Specify:
                                                                                         </label>
-                                                                                        <input type="text"
-                                                                                            name="loan_spec"
-                                                                                            id="loan_spec"
-                                                                                            class="form-control input-set-3" <?php 
-                                                                                            if($exploan[0] == "None"){
-                                                                                                echo "disabled";
-                                                                                            }else{
-                                                                                                echo 'value="'.$exploan[1].'"';
-                                                                                            }
-                                                                                        ?>>
+                                                                                        <select
+                                                                                            class="form-control input-set-3"
+                                                                                            required name="loan_spec"
+                                                                                            id="loan_spec">
+                                                                                            <option value="" selected
+                                                                                                disabled>
+                                                                                                SELECT</option>
+                                                                                            <?php 
+                                                                                                $loan = $edit->getClientData($id, 'applicants_work', 'applicant_code', 'loan')??null;
+                                                                                                $exploan =  explode("-", $loan);
+                                                                                                $loanSet = ['Salary Loan', 'Personal Loan', 'Calamity Loan', 'Maternity Loan', 'Paternity Loan', 'Business Loan', 'Appliance/Gadget Loan', 
+                                                                                                'Vehicle Loan', 'Home Loan', 'Travel Loan', 'Credit Card', 'OFW Loan'];
+                                                                                                foreach($loanSet as $key => $val){
+                                                                                                echo  $op1 = ($exploan[1] == $val) ? '<option selected value='.$exploan[1].'>'.$exploan[1].'</option>' : '<option value='.$val.'>'.$val.'</option>';
+                                                                                                
+                                                                                                }
+                                                                                            ?>
+                                                                                        </select>
                                                                                     </div>
-                                                                                    <!--MASTERRRRRRRRRRRRRRRRRRRRRRRRRR-->
+                                                                                    <!--MASTERRRRRRRRRRRRRRRRRRRRRRRRRR WALA DIAY NA SAVE NI SA DATABASE-->
                                                                                     <div class="col-lg-3">
                                                                                         <div class="form-group">
                                                                                             <label>Specify Monthly
                                                                                                 Amortization</label>
                                                                                             <input name="sma" id="sma"
                                                                                                 type="text"
-                                                                                                class="form-control text-right input-set-3" 
+                                                                                                class="form-control text-right input-set-3"
                                                                                                 maxlength="10"
                                                                                                 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                                                                                placeholder="₱"
-                                                                                                <?php 
-                                                                                                    if($exploan[1] == "Salary Loan"){
+                                                                                                placeholder="₱" <?php 
+                                                                                                    if($exploan[0] == "Yes" && $exploan[1] == "Salary Loan"){
                                                                                                         echo 'value="'.$exploan[2].'"';
                                                                                                     }else if($exploan[1] == "Personal Loan"){
                                                                                                         echo 'value="'.$exploan[2].'"';
@@ -1507,7 +1083,7 @@ if($_SESSION['user_id']){
                                                                                                         echo 'value="'.$exploan[2].'"';
                                                                                                     }else if($exploan[1] == "Paternity Loan"){
                                                                                                         echo 'value="'.$exploan[2].'"';
-                                                                                                    }else if($exploan[1] == "Business Loan"){
+                                                                                                    }else if($exploan[0] == "Yes" && $exploan[1] == "Business Loan"){
                                                                                                         echo 'value="'.$exploan[2].'"';
                                                                                                     }else if($exploan[1] == "Appliance/Gadget Loan"){
                                                                                                         echo 'value="'.$exploan[2].'"';
@@ -1524,8 +1100,7 @@ if($_SESSION['user_id']){
                                                                                                     }else{
                                                                                                         echo "disabled";
                                                                                                     }
-                                                                                                ?>
-                                                                                                >
+                                                                                                ?>>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="col-lg-3">
@@ -1535,54 +1110,50 @@ if($_SESSION['user_id']){
                                                                                             <input name="ms_salary"
                                                                                                 type="text"
                                                                                                 class="form-control text-right"
-                                                                                                placeholder="Monthly Salary"
+                                                                                                placeholder="₱"
                                                                                                 value="<?= $edit->getClientData($id, 'applicants_work', 'applicant_code', 'monthly_salary')??null; ?>">
                                                                                         </div>
                                                                                     </div>
-                                                                                    <!-- <div class="col-lg-3">
+                                                                                    <div class="col-lg-12"></div>
+                                                                                    <div class="col-lg-6">
                                                                                         <div class="form-group">
-                                                                                            <label>Salary Period</label>
-                                                                                            <select class="form-control"
-                                                                                                name="s_period">
+                                                                                            <label>Specify Other
+                                                                                                Source
+                                                                                                of Income</label>
+                                                                                            <select id="s_specify"
+                                                                                                name="s_specify"
+                                                                                                type="text"
+                                                                                                class="form-control"
+                                                                                                placeholder="Specify"
+                                                                                                onchange="incomeDis()">
                                                                                                 <option value=""
-                                                                                                    disabled selected>
-                                                                                                    SELECT
-                                                                                                </option>
+                                                                                                    selected disabled>
+                                                                                                    SELECT</option>
                                                                                                 <?php 
-                                                                                            $msalary = $edit->getClientData($id, 'applicants_work', 'applicant_code', 's_period')??null;
-                                                                                            $modeSet = ['5/20', '6/21', '7/22', '8/23','10/25','15/30','Weekly','Every 2nd Saturday'];
+                                                                                            $sourceIncome = $edit->getClientData($id, 'applicants_work', 'applicant_code', 'specify')??null;
+                                                                                            $incomeSet = ['None', 'Business', 'Allowance', 'Pension','Commission','Part time Job','Allotment', 'Family Financial Support'];
 
-                                                                                            foreach($modeSet as $key => $val){
-                                                                                              $ms = ($msalary == $val) ? '<option selected value='.$msalary.'>'.$val.'</option>' : '<option value='.$val.'>'.$val.'</option>';
-                                                                                             echo $ms;
+                                                                                            foreach($incomeSet as $key => $val){
+                                                                                              $sourceOf = ($sourceIncome == $val) ? '<option selected value='.$sourceIncome.'>'.$val.'</option>' : '<option value='.$val.'>'.$val.'</option>';
+                                                                                             echo $sourceOf;
                                                                                             }
                                                                                             ?>
                                                                                             </select>
                                                                                         </div>
-                                                                                    </div> -->
-                                                                                    <div class="col-lg-12"></div>
+                                                                                    </div>
                                                                                     <div class="col-lg-6">
                                                                                         <div class="form-group">
-                                                                                            <label>Other Source of
-                                                                                                Income</label>
-
+                                                                                            <label>Total Other
+                                                                                                Income (₱)</label>
                                                                                             <input name="os_income"
+                                                                                                id="os_income"
                                                                                                 type="text"
-                                                                                                class="form-control"
+                                                                                                class="form-control text-right"
                                                                                                 placeholder="Other Source of Income"
                                                                                                 value="<?= $edit->getClientData($id, 'applicants_work', 'applicant_code', 'other_source')??null; ?>">
                                                                                         </div>
                                                                                     </div>
-                                                                                    <div class="col-lg-6">
-                                                                                        <div class="form-group">
-                                                                                            <label>(Specify)</label>
-                                                                                            <input name="s_specify"
-                                                                                                type="text"
-                                                                                                class="form-control"
-                                                                                                placeholder="Specify"
-                                                                                                value="<?= $edit->getClientData($id, 'applicants_work', 'applicant_code', 'specify')??null ?>">
-                                                                                        </div>
-                                                                                    </div>
+
                                                                                     <!-- separator -->
                                                                                     <div class="col-lg-12">
                                                                                         <hr>
@@ -1600,7 +1171,7 @@ if($_SESSION['user_id']){
                                                                                     Prev</button>
                                                                             </fieldset>
                                                                             <fieldset>
-                                                                                <div id="div_spouse" class="text-left">
+                                                                                <div class="text-left">
                                                                                     <div class="col-lg-12"
                                                                                         align="right">
                                                                                         <button type="button"
@@ -1623,57 +1194,6 @@ if($_SESSION['user_id']){
                                                                                             ?>
                                                                                         </div>
                                                                                     </div>
-                                                                                    <!-- <div class="col-lg-12">
-                                                                                        <div class="form-group">
-                                                                                            <label>Source:</label>
-                                                                                            <div class="radio">
-                                                                                                <?php $src = $edit->getClientData($id, 'applicants_reference', 'applicant_code', 'source'); ?>
-                                                                                                <label>
-                                                                                                    <input type="radio"
-                                                                                                        name="source"
-                                                                                                        value="Facebook"
-                                                                                                        <?= ($src == "Facebook")?'checked':''; ?>>Facebook
-                                                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                                                </label>
-                                                                                                <label>
-                                                                                                    <input type="radio"
-                                                                                                        name="source"
-                                                                                                        value="Signage/Tarpaulin"
-                                                                                                        <?= ($src == "Signage/Tarpaulin")?'checked':''; ?>>Signage/Tarpaulin
-                                                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                                                </label>
-                                                                                                <label>
-                                                                                                    <input type="radio"
-                                                                                                        name="source"
-                                                                                                        value="Banners"
-                                                                                                        <?= ($src == "Banners")?'checked':''; ?>>Banners
-                                                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                                                </label>
-                                                                                                <label>
-                                                                                                    <input type="radio"
-                                                                                                        name="source"
-                                                                                                        value="Flyers"
-                                                                                                        <?= ($src == "Flyers")?'checked':''; ?>>Flyers
-                                                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                                                </label>
-                                                                                                <label>
-                                                                                                    <input type="radio"
-                                                                                                        name="source"
-                                                                                                        value="Referrals"
-                                                                                                        <?= ($src == "Referrals")?'checked':''; ?>>Referrals
-                                                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                                                </label>
-                                                                                                <label>
-                                                                                                    <input type="radio"
-                                                                                                        name="source"
-                                                                                                        value="Word of Mouth"
-                                                                                                        <?= ($src == "Word of Mouth")?'checked':''; ?>>Word
-                                                                                                    of Mouth
-                                                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                                                </label>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div> -->
                                                                                     <div class="col-lg-4">
                                                                                         <div class="form-group">
                                                                                             <label>Loan Purpose</label>
@@ -1797,20 +1317,7 @@ if($_SESSION['user_id']){
                                                                                                 placeholder="Facebook Account"
                                                                                                 value="<?= $edit->getClientData($id, 'applicants_reference', 'applicant_code', 'fb_acct')??null ?>">
                                                                                         </div>
-
                                                                                     </div>
-                                                                                    <!-- <div class="col-lg-4">
-                                                                                        <div class="form-group">
-                                                                                            <label>Select file to
-                                                                                                upload</label>
-                                                                                            <input type="file"
-                                                                                                name="myFile"
-                                                                                                class="form-control input-set-4"
-                                                                                                id="fileToUpload"
-                                                                                                accept="application/pdf"
-                                                                                                required>
-                                                                                        </div>
-                                                                                    </div> -->
                                                                                 </div>
                                                                                 <br>
                                                                                 <button type="button" name="submit"
@@ -1844,19 +1351,13 @@ if($_SESSION['user_id']){
                                             <!-- /.panel-body -->
                                         </div>
                                         <!-- /.panel -->
-
                                     </div>
-
-                                    <!-- <div class="tab-pane fade" id="tab-default-3">Page 3</div>
-                                        <div class="tab-pane fade" id="tab-default-4">Page 4</div>
-                                        <div class="tab-pane fade" id="tab-default-5">Page 5</div> -->
                                 </div>
                             </div>
                         </div>
                         <!-- /.panel -->
                     </div>
                     <div class="col-lg-12">
-
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
@@ -1865,7 +1366,6 @@ if($_SESSION['user_id']){
             <!-- /.container-fluid -->
         </div>
         <!-- /#page-wrapper -->
-
     </div>
     <div class="modal fade text-left" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
         aria-hidden="true" data-backdrop="static">
@@ -1935,6 +1435,31 @@ if($_SESSION['user_id']){
             populate("spouse_province", "", "");
         } else {
             document.getElementById('div_spouse').style.display = "none";
+        }
+    }
+    //GARA GARA rani master
+    function disabling() {
+        let loan = document.getElementById("loan");
+        let specifyLoan = document.getElementById("loan_spec");
+        let ammort = document.getElementById("sma");
+
+        if (loan.value == "None") {
+            specifyLoan.disabled = true;
+            ammort.disabled = true;
+        } else {
+            specifyLoan.disabled = false;
+            ammort.disabled = false;
+        }
+    }
+    //GARA GARA rani master
+    function incomeDis() {
+        let sourceSpec = document.getElementById('s_specify');
+        let osIncome = document.getElementById('os_income');
+
+        if (sourceSpec.value == "None") {
+            osIncome.disabled = true;
+        } else {
+            osIncome.disabled = false;
         }
     }
 
@@ -2071,9 +1596,9 @@ if($_SESSION['user_id']){
         document.getElementById('lw2').value = "Others";
     }
 
-    if (document.getElementById('loan_spec').value == "") {
-        document.getElementById('loan').value = "None";
-    }
+    // if (document.getElementById('loan_spec').value == "") {
+    //     document.getElementById('loan').value = "None";
+    // }
 
     if (document.getElementById('specPurp').value != "") {
         document.getElementById('purposeLoan').value = "Others";
@@ -2082,8 +1607,6 @@ if($_SESSION['user_id']){
     if (document.getElementById('specSource').value != "") {
         document.getElementById('sources').value = "Others";
     }
-
-
 
     function populate(select, prevVal, val, db) {
         let mainSelect = document.getElementById(select);

@@ -116,7 +116,8 @@ if(!isset($_SESSION['user_id'])){
                                                                             </ul>
                                                                             <div class="col-lg-12" align="left"><i
                                                                                     style="color:red;">NOTE:
-                                                                                    All fields that has (*) are required.</i><br><br>
+                                                                                    All fields that has (*) are
+                                                                                    required.</i><br><br>
                                                                             </div>
                                                                             <!-- fieldsets -->
                                                                             <fieldset id="set1" class="text-left">
@@ -601,45 +602,6 @@ if(!isset($_SESSION['user_id'])){
                                                                                                 placeholder="Phase/Zone">
                                                                                         </div>
                                                                                     </div>
-                                                                                    <!-- 
-
-                                                                                    <div class="col-lg-12">
-                                                                                        <div class="form-group">
-                                                                                            <label>Type of
-                                                                                                Residency:</label>
-                                                                                            <div class="radio">
-                                                                                                <label>
-                                                                                                    <input type="radio"
-                                                                                                        name="tor2"
-                                                                                                        id="owned1"
-                                                                                                        value="Owned"
-                                                                                                        onclick="enableField('owned1', 'specific1')">Owned
-                                                                                                    &nbsp;
-                                                                                                </label>
-                                                                                                <label>
-                                                                                                    <input type="radio"
-                                                                                                        name="tor2"
-                                                                                                        id="renting1"
-                                                                                                        value="Renting/leasing"
-                                                                                                        onclick="enableField('renting1', 'specific1')">Renting/Leasing
-                                                                                                    &nbsp;
-                                                                                                </label>
-                                                                                                <label>
-                                                                                                    <input type="radio"
-                                                                                                        name="tor2"
-                                                                                                        id="specify1"
-                                                                                                        value="Specify"
-                                                                                                        onclick="enableField('specify1', 'specific1')">Others
-                                                                                                    (Specify):
-                                                                                                </label>
-                                                                                                <input type="text"
-                                                                                                    name="tor_spec2"
-                                                                                                    id="specific1"
-                                                                                                    class="form-group"
-                                                                                                    disabled="true">
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div> -->
                                                                                     <div class="col-lg-3">
                                                                                         <div class="form-group">
                                                                                             <label><span
@@ -835,16 +797,6 @@ if(!isset($_SESSION['user_id'])){
                                                                                                 placeholder="Date of birth">
                                                                                         </div>
                                                                                     </div>
-                                                                                    <!-- <div class="col-lg-6">
-                                                                                        <div class="form-group">
-                                                                                            <label>Place of
-                                                                                                birth</label>
-                                                                                            <input name="spouse_pob"
-                                                                                                type="text"
-                                                                                                class="form-control"
-                                                                                                placeholder="Place of birth">
-                                                                                        </div>
-                                                                                    </div> -->
                                                                                     <div class="col-lg-4">
                                                                                         <div class="form-group">
                                                                                             <label><span
@@ -1009,28 +961,6 @@ if(!isset($_SESSION['user_id'])){
                                                                                                 required>
                                                                                         </div>
                                                                                     </div>
-                                                                                    <!-- <div class="col-lg-6">
-                                                                                        <div class="form-group">
-                                                                                            <label>Choose
-                                                                                                Sector:</label>
-                                                                                            <div class="radio">
-                                                                                                <label>
-                                                                                                    <input type="radio"
-                                                                                                        value="Private Sector"
-                                                                                                        name="sector">Private
-                                                                                                    Sector
-                                                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                                                </label>
-                                                                                                <label>
-                                                                                                    <input type="radio"
-                                                                                                        value="Government Sector"
-                                                                                                        name="sector">Government
-                                                                                                    Sector
-                                                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                                                </label>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div> -->
                                                                                     <div class="col-lg-4">
                                                                                         <div class="form-group">
                                                                                             <label><span
@@ -1288,39 +1218,6 @@ if(!isset($_SESSION['user_id'])){
                                                                                                 placeholder="Date Hired">
                                                                                         </div>
                                                                                     </div>
-                                                                                    <!-- <div class="col-lg-12">
-                                                                                        <div class="form-group">
-                                                                                            <label>Employment
-                                                                                                Status:</label>
-                                                                                            <div class="radio">
-                                                                                                <label>
-                                                                                                    <input type="radio"
-                                                                                                        value="Regular"
-                                                                                                        name="e_status">Regular
-                                                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                                                </label>
-                                                                                                <label>
-                                                                                                    <input type="radio"
-                                                                                                        value="Probationary"
-                                                                                                        name="e_status">Probationary
-                                                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                                                </label>
-                                                                                                <label>
-                                                                                                    <input type="radio"
-                                                                                                        value="Contractuary"
-                                                                                                        name="e_status">Contractuary
-                                                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                                                </label>
-                                                                                                <label>
-                                                                                                    <input type="radio"
-                                                                                                        value="Trainee"
-                                                                                                        name="e_status">Trainee
-                                                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                                                </label>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="col-lg-12"></div> -->
                                                                                     <div class="col-lg-3">
                                                                                         <div class="form-group">
                                                                                             <label><span
@@ -1352,32 +1249,6 @@ if(!isset($_SESSION['user_id'])){
                                                                                             </select>
                                                                                         </div>
                                                                                     </div>
-                                                                                    <!-- <div class="col-lg-12">
-                                                                                        <div class="form-group">
-                                                                                            <label>Mode of
-                                                                                                Salary:</label>
-                                                                                            <div class="radio">
-                                                                                                <label>
-                                                                                                    <input type="radio"
-                                                                                                        value="Cash"
-                                                                                                        name="m_salary">Cash
-                                                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                                                </label>
-                                                                                                <label>
-                                                                                                    <input type="radio"
-                                                                                                        value="ATM"
-                                                                                                        name="m_salary">ATM
-                                                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                                                </label>
-                                                                                                <label>
-                                                                                                    <input type="radio"
-                                                                                                        value="Check"
-                                                                                                        name="m_salary">Check
-                                                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                                                </label>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div> -->
                                                                                     <div class="col-lg-3">
                                                                                         <div class="form-group">
                                                                                             <label><span
@@ -1428,35 +1299,6 @@ if(!isset($_SESSION['user_id'])){
                                                                                                 placeholder="Type of ATM Card">
                                                                                         </div>
                                                                                     </div>
-                                                                                    <!-- <div class="col-lg-6">
-                                                                                        <div class="form-group">
-                                                                                            <label>Do you have other
-                                                                                                loan?</label>
-                                                                                            <div class="radio">
-                                                                                                <label>
-                                                                                                    <input type="radio"
-                                                                                                        name="loan"
-                                                                                                        id="Yes"
-                                                                                                        value="Specify"
-                                                                                                        onclick="enableField('Yes', 'yes')">Yes
-                                                                                                    (Specify):
-                                                                                                </label>
-                                                                                                <input type="text"
-                                                                                                    name="loan_spec"
-                                                                                                    id="yes"
-                                                                                                    class="form-group"
-                                                                                                    disabled="true">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                                                <label>
-                                                                                                    <input type="radio"
-                                                                                                        name="loan"
-                                                                                                        id="No"
-                                                                                                        value="No"
-                                                                                                        onclick="enableField('No', 'yes')">No
-
-                                                                                                </label>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div> -->
                                                                                     <div class="col-lg-3">
                                                                                         <div class="form-group">
                                                                                             <label><span
@@ -1534,11 +1376,6 @@ if(!isset($_SESSION['user_id'])){
                                                                                                 Travel Loan
                                                                                             </option>
                                                                                         </select>
-                                                                                        <!-- <input type="text"
-                                                                                            name="loan_spec"
-                                                                                            id="loan_spec"
-                                                                                            class="form-control input-set-3"
-                                                                                            disabled="true"> -->
                                                                                     </div>
                                                                                     <div class="col-lg-3">
                                                                                         <div class="form-group">
@@ -1613,12 +1450,7 @@ if(!isset($_SESSION['user_id'])){
                                                                                                     Family Financial
                                                                                                     Support
                                                                                                 </option>
-
                                                                                             </select>
-                                                                                            <!-- <input name="s_specify"
-                                                                                                type="text"
-                                                                                                 class="form-control input-set-3" required
-                                                                                                placeholder="Specify"> -->
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="col-lg-6">
@@ -1865,7 +1697,6 @@ if(!isset($_SESSION['user_id'])){
                                                                                             <br><br>
                                                                                         </span>
                                                                                     </div> -->
-
                                                                                 </div><br><br>
                                                                                 <button type="button" name="submit_add"
                                                                                     id="submit_add" disabled
