@@ -103,7 +103,7 @@ if(!isset($_SESSION['user_id'])){
                                                 </td>
                                                 <td style="text-align:right;">₱
                                                     <?php echo number_format($row['loan_amount'],2);?></td>
-                                                <td><?php echo date('F d, Y',strtotime($adate));?></td>
+                                                <td class="text-center"><?php echo date('F d, Y',strtotime($adate));?></td>
                                                 <td style="text-align:center;"><a class="btn btn-warning"
                                                         href="<?php echo $row['map_url'];?>" target="_blank"><i
                                                             class="fa fa-map"></i> View Map</a></td>

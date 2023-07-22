@@ -82,7 +82,7 @@ if($_SESSION['user_id']){
                                                 <th>NAME</th>
                                                 <th>GENDER</th>
                                                 <th>CONTACT NO.</th>
-                                                <th>ADDRESS</th>
+                                                <th>BARANGAY</th>
                                                 <th>CITY</th>
                                                 <th>PROVINCE</th>
                                                 <th class="text-center">ACTIONS</th>
@@ -99,7 +99,7 @@ if($_SESSION['user_id']){
                                                 </td>
                                                 <td><?php echo $display['gender'];?></td>
                                                 <td><?php echo $display['contact1'];?></td>
-                                                <td><?php echo $display['street1'].', '.$display['brgy1'];?></td>
+                                                <td><?php echo $display['brgy1'];?></td>
                                                 <td><?php echo $display['city1'];?></td>
                                                 <td><?php echo $display['province1'];?></td>
                                                 <td style="text-align:center">
