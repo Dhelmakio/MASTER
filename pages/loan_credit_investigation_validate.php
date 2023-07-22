@@ -28,9 +28,9 @@ if(isset($_GET['id'])){
     if(mysqli_num_rows($res_ex) > 0){
         header('location:loan_credit_investigation_view.php?id='.$contract);
     }else{
-        $sql = "SELECT CONCAT(clients.first_name,' ',clients.middle_name,' ',clients.last_name,' ',clients.suffix) AS names, 
+        $sql = "SELECT CONCAT(applicants_personal.firstname,' ',applicants_personal.middlename,' ',applicants_personal.lastname,' ',applicants_personal.suffix) AS names, 
         loan_applications.* FROM loan_applications 
-        INNER JOIN clients ON clients.client_id = loan_applications.client_id 
+        INNER JOIN applicants_personal ON applicants_personal.applicant_code = loan_applications.client_id 
         WHERE contract_no='$contract'";
         $res = mysqli_query($con,$sql);
         if(mysqli_num_rows($res) > 0){
