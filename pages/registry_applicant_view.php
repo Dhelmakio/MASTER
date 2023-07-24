@@ -7,12 +7,23 @@ require "../controller/reg_app.php";
 // if(!isset($_SESSION['user_id'])){
 //     header('location:login.php');
 // }
+
+
 $id;
+$cn;
 if(isset($_GET['id'])){
     $id = $_GET['id'];
 }else{
     header('location:reg_applicantion.php');
 }
+
+    $sql = "SELECT contract_no  FROM loan_applications WHERE client_id = '$id' AND paid=0";
+    $res = mysqli_query($con,$sql);
+    if(mysqli_num_rows($res) > 0){
+        while($row = mysqli_fetch_assoc($res)) {
+            $cn = $row['contract_no']??null;
+        }
+    }
 
 if($_SESSION['user_id']){
 ?>
@@ -58,8 +69,12 @@ if($_SESSION['user_id']){
         <div id="page-wrapper">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-lg-6">
                         <h1 class="page-header">View Applicant</h1>
+                    </div>
+                    <div class="col-lg-6 text-right">
+                        <br>
+                    <h1> <a href="contract_signing.php?id=<?= $id ?>&cn=<?= $cn ?>" class="btn btn-lg btn-primary">View Contract</a></h1>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
