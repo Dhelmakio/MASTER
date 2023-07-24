@@ -139,7 +139,7 @@ if(!isset($_SESSION['user_id'])){
                                                                                     $rescheck = mysqli_query($con,$check);
                                                                                     if(mysqli_num_rows($rescheck) > 0){ 
                                                                                         ?>
-                                                                                        <button type="button" class="btn btn-success btn-sml" data-toggle="modal" data-target="#myModal_<?php echo $cid?>" >
+                                                                                        <button type="button" class="btn btn-primary btn-sml" data-toggle="modal" data-target="#myModal_<?php echo $cid?>" >
                                                                                             Apply Loan <i class="fa fa-long-arrow-right" aria-hidden="true" title="Copy to use save"></i> 
                                                                                         </button>
                                                                                         <?php
@@ -173,7 +173,7 @@ if(!isset($_SESSION['user_id'])){
                                                                                                                     <input type="text" name="loan_type" value="RENEWAL" hidden>
                                                                                                                     <input type="text" name="id" value="<?php echo $cid;?>" hidden>
                                                                                                                     <input type="text" name="name" value="<?php echo $name;?>" hidden>
-                                                                                                                    <button type="submit" class="btn btn-success" name="submit">
+                                                                                                                    <button type="submit" class="btn btn-primary" name="submit">
                                                                                                                         Proceed <i class="fa fa-long-arrow-right" aria-hidden="true" title="Copy to use save"></i> 
                                                                                                                     </button>
                                                                                                                 </form>

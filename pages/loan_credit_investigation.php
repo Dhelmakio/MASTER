@@ -82,28 +82,30 @@ if(!isset($_SESSION['user_id'])){
                                         </thead>
                                         <tbody>
                                             <?php
-                                                    $sql ="SELECT * FROM loan_applications 
-                                                    INNER JOIN applicants_personal 
-                                                    ON applicants_personal.applicant_code = loan_applications.client_id 
-                                                    WHERE loan_applications.ci_status = 0 
-                                                    ORDER BY applicants_personal.lastname ASC";
-                                                    $res = mysqli_query($con,$sql);
-                                                        if(mysqli_num_rows($res) > 0){
-                                                            while($row = mysqli_fetch_assoc($res)) {
-                                                                // $name = $row['last_name'].', '.$row['first_name'].' '.$row['middle_name'];
-                                                                // $suffix = $row['suffix'];
-                                                                $cid = $row['applicant_code'];
-                                                                $lid = $row['loan_id'];
-                                                                $name = $row['lastname'].', '.$row['firstname'].' '.$row['suffix'].' '.$row['middlename'].' '.$row['suffix'];
-                                                                $adate = $row['application_date'];
-                                                                $cis;
-                                                                ?><tr class="odd gradeX">
+                                            //LEFT or INNER?
+                                                $sql ="SELECT * FROM loan_applications 
+                                                INNER JOIN applicants_personal 
+                                                ON applicants_personal.applicant_code = loan_applications.client_id 
+                                                ORDER BY applicants_personal.lastname ASC";
+                                                $res = mysqli_query($con,$sql);
+                                                    if(mysqli_num_rows($res) > 0){
+                                                        while($row = mysqli_fetch_assoc($res)) {
+                                                        // $name = $row['last_name'].', '.$row['first_name'].' '.$row['middle_name'];
+                                                        // $suffix = $row['suffix'];
+                                                        $cid = $row['applicant_code'];
+                                                        $lid = $row['loan_id'];
+                                                        $name = $row['lastname'].', '.$row['firstname'].' '.$row['suffix'].' '.$row['middlename'].' '.$row['suffix'];
+                                                        $adate = $row['application_date'];
+                                                        //$cis = $row['ci_status'];
+                                                ?>
+                                                <tr class="odd gradeX">
                                                 <td><?php echo $row['contract_no'];?></td>
                                                 <td><?php echo $row['lastname'].', '.$row['firstname'].' '.$row['suffix'].' '.$row['middlename'];?>
                                                 </td>
                                                 <td style="text-align:right;">₱
                                                     <?php echo number_format($row['loan_amount'],2);?></td>
-                                                <td class="text-center"><?php echo date('F d, Y',strtotime($adate));?></td>
+                                                <td class="text-center"><?php echo date('F d, Y',strtotime($adate));?>
+                                                </td>
                                                 <td style="text-align:center;"><a class="btn btn-primary"
                                                         href="<?php echo $row['map_url'];?>" target="_blank"><i
                                                             class="fa fa-map"></i> View Map</a></td>
@@ -111,20 +113,32 @@ if(!isset($_SESSION['user_id'])){
                                                         href="registry_applicant_view.php?id=<?php echo $cid?>"><i
                                                             class="fa fa-eye"></i> View info</td>
                                                 <td style="text-align:center">
-                                                    <a
+                                                    <!-- <a
                                                         href="loan_credit_investigation_validate.php?id=<?php echo $row['contract_no']?>">
                                                         <button type="button" class="btn btn-warning"
                                                             data-toggle="tooltip" data-placement="top" title="Validate">
                                                             <i class="fa fa-search" aria-hidden="true"></i> Validate
                                                         </button>
-                                                    </a>
-
+                                                    </a> -->
+                                                    <?php 
+                                                                        if($row['ci_status']==1){
+                                                                        echo '<a href="#validated">
+                                                                            <button disabled type="button" class="btn btn-success btn-sml">
+                                                                                    Validated <i class="fa fa-check" aria-hidden="true" title="Copy to use save"></i></button>
+                                                                        </a>';
+                                                                        }else{
+                                                                        echo '<a href="loan_credit_investigation_validate.php?id='.$row['contract_no'].'">
+                                                                            <button type="button" class="btn btn-warning btn-sml">
+                                                                                Validate <i class="fa fa-long-arrow-right" aria-hidden="true" title="Copy to use save"></i>
+                                                                            </button>
+                                                                        </a>';
+                                                                        }
+                                                                        ?>
                                                 </td>
-                                            </tr><?php
-                                                            }
-                                                        }
-                                                ?>
-
+                                            </tr>
+                                            <?php
+                                                }
+                                            }?>
                                         </tbody>
                                     </table>
                                 </div>
