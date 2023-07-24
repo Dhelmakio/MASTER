@@ -71,6 +71,7 @@ if(!isset($_SESSION['user_id'])){
                                         id="dataTables-example">
                                         <thead>
                                             <tr>
+                                                <th>CONTACT NO.</th>
                                                 <th>NAME</th>
                                                 <th>GENDER</th>
                                                 <th>CONTACT NO.</th>
@@ -85,8 +86,7 @@ if(!isset($_SESSION['user_id'])){
                                                     //$sql = "SELECT * FROM clients left join loan_applications on clients.client_id=loan_applications.client_id where loan_applications.paid=1 group by clients.client_id order by clients.last_name asc ";
                                                    $sql = "SELECT * FROM applicants_personal 
                                                    inner join loan_applications 
-                                                   on applicants_personal.applicant_code=loan_applications.client_id 
-                                                   where loan_applications.paid=1 
+                                                   on applicants_personal.applicant_code=loan_applications.client_id
                                                    group by applicants_personal.applicant_code 
                                                    order by applicants_personal.lastname asc ";
                                                    $res = mysqli_query($con,$sql);
@@ -98,6 +98,7 @@ if(!isset($_SESSION['user_id'])){
                                                                 $loan = new Loan($cid);
                                                                 $name = $row['lastname'].', '.$row['firstname'].' '.$row['suffix'].' '.$row['middlename'];?>
                                             <tr class="odd gradeX">
+                                                <td><?php echo $row['contract_no']?></td>
                                                 <td><?php echo $name?></td>
                                                 <td><?php echo $row['gender'];?></td>
                                                 <td><?php echo $row['contact1'];?></td>
@@ -107,9 +108,9 @@ if(!isset($_SESSION['user_id'])){
                                                     <div class="tooltip-demo">
 
                                                         <div class="panel-body">
-                                                            <!-- Button trigger modal -->
+                                                            <!-- Button trigger modal  Ako gi tangtang = [AND paid=0] sa query  -->
                                                             <?php
-                                                                $check = "SELECT * FROM loan_applications WHERE client_id='$cid' AND paid=0 ";
+                                                                $check = "SELECT * FROM loan_applications WHERE client_id='$cid'";
                                                                 $rescheck = mysqli_query($con,$check);
                                                                 if(mysqli_num_rows($rescheck) > 0){ 
                                                                 ?>
