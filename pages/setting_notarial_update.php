@@ -63,7 +63,7 @@ if($_SESSION['user_id']){
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Update Applicant Information Registry</h1>
+                        <h1 class="page-header">Update Notarial Fee</h1>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
@@ -93,7 +93,7 @@ if($_SESSION['user_id']){
                                                                     $result = mysqli_query($con, $sql);
                                                                     foreach($result as $row){
                                                                     ?>
-                                                                    <div class="col-lg-12 mx-0">
+                                                                    <div class="col-lg-12">
                                                                         <form id="msform" method="POST"
                                                                             action="../request/reg_notarial.php">
                                                                             <!-- fieldsets -->

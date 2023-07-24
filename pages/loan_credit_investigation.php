@@ -104,7 +104,7 @@ if(!isset($_SESSION['user_id'])){
                                                 <td style="text-align:right;">₱
                                                     <?php echo number_format($row['loan_amount'],2);?></td>
                                                 <td class="text-center"><?php echo date('F d, Y',strtotime($adate));?></td>
-                                                <td style="text-align:center;"><a class="btn btn-warning"
+                                                <td style="text-align:center;"><a class="btn btn-primary"
                                                         href="<?php echo $row['map_url'];?>" target="_blank"><i
                                                             class="fa fa-map"></i> View Map</a></td>
                                                 <td style="text-align:center;"><a class="btn btn-info"
@@ -113,7 +113,7 @@ if(!isset($_SESSION['user_id'])){
                                                 <td style="text-align:center">
                                                     <a
                                                         href="loan_credit_investigation_validate.php?id=<?php echo $row['contract_no']?>">
-                                                        <button type="button" class="btn btn-primary"
+                                                        <button type="button" class="btn btn-warning"
                                                             data-toggle="tooltip" data-placement="top" title="Validate">
                                                             <i class="fa fa-search" aria-hidden="true"></i> Validate
                                                         </button>

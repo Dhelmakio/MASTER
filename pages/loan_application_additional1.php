@@ -24,11 +24,12 @@ $max_add;
 $loan_type = $_POST['loan_type'];
 if(isset($_POST['id'])){
     $cid = $_POST['id'];
-    $sel = "select * from clients where client_id='$cid'";
+    //$sel = "select * from clients where client_id='$cid'";
+    $sel = "SELECT * FROM applicants_personal WHERE applicant_code='$cid'";
     $resel = mysqli_query($con,$sel);
     if(mysqli_num_rows($resel) > 0){
     while($rowsel = mysqli_fetch_assoc($resel)) {
-        $name = $rowsel['first_name']." ".$rowsel['middle_name']." ".$rowsel['last_name']." ".$rowsel['suffix'];
+        $name = $rowsel['firstname']." ".$rowsel['middlename']." ".$rowsel['lastname']." ".$rowsel['suffix'];
     }
     }
 
@@ -133,7 +134,7 @@ if(isset($_POST['id'])){
                                                         </div>
                                                     </div>
                                                     <br><br>
-                                                    <div class="col-lg-8" style="font-size:15px;"><br>
+                                                    <!-- <div class="col-lg-8" style="font-size:15px;"><br>
                                                         <div class="col-lg-3">Employee Status: </div>
                                                         <div class="col-lg-3"><label> <?php echo $loan->clientEmpStatus; ?></label></div>
                                                         <div class="col-lg-3">Net Salary per Month: </div>
@@ -147,6 +148,21 @@ if(isset($_POST['id'])){
                                                         <div class="col-lg-3">Net Loanable per month: </div>
                                                         <div class="col-lg-3"><label>₱ <?php echo $loan->netLoanPerMonth; ?></label></div>
                                                         
+                                                    </div> -->
+                                                    <div class="col-lg-11" style="font-size:15px;"><br>
+                                                        <div class="col-lg-3">Employee Status: </div>
+                                                        <div class="col-lg-3"><label>
+                                                                <?php echo $loan->clientEmpStatus; ?></label></div>
+                                                        <div class="col-lg-3">Net Salary per Month: </div>
+                                                        <div class="col-lg-3"><label>₱
+                                                                <?php echo number_format(floatval( $loan->monthlyNetSal), 2) ?></label></div>
+                                                        <div class="col-lg-3">Income Earning: </div>
+                                                        <div class="col-lg-3"><label>
+                                                                <?php echo $loan->incomeEarning; ?></label></div>
+                                                                <div class="col-lg-3">Borrowing History: </div>
+                                                        <div class="col-lg-3"><label>
+                                                                <?php echo $loan->borrowingHistCount; ?></label></div>
+
                                                     </div>
                                                     <div class="col-lg-12"><hr></div>
 

@@ -42,7 +42,7 @@
                                // if($_SESSION['access'] == 1 || $_SESSION['access'] == 2){
                                     ?> -->
                             <li>
-                                <a href="index.php" class="active"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                                <a href="index.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                             </li>
                             <?php
                                 //}
@@ -86,7 +86,7 @@
                              //   if($_SESSION['access'] == 1 || $_SESSION['access'] == 4){ //CI
                                     ?>
                             <li>
-                                <a href="loan_credit_investigation.php" class="active"><i class="fa fa-user-secret fa-fw"></i>Credit Investigate</a>
+                                <a href="loan_credit_investigation.php"><i class="fa fa-user-secret fa-fw"></i>Credit Investigate</a>
                             </li>
                             <?php
                               //  }
@@ -96,7 +96,7 @@
                                // if($_SESSION['access'] == 1 || $_SESSION['access'] == 2){ // approver
                             ?>
                                 <li>
-                                <a href="loan_approval.php" class="active"><i class="fa fa-check fa-fw"></i>Loan Approval</a>
+                                <a href="loan_approval.php"><i class="fa fa-check fa-fw"></i>Loan Approval</a>
                                 </li>
                             <?php
                               //  }
@@ -106,7 +106,7 @@
                                // if($_SESSION['access'] == 1 || $_SESSION['access'] == 2){ // approver
                             ?>
                                 <li>
-                                <a href="setting_notarial.php" class="active"><i class="fa fa-money fa-fw"></i> Notarial Fee</a>
+                                <a href="setting_notarial.php"><i class="fa fa-money fa-fw"></i> Notarial Fee</a>
                                 </li>
                             <?php
                               //  }

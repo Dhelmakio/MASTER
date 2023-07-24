@@ -72,7 +72,7 @@ if(!isset($_SESSION['user_id'])){
                                                     <th>NAME</th>
                                                     <th>LOAN AMOUNT</th>
                                                     <th>CI STATUS</th>
-                                                    <th>ACTIONS</th>
+                                                    <th class="text-center">ACTIONS</th>
                                                 </tr>
                                             </thead>
                                             <tbody>

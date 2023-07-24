@@ -124,7 +124,7 @@ if($_SESSION['user_id']){
                                                                 class="fa fa-trash-o"></i>
                                                         </button> -->
                                                         
-                                                            <button data-target="#modal-<?= $display['applicant_code'] ?>" type="button" class="btn btn-warning"
+                                                            <button data-target="#modal-<?= $display['applicant_code'] ?>" type="button" class="btn btn-danger"
                                                                 data-toggle="modal" data-placement="top" title="Archive">
                                                                 <!-- <i class="fa fa-file-text-o" aria-hidden="true"></i> -->
                                                                 <i class="fa fa-fw" aria-hidden="true" title="Copy to use archive">&#xf187</i>

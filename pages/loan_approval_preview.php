@@ -133,16 +133,17 @@ if(isset($_GET['con'])){
                     </div>
                     <!-- /.col-lg-12 -->
                     <div class="col-lg-12" align="center">
-                        <a href="loan_approval_approve.php?con=<?php echo $contract_no;?>">
-                            <button type="button" class="btn btn-warning btn-sml">
-                                Approve <i class="fa fa-check" aria-hidden="true" title="Copy to use save"></i>
-                            </button>
-                        </a>
-                        <!-- Button trigger modal -->
                         <button type="button" class="btn btn-danger btn-sml" data-toggle="modal"
                             data-target="#myModal_<?php echo $cid?>">
                             Reject <i class="fa fa-times" aria-hidden="true" title="Copy to use save"></i>
                         </button>
+                        <a href="loan_approval_approve.php?con=<?php echo $contract_no;?>">
+                            <button type="button" class="btn btn-primary btn-sml">
+                                Approve <i class="fa fa-check" aria-hidden="true" title="Copy to use save"></i>
+                            </button>
+                        </a>
+                        <!-- Button trigger modal -->
+
                         <!-- Modal -->
                         <div class="modal fade" id="myModal_<?php echo $cid?>" tabindex="-1" role="dialog"
                             aria-labelledby="myModalLabel" aria-hidden="true" align="left">

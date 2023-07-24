@@ -62,14 +62,6 @@ if(!isset($_SESSION['user_id'])){
                         
                         <div class="col-lg-12">
                             <div class="panel panel-default">
-                                <div class="panel-heading" align="right">
-                                    <!-- Clients -->
-                                    <a href="reg_applicant_1.php">
-                                        <button type="button" class="btn btn-success">
-                                            <i class="fa fa-fw" aria-hidden="true" title="Copy to use user-plus">&#xf234</i> Add Applicant
-                                        </button>
-                                    </a>
-                                </div>
                                 <!-- /.panel-heading -->
                                 <div class="panel-body">
                                     <div class="table-responsive">
@@ -81,7 +73,7 @@ if(!isset($_SESSION['user_id'])){
                                                     <th>CONTACT NO.</th>
                                                     <th>ADDRESS</th>
                                                     <th>BORROWING HISTORY</th>
-                                                    <th>ACTIONS</th>
+                                                    <th class="text-center">ACTIONS</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -130,7 +122,7 @@ if(!isset($_SESSION['user_id'])){
                                                                                     $rescheck = mysqli_query($con,$check);
                                                                                     if(mysqli_num_rows($rescheck) == 0){ 
                                                                                         ?>
-                                                                                        <button type="button" class="btn btn-warning btn-sml" data-toggle="modal" data-target="#myModal_<?php echo $cid?>" >
+                                                                                        <button type="button" class="btn btn-success btn-sml" data-toggle="modal" data-target="#myModal_<?php echo $cid?>" >
                                                                                             Apply Loan <i class="fa fa-long-arrow-right" aria-hidden="true" title="Copy to use save"></i> 
                                                                                         </button>
                                                                                         <?php
@@ -162,7 +154,7 @@ if(!isset($_SESSION['user_id'])){
                                                                                                                     <input type="text" name="loan_type" value="RELOAN" hidden>
                                                                                                                     <input type="text" name="id" value="<?php echo $cid;?>" hidden>
                                                                                                                     <input type="text" name="name" value="<?php echo $name;?>" hidden>
-                                                                                                                    <button type="submit" class="btn btn-warning" name="submit">
+                                                                                                                    <button type="submit" class="btn btn-success" name="submit">
                                                                                                                         Proceed <i class="fa fa-long-arrow-right" aria-hidden="true" title="Copy to use save"></i> 
                                                                                                                     </button>
                                                                                                                 </form>
