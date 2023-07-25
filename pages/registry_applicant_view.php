@@ -74,7 +74,7 @@ if($_SESSION['user_id']){
                     </div>
                     <div class="col-lg-6 text-right">
                         <br>
-                    <h1> <a href="contract_signing.php?id=<?= $id ?>&cn=<?= $cn ?>" class="btn btn-lg btn-primary">View Contract</a></h1>
+                    <h1> <a href="contract_signing.php?id=<?= $id ?>&cn=<?= $cn ?>" class="btn btn-primary"><i class="fa fa-eye"></i> View Contract</a></h1>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>

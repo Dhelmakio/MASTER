@@ -135,11 +135,11 @@ if(isset($_GET['con'])){
                     <div class="col-lg-12" align="center">
                         <button type="button" class="btn btn-danger btn-sml" data-toggle="modal"
                             data-target="#myModal_<?php echo $cid?>">
-                            Reject <i class="fa fa-times" aria-hidden="true" title="Copy to use save"></i>
+                            <i class="fa fa-times" aria-hidden="true" title="Copy to use save"></i> Reject
                         </button>
                         <a href="loan_approval_approve.php?con=<?php echo $contract_no;?>">
                             <button type="button" class="btn btn-primary btn-sml">
-                                Approve <i class="fa fa-check" aria-hidden="true" title="Copy to use save"></i>
+                                <i class="fa fa-check" aria-hidden="true" title="Copy to use save"></i> Approve
                             </button>
                         </a>
                         <!-- Button trigger modal -->

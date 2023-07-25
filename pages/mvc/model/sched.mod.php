@@ -74,8 +74,8 @@ class Schedule extends DbCon {
             $content .= "<tr>
                 <td>".($index+1)."</td>
                 <td>".date_format($date, "F d, Y ")."</td>
-                <td>₱ ".number_format($this->amortAmount, 2)."</td>
-                <td><span class='btn-sm btn-warning'>PENDING</span></td>
+                <td class='text-right'><strong>₱ ".number_format($this->amortAmount, 2)."</strong></td>
+                <td class='text-center'><span class='btn-sm btn-warning'> <i class='fa fa-spinner'></i> PENDING</span></td>
                 <td>-- -- ----</td>
             </tr>";
         }
@@ -83,8 +83,8 @@ class Schedule extends DbCon {
         <td></td>
         <td></td>
         <td></td>
-        <td class='text-right'>TOTAL</td>
-        <td>₱ ".number_format($this->principal, 2)."</td>
+        <td class='text-right'><strong>TOTAL</strong></td>
+        <td class='text-right' style='color:red'><strong>₱ ".number_format($this->principal, 2)."</strong></td>
         </tr>";
 
         return $content;
