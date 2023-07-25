@@ -823,7 +823,7 @@ if(isset($_POST['id'])){
                 let collectionPerCut3 = ($("#lamt").val() / (duration)) / 4;
 
                 let udi = ( <?php echo $loan->moInterest * 100 ?>  * duration) - ( (collectionFeePer * 100) + (processingFeePer * 100));
-                let udiValue = $("#lamt").val() * (udi / 100);
+                let udiValue = $("#lamt").val() * ($('#udi').val() / 100);
                 let totalDeduction = udiValue + processingFee + collectionFee + notarialFee;
                 let proceedLoan = $("#lamt").val() - totalDeduction;
                 let newPL = proceedLoan - <?= $loan->outStandingBalance ?>;
@@ -832,14 +832,14 @@ if(isset($_POST['id'])){
 
               
                 $("#udi_").val(parseFloat(udiValue).toFixed(2));
-                $("#udi").val(parseFloat(udiValue).toFixed(2));
+                // $("#udi").val(parseFloat(udiValue).toFixed(2));
                 $("#outstanding_balance_").val(parseFloat(<?=  $loan->outStandingBalance; ?>).toFixed(2));
                 $("#outstanding_balance").val(parseFloat(<?=  $loan->outStandingBalance; ?>).toFixed(2));
                 $("#udiper").text($('#udi').val());
                 $("#pfper").text(processingFeePer * 100);
                 $("#cfper").text(collectionFeePer * 100);
 
-                $("#udi_percentage").val(udi);
+                $("#udi_percentage").val($('#udi').val());
                 $('#interest_percentage').val(<?php echo $loan->moInterest * 100 ?>);
                
 
@@ -988,7 +988,7 @@ if(isset($_POST['id'])){
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <input type="number" style="color:blue;text-align:right;font-weight:bold;" name="cashout_" class="form-control" step="0.01" id="total-cashout_" style="text-align:right" value="${parseFloat(proceedLoan).toFixed(2)}" disabled>
+                                        <input type="number" style="color:blue;text-align:right;font-weight:bold;" name="cashout_" class="form-control" step="0.01" id="total-cashout_" style="text-align:right" value="${parseFloat(newPL).toFixed(2)}" disabled>
                                     </div>
                                 </div>
                             </div>
@@ -1013,7 +1013,7 @@ if(isset($_POST['id'])){
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <input style="color:red;text-align:right;" type="number" name="amortization_2" class="form-control" step="0.01" id="collection-per-cut_2" style="text-align:right" value="${parseFloat(collectionPerCut).toFixed(2)}" disabled>
+                                        <input style="color:red;text-align:right;" type="number" name="amortization_2" class="form-control" step="0.01" id="collection-per-cut_2" style="text-align:right" value="${parseFloat(collectionPerCut2).toFixed(2)}" disabled>
                                     </div>
                                 </div>
                             </div>

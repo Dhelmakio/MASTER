@@ -1,11 +1,12 @@
 <?php
+
 class Schedule extends DbCon {
     private $clientID;
     public $amortFrequency;
-    private $duration;
-    private $startDate;
-    private $addDate;
-    private $amortAmount;
+    public $duration;
+    public $startDate;
+    public $addDate;
+    public $amortAmount;
     public $principal;
     public $notarial;
     public $interestPer;
