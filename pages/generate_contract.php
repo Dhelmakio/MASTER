@@ -130,7 +130,7 @@ $date_val = date("Y-m-d");
 $pdf->AddPage();
 // $pdf->WriteHtml($pdf->loadHTML());
 $pdf->Ln(2);
-$pdf->SetFont('courier','B','12');
+$pdf->SetFont('pdfahelvetica','B','12');
 $pdf->cell(0,0,'Personal Information',0,5,'L');
 $pdf->SetFont('courier','','10');
 $pdf->MultiCell(0,1,'
@@ -142,7 +142,8 @@ Place of Birth: '.load->placeBirth.'
 Marital Status: '.strtoupper(load->mstatus).'
 Contact No.: '.load->contact.'
 ',0,'J',false);
-$pdf->SetFont('courier','B','12');
+$pdf->SetFont('pdfahelvetica','B','12');
+$pdf->Write($h=0, $label, $link='', $fill=0, $align='C', $ln=true, $stretch=0, $firstline=false, $firstblock=false, $maxh=0);
 $pdf->cell(0,0,'Family Background',0,5,'L');
 $pdf->SetFont('courier','','10');
 $pdf->MultiCell(0,1,"
@@ -152,8 +153,9 @@ Father's Name: ".load->fatherName."
 Contact: ".load->fatherContact."
 Living With: ".load->lw."
 ",0,'J',false);
+$pdf->Write($h=0, $label, $link='', $fill=0, $align='C', $ln=true, $stretch=0, $firstline=false, $firstblock=false, $maxh=0);
 if(load->mstatus == "Married"){
-    $pdf->SetFont('courier','B','12');
+    $pdf->SetFont('pdfahelvetica','B','12');
     $pdf->cell(0,0,'Spouse Information',0,5,'L');
     $pdf->SetFont('courier','','10');
     $pdf->MultiCell(0,1,"
@@ -165,7 +167,7 @@ Address: ".load->spouseAddress."
 Occupation: ".load->spouseOccupation."
     ",0,'J',false);
 }
-$pdf->SetFont('courier','B','12');
+$pdf->SetFont('pdfahelvetica','B','12');
 $pdf->cell(0,0,'Employment Inforation',0,5,'L');
 $pdf->SetFont('courier','','10');
 $pdf->MultiCell(0,1,"
@@ -187,6 +189,7 @@ Specify: ".load->specify."
 ",0,'J',false);
 $pdf->Ln(3);
 //Type of ATM Card: ".load->toac."
+$pdf->Write($h=0, $label, $link='', $fill=0, $align='C', $ln=true, $stretch=0, $firstline=false, $firstblock=false, $maxh=0);
 $pdf->SetFont('courier','','10');
 $pdf->MultiCell(0,5,'I HEREBY CERTIFY that the information provided in this form is complete, true and correct to the best of my knowledge. FURTHER, I HEREBY ACKNOWLEDGE that I have read and understood the UNA AMIGO LENDING CORPORATION Privacy Notice and agree there to as well. I give my consent to UNA AMIGO LENDING CORPORATION to collect, use and process my personal information. I understand that my consent does not preclude the existence of other criteria for lawful processing of personal data, and does not waive any of my rights under the Data Privacy Act of 2012 and other applicable laws. 
 

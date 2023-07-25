@@ -100,7 +100,7 @@ if(isset($_GET['id'])){
                     </div>
                     <div class="col-lg-6 text-right">
                         <br>
-                        <h1><button type="button" onclick="{window.open('generate_contract.php?id=<?= $client_id ?>', '_blank');window.open('generate_promissory_note.php?id=<?= $client_id ?>', '_blank');window.open('generate_disclosure.php?id=<?= $client_id ?>', '_blank');}" class="btn btn-lg btn-primary">Print</button></h1>
+                        <h1><button class="btn btn-md btn-primary" type="button" onclick="{window.open('generate_contract.php?id=<?= $client_id ?>', '_blank');window.open('generate_promissory_note.php?id=<?= $client_id ?>', '_blank');window.open('generate_disclosure.php?id=<?= $client_id ?>', '_blank');}" class="btn btn-lg btn-primary"><i class="fa fa-print"></i> Print</button></h1>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
