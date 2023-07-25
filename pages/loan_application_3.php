@@ -348,7 +348,7 @@ if(isset($_POST['id'])){
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-lg-12">
+                                                                <!-- <div class="col-lg-12">
                                                                     <div class="col-lg-6" align="right">
                                                                         <div class="form-group">
                                                                             <label>Interest Amount
@@ -366,8 +366,7 @@ if(isset($_POST['id'])){
                                                                                 style="text-align:right">
                                                                         </div>
                                                                     </div>
-
-                                                                </div>
+                                                                </div> -->
                                                                 <div class="col-lg-12">
                                                                     <div class="col-lg-6" align="right">
                                                                         <div class="form-group">
