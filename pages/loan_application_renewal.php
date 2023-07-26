@@ -102,6 +102,13 @@ if(!isset($_SESSION['user_id'])){
                                                 left join payments p on l.contract_no=p.contract_no 
                                                 where l.paid=0
                                                 order by l.application_date asc";
+                                                // $sql = "SELECT * FROM applicants_personal 
+                                                // LEFT JOIN loan_applications
+                                                // ON applicants_personal.applicant_code = loan_applications.client_id
+                                                // LEFT JOIN payments
+                                                // ON payments.contract_no = loan_applications.contract_no
+                                                // WHERE loan_applications.paid = 0
+                                                // ORDER BY loan_applications.application_date ASC";
                                                 $res = mysqli_query($con,$sql);
                                                     if(mysqli_num_rows($res) > 0){
                                                         while($row = mysqli_fetch_assoc($res)) {
@@ -109,8 +116,9 @@ if(!isset($_SESSION['user_id'])){
                                                         // $suffix = $row['suffix'];
                                                         $cid = $row['client_id'];
                                                         $loan = new Loan(strval($cid));
+                                                        //$name = $row['lastname'].', '.$row['firstname'].' '.$row['middlename'] .' '.$row['suffix'];
                                                         $name = $row['name'];
-                                                        $ob = $row['loan_amount'] - $row['total_paid']?>
+                                                        $ob = $row['loan_amount']?>
                                             <tr class="odd gradeX">
                                                 <td><?php echo $row['contract_no'];?></td>
                                                 <td><?php echo $name?></td>

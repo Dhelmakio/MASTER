@@ -110,12 +110,12 @@ if(!isset($_SESSION['user_id'])){
                                                                         if($cis==1){
                                                                         echo '<a href="loan_approval_preview.php?con='.$row['contract_no'].'">
                                                                             <button type="button" class="btn btn-warning btn-sml">
-                                                                                    Validate <i class="fa fa-long-arrow-right" aria-hidden="true" title="Copy to use save"></i></button>
+                                                                                    Approval <i class="fa fa-long-arrow-right" aria-hidden="true" title="Copy to use save"></i></button>
                                                                         </a>';
                                                                         }else{
                                                                         echo '<a href="loan_approval_preview.php?con='.$row['contract_no'].'">
                                                                             <button type="button" class="btn btn-warning btn-sml" disabled>
-                                                                                Validate <i class="fa fa-long-arrow-right" aria-hidden="true" title="Copy to use save"></i>
+                                                                                Approval <i class="fa fa-long-arrow-right" aria-hidden="true" title="Copy to use save"></i>
                                                                             </button>
                                                                         </a>';
                                                                         }

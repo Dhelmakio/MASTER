@@ -98,7 +98,7 @@ if(!isset($_SESSION['user_id'])){
                                                         $adate = $row['application_date'];
                                                         //$cis = $row['ci_status'];
                                                 ?>
-                                                <tr class="odd gradeX">
+                                            <tr class="odd gradeX">
                                                 <td><?php echo $row['contract_no'];?></td>
                                                 <td><?php echo $row['lastname'].', '.$row['firstname'].' '.$row['suffix'].' '.$row['middlename'];?>
                                                 </td>
@@ -106,10 +106,15 @@ if(!isset($_SESSION['user_id'])){
                                                     <?php echo number_format($row['loan_amount'],2);?></td>
                                                 <td class="text-center"><?php echo date('F d, Y',strtotime($adate));?>
                                                 </td>
-                                                <td style="text-align:center;"><?php echo date('F d, Y',strtotime($row['ci_date']));?></td>
-                                                <td style="text-align:center;"><span class='btn-sm btn-success'> <i class='fa fa-check'></i> VALIDATED</span></td>
+                                                <td style="text-align:center;">
+                                                    <?php echo date('F d, Y',strtotime($row['ci_date']));?></td>
+                                                <td style="text-align:center;"><span class='btn btn-success'> <i
+                                                            class='fa fa-check'></i> Validated</span></td>
                                                 <td style="text-align:center">
-                                                <button type="button" onclick="{window.location.href = 'contract_signing.php?id=<?= $cid ?>&cn=<?= $row['contract_no'] ?>'}" class="btn btn-success btn-sml">Process Loan</i></button>
+                                                    <button type="button"
+                                                        onclick="{window.location.href = 'contract_signing.php?id=<?= $cid ?>&cn=<?= $row['contract_no'] ?>'}"
+                                                        class="btn btn-warning btn-sml">Process
+                                                        Loan <i class="fa fa-long-arrow-right"></i></button>
                                                 </td>
                                             </tr>
                                             <?php
