@@ -93,6 +93,16 @@
                             ?>
 
                             <?php 
+                             //   if($_SESSION['access'] == 1 || $_SESSION['access'] == 4){ //CI
+                                    ?>
+                            <li>
+                                <a href="process_loan.php"><i class="fa fa-user-secret fa-fw"></i>Process Loan</a>
+                            </li>
+                            <?php
+                              //  }
+                            ?>
+
+                            <?php 
                                // if($_SESSION['access'] == 1 || $_SESSION['access'] == 2){ // approver
                             ?>
                                 <li>
