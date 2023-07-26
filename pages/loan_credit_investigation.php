@@ -85,7 +85,7 @@ if(!isset($_SESSION['user_id'])){
                                             //LEFT or INNER?
                                                 $sql ="SELECT * FROM loan_applications 
                                                 INNER JOIN applicants_personal 
-                                                ON applicants_personal.applicant_code = loan_applications.client_id 
+                                                ON applicants_personal.applicant_code = loan_applications.client_id WHERE loan_applications.ci_status = 0
                                                 ORDER BY applicants_personal.lastname ASC";
                                                 $res = mysqli_query($con,$sql);
                                                     if(mysqli_num_rows($res) > 0){

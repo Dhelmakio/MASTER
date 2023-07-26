@@ -75,8 +75,8 @@ if(!isset($_SESSION['user_id'])){
                                                 <th style="text-align:center;">NAME</th>
                                                 <th style="text-align:center;">LOAN AMOUNT</th>
                                                 <th style="text-align:center;">DATE OF APPLICATION</th>
-                                                <th style="text-align:center;">LOCATION</th>
-                                                <th style="text-align:center;">INFORMATION</th>
+                                                <th style="text-align:center;">DATE VALIDATED</th>
+                                                <th style="text-align:center;">STATUS</th>
                                                 <th style="text-align:center;">ACTIONS</th>
                                             </tr>
                                         </thead>
@@ -85,7 +85,7 @@ if(!isset($_SESSION['user_id'])){
                                             //LEFT or INNER?
                                                 $sql ="SELECT * FROM loan_applications 
                                                 INNER JOIN applicants_personal 
-                                                ON applicants_personal.applicant_code = loan_applications.client_id 
+                                                ON applicants_personal.applicant_code = loan_applications.client_id WHERE loan_applications.ci_status != 0 
                                                 ORDER BY applicants_personal.lastname ASC";
                                                 $res = mysqli_query($con,$sql);
                                                     if(mysqli_num_rows($res) > 0){
@@ -106,34 +106,10 @@ if(!isset($_SESSION['user_id'])){
                                                     <?php echo number_format($row['loan_amount'],2);?></td>
                                                 <td class="text-center"><?php echo date('F d, Y',strtotime($adate));?>
                                                 </td>
-                                                <td style="text-align:center;"><a class="btn btn-primary"
-                                                        href="<?php echo $row['map_url'];?>" target="_blank"><i
-                                                            class="fa fa-map"></i> View Map</a></td>
-                                                <td style="text-align:center;"><a class="btn btn-info"
-                                                        href="registry_applicant_view.php?id=<?php echo $cid?>"><i
-                                                            class="fa fa-eye"></i> View info</td>
+                                                <td style="text-align:center;"><?php echo date('F d, Y',strtotime($row['ci_date']));?></td>
+                                                <td style="text-align:center;"><span class='btn-sm btn-success'> <i class='fa fa-check'></i> VALIDATED</span></td>
                                                 <td style="text-align:center">
-                                                    <!-- <a
-                                                        href="loan_credit_investigation_validate.php?id=<?php echo $row['contract_no']?>">
-                                                        <button type="button" class="btn btn-warning"
-                                                            data-toggle="tooltip" data-placement="top" title="Validate">
-                                                            <i class="fa fa-search" aria-hidden="true"></i> Validate
-                                                        </button>
-                                                    </a> -->
-                                                    <?php 
-                                                                        if($row['ci_status']==1){
-                                                                        echo '<a href="#validated">
-                                                                            <button disabled type="button" class="btn btn-success btn-sml">
-                                                                                    Validated <i class="fa fa-check" aria-hidden="true" title="Copy to use save"></i></button>
-                                                                        </a>';
-                                                                        }else{
-                                                                        echo '<a href="loan_credit_investigation_validate.php?id='.$row['contract_no'].'">
-                                                                            <button type="button" class="btn btn-warning btn-sml">
-                                                                                Validate <i class="fa fa-long-arrow-right" aria-hidden="true" title="Copy to use save"></i>
-                                                                            </button>
-                                                                        </a>';
-                                                                        }
-                                                                        ?>
+                                                <button type="button" onclick="{window.location.href = 'contract_signing.php?id=<?= $cid ?>&cn=<?= $row['contract_no'] ?>'}" class="btn btn-success btn-sml">Process Loan</i></button>
                                                 </td>
                                             </tr>
                                             <?php
