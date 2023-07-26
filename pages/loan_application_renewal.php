@@ -102,9 +102,11 @@ if(!isset($_SESSION['user_id'])){
                                                                 $loan = new Loan(strval($cid));
                                                                 $ob = $row['loan_amount'] - $row['total_paid'];
                                                                 $name = $row['name']; 
+                                                                if($ob != $row['loan_amount']){
                                             ?>
                                             
                                             <tr class="odd gradeX">
+
                                                 <td><?php echo $row['contract_no']?></td>
                                                 <td><?php echo $name?></td>
                                                 <td><?php echo $ob;?></td>
@@ -198,6 +200,7 @@ if(!isset($_SESSION['user_id'])){
                                                             <!-- /.modal -->
                                                         </div>
                                                         <?php
+                                                            }
                                                                                                 }
                                                                                                 ?>
                                                     </div>
