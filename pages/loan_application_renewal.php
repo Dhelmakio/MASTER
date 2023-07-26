@@ -80,49 +80,57 @@ if(!isset($_SESSION['user_id'])){
                                             <tr>
                                                 <th>CONTRACT NO.</th>
                                                 <th>NAME</th>
-                                                <th>GENDER</th>
-                                                <th>CONTACT NO.</th>
-                                                <th>ADDRESS</th>
+                                                <th>OUTSTANDING BALANCE</th>
+                                                <!-- <th>CONTACT NO.</th> -->
+                                                <!-- <th>ADDRESS</th> -->
                                                 <th>BORROWING HISTORY</th>
-                                                <th>ACTIONS</th>
+                                                <th class="text-center">ACTIONS</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
                                                     //$sql ="SELECT c.*,l.remarks FROM clients c left join loan_applications l on l.client_id=c.client_id where  (l.remarks is null or l.remarks='paid') and (l.approval!=0 or l.approval is null) group by c.client_id ORDER BY last_name ASC";
-                                                    $sql = "SELECT * FROM applicants_personal 
-                                                    LEFT JOIN loan_applications ON 
-                                                    applicants_personal.applicant_code=loan_applications.client_id 
-                                                    GROUP BY applicants_personal.applicant_code 
-                                                    ORDER BY applicants_personal.lastname ASC";
-                                                    $res = mysqli_query($con,$sql);
-                                                        if(mysqli_num_rows($res) > 0){
-                                                            while($row = mysqli_fetch_assoc($res)) {
-                                                                // $name = $row['last_name'].', '.$row['first_name'].' '.$row['middle_name'];
-                                                                // $suffix = $row['suffix'];
-                                                                $cid = $row['applicant_code'];
-                                                                $loan = new Loan($cid);
-                                                                $name = $row['lastname'].', '.$row['firstname'].' '.$row['suffix'].' '.$row['middlename'].' '.$row['suffix'];?>
+                                                    // $sql = "SELECT * FROM applicants_personal 
+                                                    // LEFT JOIN loan_applications ON 
+                                                    // applicants_personal.applicant_code=loan_applications.client_id 
+                                                    // GROUP BY applicants_personal.applicant_code 
+                                                    // ORDER BY applicants_personal.lastname ASC";
+                                                $sql = "SELECT l.*,SUM(p.amount) as total_paid,
+                                                (SELECT CONCAT(lastname,', ',firstname,' ',middlename,' ',suffix) as name 
+                                                from applicants_personal where applicants_personal.applicant_code=l.client_id) as name 
+                                                from loan_applications l 
+                                                left join payments p on l.contract_no=p.contract_no 
+                                                where l.paid=0
+                                                order by l.application_date asc";
+                                                $res = mysqli_query($con,$sql);
+                                                    if(mysqli_num_rows($res) > 0){
+                                                        while($row = mysqli_fetch_assoc($res)) {
+                                                        // $name = $row['last_name'].', '.$row['first_name'].' '.$row['middle_name'];
+                                                        // $suffix = $row['suffix'];
+                                                        $cid = $row['client_id'];
+                                                        $loan = new Loan(strval($cid));
+                                                        $name = $row['name'];
+                                                        $ob = $row['loan_amount'] - $row['total_paid']?>
                                             <tr class="odd gradeX">
-                                                <td><?php echo $row['contract_no']?></td>
+                                                <td><?php echo $row['contract_no'];?></td>
                                                 <td><?php echo $name?></td>
-                                                <td><?php echo $row['gender'];?></td>
-                                                <td><?php echo $row['contact1'];?></td>
-                                                <td><?php echo $row['street1'].', '.$row['brgy1'].', '.$row['city1'] .''.$row['province1'];?>
+                                                <td class="text-right"><?php echo $ob?></td>
+                                                <!--<td><?php //echo $row['contact1'];?></td> -->
+                                                <!-- <td><?php //echo $row['street1'].', '.$row['brgy1'].', '.$row['city1'] .''.$row['province1'];?> -->
                                                 </td>
-                                                <td><?php echo $loan->borrowingHistCount;?></td>
+                                                <td class="text-right"><?php echo $loan->borrowingHistCount;?></td>
                                                 <td style="text-align:center">
                                                     <div class="tooltip-demo">
 
                                                         <div class="panel-body">
                                                             <!-- Button trigger modal -->
                                                             <?php
-                                                                                //kani diri tangtangon paid=1 kay paid or not pwede ra mag renewal nakalimot kos policy HAHAHHAHA basta naa ra to policy sa renewal
-                                                                                // $check = "SELECT * FROM loan_applications WHERE client_id='$cid' and paid=1 ";
-                                                                                $check = "SELECT * FROM loan_applications WHERE client_id='$cid'";
-                                                                                $rescheck = mysqli_query($con,$check);
-                                                                                if(mysqli_num_rows($rescheck) > 0){ 
-                                                                            ?>
+                                                                //kani diri tangtangon paid=1 kay paid or not pwede ra mag renewal nakalimot kos policy HAHAHHAHA basta naa ra to policy sa renewal
+                                                                // $check = "SELECT * FROM loan_applications WHERE client_id='$cid' and paid=1 ";
+                                                                $check = "SELECT * FROM loan_applications WHERE client_id='$cid'";
+                                                                $rescheck = mysqli_query($con,$check);
+                                                                    if(mysqli_num_rows($rescheck) > 0){ 
+                                                            ?>
                                                             <button type="button" class="btn btn-primary btn-sml"
                                                                 data-toggle="modal"
                                                                 data-target="#myModal_<?php echo $cid?>">
@@ -130,8 +138,8 @@ if(!isset($_SESSION['user_id'])){
                                                                     aria-hidden="true" title="Copy to use save"></i>
                                                             </button>
                                                             <?php
-                                                                                }
-                                                                            ?>
+                                                                }
+                                                            ?>
                                                             <!-- Modal -->
                                                             <div class="modal fade" id="myModal_<?php echo $cid?>"
                                                                 tabindex="-1" role="dialog" data-backdrop="static"

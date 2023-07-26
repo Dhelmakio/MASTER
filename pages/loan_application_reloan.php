@@ -71,7 +71,7 @@ if(!isset($_SESSION['user_id'])){
                                         id="dataTables-example">
                                         <thead>
                                             <tr>
-                                                <th>CONTACT NO.</th>
+                                                <th>CONTRACT NO.</th>
                                                 <th>NAME</th>
                                                 <th>GENDER</th>
                                                 <th>CONTACT NO.</th>
@@ -84,12 +84,13 @@ if(!isset($_SESSION['user_id'])){
                                             <?php
                                                     //$sql ="SELECT c.*,l.remarks FROM clients c left join loan_applications l on l.client_id=c.client_id where  (l.remarks is null or l.remarks='paid') and (l.approval!=0 or l.approval is null) group by c.client_id ORDER BY last_name ASC";
                                                     //$sql = "SELECT * FROM clients left join loan_applications on clients.client_id=loan_applications.client_id where loan_applications.paid=1 group by clients.client_id order by clients.last_name asc ";
-                                                   $sql = "SELECT * FROM applicants_personal 
-                                                   inner join loan_applications 
-                                                   on applicants_personal.applicant_code=loan_applications.client_id
-                                                   group by applicants_personal.applicant_code 
-                                                   order by applicants_personal.lastname asc ";
-                                                   $res = mysqli_query($con,$sql);
+                                                    $sql = "SELECT * FROM applicants_personal 
+                                                    LEFT JOIN loan_applications 
+                                                    ON applicants_personal.applicant_code=loan_applications.client_id
+                                                    WHERE loan_applications.paid=1
+                                                    GROUP BY applicants_personal.applicant_code 
+                                                    ORDER BY applicants_personal.lastname ASC ";
+                                                    $res = mysqli_query($con,$sql);
                                                         if(mysqli_num_rows($res) > 0){
                                                             while($row = mysqli_fetch_assoc($res)) {
                                                                 // $name = $row['last_name'].', '.$row['first_name'].' '.$row['middle_name'];
@@ -103,7 +104,7 @@ if(!isset($_SESSION['user_id'])){
                                                 <td><?php echo $row['gender'];?></td>
                                                 <td><?php echo $row['contact1'];?></td>
                                                 <td><?php echo $row['brgy1'].', '.$row['city1'];?></td>
-                                                <td><?php echo $loan->borrowingHistCount;?></td>
+                                                <td class="text-right"><?php echo $loan->borrowingHistCount;?></td>
                                                 <td style="text-align:center">
                                                     <div class="tooltip-demo">
 
@@ -145,14 +146,6 @@ if(!isset($_SESSION['user_id'])){
                                                                                     <form
                                                                                         action="loan_application_3.php"
                                                                                         method="POST">
-                                                                                        <!-- <label>Loan Type</label> -->
-                                                                                        <!-- <select class="form-control" name="loan_type" required style="width:80%;">
-                                                                                                                        <option value="" disabled selected=1>SELECT</option>
-                                                                                                                        <option value="NEW">New</option>
-                                                                                                                        <option value="RENEWAL">Renewal</option>
-                                                                                                                        <option value="RELOAN">Reloan</option>
-                                                                                                                        <option value="ADDITIONAL">Additional</option>
-                                                                                                                    </select> -->
                                                                                         <input type="text"
                                                                                             name="loan_type"
                                                                                             value="RELOAN" hidden>

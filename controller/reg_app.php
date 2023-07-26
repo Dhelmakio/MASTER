@@ -76,9 +76,9 @@ class Registry extends DatabaseConnection {
                 $r = $relation[$key];
                 $t = $ta[$key];
                 $sql = "INSERT INTO applicants_relative
-                (applicant_code, relative_name, r_contact, r_relationship,r_ta) 
+                (applicant_code, relative_name, r_contact, r_relationship,r_ta, date_encoded) 
                 VALUES
-                ('$code','$n','$c', '$r', '$t')";
+            ('$code','$n','$c', '$r', '$t', CURRENT_DATE())";
                 mysqli_query($this->connect(), $sql);
             }
             return true;
