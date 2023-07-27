@@ -13,6 +13,7 @@ class Schedule extends DbCon {
     public $interestVal;
     public $loanType;
     public $applicationDate;
+    public $mop;
 
 
     public function __construct(String $id){
@@ -32,6 +33,7 @@ class Schedule extends DbCon {
         $this->interestPer = $result['udi_percentage']??null;
         $this->interestVal = $result['udi_value']??null;
         $this->loanType = $result['loan_type']??null;
+        $this->mop = $result['mop']??null;
         $this->applicationDate = $result['application_date']??null;
         $this->applicationDate = date_format(new DateTime($this->applicationDate), "F d, Y ");
 
@@ -65,8 +67,16 @@ class Schedule extends DbCon {
     private function loadTableRow(){
 
         $content = "";
-        $date = new DateTime($this->startDate);
-        for($index = 0; $index < $this->duration; $index++){
+        $date = new DateTime(date('Y-m-d'));
+        $newDuration;
+        if($this->mop == 1){
+            $newDuration = $this->duration;
+        }else if($this->mop == 2){
+            $newDuration = $this->duration * 2;
+        }else if($this->mop == 3){
+            $newDuration = $this->duration * 4;
+        }
+        for($index = 0; $index < $newDuration; $index++){
 
             //will add days for payment schedule based on mop
             date_add($date, date_interval_create_from_date_string($this->addDate." days"));
