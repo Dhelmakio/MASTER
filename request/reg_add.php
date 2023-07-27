@@ -21,6 +21,12 @@ $sources = (($_POST['source'] == "Others") ? strtoupper($_POST['specSource']) : 
 $spouse_pob = (($_POST['spob_province']??null).', '.($_POST['spob_city']??null));
 $spouse_address = (($_POST['spouse_province']??null).', '.($_POST['spouse_city']??null).', '.($_POST['spouse_brgy']??null));
 
+$l = $_POST['loan']??null; 
+$o = $_POST['loan_spec']??null;
+$a = $_POST['sma']??null;
+
+$loan = $l.'-'.$o.'-'.$a;
+
 //personal tab 1
 $applicant->personal_add($code, strtoupper($_POST['fname']??null), strtoupper($_POST['mname']??null),strtoupper($_POST['lname']??null) , strtoupper($_POST['suffix']??null),strtoupper($_POST['nname']??null),$_POST['gender']??null,
 $_POST['contact_num']??null,$_POST['m_status']??null,$_POST['dob']??null, (($_POST['pob_province']??null).', '.($_POST['pob_city']??null)),strtoupper($_POST['blk'])??null,strtoupper($_POST['street']??null),strtoupper($_POST['phase']??null),strtoupper($_POST['brgy']??null),
@@ -70,7 +76,7 @@ if($_POST['spouse_name'] != null){
 //work tab 3
 if($_POST['agency'] != null){
 $applicant->work_add($code, strtoupper($_POST['agency'])??null,$_POST['sector']??null,$_POST['business']??null ,strtoupper($_POST['ca_company']??null),strtoupper($_POST['location']??null),strtoupper($_POST['supervisor']??null),
-$_POST['hr_number']??null,$_POST['date_hired']??null,$_POST['e_status']??null,$_POST['m_salary']??null,strtoupper($_POST['bank']??null),strtoupper($_POST['t_card']??null), (($_POST['loan'] != "No") ? $_POST['loan'].'-'.$_POST['loan_spec'].'-'.$_POST['sma']??null : $_POST['loan'])??null, $_POST['ms_salary']??null,
+$_POST['hr_number']??null,$_POST['date_hired']??null,$_POST['e_status']??null,$_POST['m_salary']??null,strtoupper($_POST['bank']??null),strtoupper($_POST['t_card']??null), (($_POST['loan'] != "No") ? $loan : $_POST['loan'])??null, $_POST['ms_salary']??null,
 $_POST['s_period']??null,$_POST['os_income']??null,$_POST['s_specify']??null);
 }
 
