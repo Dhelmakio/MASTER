@@ -80,7 +80,7 @@ if(!isset($_SESSION['user_id'])){
                                             <tr>
                                                 <th>CONTRACT NO.</th>
                                                 <th>NAME</th>
-                                                <th>OUTSTANDING BALANCE</th>
+                                                <th class="text-center">OUTSTANDING BALANCE</th>
                                                 <!-- <th>CONTACT NO.</th> -->
                                                 <!-- <th>ADDRESS</th> -->
                                                 <th>BORROWING HISTORY</th>
@@ -127,8 +127,8 @@ if(!isset($_SESSION['user_id'])){
                                                          ?>
                                             <tr class="odd gradeX">
                                                 <td><?php echo $row['contract_no'];?></td>
-                                                <td><?php //echo $name;?></td>
-                                                <td class="text-right"><?php echo $loan->outStandingBalance?></td>
+                                                <td><?php echo $name;?></td>
+                                                <td class="text-right"><?php echo "₱ ".number_format(floatval($loan->outStandingBalance),2)?></td>
                                                 <!--<td><?php //echo $row['contact1'];?></td> -->
                                                 <!-- <td><?php //echo $row['street1'].', '.$row['brgy1'].', '.$row['city1'] .''.$row['province1'];?> -->
                                                 </td>
