@@ -549,7 +549,7 @@ if(isset($_POST['id'])){
                                                                         <div class="form-group">
                                                                             <label>Monthly (₱):<input type="radio"
                                                                                     name="mop" id="mop" value="1"
-                                                                                    checked required></label>
+                                                                                     required></label>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-lg-6">
@@ -571,7 +571,7 @@ if(isset($_POST['id'])){
                                                                     <div class="col-lg-6" align="right">
                                                                         <div class="form-group">
                                                                             <label>Semi-monthly (₱):<input type="radio"
-                                                                                    name="mop" id="mop"
+                                                                                    name="mop" id="mop" checked
                                                                                     value="2"></label>
                                                                         </div>
                                                                     </div>

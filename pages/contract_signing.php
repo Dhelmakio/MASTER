@@ -76,7 +76,7 @@ if(isset($_GET['id'])){
 
     <!-- Custom Fonts -->
     <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -100,7 +100,9 @@ if(isset($_GET['id'])){
                     </div>
                     <div class="col-lg-6 text-right">
                         <br>
-                        <h1><button class="btn btn-md btn-primary" type="button" onclick="{window.open('generate_contract.php?id=<?= $client_id ?>', '_blank');window.open('generate_promissory_note.php?id=<?= $client_id ?>', '_blank');window.open('generate_disclosure.php?id=<?= $client_id ?>', '_blank');window.location.href='loan_approval.php'}" class="btn btn-lg btn-primary"><i class="fa fa-print"></i> Print</button></h1>
+                        <h1><button class="btn btn-md btn-primary" type="button"
+                                onclick="{window.open('generate_contract.php?id=<?= $client_id ?>', '_blank');window.open('generate_promissory_note.php?id=<?= $client_id ?>', '_blank');window.open('generate_disclosure.php?id=<?= $client_id ?>', '_blank');window.location.href='loan_approval.php'}"
+                                class="btn btn-lg btn-primary"><i class="fa fa-print"></i> Print</button></h1>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
@@ -115,94 +117,105 @@ if(isset($_GET['id'])){
                                     <!-- Page 1 -->
                                     <div class="tab-pane fade in active" id="tab-default-1">
                                         <!-- <h3>Loan Application</h3> -->
-                                        <div class="panel panel-primary">
-                                            <!-- <div class="panel-heading">
+                                        <!-- <div class="panel panel-primary"> -->
+                                        <!-- <div class="panel-heading">
                                                 Personal Information
                                             </div> -->
-                                            <div class="panel-body">
-                                                <div class="row">
-                                                    <div class="col-lg-12">
-                                                        <center>
-                                                            <h3><b>PAYMENT SCHEDULES</b></h3>
-                                                        </center>
-                                                        <hr>
-                                                    </div>
-                                                    <?php
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <center>
+                                                        <h3><b>PAYMENT SCHEDULES</b></h3>
+                                                    </center>
+                                                    <hr>
+                                                </div>
+                                                <?php
                                                      $applicant = "SELECT * FROM applicants_personal WHERE applicant_code = '$cid'";
                                                      $applcaintQuery = mysqli_query($con,$applicant);
                                                      if(mysqli_num_rows($applcaintQuery) > 0){
                                                      while($rowApp = mysqli_fetch_assoc($applcaintQuery)) {
                                                     ?>
-                                                    <div class="col-lg-11">
-                                                        
-                                                        <div class="col-lg-3">
-                                                            <h4>Name of Borrower:</h4>
-                                                        </div>
-                                                        <div class="col-lg-6">
-                                                            <h4>
-                                                                <b><?php echo $rowApp['lastname']." ".$rowApp['firstname']." ".$rowApp['middlename']; ?></b>
-                                                            </h4>
-                                                        </div>
-                                                        
-                                                        <div class="col-lg-3" align="right">
-                                                            <h4>Date of Application: <b><?= $sched->applicationDate ?></b>
-                                                            </h4>
-                                                        </div>
-                                                        <div class="col-lg-3">
-                                                            <h4>Contract No.:</h4>
-                                                        </div>
-                                                        <div class="col-lg-3">
-                                                        <h4><b><?php echo $_GET['cn'] ?></b></h4>
-                                                        </div>
+                                                <div class="col-lg-11">
+
+                                                    <div class="col-lg-3">
+                                                        <h4>Name of Borrower:</h4>
                                                     </div>
-                                                    <?php
+                                                    <div class="col-lg-6">
+                                                        <h4>
+                                                            <b><?php echo $rowApp['lastname']." ".$rowApp['firstname']." ".$rowApp['middlename']; ?></b>
+                                                        </h4>
+                                                    </div>
+
+                                                    <div class="col-lg-3" align="right">
+                                                        <h4>Date of Application:
+                                                            <b><?= $sched->applicationDate ?></b>
+                                                        </h4>
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        <h4>Contract No.:</h4>
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        <h4><b><?php echo $_GET['cn'] ?></b></h4>
+                                                    </div>
+                                                </div>
+                                                <?php
                                                         }
                                                     }
                                                     ?>
-                                                    <br><br>
-                                                    <div class="col-lg-11" style="font-size:15px;"><br>
-                                                        <div class="col-lg-3">Employee Status: </div>
-                                                        <div class="col-lg-3"><label>
-                                                                <?php echo $loan->clientEmpStatus; ?></label></div>
-                                                        <div class="col-lg-3">Principal: </div>
-                                                        <div class="col-lg-3"><label>₱
-                                                                <?php echo number_format(floatval($sched->principal), 2); ?></label>
-                                                        </div>
-                                                        <div class="col-lg-3">Income Earning: </div>
-                                                        <div class="col-lg-3"><label>
-                                                                <?php echo $loan->incomeEarning; ?></label></div>
-                                                        <div class="col-lg-3">Interest (<?=$sched->interestPer?>%): </div>
-                                                        <div class="col-lg-3"><label>₱
-                                                                <?php echo number_format(floatval($sched->interestVal), 2); ?>
-                                                        </div>
-                                                        <div class="col-lg-3">Borrowing History: </div>
-                                                        <div class="col-lg-3"><label>
-                                                                <?php echo $loan->borrowingHistCount; ?></label></div>
-                                                        <div class="col-lg-3">Notarial Fee: </div>
-                                                        <div class="col-lg-3"><label>₱
-                                                                <?php echo number_format(floatval($sched->notarial), 2); ?></label>
-                                                        </div>
-                                                        <div class="col-lg-3">Loan Type: </div>
-                                                        <div class="col-lg-3"><label>
-                                                                <?= $sched->loanType ?></label>
-                                                        </div>
-                                                        <div class="col-lg-3">Amortization Frequency: </div>
-                                                        <div class="col-lg-3"><label>
-                                                                <?= $sched->amortFrequency.'LY' ?></label>
-                                                        </div>
+                                                <br><br>
+                                                <div class="col-lg-11" style="font-size:15px;"><br>
+                                                    <div class="col-lg-3">Employee Status: </div>
+                                                    <div class="col-lg-3"><label>
+                                                            <?php echo $loan->clientEmpStatus; ?></label></div>
+                                                    <div class="col-lg-3">Principal: </div>
+                                                    <div class="col-lg-3"><label>₱
+                                                            <?php echo number_format(floatval($sched->principal), 2); ?></label>
+                                                    </div>
+                                                    <div class="col-lg-3">Income Earning: </div>
+                                                    <div class="col-lg-3"><label>
+                                                            <?php echo $loan->incomeEarning; ?></label></div>
+                                                    <div class="col-lg-3">Interest (<?=$sched->interestPer?>%):
+                                                    </div>
+                                                    <div class="col-lg-3"><label>₱
+                                                            <?php echo number_format(floatval($sched->interestVal), 2); ?>
+                                                    </div>
+                                                    <div class="col-lg-3">Borrowing History: </div>
+                                                    <div class="col-lg-3"><label>
+                                                            <?php echo $loan->borrowingHistCount; ?></label></div>
+                                                    <div class="col-lg-3">Notarial Fee: </div>
+                                                    <div class="col-lg-3"><label>₱
+                                                            <?php echo number_format(floatval($sched->notarial), 2); ?></label>
+                                                    </div>
+                                                    <div class="col-lg-3">Loan Type: </div>
+                                                    <div class="col-lg-3"><label>
+                                                            <?= $sched->loanType ?></label>
+                                                    </div>
+                                                    <div class="col-lg-3">Amortization Frequency: </div>
+                                                    <div class="col-lg-3"><label>
+                                                            <?= $sched->amortFrequency.'LY' ?></label>
+                                                    </div>
 
-                                                    </div>
-                                                    <div class="col-lg-12">
-                                                        <hr>
-                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="row">
                                                 <div class="col-lg-12">
-                                                   <?= $sched->loadTable(); ?>
+                                                    <hr>
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <?= $sched->loadTable(); ?>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label><span style="color:red">* </span>Effective Date</label>
+                                                    <input type="date" name="effective_date" class="form-control"
+                                                        id="effective_date" value="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- </div> -->
                                         <!-- /.row (nested) -->
                                     </div>
                                     <!-- /.panel-body -->
@@ -244,5 +257,14 @@ if(isset($_GET['id'])){
 
 </body>
 <?php require_once('footer.php'); ?>
+<script type="text/javascript">
+var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0');
+var yyyy = today.getFullYear();
+
+today = yyyy + '-' + mm + '-' + dd;
+$('#effective_date').attr('min', today);
+</script>
 
 </html>
