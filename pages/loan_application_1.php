@@ -771,7 +771,7 @@ if(isset($_GET['id'])){
                 let collectionPerCut3 = ($("#lamt").val() / (duration)) / 4;
 
                 let udi = ( <?php echo $loan->moInterest * 100 ?>  * duration) - ( (collectionFeePer * 100) + (processingFeePer * 100));
-                let udiValue = $("#lamt").val() * (udi / 100);
+                let udiValue = $("#lamt").val() * ($('#udi').val() / 100);
                 let totalDeduction = udiValue + processingFee + collectionFee + notarialFee;
                 let proceedLoan = $("#lamt").val() - totalDeduction;
 
