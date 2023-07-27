@@ -14,6 +14,7 @@ class Loan extends DbCon {
     public $contractNo;
     public $recLoanAmount;
     public $notarialFee;
+    public $checkIfExistInLoanApplicaiton;
 
 
     public function __construct(String $id){
@@ -49,6 +50,7 @@ class Loan extends DbCon {
         $this->getRenewalBasesInfo();
         $this->getOutstandingBalance();
         $this->getNotarialFee();
+        $this->checkIfExistInLoanApp();
     }
 
     public function getSemiMonthly(){
@@ -110,6 +112,16 @@ class Loan extends DbCon {
                 return Statics::$AONEATWOINTERESTRATECAS;
             }
         }
+    }
+
+
+    public function checkIfExistInLoanApp(){
+        $sql = "SELECT client_id FROM loan_applications WHERE client_id = ?";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute([$this->clientID]);
+        $result = $stmt->fetchColumn();
+        
+        $this->checkIfExistInLoanApplicaiton = $result;
     }
 
     public function getNotarialFee(){

@@ -105,6 +105,7 @@ if(!isset($_SESSION['user_id'])){
                                                         // $suffix = $row['suffix'];
                                                         $cid = $row['applicant_code'];
                                                         $loan = new Loan(strval($cid));
+                                                        if($loan->checkIfExistInLoanApplicaiton == ""){
                                                         //$name = $row['name'];?>
                                             <tr class="odd gradeX">
                                                 <td><?php echo $row['applicant_code'];?></td>
@@ -184,12 +185,13 @@ if(!isset($_SESSION['user_id'])){
                                                             <!-- /.modal -->
                                                         </div>
                                                         <?php
-                                                                                                }
+                                                                                                                        }
                                                                                                 ?>
                                                     </div>
                                                 </td>
                                             </tr>
                                             <?php
+                                                        }
                                                                     }
                                                                 
                                                             ?>
