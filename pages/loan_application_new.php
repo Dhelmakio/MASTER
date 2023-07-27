@@ -83,18 +83,14 @@ if(!isset($_SESSION['user_id'])){
                                                 <!-- <th>GENDER</th>
                                                 <th>CONTACT NO.</th> -->
                                                 <!-- <th>ADDRESS</th> -->
-                                                <th>BORROWING HISTORY</th>
+                                                <!-- <th>BORROWING HISTORY</th> -->
                                                 <th>ACTIONS</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
                                                 //$sql ="SELECT c.*,l.remarks FROM clients c left join loan_applications l on l.client_id=c.client_id where  (l.remarks is null or l.remarks='paid') and (l.approval!=0 or l.approval is null) group by c.client_id ORDER BY last_name ASC";
-                                                $sql = "SELECT * FROM applicants_personal 
-                                                LEFT JOIN loan_applications ON 
-                                                applicants_personal.applicant_code=loan_applications.client_id 
-                                                GROUP BY applicants_personal.applicant_code 
-                                                ORDER BY applicants_personal.lastname ASC";
+                                                $sql = "SELECT * FROM applicants_personal ORDER BY lastname ASC";
                                                 // $sql = "SELECT l.*,SUM(p.amount) as total_paid,
                                                 // (SELECT CONCAT(lastname,', ',firstname,' ',middlename,' ',suffix) as name 
                                                 // from applicants_personal where applicants_personal.applicant_code=l.client_id) as name 
@@ -107,38 +103,28 @@ if(!isset($_SESSION['user_id'])){
                                                         while($row = mysqli_fetch_assoc($res)) {
                                                         $name = $row['lastname'].', '.$row['firstname'].' '.$row['middlename'];
                                                         // $suffix = $row['suffix'];
-                                                        $cid = $row['client_id'];
+                                                        $cid = $row['applicant_code'];
                                                         $loan = new Loan(strval($cid));
                                                         //$name = $row['name'];?>
                                             <tr class="odd gradeX">
-                                                <td><?php echo $row['contract_no'];?></td>
+                                                <td><?php echo $row['applicant_code'];?></td>
                                                 <td><?php echo $name?></td>
                                                 <!-- <td><?php //echo $row['gender'];?></td>
                                                 <td><?php //echo $row['contact1'];?></td> -->
                                                 <!-- <td><?php //echo $row['street1'].', '.$row['brgy1'].', '.$row['city1'] .''.$row['province1'];?> -->
                                                 </td>
-                                                <td><?php //echo $loan->borrowingHistCount;?></td>
                                                 <td style="text-align:center">
                                                     <div class="tooltip-demo">
 
                                                         <div class="panel-body">
                                                             <!-- Button trigger modal -->
-                                                            <?php
-                                                                //kani diri tangtangon paid=1 kay paid or not pwede ra mag renewal nakalimot kos policy HAHAHHAHA basta naa ra to policy sa renewal
-                                                                // $check = "SELECT * FROM loan_applications WHERE client_id='$cid' and paid=1 ";
-                                                                $check = "SELECT * FROM loan_applications WHERE client_id='$cid'";
-                                                                $rescheck = mysqli_query($con,$check);
-                                                                if(mysqli_num_rows($rescheck) > 0){ 
-                                                                ?>
+                                                            
                                                             <button type="button" class="btn btn-primary btn-sml"
                                                                 data-toggle="modal"
                                                                 data-target="#myModal_<?php echo $cid?>">
                                                                 NEW <i class="fa fa-long-arrow-right"
                                                                     aria-hidden="true" title="Copy to use save"></i>
                                                             </button>
-                                                            <?php
-                                                                }
-                                                            ?>
                                                             <!-- Modal -->
                                                             <div class="modal fade" id="myModal_<?php echo $cid?>"
                                                                 tabindex="-1" role="dialog" data-backdrop="static"
@@ -151,7 +137,7 @@ if(!isset($_SESSION['user_id'])){
                                                                                 data-dismiss="modal"
                                                                                 aria-hidden="true">&times;</button>
                                                                             <h4 class="modal-title" id="myModalLabel">
-                                                                                Proceed to Renewal?</h4>
+                                                                                Proceed to New?</h4>
                                                                         </div>
                                                                         <div class="modal-body">
                                                                             <div class="row">
@@ -169,14 +155,14 @@ if(!isset($_SESSION['user_id'])){
                                                                                         <input type="text" name="name"
                                                                                             value="<?php echo $name;?>"
                                                                                             hidden>
-                                                                                        <button type="submit"
+                                                                                        <a href="loan_application_1.php?id=<?php echo $cid?>"
                                                                                             class="btn btn-primary"
                                                                                             name="submit">
                                                                                             Proceed <i
                                                                                                 class="fa fa-long-arrow-right"
                                                                                                 aria-hidden="true"
                                                                                                 title="Copy to use save"></i>
-                                                                                        </button>
+                                                                                        </a>
                                                                                     </form>
                                                                                     <!-- </div> -->
                                                                                 </div>

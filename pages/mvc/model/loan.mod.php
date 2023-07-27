@@ -123,7 +123,7 @@ class Loan extends DbCon {
 
     //functions below are for renewal
     public function getRenewalBasesInfo(){
-        $sql = "SELECT contract_no, loan_amount FROM loan_applications WHERE client_id = ?";
+        $sql = "SELECT contract_no, loan_amount FROM loan_applications WHERE paid=0 AND client_id = ?";
         $stmt = $this->connect()->prepare($sql);
         $stmt->execute([$this->clientID]);
         $result = $stmt->fetch();

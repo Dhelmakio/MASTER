@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 26, 2023 at 04:26 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Generation Time: Jul 27, 2023 at 10:03 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.1.17
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -33,14 +33,194 @@ CREATE TABLE `activity_logs` (
   `name` text NOT NULL,
   `activity` text NOT NULL,
   `date_time` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `activity_logs`
 --
 
 INSERT INTO `activity_logs` (`log_id`, `user_id`, `name`, `activity`, `date_time`) VALUES
-(1, 1, 'Kevin Fontanoza', 'Added loan application', '2023-07-26 22:10:35');
+(1, 1, 'Kevin Fontanoza', 'Logged out', '2023-02-17 14:51:33'),
+(2, 1, 'Kevin Fontanoza', 'Logged in', '2023-02-17 14:51:35'),
+(3, 1, 'Kevin Fontanoza', 'Added new client: 1', '2023-02-17 14:52:39'),
+(4, 1, 'Kevin Fontanoza', 'Added client information: 1', '2023-02-17 14:53:08'),
+(5, 1, 'Kevin Fontanoza', 'Updated employment information of client: 1', '2023-02-17 14:53:57'),
+(6, 1, 'Kevin Fontanoza', 'Added new client: 2', '2023-02-17 14:54:44'),
+(7, 1, 'Kevin Fontanoza', 'Added client information: 2', '2023-02-17 14:55:01'),
+(8, 1, 'Kevin Fontanoza', 'Updated employment information of client: 2', '2023-02-17 15:00:17'),
+(9, 1, 'Kevin Fontanoza', 'Added new client: 3', '2023-02-17 15:02:34'),
+(10, 1, 'Kevin Fontanoza', 'Added client information: 3', '2023-02-17 15:03:08'),
+(11, 1, 'Kevin Fontanoza', 'Updated employment information of client: 3', '2023-02-17 15:04:32'),
+(12, 1, 'Kevin Fontanoza', 'Added new client: 4', '2023-02-17 15:05:18'),
+(13, 1, 'Kevin Fontanoza', 'Added client information: 4', '2023-02-17 15:05:37'),
+(14, 1, 'Kevin Fontanoza', 'Updated employment information of client: 4', '2023-02-17 15:06:26'),
+(15, 1, 'Kevin Fontanoza', 'Added new client: 5', '2023-02-17 15:06:54'),
+(16, 1, 'Kevin Fontanoza', 'Added client information: 5', '2023-02-17 15:07:13'),
+(17, 1, 'Kevin Fontanoza', 'Updated employment information of client: 5', '2023-02-17 15:07:57'),
+(18, 1, 'Kevin Fontanoza', 'Added new client: 6', '2023-02-17 15:08:16'),
+(19, 1, 'Kevin Fontanoza', 'Added client information: 6', '2023-02-17 15:08:35'),
+(20, 1, 'Kevin Fontanoza', 'Updated employment information of client: 6', '2023-02-17 15:09:12'),
+(21, 1, 'Kevin Fontanoza', 'Added new client: 7', '2023-02-17 15:09:50'),
+(22, 1, 'Kevin Fontanoza', 'Added client information: 7', '2023-02-17 15:10:07'),
+(23, 1, 'Kevin Fontanoza', 'Updated employment information of client: 7', '2023-02-17 15:10:28'),
+(24, 1, 'Kevin Fontanoza', 'Added new client: 8', '2023-02-17 15:11:32'),
+(25, 1, 'Kevin Fontanoza', 'Added client information: 8', '2023-02-17 15:11:46'),
+(26, 1, 'Kevin Fontanoza', 'Updated employment information of client: 8', '2023-02-17 15:12:14'),
+(27, 1, 'Kevin Fontanoza', 'Added loan application', '2023-02-17 15:18:45'),
+(28, 1, 'Kevin Fontanoza', 'Added loan application', '2023-02-17 15:28:04'),
+(29, 1, 'Kevin Fontanoza', 'Answered Questionnaire: AMG202302080204317', '2023-02-17 15:28:22'),
+(30, 1, 'Kevin Fontanoza', 'Approved CI', '2023-02-17 15:28:39'),
+(31, 1, 'Kevin Fontanoza', 'Approved loan application: AMG202302080204317', '2023-02-17 15:28:49'),
+(32, 1, 'Kevin Fontanoza', 'Added loan application', '2023-02-17 15:30:37'),
+(33, 1, 'Kevin Fontanoza', 'Answered Questionnaire: AMG202302080237317', '2023-02-17 15:30:57'),
+(34, 1, 'Kevin Fontanoza', 'Approved CI', '2023-02-17 15:31:03'),
+(35, 1, 'Kevin Fontanoza', 'Approved loan application: AMG202302080237317', '2023-02-17 15:31:23'),
+(36, 1, 'Kevin Fontanoza', 'Added loan application', '2023-02-17 15:34:01'),
+(37, 1, 'Kevin Fontanoza', 'Answered Questionnaire: AMG202302080201417', '2023-02-17 15:34:18'),
+(38, 1, 'Kevin Fontanoza', 'Approved CI', '2023-02-17 15:34:22'),
+(39, 1, 'Kevin Fontanoza', 'Approved loan application: AMG202302080201417', '2023-02-17 15:34:26'),
+(40, 1, 'Kevin Fontanoza', 'Added loan application', '2023-02-17 15:45:47'),
+(41, 1, 'Kevin Fontanoza', 'Answered Questionnaire: AMG202302080247417', '2023-02-17 16:02:45'),
+(42, 1, 'Kevin Fontanoza', 'Approved CI', '2023-02-17 16:02:49'),
+(43, 1, 'Kevin Fontanoza', 'Approved loan application: AMG202302080247417', '2023-02-17 16:03:00'),
+(44, 1, 'Kevin Fontanoza', 'Added new client: 9', '2023-02-17 17:32:24'),
+(45, 1, 'Kevin Fontanoza', 'Added client information: 9', '2023-02-17 17:32:41'),
+(46, 1, 'Kevin Fontanoza', 'Updated employment information of client: 9', '2023-02-17 17:33:41'),
+(47, 1, 'Kevin Fontanoza', 'Added loan application', '2023-02-17 17:41:35'),
+(48, 1, 'Kevin Fontanoza', 'Answered Questionnaire: AMG202302100235917', '2023-02-17 17:47:34'),
+(49, 1, 'Kevin Fontanoza', 'Approved CI', '2023-02-17 17:50:24'),
+(50, 1, 'Kevin Fontanoza', 'Logged in', '2023-03-01 16:06:21'),
+(51, 1, 'Kevin Fontanoza', 'Logged in', '2023-03-13 15:52:03'),
+(52, 1, 'Kevin Fontanoza', 'Approved loan application: AMG202302100235917', '2023-03-13 15:57:03'),
+(53, 1, 'Kevin Fontanoza', 'Logged in', '2023-03-17 00:09:29'),
+(54, 1, 'Kevin Fontanoza', 'Added loan application', '2023-03-17 00:32:42'),
+(55, 1, 'Kevin Fontanoza', 'Answered Questionnaire: AMG202303050342116', '2023-03-17 00:44:20'),
+(56, 1, 'Kevin Fontanoza', 'Approved CI', '2023-03-17 07:42:52'),
+(57, 1, 'Kevin Fontanoza', 'Logged out', '2023-03-17 07:44:52'),
+(58, 1, 'Kevin Fontanoza', 'Logged in', '2023-03-17 07:56:26'),
+(59, 1, 'Kevin Fontanoza', 'Logged out', '2023-03-17 08:09:23'),
+(60, 1, 'Kevin Fontanoza', 'Logged in', '2023-03-17 08:12:07'),
+(61, 1, 'Kevin Fontanoza', 'Logged out', '2023-03-17 08:45:16'),
+(62, 1, 'Kevin Fontanoza', 'Logged in', '2023-03-17 08:45:29'),
+(63, 1, 'Kevin Fontanoza', 'Added new client: 10', '2023-03-17 08:56:28'),
+(64, 1, 'Kevin Fontanoza', 'Added client information: 10', '2023-03-17 08:59:27'),
+(65, 1, 'Kevin Fontanoza', 'Updated employment information of client: 10', '2023-03-17 09:05:20'),
+(66, 1, 'Kevin Fontanoza', 'Added loan application', '2023-03-17 09:21:00'),
+(67, 1, 'Kevin Fontanoza', 'Answered Questionnaire: AMG2023030203001017', '2023-03-17 09:27:50'),
+(68, 1, 'Kevin Fontanoza', 'Approved CI', '2023-03-17 09:31:07'),
+(69, 1, 'Kevin Fontanoza', 'Added new client: 11', '2023-03-17 09:54:57'),
+(70, 1, 'Kevin Fontanoza', 'Added client information: 11', '2023-03-17 09:56:57'),
+(71, 1, 'Kevin Fontanoza', 'Updated employment information of client: 11', '2023-03-17 10:00:38'),
+(72, 1, 'Kevin Fontanoza', 'Added loan application', '2023-03-17 10:05:49'),
+(73, 1, 'Kevin Fontanoza', 'Approved loan application: AMG2023030203001017', '2023-03-17 11:13:23'),
+(74, 1, 'Kevin Fontanoza', 'Rejected loan application: AMG202303050342116', '2023-03-17 11:15:30'),
+(75, 1, 'Kevin Fontanoza', 'Added new client: 12', '2023-03-17 14:33:35'),
+(76, 1, 'Kevin Fontanoza', 'Added client information: 12', '2023-03-17 14:33:52'),
+(77, 1, 'Kevin Fontanoza', 'Updated employment information of client: 12', '2023-03-17 14:34:35'),
+(78, 1, 'Kevin Fontanoza', 'Logged out', '2023-03-23 19:52:36'),
+(79, 1, 'Kevin Fontanoza', 'Logged in', '2023-03-23 19:52:42'),
+(80, 1, 'Kevin Fontanoza', 'Logged out', '2023-03-23 19:56:12'),
+(81, 1, 'Kevin Fontanoza', 'Logged in', '2023-03-23 20:03:22'),
+(82, 1, 'Kevin Fontanoza', 'Added new client: 13', '2023-03-28 10:02:51'),
+(83, 1, 'Kevin Fontanoza', 'Added client information: 13', '2023-03-28 10:03:19'),
+(84, 1, 'Kevin Fontanoza', 'Logged in', '2023-04-03 09:29:57'),
+(85, 1, 'Kevin Fontanoza', 'Logged in', '2023-04-03 09:46:08'),
+(86, 1, 'Kevin Fontanoza', 'Added new client: 14', '2023-04-03 09:48:49'),
+(87, 1, 'Kevin Fontanoza', 'Logged out', '2023-04-03 09:57:40'),
+(88, 1, 'Kevin Fontanoza', 'Logged in', '2023-04-03 09:57:46'),
+(89, 1, 'Kevin Fontanoza', 'Logged out', '2023-04-03 10:03:24'),
+(90, 1, 'Kevin Fontanoza', 'Logged in', '2023-04-03 10:06:51'),
+(91, 1, 'Kevin Fontanoza', 'Added new client: 15', '2023-04-03 11:19:07'),
+(92, 1, 'Kevin Fontanoza', 'Added client information: 15', '2023-04-03 11:22:20'),
+(93, 1, 'Kevin Fontanoza', 'Added new client: 16', '2023-04-03 11:24:35'),
+(94, 1, 'Kevin Fontanoza', 'Logged in', '2023-06-19 16:57:21'),
+(95, 1, 'Kevin Fontanoza', 'Logged in', '2023-06-21 09:08:46'),
+(96, 1, 'Kevin Fontanoza', 'Logged out', '2023-06-21 09:29:14'),
+(97, 1, 'Kevin Fontanoza', 'Logged in', '2023-06-21 09:31:50'),
+(98, 1, 'Kevin Fontanoza', 'Logged in', '2023-06-21 09:32:38'),
+(99, 1, 'Kevin Fontanoza', 'Logged out', '2023-06-21 09:34:28'),
+(100, 1, 'Kevin Fontanoza', 'Logged in', '2023-06-21 09:34:48'),
+(101, 1, 'Kevin Fontanoza', 'Logged out', '2023-06-21 09:39:39'),
+(102, 1, 'Kevin Fontanoza', 'Logged in', '2023-06-21 09:39:53'),
+(103, 1, 'Kevin Fontanoza', 'Logged in', '2023-06-21 16:40:22'),
+(104, 1, 'Kevin Fontanoza', 'Logged in', '2023-06-23 10:18:59'),
+(105, 1, 'Kevin Fontanoza', 'Added client information: ', '2023-06-23 11:02:22'),
+(106, 1, 'Kevin Fontanoza', 'Logged out', '2023-06-26 19:16:28'),
+(107, 1, 'Kevin Fontanoza', 'Logged in', '2023-06-27 00:24:35'),
+(108, 1, 'Kevin Fontanoza', 'Logged out', '2023-06-27 02:21:53'),
+(109, 1, 'Kevin Fontanoza', 'Logged in', '2023-06-29 20:47:44'),
+(110, 1, 'Kevin Fontanoza', 'Logged in', '2023-07-06 15:56:55'),
+(111, 1, 'Kevin Fontanoza', 'Added loan application', '2023-07-11 21:06:53'),
+(112, 1, 'Kevin Fontanoza', 'Added loan application', '2023-07-11 21:22:16'),
+(113, 1, 'Kevin Fontanoza', 'Logged out', '2023-07-12 20:24:25'),
+(114, 1, 'Kevin Fontanoza', 'Logged in', '2023-07-12 20:24:47'),
+(115, 1, 'Kevin Fontanoza', 'Logged out', '2023-07-14 20:34:04'),
+(116, 1, 'Kevin Fontanoza', 'Logged in', '2023-07-14 20:34:13'),
+(117, 1, 'Kevin Fontanoza', 'Logged in', '2023-07-14 20:35:26'),
+(118, 1, 'Kevin Fontanoza', 'Added loan application', '2023-07-15 14:05:55'),
+(119, 1, 'Kevin Fontanoza', 'Logged in', '2023-07-17 12:52:29'),
+(120, 1, 'Kevin Fontanoza', 'Logged in', '2023-07-17 12:52:47'),
+(121, 1, 'Kevin Fontanoza', 'Added loan application', '2023-07-18 00:43:27'),
+(122, 1, 'Kevin Fontanoza', 'Logged in', '2023-07-18 04:11:32'),
+(123, 1, 'Kevin Fontanoza', 'Added loan application', '2023-07-19 11:27:50'),
+(124, 1, 'Kevin Fontanoza', 'Added loan application', '2023-07-19 11:27:51'),
+(125, 1, 'Kevin Fontanoza', 'Added loan application', '2023-07-19 11:31:50'),
+(126, 0, 'Kevin Fontanoza', 'Added loan application', '2023-07-19 21:00:17'),
+(127, 0, 'Kevin Fontanoza', 'Added loan application', '2023-07-19 21:01:42'),
+(128, 0, 'Kevin Fontanoza', 'Added loan application', '2023-07-19 21:05:29'),
+(129, 0, 'Kevin Fontanoza', 'Added loan application', '2023-07-19 21:06:41'),
+(130, 0, 'Kevin Fontanoza', 'Added loan application', '2023-07-22 02:21:15'),
+(131, 0, 'Kevin Fontanoza', 'Added loan application', '2023-07-22 02:39:32'),
+(132, 0, 'Kevin Fontanoza', 'Added loan application', '2023-07-22 02:43:50'),
+(133, 0, 'Kevin Fontanoza', 'Added loan application', '2023-07-22 02:55:45'),
+(134, 0, 'Kevin Fontanoza', 'Added loan application', '2023-07-22 03:02:56'),
+(135, 0, 'Kevin Fontanoza', 'Added loan application', '2023-07-22 03:09:52'),
+(136, 0, 'Kevin Fontanoza', 'Added loan application', '2023-07-22 03:11:18'),
+(137, 0, 'Kevin Fontanoza', 'Added loan application', '2023-07-22 03:11:56'),
+(138, 0, 'Kevin Fontanoza', 'Added loan application', '2023-07-22 03:14:20'),
+(139, 1, 'Kevin Fontanoza', 'Answered Questionnaire: AMG001000000220230703074119', '2023-07-22 03:40:18'),
+(140, 1, 'Kevin Fontanoza', 'Approved CI', '2023-07-22 03:41:15'),
+(141, 1, 'Kevin Fontanoza', 'Approved CI', '2023-07-22 03:42:12'),
+(142, 1, 'Kevin Fontanoza', 'Approved loan application: AMG001000001620230709071921', '2023-07-22 03:47:05'),
+(143, 1, 'Kevin Fontanoza', 'Approved loan application: AMG001000000220230703074119', '2023-07-22 03:49:56'),
+(144, 1, 'Kevin Fontanoza', 'Logged in', '2023-07-22 13:32:00'),
+(145, 1, 'Kevin Fontanoza', 'Added loan application', '2023-07-22 14:52:42'),
+(146, 1, 'Kevin Fontanoza', 'Added loan application', '2023-07-22 19:36:43'),
+(147, 1, 'Kevin Fontanoza', 'Added loan application', '2023-07-23 02:06:21'),
+(148, 1, 'Kevin Fontanoza', 'Added loan application', '2023-07-23 02:06:48'),
+(149, 1, 'Kevin Fontanoza', 'Added loan application', '2023-07-23 15:53:04'),
+(150, 1, 'Kevin Fontanoza', 'Logged out', '2023-07-23 15:53:57'),
+(151, 1, 'Kevin Fontanoza', 'Logged in', '2023-07-23 15:55:20'),
+(152, 1, 'Kevin Fontanoza', 'Logged in', '2023-07-23 21:32:31'),
+(153, 1, 'Kevin Fontanoza', 'Logged in', '2023-07-24 20:06:48'),
+(154, 1, 'Kevin Fontanoza', 'Answered Questionnaire: AMG001000002020230708074822', '2023-07-24 20:20:56'),
+(155, 1, 'Kevin Fontanoza', 'Approved CI', '2023-07-24 20:22:09'),
+(156, 1, 'Kevin Fontanoza', 'Answered Questionnaire: AMG001000002120230709070423', '2023-07-24 22:06:34'),
+(157, 1, 'Kevin Fontanoza', 'Approved CI', '2023-07-24 22:07:22'),
+(158, 1, 'Kevin Fontanoza', 'Approved loan application: AMG001000002120230709070423', '2023-07-24 22:54:40'),
+(159, 1, 'Kevin Fontanoza', 'Approved loan application: AMG001000001620230703071719', '2023-07-24 23:18:51'),
+(160, 1, 'Kevin Fontanoza', 'Approved loan application: AMG001000001220230703074219', '2023-07-24 23:18:59'),
+(161, 1, 'Kevin Fontanoza', 'Added loan application', '2023-07-25 00:44:28'),
+(162, 1, 'Kevin Fontanoza', 'Added loan application', '2023-07-25 23:35:47'),
+(163, 1, 'Kevin Fontanoza', 'Logged out', '2023-07-25 23:53:14'),
+(164, 1, 'Kevin Fontanoza', 'Logged in', '2023-07-26 02:07:40'),
+(165, 1, 'Kevin Fontanoza', 'Added loan application', '2023-07-26 10:09:57'),
+(166, 1, 'Kevin Fontanoza', 'Added loan application', '2023-07-26 10:42:31'),
+(167, 1, 'Kevin Fontanoza', 'Added loan application', '2023-07-26 10:43:02'),
+(168, 1, 'Kevin Fontanoza', 'Logged out', '2023-07-26 10:47:55'),
+(169, 1, 'Kevin Fontanoza', 'Logged in', '2023-07-26 21:54:27'),
+(170, 1, 'Kevin Fontanoza', 'Added loan application', '2023-07-26 22:34:12'),
+(171, 1, 'Kevin Fontanoza', 'Added loan application', '2023-07-26 22:48:15'),
+(172, 1, 'Kevin Fontanoza', 'Added loan application', '2023-07-27 01:44:47'),
+(173, 1, 'Kevin Fontanoza', 'Answered Questionnaire: AMG001000000120230707074726', '2023-07-27 01:45:18'),
+(174, 1, 'Kevin Fontanoza', 'Approved CI', '2023-07-27 01:45:41'),
+(175, 1, 'Kevin Fontanoza', 'Approved loan application: AMG001000000120230707074726', '2023-07-27 01:49:28'),
+(176, 1, 'Kevin Fontanoza', 'Added loan application', '2023-07-27 02:13:07'),
+(177, 1, 'Kevin Fontanoza', 'Added loan application', '2023-07-27 14:34:49'),
+(178, 1, 'Kevin Fontanoza', 'Added loan application', '2023-07-27 14:39:30'),
+(179, 1, 'Kevin Fontanoza', 'Added loan application', '2023-07-27 15:20:15'),
+(180, 1, 'Kevin Fontanoza', 'Added loan application', '2023-07-27 15:21:12'),
+(181, 1, 'Kevin Fontanoza', 'Added loan application', '2023-07-27 15:30:09');
 
 -- --------------------------------------------------------
 
@@ -112,7 +292,14 @@ CREATE TABLE `answers` (
   `question59` varchar(10) DEFAULT NULL,
   `question60` varchar(10) DEFAULT NULL,
   `date` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `answers`
+--
+
+INSERT INTO `answers` (`questionnaire_id`, `contract_no`, `question1`, `question2`, `question3`, `question4`, `question5`, `question6`, `question7`, `question8`, `question9`, `question10`, `question11`, `question12`, `question13`, `question14`, `question15`, `question16`, `question17`, `question18`, `question19`, `question20`, `question21`, `question22`, `question23`, `question24`, `question25`, `question26`, `question27`, `question28`, `question29`, `question30`, `question31`, `question32`, `question33`, `question34`, `question35`, `question36`, `question37`, `question38`, `question39`, `question40`, `question41`, `question42`, `question43`, `question44`, `question45`, `question46`, `question47`, `question48`, `question49`, `question50`, `question51`, `question52`, `question53`, `question54`, `question55`, `question56`, `question57`, `question58`, `question59`, `question60`, `date`) VALUES
+(1, 'AMG001000000120230707074726', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 'ss', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', '2023-07-27 01:45:18');
 
 -- --------------------------------------------------------
 
@@ -126,7 +313,7 @@ CREATE TABLE `applicants_child` (
   `child_name` text NOT NULL,
   `child_dob` date NOT NULL,
   `date_encoded` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -171,14 +358,7 @@ CREATE TABLE `applicants_personal` (
   `fathercon` text NOT NULL,
   `file` text NOT NULL,
   `date_encoded` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `applicants_personal`
---
-
-INSERT INTO `applicants_personal` (`applicant_id`, `applicant_code`, `firstname`, `middlename`, `lastname`, `suffix`, `nickname`, `age`, `gender`, `contact1`, `mstatus`, `dob1`, `pob1`, `block1`, `street1`, `phase1`, `brgy1`, `city1`, `province1`, `map_url`, `residence1`, `lwith1`, `block2`, `street2`, `phase2`, `brgy2`, `city2`, `province2`, `residence2`, `lwith2`, `mothername`, `mothercon`, `fathername`, `fathercon`, `file`, `date_encoded`) VALUES
-(1, 'AMG0010000001', 'DHEL MARK', 'SALIDAGA', 'BAYLON', '', 'MARKOS', '', 'Male', '09999999999', 'Single', '2023-07-26', 'CAVITE, TANZA', '', '', '', 'PALID II (IRAYA)', 'LEYTE', 'LEYTE', 'https://www.google.com/maps/place/San+Fernando,+Pampanga/@15.070648,120.652019,3064m/data=!3m1!1e3!4m6!3m5!1s0x3396f79f47a8aadb:0x2c4be1dddb81922a!8m2!3d15.0593937!4d120.6567054!16zL20vMDZwZ3pu?hl=en-US&entry=ttu', 'Owned', 'Parents', '', '', '', 'PALID II (IRAYA)', 'LEYTE', 'LEYTE', 'Owned', 'Parents', 'DELMA SALIDAGA BAYLON', '09999999999', 'ALBERTO PEREZ BAYLON', '09999999999', '', '2023-07-26');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -193,14 +373,7 @@ CREATE TABLE `applicants_reference` (
   `loan_purpose` text NOT NULL,
   `fb_acct` text NOT NULL,
   `date_encoded` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `applicants_reference`
---
-
-INSERT INTO `applicants_reference` (`reference_id`, `applicant_code`, `source`, `loan_purpose`, `fb_acct`, `date_encoded`) VALUES
-(1, 'AMG0010000001', 'Facebook', 'Medical', 'dhelmark', '2023-07-26');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -216,7 +389,7 @@ CREATE TABLE `applicants_relative` (
   `r_relationship` text NOT NULL,
   `r_ta` text NOT NULL,
   `date_encoded` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -235,7 +408,7 @@ CREATE TABLE `applicants_spouse` (
   `s_occupation` text NOT NULL,
   `s_company` text NOT NULL,
   `date_encoded` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -265,14 +438,7 @@ CREATE TABLE `applicants_work` (
   `specify` text NOT NULL,
   `max_loanable_amt` float NOT NULL,
   `date_encoded` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `applicants_work`
---
-
-INSERT INTO `applicants_work` (`work_id`, `applicant_code`, `employer`, `sector_type`, `tob`, `com_address`, `a_location`, `sup_name`, `hr_number`, `date_hired`, `e_status`, `m_salary`, `bank_name`, `atm_card`, `loan`, `monthly_salary`, `s_period`, `other_source`, `specify`, `max_loanable_amt`, `date_encoded`) VALUES
-(1, 'AMG0010000001', 'COMPTIA', 'Private Sector', 'Firms which offer professional services, such as accounting, legal, engineering, business consulting, customer service and architecture', 'PALID II LEYTE LEYTE', 'ORMOC', 'AAAAAAAAA', '09999999999', '2023-07-26', 'REGULAR', 'ATM', 'TEST', 'TEST', 'Yes-Appliance/Gadget Loan-20000001', '2000000', '', '20000', 'Allowance', 0, '2023-07-26');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -287,7 +453,7 @@ CREATE TABLE `archive_child` (
   `child_name` text NOT NULL,
   `child_dob` date NOT NULL,
   `date_encoded` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -333,7 +499,7 @@ CREATE TABLE `archive_personal` (
   `fathercon` text NOT NULL,
   `file` text NOT NULL,
   `date_encoded` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -349,7 +515,7 @@ CREATE TABLE `archive_reference` (
   `loan_purpose` text NOT NULL,
   `fb_acct` text NOT NULL,
   `date_encoded` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -366,7 +532,7 @@ CREATE TABLE `archive_relative` (
   `r_relationship` text NOT NULL,
   `r_ta` text NOT NULL,
   `date_encoded` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -386,7 +552,7 @@ CREATE TABLE `archive_spouse` (
   `s_occupation` text NOT NULL,
   `s_company` text NOT NULL,
   `date_encoded` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -417,7 +583,7 @@ CREATE TABLE `archive_work` (
   `specify` text NOT NULL,
   `max_loanable_amt` float NOT NULL,
   `date_encoded` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -444,7 +610,26 @@ CREATE TABLE `clients` (
   `yrs_res` int(11) NOT NULL,
   `status` int(11) NOT NULL,
   `date_encoded` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `clients`
+--
+
+INSERT INTO `clients` (`client_id`, `first_name`, `middle_name`, `last_name`, `suffix`, `gender`, `dob`, `pob`, `mobile`, `street`, `brgy`, `city`, `province`, `zipcode`, `res_status`, `yrs_res`, `status`, `date_encoded`) VALUES
+(2, 'A2', 'A2', 'A2', '', 'M', '2000-03-02', 'ORMOC', '09688513053', 'BLK. 4 LOT 39 DECA HOMES', 'CONCEPCION', 'ORMOC CITY', 'LEYTE', 6541, 'OWNED', 4, 0, '2023-02-17 14:54:44'),
+(3, 'A3', 'A3', 'A3', '', 'M', '1998-09-30', 'ALBUERA', '09688513053', 'BLK. 4 LOT 39 DECA HOMES', 'CONCEPCION', 'ORMOC CITY', 'LEYTE', 6541, 'OWNED', 14, 0, '2023-02-17 15:02:34'),
+(4, 'A4', 'A4', 'A4', '', 'M', '1993-02-28', 'ORMOC CITY', '9950083505', 'BLK. 4 LOT 39 DECA HOMES', 'CONCEPCION', 'ORMOC CITY', 'LEYTE', 6541, 'OWNED', 6, 0, '2023-02-17 15:05:18'),
+(5, 'B1', 'B1', 'B1', '', 'M', '1995-12-31', 'ORMOC CITY', '09950083505', 'BLK. 4 LOT 39 DECA HOMES', 'CONCEPCION', 'ORMOC CITY', 'LEYTE', 6541, 'OWNED', 4, 0, '2023-02-17 15:06:54'),
+(6, 'B2', 'B2', 'B2', '', 'M', '2001-01-06', 'ORMOC CITY', '09950083505', 'BLK. 4 LOT 39 DECA HOMES', 'CONCEPCION', 'ORMOC CITY', 'LEYTE', 6541, 'OWNED', 3, 0, '2023-02-17 15:08:16'),
+(7, 'B3', 'B3', 'B3', '', 'M', '2000-02-20', 'ORMOC CITY', '09950083505', 'BLK. 4 LOT 39 DECA HOMES', 'CONCEPCION', 'ORMOC CITY', 'LEYTE', 6541, 'OWNED', 4, 0, '2023-02-17 15:09:50'),
+(8, 'B4', 'B4', 'B4', '', 'M', '1993-07-14', 'ORMOC CITY', '09950083505', 'BLK. 4 LOT 39 DECA HOMES', 'CONCEPCION', 'ORMOC CITY', 'LEYTE', 6541, 'OWNED', 5, 0, '2023-02-17 15:11:32'),
+(9, 'SAMPLE', 'SAMPLE', 'SAMPLE', '', 'M', '2000-01-01', 'ORMOC CITY', '09950083505', 'BLK. 4 LOT 39 DECA HOMES', 'CONCEPCION', 'ORMOC CITY', 'LEYTE', 6541, 'OWNED', 3, 0, '2023-02-17 17:32:24'),
+(10, 'FIRST', 'MIDDLE', 'LAST', '', 'M', '1992-02-11', 'PAMPANGA', '09955055555', 'BLOCK 4 LOT 40', 'DEL ROSARIO', 'SAN FERNANDO', 'PAMPANGA', 2000, 'OWNED', 2, 0, '2023-03-17 08:56:28'),
+(11, 'LARRES BEA MAE', 'EULA', 'ASAYAS', '', 'F', '2001-11-17', 'PALO LEYTE', '09665610361', 'GAMMBOA BLDG', 'DEL ROSARIO', 'SAN FERNANDO', 'PAMPANGA', 2000, 'RENTED', 1, 0, '2023-03-17 09:54:57'),
+(12, 'NEW', 'NEW', 'NEW', '', 'M', '1995-01-11', 'ORMOC', '09950003321', 'B', 'TIBAY', 'ORMOC CITY', 'LEYTE', 6541, 'OWNED', 2, 0, '2023-03-17 14:33:35'),
+(14, 'KEVIN', 'BUZON', 'FONTANOZA', '', 'M', '2023-04-03', 'ORMOC CITY', '09950083505', 'BLK. 4 LOT 39 DECA HOMES', 'CONCEPCION', 'ORMOC CITY', 'LEYTE', 6541, 'OWNED', 1, 0, '2023-04-03 09:48:49'),
+(16, 'SIM', 'GO', 'EBCAS', '', 'M', '2023-04-03', 'ORMOC CITY', '09950083505', 'BLK. 4 LOT 39 DECA HOMES', 'CONCEPCION', 'ORMOC CITY', 'LEYTE', 6541, 'OWNED', 1, 0, '2023-04-03 11:24:35');
 
 -- --------------------------------------------------------
 
@@ -470,7 +655,25 @@ CREATE TABLE `client_info` (
   `spouse_position` text NOT NULL,
   `spouse_employer` text NOT NULL,
   `spouse_employer_contact` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `client_info`
+--
+
+INSERT INTO `client_info` (`client_info_id`, `client_id`, `mother_name`, `mother_contact`, `father_name`, `father_contact`, `living_with`, `marital_status`, `spouse_name`, `spouse_contact`, `spouse_dob`, `spouse_pob`, `spouse_address`, `spouse_occupation`, `spouse_position`, `spouse_employer`, `spouse_employer_contact`) VALUES
+(2, 2, 'A2 MOTHER', '09288819281', 'A2 FATHER', '09198092201', 'RELATIVES', 'SINGLE', '', '', '1970-01-01', '', '', '', '', '', ''),
+(3, 3, 'A3 MOTHER', '09357773265', 'A3 FATHER', '09176549865', 'FAMILY', 'SINGLE', '', '', '1970-01-01', '', '', '', '', '', ''),
+(4, 4, 'A4 MOTHER', '09210092011', 'A4 FATHER', '09280019281', 'FAMILY', 'SINGLE', '', '', '1970-01-01', '', '', '', '', '', ''),
+(5, 5, 'B1 MOTHER', '09357773265', 'B1 FATHER', '09176549865', 'FAMILY', 'SINGLE', '', '', '1970-01-01', '', '', '', '', '', ''),
+(6, 6, 'B2 MOTHER', '', 'B2 FATHER', '09198092201', 'PARENTS', 'SINGLE', '', '', '1970-01-01', '', '', '', '', '', ''),
+(7, 7, 'B3 MOTHER', '09357773265', 'B3 FATHER', '09176549865', 'PARENTS', 'SINGLE', '', '', '1970-01-01', '', '', '', '', '', ''),
+(8, 8, 'B4 MOTHER', '09357773265', 'B4 FATHER', '09176549865', 'PARENTS', 'SINGLE', '', '', '1970-01-01', '', '', '', '', '', ''),
+(9, 9, 'TERESITA BUZON FONTANOZA', '09357773265', 'REYNALDO CABALJIN FONTANOZA', '09176549865', 'PARENTS', 'SINGLE', '', '', '1970-01-01', '', '', '', '', '', ''),
+(10, 10, 'MOTHER', '09100009999', 'FATHER', '09109992222', 'PARENTS', 'MARRIED', 'SPOUSE', '09110909090', '1992-11-03', 'PAMPANGA', 'SAN FERNANDO, PAMPANGA', 'GOV. EMPLOYEE', 'STAFF', 'LGU SAN FERNANDO', '09556564652'),
+(11, 11, 'LOURDES CHYRELLE ASAYAS', '09129914500', 'LARRY ASAYAS', '', 'RELATIVES', 'SINGLE', '', '', '1970-01-01', '', '', '', '', '', ''),
+(12, 12, 'MOTHER', '09100009999', 'FATHER', '09109992222', 'PARENTS', 'SINGLE', '', '', '1970-01-01', '', '', '', '', '', ''),
+(15, 0, 'A', '09999999999', 'TEST', '09999999999', '', 'SINGLE', '', '', '1970-01-01', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -483,7 +686,14 @@ CREATE TABLE `dependents` (
   `client_id` int(11) NOT NULL,
   `name` text NOT NULL,
   `dob` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `dependents`
+--
+
+INSERT INTO `dependents` (`dependent_id`, `client_id`, `name`, `dob`) VALUES
+(1, 10, 'Dependent', '2020-03-02');
 
 -- --------------------------------------------------------
 
@@ -509,7 +719,24 @@ CREATE TABLE `employer` (
   `hr_contact` text NOT NULL,
   `supervisor` text NOT NULL,
   `supervisor_contact` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `employer`
+--
+
+INSERT INTO `employer` (`employer_id`, `client_id`, `employer_name`, `address`, `employer_contact`, `occupation`, `date_hired`, `employment_status`, `employment_type`, `nature_of_business`, `gross_monthly`, `other_income`, `max_loanable_amt`, `hr_personnel`, `hr_contact`, `supervisor`, `supervisor_contact`) VALUES
+(2, 2, 'ACCENTURE', 'CEBU CITY', '09653336989', 'ASSOCIATE SOFTWARE ENGINEER', '2015-06-21', 'REGULAR', 'PRIVATE', 'INFORMATION TECHNOLOGY', 12000, 10000, 0, 'DANNY SANCHEZ', '09563336598', 'LITO QUEZON', '09210029102'),
+(3, 3, 'LEYECO V', 'BRGY. SAN PABLO, ORMOC CITY', '09120002910', 'CUSTOMER SERVICE AIDE I', '2016-11-12', 'REGULAR', 'PRIVATE', 'ELECTRIC COOPERATIVE', 12000, 0, 0, 'DANNY SANCHEZ', '09563336598', 'PETER PARKER', '09210029102'),
+(4, 4, 'CITY GOVERNMENT OF ORMOC', 'NEW ORMOC CITY HALL BLDG., BRGY. COGON, ORMOC CITY', '09653336989', 'SR. ADMINISTRATIVE ASSISTANT II', '2022-12-21', 'REGULAR', 'GOVERNMENT', 'INFORMATION TECHNOLOGY', 12000, 24000, 0, 'FARICA ZGUMBA', '09109920192', 'MELCHIZEDEC YAP', '09210029102'),
+(5, 5, 'CITY GOVERNMENT OF ORMOC', 'NEW ORMOC CITY HALL BLDG., BRGY. COGON, ORMOC CITY', '09289938102', 'ADMIN AIDE I', '2019-01-06', 'CASUAL', 'GOVERNMENT', 'INFORMATION TECHNOLOGY', 12000, 0, 0, 'FARICA ZGUMBA', '09109920192', 'MELCHIZEDEC YAP', '09210029102'),
+(6, 6, 'CITY GOVERNMENT OF ORMOC', 'NEW ORMOC CITY HALL BLDG., BRGY. COGON, ORMOC CITY', '09653336989', 'ADMIN AIDE I', '2019-01-06', 'CASUAL', 'GOVERNMENT', 'INFORMATION TECHNOLOGY', 12000, 10000, 0, 'FARICA ZGUMBA', '09109920192', 'MELCHIZEDEC YAP', '09210029102'),
+(7, 7, 'CITY GOVERNMENT OF ORMOC', 'NEW ORMOC CITY HALL BLDG., BRGY. COGON, ORMOC CITY', '09653336989', 'ADMIN AIDE I', '2019-01-06', 'CASUAL', 'GOVERNMENT', 'INFORMATION TECHNOLOGY', 12000, 0, 0, 'FARICA ZGUMBA', '09109920192', 'MELCHIZEDEC YAP', '09210029102'),
+(8, 8, 'CITY GOVERNMENT OF ORMOC', 'NEW ORMOC CITY HALL BLDG., BRGY. COGON, ORMOC CITY', '09289938102', 'ADMIN AIDE I', '2019-01-06', 'CASUAL', 'GOVERNMENT', 'INFORMATION TECHNOLOGY', 12000, 12000, 0, 'FARICA ZGUMBA', '09109920192', 'MELCHIZEDEC YAP', '09210029102'),
+(9, 9, 'CITY GOVERNMENT OF ORMOC', 'NEW ORMOC CITY HALL BLDG., BRGY. COGON, ORMOC CITY', '09289938102', 'ADMIN AIDE I', '2000-01-31', 'REGULAR', 'GOVERNMENT', 'INFORMATION TECHNOLOGY', 12000, 10000, 0, 'FARICA ZGUMBA', '09109920192', 'MELCHIZEDEC YAP', '09210029102'),
+(10, 10, 'LGU SAN FERNANDO', 'SAN FERNANDO, PAMPANGA', '09102365652', 'STAFF', '2018-01-06', 'REGULAR', 'GOVERNMENT', 'IT', 18000, 6000, 0, 'HR', '09556665555', 'SUPERVISOR', '09565554213'),
+(11, 11, 'AMIGO LENDING CORP', 'GROUND FLOOR GAMBOA BLDG BRGY DEL ROSARIO SAN FERNANDO PAMPANGA', '09203212121', 'COLLECTION ASSISTANT', '2023-01-03', 'REGULAR', 'PRIVATE', 'LENDING COMPANY', 15000, 0, 0, 'CHERRY MAE EULA', '09203212121', 'CHERRY MAE EULA', '09203212121'),
+(12, 12, 'LGU SAN FERNANDO', 'SAN FERNANDO, PAMPANGA', '09102365652', 'STAFF', '2022-12-08', 'REGULAR', 'GOVERNMENT', 'GOVERNMENT', 50000, 1000, 0, 'HR', '09556665555', 'SUPERVISOR', '09565554213');
 
 -- --------------------------------------------------------
 
@@ -520,7 +747,7 @@ CREATE TABLE `employer` (
 CREATE TABLE `fees` (
   `notarial_id` int(11) DEFAULT NULL,
   `notarial_fee` float NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `fees`
@@ -540,7 +767,7 @@ CREATE TABLE `gov_issued_id` (
   `client_id` int(11) NOT NULL,
   `id_type` text NOT NULL,
   `id_no` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -573,14 +800,7 @@ CREATE TABLE `loan_applications` (
   `date_flagged` datetime DEFAULT NULL,
   `remarks` text NOT NULL,
   `paid` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `loan_applications`
---
-
-INSERT INTO `loan_applications` (`loan_id`, `contract_no`, `client_id`, `loan_type`, `loan_duration`, `loan_amount`, `interest_amount`, `other_fee`, `total_cashout`, `monthly_amortization`, `mop`, `ob`, `udi_percentage`, `udi_value`, `interest_percentage`, `application_date`, `ci_status`, `ci_by`, `ci_date`, `approval`, `processed_by`, `date_flagged`, `remarks`, `paid`) VALUES
-(1, 'AMG001000000120230704073426', 'AMG0010000001', 1, 4, 32000, 0, 400, 21360, 8000, '1', 0, 26, 8320, 8, '2023-07-26 22:10:34', 0, '', NULL, 0, '', NULL, '', 0);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -595,7 +815,15 @@ CREATE TABLE `loan_types` (
   `min` int(11) NOT NULL,
   `max` int(11) NOT NULL,
   `description` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `loan_types`
+--
+
+INSERT INTO `loan_types` (`loan_type_id`, `loan_type`, `interest`, `min`, `max`, `description`) VALUES
+(1, 'Multipurpose Loan', 10, 1, 3, 'Multipurpose'),
+(2, 'Emergency Loan', 6, 1, 3, 'For emergency purposes');
 
 -- --------------------------------------------------------
 
@@ -611,7 +839,7 @@ CREATE TABLE `payments` (
   `due_date` date NOT NULL,
   `payment_date` datetime DEFAULT NULL,
   `payment_type` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -622,7 +850,7 @@ CREATE TABLE `payments` (
 CREATE TABLE `questions` (
   `question_id` int(11) NOT NULL,
   `question` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `questions`
@@ -703,7 +931,7 @@ CREATE TABLE `users` (
   `username` text NOT NULL,
   `password` text NOT NULL,
   `access_level` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
@@ -868,13 +1096,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `activity_logs`
 --
 ALTER TABLE `activity_logs`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=182;
 
 --
 -- AUTO_INCREMENT for table `answers`
 --
 ALTER TABLE `answers`
-  MODIFY `questionnaire_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `questionnaire_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `applicants_child`
@@ -886,13 +1114,13 @@ ALTER TABLE `applicants_child`
 -- AUTO_INCREMENT for table `applicants_personal`
 --
 ALTER TABLE `applicants_personal`
-  MODIFY `applicant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `applicant_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `applicants_reference`
 --
 ALTER TABLE `applicants_reference`
-  MODIFY `reference_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `reference_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `applicants_relative`
@@ -910,7 +1138,7 @@ ALTER TABLE `applicants_spouse`
 -- AUTO_INCREMENT for table `applicants_work`
 --
 ALTER TABLE `applicants_work`
-  MODIFY `work_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `work_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `archive_child`
@@ -952,25 +1180,25 @@ ALTER TABLE `archive_work`
 -- AUTO_INCREMENT for table `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `client_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `client_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `client_info`
 --
 ALTER TABLE `client_info`
-  MODIFY `client_info_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `client_info_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `dependents`
 --
 ALTER TABLE `dependents`
-  MODIFY `dependent_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `dependent_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `employer`
 --
 ALTER TABLE `employer`
-  MODIFY `employer_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `employer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `gov_issued_id`
@@ -982,13 +1210,13 @@ ALTER TABLE `gov_issued_id`
 -- AUTO_INCREMENT for table `loan_applications`
 --
 ALTER TABLE `loan_applications`
-  MODIFY `loan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `loan_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `loan_types`
 --
 ALTER TABLE `loan_types`
-  MODIFY `loan_type_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `loan_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `payments`

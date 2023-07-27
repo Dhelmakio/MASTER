@@ -58,7 +58,7 @@
                                 <a href="#"><i class="fa fa-bar-chart fa-fw"></i> Loan Application<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="registry_application.php">New</a>
+                                        <a href="loan_application_new.php">New</a>
                                     </li>
                                     <li>
                                         <a href="loan_application_renewal.php">Renewal</a>
