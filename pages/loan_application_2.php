@@ -792,7 +792,8 @@ if(isset($_POST['id'])){
         
         if ($("#lamt").val() > maxLoanAmount) {
             alert('Loan amount is greater than the Maximum Loanable: ' + maxLoanAmount);
-        } else {
+        }
+         else {
 
             var x = document.getElementById("lamt").value;
             var y = document.getElementById("months").value;
@@ -1044,7 +1045,7 @@ if(isset($_POST['id'])){
                     // );
                 });
                
-                if(totalDeduction > x){
+                if(totalDeduction => x){
                     alert('Cannot avail for renewal');
                 }else{
                     document.getElementById("submit_btn").style.visibility = "visible";
