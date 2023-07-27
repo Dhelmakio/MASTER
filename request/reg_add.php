@@ -34,6 +34,10 @@ $_POST['city']??null,$_POST['province']??null,$_POST['coordinates']??null,$tor, 
 ((($_POST['brgy2']??null) == null) ? strtoupper($_POST['brgy']??null) : strtoupper($_POST['brgy2']??null)), ((($_POST['city2']??null) == null) ? $_POST['city'] : $_POST['city2']??null), ((($_POST['province2']??null) == null) ? $_POST['province'] : $_POST['province2']??null),$tor2??$tor, $lw2??$lw,strtoupper($_POST['mother_name']??null),$_POST['mother_contact']??null,
 strtoupper($_POST['father_name']??null),$_POST['father_contact']??null, $_POST['myFile']??null);
 
+if(!file_exists("../assets/docs")){
+    mkdir("../assets/docs");
+}
+
 $attach1 = addslashes($_FILES['myFile']['tmp_name']);
 if(mkdir("../assets/docs/".$code."/",0777)){
                     
