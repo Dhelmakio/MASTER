@@ -26,12 +26,23 @@ if(isset($_GET['id'])){
     $exists = "SELECT * FROM answers WHERE contract_no='$contract'";
     $res_ex = mysqli_query($con,$exists);
     if(mysqli_num_rows($res_ex) > 0){
+
         while($row = mysqli_fetch_assoc($res_ex)) {
             $control = $row['question31'] == null;
-            if($control == 1){
-                header('location:loan_credit_investigation.php');
-            }else{
+            if($control != 1){
                 header('location:loan_credit_investigation_view.php?id='.$contract);
+            }else{
+                $sql = "SELECT CONCAT(applicants_personal.firstname,' ',applicants_personal.middlename,' ',applicants_personal.lastname,' ',applicants_personal.suffix) AS names, 
+                loan_applications.* FROM loan_applications 
+                INNER JOIN applicants_personal ON applicants_personal.applicant_code = loan_applications.client_id 
+                WHERE contract_no='$contract'";
+                $res = mysqli_query($con,$sql);
+                if(mysqli_num_rows($res) > 0){
+                    while($row = mysqli_fetch_assoc($res)) {
+                        $name = $row['names'];
+                        // $name = $row['name'];
+                    }
+                }
             }
         }
     }else{
@@ -47,7 +58,9 @@ if(isset($_GET['id'])){
             }
         }
     }
+
     
+
 }else{
     header('location:loan_credit_investigation.php');
 }
@@ -119,7 +132,7 @@ if(isset($_GET['id'])){
                                                 <div class="row">
                                                     <div class="col-lg-12">
                                                         <center>
-                                                            <h3><b>Credit Investigation | Questionnaire</b></h3>
+                                                            <h3><b>Questionnaire | For Co-worker</b></h3>
                                                         </center>
                                                         <hr>
                                                     </div>
@@ -145,17 +158,8 @@ if(isset($_GET['id'])){
                                                         <input type="text" name="contract"
                                                             value="<?php echo $contract?>" hidden>
                                                         <!-- <input type="text" name="client_id" value="<?php echo $cid?>" hidden> -->
-
-                                                        <!-- Relative -->
-                                                        <div class="col-lg-12" align="center">
-                                                            <hr><br>
-                                                            <h3>Questionnaire | For Relative</h3>
-                                                            <br>
-                                                        </div>
-                                                        <div class="col-lg-12" align="left"><i style="color:red;">NOTE:
-                                                                All fields are required.</i><br><br></div>
                                                         <?php
-                                                        $questions = "SELECT * FROM questions ORDER BY question_id ASC LIMIT 30";
+                                                        $questions = "SELECT * FROM questions WHERE question_id>30 ORDER BY question_id ASC ";
                                                         $qres = mysqli_query($con,$questions);
                                                         if(mysqli_num_rows($qres) > 0){
                                                             while($row = mysqli_fetch_assoc($qres)) {
@@ -177,7 +181,7 @@ if(isset($_GET['id'])){
                                                         }
                                                     ?>
                                                         <div class="col-lg-12" align="right"><br>
-                                                            <button onclick="" class="btn btn-primary" name="submit_relative">
+                                                            <button onclick="" class="btn btn-primary" name="submit_coworker">
                                                                 <i class="fa fa-send" aria-hidden="true"
                                                                     title="Copy to use save"></i> Submit
                                                             </button>

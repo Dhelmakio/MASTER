@@ -129,9 +129,15 @@ if(!isset($_SESSION['user_id'])){
                                                                         }else{
                                                                         echo '<a href="loan_credit_investigation_validate.php?id='.$row['contract_no'].'">
                                                                             <button type="button" class="btn btn-warning btn-sml">
-                                                                                Validate <i class="fa fa-long-arrow-right" aria-hidden="true" title="Copy to use save"></i>
+                                                                                Validate Relative <i class="fa fa-long-arrow-right" aria-hidden="true" title="Copy to use save"></i>
                                                                             </button>
-                                                                        </a>';
+                                                                        </a>
+                                                                        <a href="loan_credit_investigation_validate_coworker.php?id='.$row['contract_no'].'">
+                                                                            <button type="button" class="btn btn-warning btn-sml">
+                                                                                Validate Coworker <i class="fa fa-long-arrow-right" aria-hidden="true" title="Copy to use save"></i>
+                                                                            </button>
+                                                                        </a>
+                                                                        ';
                                                                         }
                                                                         ?>
                                                 </td>

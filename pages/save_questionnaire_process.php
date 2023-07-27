@@ -8,10 +8,12 @@ if(isset($_SESSION['user_id'])){
     // header('location: main_client.php');
 }
 
+// die(isset($_POST['submit_relative']));
 
 
-if(isset($_POST['contract'])){
-    $contract = $_POST['contract'];
+$contract = $_POST['contract'];
+
+if(isset($_POST['submit_relative'])){
     $q1=$_POST['q1'];
     $q2=$_POST['q2'];
     $q3=$_POST['q3'];
@@ -42,6 +44,20 @@ if(isset($_POST['contract'])){
     $q28=$_POST['q28'];
     $q29=$_POST['q29'];
     $q30=$_POST['q30'];
+
+    $sql = "INSERT INTO answers (contract_no, question1,	question2,	question3,	question4,	question5,	question6,	question7,	question8,	question9,	question10,	question11,	question12,	question13,	question14,	question15,	question16,	question17,	question18,	question19,	question20,	question21,	question22,	question23,	question24,	question25,	question26,	question27,	question28,	question29, question30) 
+    VALUES('$contract','$q1','$q2','$q3','$q4','$q5','$q6','$q7','$q8','$q9','$q10','$q11','$q12','$q13','$q14','$q15','$q16','$q17','$q18','$q19','$q20','$q21','$q22','$q23','$q24','$q25','$q26','$q27','$q28','$q29','$q30')";
+
+    if(mysqli_query($con, $sql)){
+        $act = "Answered Relative Questionnaire: ".$contract;
+        $log = "INSERT into activity_logs (user_id,name,activity) values ('$alog_id','$alog_name','$act')";
+        mysqli_query($con,$log);
+        header('location: loan_credit_investigation.php');
+    }else{
+        echo "Error: " . $sql . "<br>" . $con->error;
+    }
+}else if(isset($_POST['submit_coworker'])){
+    //  die("paras coworker");
     $q31=$_POST['q31'];
     $q32=$_POST['q32'];
     $q33=$_POST['q33'];
@@ -72,8 +88,7 @@ if(isset($_POST['contract'])){
     $q58=$_POST['q58'];
     $q59=$_POST['q59'];
     $q60=$_POST['q60'];
-    // $q61=$_POST['q61']??null;
-    // $q62=$_POST['q62']??null;
+
 
     $alog_id = $_SESSION['user_id'];
     $alog_name = $_SESSION['name'];
@@ -81,19 +96,32 @@ if(isset($_POST['contract'])){
     
     // $sql = "INSERT INTO answers (contract_no, question1,	question2,	question3,	question4,	question5,	question6,	question7,	question8,	question9,	question10,	question11,	question12,	question13,	question14,	question15,	question16,	question17,	question18,	question19,	question20,	question21,	question22,	question23,	question24,	question25,	question26,	question27,	question28,	question29,	question30,	question31,	question32,	question33,	question34,	question35,	question36,	question37,	question38,	question39,	question40,	question41,	question42,	question43,	question44,	question45,	question46,	question47,	question48,	question49,	question50,	question51,	question52,	question53,	question54,	question55,	question56,	question57,	question58,	question59,	question60,	question61,	question62) 
     // VALUES('$contract','$q1','$q2','$q3','$q4','$q5','$q6','$q7','$q8','$q9','$q10','$q11','$q12','$q13','$q14','$q15','$q16','$q17','$q18','$q19','$q20','$q21','$q22','$q23','$q24','$q25','$q26','$q27','$q28','$q29','$q30','$q31','$q32','$q33','$q34','$q35','$q36','$q37','$q38','$q39','$q40','$q41','$q42','$q43','$q44','$q45','$q46','$q47','$q48','$q49','$q50','$q51','$q52','$q53','$q54','$q55','$q56','$q57','$q58','$q59','$q60','$q61','$q62')";
-    $sql = "INSERT INTO answers (contract_no, question1,	question2,	question3,	question4,	question5,	question6,	question7,	question8,	question9,	question10,	question11,	question12,	question13,	question14,	question15,	question16,	question17,	question18,	question19,	question20,	question21,	question22,	question23,	question24,	question25,	question26,	question27,	question28,	question29,	question30,	question31,	question32,	question33,	question34,	question35,	question36,	question37,	question38,	question39,	question40,	question41,	question42,	question43,	question44,	question45,	question46,	question47,	question48,	question49,	question50,	question51,	question52,	question53,	question54,	question55,	question56,	question57,	question58,	question59,	question60) 
-    VALUES('$contract','$q1','$q2','$q3','$q4','$q5','$q6','$q7','$q8','$q9','$q10','$q11','$q12','$q13','$q14','$q15','$q16','$q17','$q18','$q19','$q20','$q21','$q22','$q23','$q24','$q25','$q26','$q27','$q28','$q29','$q30','$q31','$q32','$q33','$q34','$q35','$q36','$q37','$q38','$q39','$q40','$q41','$q42','$q43','$q44','$q45','$q46','$q47','$q48','$q49','$q50','$q51','$q52','$q53','$q54','$q55','$q56','$q57','$q58','$q59','$q60')";
+    $sql = "UPDATE answers SET question31 = '$q31',	question32 = '$q32', question33 = '$q33', question34 = '$q34',	question35 = '$q35', question36= '$q36',	question37= '$q37',	question38= '$q38',	question39= '$q39',	question40= '$q40',	question41= '$q41',	question42= '$q42',	question43= '$q43',	question44= '$q44',	question45= '$q45',	question46= '$q46',	question47= '$q47',	question48= '$q48',	question49= '$q49',	question50= '$q50',	question51= '$q51',	question52= '$q52',	question53= '$q53',	question54= '$q54',	question55= '$q55',	question56= '$q56',	question57= '$q57',	question58= '$q58',	question59= '$q59',	question60 = '$q60' WHERE contract_no = '$contract'";
 
     if(mysqli_query($con, $sql)){
-        $act = "Answered Questionnaire: ".$contract;
+        $act = "Answered Coworker Questionnaire: ".$contract;
         $log = "INSERT into activity_logs (user_id,name,activity) values ('$alog_id','$alog_name','$act')";
         mysqli_query($con,$log);
         header('location: loan_credit_investigation.php?success');
     }else{
         echo "Error: " . $sql . "<br>" . $con->error;
     }
+
+    
 }else{
     header('location: loan_credit_investigation.php?failed');
 }
+
+// die(isset($_POST['submit_coworker']));
+
+// if(isset($_POST['contract'])){
+  
+//     // $q61=$_POST['q61']??null;
+//     // $q62=$_POST['q62']??null;
+
+   
+// }else{
+//     header('location: loan_credit_investigation.php?failed');
+// }
 
 ?>
