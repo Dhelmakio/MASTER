@@ -8,7 +8,7 @@ session_start();
 
 define('id', $_GET['id']);
 
-$load = new ClientData(id);
+$load = new ClientData($_GET['id']);
 
 define('load', $load);
 
