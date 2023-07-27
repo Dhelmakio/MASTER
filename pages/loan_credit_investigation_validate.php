@@ -148,7 +148,7 @@ if(isset($_GET['id'])){
 
                                                         <!-- Relative -->
                                                         <div class="col-lg-12" align="center">
-                                                            <hr><br>
+                                                            <hr>
                                                             <h3>Questionnaire | For Relative</h3>
                                                             <br>
                                                         </div>
