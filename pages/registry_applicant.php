@@ -123,47 +123,51 @@ if($_SESSION['user_id']){
                                                             data-toggle="modal" class="btn btn-danger"><i
                                                                 class="fa fa-trash-o"></i>
                                                         </button> -->
-                                                        
-                                                            <button data-target="#modal-<?= $display['applicant_code'] ?>" type="button" class="btn btn-danger"
-                                                                data-toggle="modal" data-placement="top" title="Archive">
-                                                                <!-- <i class="fa fa-file-text-o" aria-hidden="true"></i> -->
-                                                                <i class="fa fa-fw" aria-hidden="true" title="Copy to use archive">&#xf187</i>
-                                                            </button>
 
-                                                            <!-- delete modal -->
-                                                            <div class="modal fade text-left"
-                                                                id="modal-<?=  $display['applicant_code'] ?>" tabindex="-1"
-                                                                role="dialog" aria-labelledby="myModalLabel"
-                                                                aria-hidden="true" data-backdrop="static">
-                                                                <div class="modal-dialog modal-md" role="document">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-body">
-                                                                            <p>
-                                                                                <center><i class="fa fa-fw fa-5x"
-                                                                                        style="color:#d9534f;"
-                                                                                        aria-hidden="true" title="Copy to use archive">&#xf187</i>
-                                                                                </center>
-                                                                                <center>
-                                                                                    <h5>Save to archive?</h5>
-                                                                                </center>
+                                                        <button data-target="#modal-<?= $display['applicant_code'] ?>"
+                                                            type="button" class="btn btn-danger" data-toggle="modal"
+                                                            data-placement="top" title="Archive">
+                                                            <!-- <i class="fa fa-file-text-o" aria-hidden="true"></i> -->
+                                                            <i class="fa fa-fw" aria-hidden="true"
+                                                                title="Copy to use archive">&#xf187</i>
+                                                        </button>
 
-                                                                            </p>
-                                                                        </div>
-                                                                        <div class="modal-footer" style="padding: 5px;">
-                                                                            <form action="#" method="post">
-                                                                                <button type="button"
-                                                                                    class="btn btn-default text-small"
-                                                                                    data-dismiss="modal">Cancel</button>
-                                                                                <input type="hidden" name="id"
-                                                                                    value="<?=  $display['applicant_code'] ?>">
-                                                                                <button type="submit" name="delete"
-                                                                                    class="btn btn-danger text-small">Yes</button>
-                                                                            </form>
-                                                                        </div>
+                                                        <!-- delete modal -->
+                                                        <div class="modal fade text-left"
+                                                            id="modal-<?=  $display['applicant_code'] ?>" tabindex="-1"
+                                                            role="dialog" aria-labelledby="myModalLabel"
+                                                            aria-hidden="true" data-backdrop="static">
+                                                            <div class="modal-dialog modal-md" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-body">
+                                                                        <p>
+                                                                            <center><i class="fa fa-fw fa-5x"
+                                                                                    style="color:#d9534f;"
+                                                                                    aria-hidden="true"
+                                                                                    title="Copy to use archive">&#xf187</i>
+                                                                            </center>
+                                                                            <center>
+                                                                                <h5>Save to archive?</h5>
+                                                                            </center>
+
+                                                                        </p>
                                                                     </div>
-                                                                    <!-- /.modal-content -->
+                                                                    <div class="modal-footer" style="padding: 5px;">
+                                                                        <form action="#" method="post">
+                                                                            <button type="button"
+                                                                                class="btn btn-default text-small"
+                                                                                data-dismiss="modal">Cancel</button>
+                                                                            <input type="hidden" name="id"
+                                                                                value="<?=  $display['applicant_code'] ?>">
+                                                                            <button type="submit" name="delete"
+                                                                                class="btn btn-danger text-small">Yes</button>
+                                                                        </form>
+                                                                    </div>
                                                                 </div>
+                                                                <!-- /.modal-content -->
                                                             </div>
+                                                        </div>
+                                                    </div>
                                                 </td>
                                             </tr>
                                             <?php

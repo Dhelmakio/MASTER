@@ -80,39 +80,17 @@ if(!isset($_SESSION['user_id'])){
                                             <tr>
                                                 <th>CONTRACT NO.</th>
                                                 <th>NAME</th>
+                                                <th>ADDRESS</th>
                                                 <th class="text-center">OUTSTANDING BALANCE</th>
-                                                <!-- <th>CONTACT NO.</th> -->
-                                                <!-- <th>ADDRESS</th> -->
-                                                <th>BORROWING HISTORY</th>
+                                                <th class="text-center">CREDIT HISTORY</th>
                                                 <th class="text-center">ACTIONS</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
-                                                    //$sql ="SELECT c.*,l.remarks FROM clients c left join loan_applications l on l.client_id=c.client_id where  (l.remarks is null or l.remarks='paid') and (l.approval!=0 or l.approval is null) group by c.client_id ORDER BY last_name ASC";
-                                                    // $sql = "SELECT * FROM applicants_personal 
-                                                    // LEFT JOIN loan_applications ON 
-                                                    // applicants_personal.applicant_code=loan_applications.client_id 
-                                                    // GROUP BY applicants_personal.applicant_code 
-                                                    // ORDER BY applicants_personal.lastname ASC";
-                                                // $sql = "SELECT l.*,SUM(p.amount) as total_paid,
-                                                // (SELECT CONCAT(lastname,', ',firstname,' ',middlename,' ',suffix) as name 
-                                                // from applicants_personal where applicants_personal.applicant_code=l.client_id) as name 
-                                                // from loan_applications l 
-                                                // left join payments p on l.contract_no=p.contract_no 
-                                                // where l.paid=0
-                                                // order by l.application_date asc";
-                                                // $sql = "SELECT * FROM applicants_personal 
-                                                // LEFT JOIN loan_applications
-                                                // ON applicants_personal.applicant_code = loan_applications.client_id
-                                                // LEFT JOIN payments
-                                                // ON payments.contract_no = loan_applications.contract_no
-                                                // WHERE loan_applications.paid = 0
-                                                // ORDER BY loan_applications.application_date ASC";
                                                 $sql = "SELECT * FROM applicants_personal
                                                 LEFT JOIN loan_applications
                                                 ON applicants_personal.applicant_code = loan_applications.client_id
-                                                WHERE loan_applications.paid = 0
                                                 ORDER BY loan_applications.application_date ASC";
                                                 $res = mysqli_query($con,$sql);
                                                     if(mysqli_num_rows($res) > 0){
@@ -122,214 +100,202 @@ if(!isset($_SESSION['user_id'])){
                                                         $cid = $row['client_id'];
                                                         $loan = new Loan(strval($cid));
                                                         $name = $row['lastname'].', '.$row['firstname'].' '.$row['middlename'] .' '.$row['suffix'];
-                                                        // $name = $row['name'];
-                                                        if(intval($loan->borrowingHistCount) == 0) {
-                                                         ?>
+                                                        $cont_no = $row['contract_no'];
+                                                ?>
                                             <tr class="odd gradeX">
-                                                <td><?php echo $row['contract_no'];?></td>
+                                                <td><?php echo $cont_no;?></td>
                                                 <td><?php echo $name;?></td>
-                                                <td class="text-right"><?php echo "₱ ".number_format(floatval($loan->outStandingBalance),2)?></td>
+                                                
                                                 <!--<td><?php //echo $row['contact1'];?></td> -->
-                                                <!-- <td><?php //echo $row['street1'].', '.$row['brgy1'].', '.$row['city1'] .''.$row['province1'];?> -->
+                                                <td><?php echo $row['brgy1'].', '.$row['city1'] .', '.$row['province1'];?>
                                                 </td>
-                                                <td class="text-right"><?php echo $loan->borrowingHistCount;?></td>
-                                                <td style="text-align:center">
-                                                    <div class="tooltip-demo">
-
-                                                        <div class="panel-body">
-                                                            <!-- Button trigger modal -->
-                                                            <?php
-                                                                //kani diri tangtangon paid=1 kay paid or not pwede ra mag renewal nakalimot kos policy HAHAHHAHA basta naa ra to policy sa renewal
-                                                                // $check = "SELECT * FROM loan_applications WHERE client_id='$cid' and paid=1 ";
-                                                                $check = "SELECT * FROM loan_applications WHERE client_id='$cid'";
-                                                                $rescheck = mysqli_query($con,$check);
-                                                                    if(mysqli_num_rows($rescheck) > 0){ 
-                                                            ?>
-                                                            <button type="button" class="btn btn-primary btn-sml"
-                                                                data-toggle="modal"
-                                                                data-target="#myModal_<?php echo $cid?>">
-                                                                Apply For Renewal <i class="fa fa-long-arrow-right"
-                                                                    aria-hidden="true" title="Copy to use save"></i>
-                                                            </button>
-                                                            <?php
-                                                                }
-                                                            ?>
-                                                            <!-- Modal -->
-                                                            <div class="modal fade" id="myModal_<?php echo $cid?>"
-                                                                tabindex="-1" role="dialog" data-backdrop="static"
-                                                                aria-labelledby="myModalLabel" aria-hidden="true"
-                                                                align="left">
-                                                                <div class="modal-dialog" role="document">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <button type="button" class="close"
-                                                                                data-dismiss="modal"
-                                                                                aria-hidden="true">&times;</button>
-                                                                            <h4 class="modal-title" id="myModalLabel">
-                                                                                Proceed to Renewal?</h4>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            <div class="row">
-                                                                                <div class="col-lg-12" align="right">
-                                                                                    <!-- <div class=""> -->
-                                                                                    <form
-                                                                                        action="loan_application_2.php"
-                                                                                        method="POST">
-                                                                                        <!-- <label>Loan Type</label> -->
-                                                                                        <!-- <select class="form-control" name="loan_type" required style="width:80%;">
-                                                                                                                                        <option value="" disabled selected=1>SELECT</option>
-                                                                                                                                        <option value="NEW">New</option>
-                                                                                                                                        <option value="RENEWAL">Renewal</option>
-                                                                                                                                        <option value="RELOAN">Reloan</option>
-                                                                                                                                        <option value="ADDITIONAL">Additional</option>
-                                                                                                                                    </select> -->
-                                                                                        <input type="text"
-                                                                                            name="loan_type"
-                                                                                            value="RENEWAL" hidden>
-                                                                                        <input type="text" name="id"
-                                                                                            value="<?php echo $cid;?>"
-                                                                                            hidden>
-                                                                                        <input type="text" name="name"
-                                                                                            value="<?php echo $name;?>"
-                                                                                            hidden>
-                                                                                        <button type="submit"
-                                                                                            class="btn btn-primary"
-                                                                                            name="submit">
-                                                                                            Proceed <i
-                                                                                                class="fa fa-long-arrow-right"
-                                                                                                aria-hidden="true"
-                                                                                                title="Copy to use save"></i>
-                                                                                        </button>
-                                                                                    </form>
-                                                                                    <!-- </div> -->
-                                                                                </div>
-                                                                                <div class="col-lg-6">
-
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <!-- <a href="loan_application_1.php?id=<?php echo $cid;?>">
-                                                                                                                    <button type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Apply">
-                                                                                                                        <i class="fa fa-long-arrow-right" aria-hidden="true"></i> 
-                                                                                                                    </button>
-                                                                                                                </a> -->
-                                                                    </div>
-                                                                    <!-- /.modal-content -->
-                                                                </div>
-                                                                <!-- /.modal-dialog -->
-                                                            </div>
-                                                            <!-- /.modal -->
-                                                        </div>
-                                                        <?php  }else{ ?>
-
-                                                            <tr class="odd gradeX">
-                                                <td><?php echo $row['contract_no'];?></td>
-                                                <td><?php //echo $name;?></td>
-                                                <td class="text-right"><?php echo $loan->outStandingBalance?></td>
-                                                <!--<td><?php //echo $row['contact1'];?></td> -->
-                                                <!-- <td><?php //echo $row['street1'].', '.$row['brgy1'].', '.$row['city1'] .''.$row['province1'];?> -->
+                                                <td class="text-center">
+                                                    <?php echo "₱ ".number_format(floatval($loan->outStandingBalance),2)?>
                                                 </td>
-                                                <td class="text-right"><?php echo $loan->borrowingHistCount;?></td>
-                                                <td style="text-align:center">
-                                                    <div class="tooltip-demo">
-
-                                                        <div class="panel-body">
-                                                            <!-- Button trigger modal -->
-                                                            <?php
-                                                                //kani diri tangtangon paid=1 kay paid or not pwede ra mag renewal nakalimot kos policy HAHAHHAHA basta naa ra to policy sa renewal
-                                                                // $check = "SELECT * FROM loan_applications WHERE client_id='$cid' and paid=1 ";
-                                                                $check = "SELECT * FROM loan_applications WHERE client_id='$cid'";
-                                                                $rescheck = mysqli_query($con,$check);
-                                                                    if(mysqli_num_rows($rescheck) > 0){ 
-                                                            ?>
-                                                            <button type="button" class="btn btn-primary btn-sml"
-                                                                data-toggle="modal"
-                                                                data-target="#myModal_<?php echo $cid?>">
-                                                                Apply For Renewal <i class="fa fa-long-arrow-right"
-                                                                    aria-hidden="true" title="Copy to use save"></i>
-                                                            </button>
-                                                            <?php
-                                                                }
-                                                            ?>
-                                                            <!-- Modal -->
-                                                            <div class="modal fade" id="myModal_<?php echo $cid?>"
-                                                                tabindex="-1" role="dialog" data-backdrop="static"
-                                                                aria-labelledby="myModalLabel" aria-hidden="true"
-                                                                align="left">
-                                                                <div class="modal-dialog" role="document">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <button type="button" class="close"
-                                                                                data-dismiss="modal"
-                                                                                aria-hidden="true">&times;</button>
-                                                                            <h4 class="modal-title" id="myModalLabel">
-                                                                                Proceed to Renewal?</h4>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            <div class="row">
-                                                                                <div class="col-lg-12" align="right">
-                                                                                    <!-- <div class=""> -->
-                                                                                    <form
-                                                                                        action="loan_application_2.php"
-                                                                                        method="POST">
-                                                                                        <!-- <label>Loan Type</label> -->
-                                                                                        <!-- <select class="form-control" name="loan_type" required style="width:80%;">
-                                                                                                                                        <option value="" disabled selected=1>SELECT</option>
-                                                                                                                                        <option value="NEW">New</option>
-                                                                                                                                        <option value="RENEWAL">Renewal</option>
-                                                                                                                                        <option value="RELOAN">Reloan</option>
-                                                                                                                                        <option value="ADDITIONAL">Additional</option>
-                                                                                                                                    </select> -->
-                                                                                        <input type="text"
-                                                                                            name="loan_type"
-                                                                                            value="RENEWAL" hidden>
-                                                                                        <input type="text" name="id"
-                                                                                            value="<?php echo $cid;?>"
-                                                                                            hidden>
-                                                                                        <input type="text" name="name"
-                                                                                            value="<?php echo $name;?>"
-                                                                                            hidden>
-                                                                                        <button type="submit"
-                                                                                            class="btn btn-primary"
-                                                                                            name="submit">
-                                                                                            Proceed <i
-                                                                                                class="fa fa-long-arrow-right"
-                                                                                                aria-hidden="true"
-                                                                                                title="Copy to use save"></i>
-                                                                                        </button>
-                                                                                    </form>
-                                                                                    <!-- </div> -->
-                                                                                </div>
-                                                                                <div class="col-lg-6">
-
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <!-- <a href="loan_application_1.php?id=<?php echo $cid;?>">
-                                                                                                                    <button type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Apply">
-                                                                                                                        <i class="fa fa-long-arrow-right" aria-hidden="true"></i> 
-                                                                                                                    </button>
-                                                                                                                </a> -->
-                                                                    </div>
-                                                                    <!-- /.modal-content -->
+                                                <td class="text-center">
+                                                    <button type="button" class="btn btn-info btn-sml"
+                                                        data-toggle="modal" data-target="#credit<?php echo $cont_no?>">
+                                                        View Credit History <i class="fa fa-eye" aria-hidden="true"
+                                                            title="Copy to use save"></i></button>
+                                                    <div class="modal fade" id="credit<?php echo $cont_no?>"
+                                                        tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                                                        aria-hidden="true" align="left">
+                                                        <div class="modal-dialog modal-lg" style="width:60%"
+                                                            role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close"
+                                                                        data-dismiss="modal"
+                                                                        aria-hidden="true">&times;</button>
+                                                                    <center>
+                                                                        <h4 class="modal-title" id="myModalLabel">
+                                                                            Credit History</h4>
+                                                                    </center>
                                                                 </div>
-                                                                <!-- /.modal-dialog -->
+                                                                <div class="modal-body">
+                                                                    <div class="row">
+                                                                        <div class="col-lg-1">
+                                                                            <h4>Name:</h4>
+                                                                        </div>
+                                                                        <div class="col-lg-5">
+                                                                            <h4>
+                                                                                <b><?php echo $name ?></b>
+                                                                            </h4>
+                                                                        </div>
+                                                                        <div class="col-lg-3">
+                                                                            <h4>Borrowing History:</h4>
+                                                                        </div>
+                                                                        <div class="col-lg-3">
+                                                                            <h4><b><?php echo $loan->borrowingHistCount;?></b>
+                                                                            </h4>
+                                                                        </div>
+                                                                        <div class="col-lg-3">
+                                                                            <h4>Employee Status:</h4>
+                                                                        </div>
+                                                                        <div class="col-lg-3">
+                                                                            <h4>
+                                                                                <b><?php echo $loan->clientEmpStatus; ?></b>
+                                                                            </h4>
+                                                                        </div>
+                                                                    </div><br><br>
+                                                                    <div class="table-responsive">
+                                                                        <table
+                                                                            class="table table-striped table-bordered">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th>CONTRACT NO.</th>
+                                                                                    <th>LOAN TYPE</th>
+                                                                                    <th class="text-center">PRINCIPAL
+                                                                                    </th>
+                                                                                    <!-- <th class="text-center">AMOUNT PAID</th> -->
+                                                                                    <th class="text-center">OUSTANDING
+                                                                                        BALANCE</th>
+                                                                                    <th class="text-center">STATUS</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <tr>
+                                                                                    <td><?php echo $row['contract_no']?>
+                                                                                    </td>
+                                                                                    <td><?php echo $row['loan_type']?>
+                                                                                    </td>
+                                                                                    <td class="text-center">₱
+                                                                                        <?php echo number_format($row['loan_amount'],2);?>
+                                                                                    </td>
+                                                                                    <?php
+                                                                                        $query = "SELECT * FROM applicants_personal 
+                                                                                        LEFT JOIN loan_applications 
+                                                                                        ON applicants_personal.applicant_code=loan_applications.client_id 
+                                                                                        LEFT JOIN payments 
+                                                                                        ON payments.contract_no = loan_applications.contract_no 
+                                                                                        WHERE loan_applications.contract_no = '$cont_no'
+                                                                                        ORDER BY applicants_personal.lastname ASC";
+                                                                                        $qry_res = mysqli_query($con,$query);
+                                                                                            if(mysqli_num_rows($qry_res) > 0){
+                                                                                                while($rows = mysqli_fetch_assoc($qry_res)){
+                                                                                                    $get_name = $rows['lastname'].', '.$rows['firstname'].' '.$rows['middlename'];
+                                                                                    ?>
+                                                                                    <!-- <td class="text-center">₱
+                                                                                        <?php //echo number_format($rows['amount'],2)?>
+                                                                                    </td> -->
+                                                                                    <td class="text-center">
+                                                                                        <?php echo "₱ ".number_format(floatval($loan->outStandingBalance),2)?>
+                                                                                    </td>
+                                                                                    <td class="text-center">
+                                                                                        <?php
+                                                                                        if($rows['loan_status'] == 1){
+                                                                                            echo '<button class="btn btn-success"> Active <i class="fa fa-check"></i>
+                                                                                            </button>';
+                                                                                        }else{
+                                                                                            echo '<button class="btn btn-warning"> Paid <i class="fa fa-thumbs-o-up"></i>
+                                                                                            </button>';
+                                                                                        }
+                                                                                    ?>
+                                                                                    </td>
+                                                                                    <?php
+                                                                                      }
+                                                                                    }
+                                                                            ?>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                            <!-- /.modal -->
+                                                            <!-- /.modal-content -->
                                                         </div>
-
-                                                            <?php
-                                                        }
-                                                                                                }
-                                                                                                ?>
+                                                        <!-- /.modal-dialog -->
                                                     </div>
                                                 </td>
-                                            </tr>
-                                            <?php
-                                                                    }
-                                                                
+                                                <td style="text-align:center">
+                                                    <!-- Button trigger modal -->
+                                                    <?php
+                                                                //kani diri tangtangon paid=1 kay paid or not pwede ra mag renewal nakalimot kos policy HAHAHHAHA basta naa ra to policy sa renewal
+                                                                // $check = "SELECT * FROM loan_applications WHERE client_id='$cid' and paid=1 ";
+                                                                $check = "SELECT * FROM loan_applications WHERE client_id='$cid'";
+                                                                $rescheck = mysqli_query($con,$check);
+                                                                    if(mysqli_num_rows($rescheck) > 0){ 
                                                             ?>
+                                                    <button type="button" class="btn btn-primary btn-sml"
+                                                        data-toggle="modal" data-target="#myModal_<?php echo $cid?>">
+                                                        Apply For Renewal <i class="fa fa-long-arrow-right"
+                                                            aria-hidden="true" title="Copy to use save"></i>
+                                                    </button>
+                                                    <?php
+                                                                }
+                                                            ?>
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="myModal_<?php echo $cid?>" tabindex="-1"
+                                                        role="dialog" data-backdrop="static"
+                                                        aria-labelledby="myModalLabel" aria-hidden="true" align="left">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close"
+                                                                        data-dismiss="modal"
+                                                                        aria-hidden="true">&times;</button>
+                                                                    <h4 class="modal-title" id="myModalLabel">
+                                                                        Proceed to Renewal?</h4>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="row">
+                                                                        <div class="col-lg-12" align="right">
+                                                                            <!-- <div class=""> -->
+                                                                            <form action="loan_application_2.php"
+                                                                                method="POST">
+                                                                                <input type="text" name="loan_type"
+                                                                                    value="RENEWAL" hidden>
+                                                                                <input type="text" name="id"
+                                                                                    value="<?php echo $cid;?>" hidden>
+                                                                                <input type="text" name="name"
+                                                                                    value="<?php echo $name;?>" hidden>
+                                                                                <button type="submit"
+                                                                                    class="btn btn-primary"
+                                                                                    name="submit">
+                                                                                    Proceed <i
+                                                                                        class="fa fa-long-arrow-right"
+                                                                                        aria-hidden="true"
+                                                                                        title="Copy to use save"></i>
+                                                                                </button>
+                                                                            </form>
+                                                                            <!-- </div> -->
+                                                                        </div>
+                                                                        <div class="col-lg-6">
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- /.modal-content -->
+                                                        </div>
+                                                        <!-- /.modal-dialog -->
+                                                    </div>
+                                                </td>
                                         </tbody>
+                                        <?php  
+                                            }
+                                        }
+                                    ?>
                                     </table>
                                 </div>
 

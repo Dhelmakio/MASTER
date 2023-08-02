@@ -70,8 +70,8 @@ if(!isset($_SESSION['user_id'])){
                                                 <tr>
                                                     <th>CONTRACT NO.</th>
                                                     <th>NAME</th>
-                                                    <th>LOAN AMOUNT</th>
-                                                    <th>CI STATUS</th>
+                                                    <th>LOAN DETAILS</th>
+                                                    <th>CI REMARKS</th>
                                                     <th class="text-center">ACTIONS</th>
                                                 </tr>
                                             </thead>
@@ -101,13 +101,16 @@ if(!isset($_SESSION['user_id'])){
                                                                         $cis = 0;
                                                                         echo '<button type="button" class="btn btn-danger btn-circle"><i class="fa fa-times"></i></button>';
                                                                     }
-                                                                    
-                                                                    ?></td>
-                                                                    <!-- <button type="button" class="btn btn-warning btn-sml" data-toggle="modal" data-target="#myModal_<?php echo $cid?>" disabled>
-                                                                                    Validate <i class="fa fa-long-arrow-right" aria-hidden="true" title="Copy to use save"></i> -->
-                                                                    <td style="text-align:center">
+                                                                    ?>
+                                                                    </td>
+                                                                    <td>
                                                                     <?php 
                                                                         if($cis==1){
+                                                                        echo '<a href="loan_approval_preview.php?con='.$row['contract_no'].'">
+                                                                            <button type="button" class="btn btn-warning btn-sml">
+                                                                                    Approval <i class="fa fa-long-arrow-right" aria-hidden="true" title="Copy to use save"></i></button>
+                                                                        </a>';
+                                                                        }else if($cis == 2){
                                                                         echo '<a href="loan_approval_preview.php?con='.$row['contract_no'].'">
                                                                             <button type="button" class="btn btn-warning btn-sml">
                                                                                     Approval <i class="fa fa-long-arrow-right" aria-hidden="true" title="Copy to use save"></i></button>
@@ -121,6 +124,24 @@ if(!isset($_SESSION['user_id'])){
                                                                         }
                                                                         ?>
                                                                     </td>
+                                                                    <!-- <button type="button" class="btn btn-warning btn-sml" data-toggle="modal" data-target="#myModal_<?php echo $cid?>" disabled>
+                                                                                    Validate <i class="fa fa-long-arrow-right" aria-hidden="true" title="Copy to use save"></i> -->
+                                                                    <!-- <td style="text-align:center">
+                                                                    <?php 
+                                                                        // if($cis==1){
+                                                                        // echo '<a href="loan_approval_preview.php?con='.$row['contract_no'].'">
+                                                                        //     <button type="button" class="btn btn-warning btn-sml">
+                                                                        //             Approval <i class="fa fa-long-arrow-right" aria-hidden="true" title="Copy to use save"></i></button>
+                                                                        // </a>';
+                                                                        // }else{
+                                                                        // echo '<a href="loan_approval_preview.php?con='.$row['contract_no'].'">
+                                                                        //     <button type="button" class="btn btn-warning btn-sml" disabled>
+                                                                        //         Approval <i class="fa fa-long-arrow-right" aria-hidden="true" title="Copy to use save"></i>
+                                                                        //     </button>
+                                                                        // </a>';
+                                                                        // }
+                                                                        ?>
+                                                                    </td> -->
                                                                 </tr><?php
                                                             }
                                                         }

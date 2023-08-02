@@ -61,13 +61,13 @@
                                         <a href="loan_application_new.php">New</a>
                                     </li>
                                     <li>
-                                        <a href="loan_application_renewal.php">Renewal</a>
-                                    </li>
-                                    <li>
                                         <a href="loan_application_reloan.php">Reloan</a>
                                     </li>
                                     <li>
                                         <a href="loan_application_additional.php">Additional</a>
+                                    </li>
+                                    <li>
+                                        <a href="loan_application_renewal.php">Renewal</a>
                                     </li>
                                     <!-- <li>
                                         <a href="util_interest.php">Interest</a>
@@ -86,7 +86,7 @@
                              //   if($_SESSION['access'] == 1 || $_SESSION['access'] == 4){ //CI
                                     ?>
                             <li>
-                                <a href="loan_credit_investigation.php"><i class="fa fa-user-secret fa-fw"></i>Credit Investigate</a>
+                                <a href="loan_credit_investigation.php"><i class="fa fa-user-secret fa-fw"></i> Credit Investigate</a>
                             </li>
                             <?php
                               //  }
@@ -96,7 +96,7 @@
                              //   if($_SESSION['access'] == 1 || $_SESSION['access'] == 4){ //CI
                                     ?>
                             <li>
-                                <a href="process_loan.php"><i class="fa fa-user-secret fa-fw"></i>Process Loan</a>
+                                <a href="process_loan.php"><i class="fa fa-spinner"></i> Process Loan</a>
                             </li>
                             <?php
                               //  }
@@ -106,7 +106,7 @@
                                // if($_SESSION['access'] == 1 || $_SESSION['access'] == 2){ // approver
                             ?>
                                 <li>
-                                <a href="loan_approval.php"><i class="fa fa-check fa-fw"></i>Loan Approval</a>
+                                <a href="loan_approval.php"><i class="fa fa-check fa-fw"></i> Loan Approval</a>
                                 </li>
                             <?php
                               //  }

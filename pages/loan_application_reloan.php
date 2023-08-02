@@ -71,12 +71,10 @@ if(!isset($_SESSION['user_id'])){
                                         id="dataTables-example">
                                         <thead>
                                             <tr>
-                                                <th>CONTRACT NO.</th>
+                                                <th>APPLICANT CODE</th>
                                                 <th>NAME</th>
-                                                <th>GENDER</th>
-                                                <th>CONTACT NO.</th>
                                                 <th>ADDRESS</th>
-                                                <th>BORROWING HISTORY</th>
+                                                <th class="text-center">CREDIT HISTORY</th>
                                                 <th class="text-center">ACTIONS</th>
                                             </tr>
                                         </thead>
@@ -87,8 +85,7 @@ if(!isset($_SESSION['user_id'])){
                                                     $sql = "SELECT * FROM applicants_personal 
                                                     LEFT JOIN loan_applications 
                                                     ON applicants_personal.applicant_code=loan_applications.client_id
-                                                    WHERE loan_applications.paid=1
-                                                    GROUP BY applicants_personal.applicant_code 
+                                                    WHERE loan_applications.paid = 1
                                                     ORDER BY applicants_personal.lastname ASC ";
                                                     $res = mysqli_query($con,$sql);
                                                         if(mysqli_num_rows($res) > 0){
@@ -97,102 +94,202 @@ if(!isset($_SESSION['user_id'])){
                                                                 // $suffix = $row['suffix'];
                                                                 $cid = $row['client_id'];
                                                                 $loan = new Loan($cid);
-                                                                $name = $row['lastname'].', '.$row['firstname'].' '.$row['suffix'].' '.$row['middlename'];?>
-                                            <tr class="odd gradeX">
-                                                <td><?php echo $row['contract_no']?></td>
-                                                <td><?php echo $name?></td>
-                                                <td><?php echo $row['gender'];?></td>
-                                                <td><?php echo $row['contact1'];?></td>
-                                                <td><?php echo $row['brgy1'].', '.$row['city1'];?></td>
-                                                <td class="text-right"><?php echo $loan->borrowingHistCount;?></td>
-                                                <td style="text-align:center">
-                                                    <div class="tooltip-demo">
-
-                                                        <div class="panel-body">
-                                                            <!-- Button trigger modal  Ako gi tangtang = [AND paid=0] sa query  -->
-                                                            <?php
-                                                                $check = "SELECT * FROM loan_applications WHERE client_id='$cid'";
-                                                                $rescheck = mysqli_query($con,$check);
-                                                                if(mysqli_num_rows($rescheck) > 0){ 
+                                                                $name = $row['lastname'].', '.$row['firstname'].' '.$row['middlename'];
+                                                                $cont_no = $row['contract_no'];
                                                                 ?>
-                                                            <button type="button" class="btn btn-primary btn-sml"
-                                                                data-toggle="modal"
-                                                                data-target="#myModal_<?php echo $cid?>">
-                                                                Apply Loan <i class="fa fa-long-arrow-right"
-                                                                    aria-hidden="true" title="Copy to use save"></i>
-                                                            </button>
-                                                            <?php
-                                                                }
-                                                            ?>
-
-                                                            <!-- Modal -->
-                                                            <div class="modal fade" id="myModal_<?php echo $cid?>"
-                                                                tabindex="-1" role="dialog"
-                                                                aria-labelledby="myModalLabel" aria-hidden="true"
-                                                                align="left">
-                                                                <div class="modal-dialog" role="document">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <button type="button" class="close"
-                                                                                data-dismiss="modal"
-                                                                                aria-hidden="true">&times;</button>
-                                                                            <h4 class="modal-title" id="myModalLabel">
-                                                                                Proceed to Reloan Application?</h4>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            <div class="row">
-                                                                                <div class="col-lg-12" align="right">
-                                                                                    <!-- <div class=""> -->
-                                                                                    <form
-                                                                                        action="loan_application_3.php"
-                                                                                        method="POST">
-                                                                                        <input type="text"
-                                                                                            name="loan_type"
-                                                                                            value="RELOAN" hidden>
-                                                                                        <input type="text" name="id"
-                                                                                            value="<?php echo $cid;?>"
-                                                                                            hidden>
-                                                                                        <input type="text" name="name"
-                                                                                            value="<?php echo $name;?>"
-                                                                                            hidden>
-                                                                                        <button type="submit"
-                                                                                            class="btn btn-primary"
-                                                                                            name="submit">
-                                                                                            Proceed <i
-                                                                                                class="fa fa-long-arrow-right"
-                                                                                                aria-hidden="true"
-                                                                                                title="Copy to use save"></i>
-                                                                                        </button>
-                                                                                    </form>
-                                                                                    <!-- </div> -->
-                                                                                </div>
-                                                                                <div class="col-lg-6">
-
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <!-- <a href="loan_application_1.php?id=<?php echo $cid;?>">
-                                                                                                    <button type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Apply">
-                                                                                                        <i class="fa fa-long-arrow-right" aria-hidden="true"></i> 
-                                                                                                    </button>
-                                                                                                </a> -->
-                                                                    </div>
-                                                                    <!-- /.modal-content -->
+                                            <tr class="odd gradeX">
+                                                <td><?php echo $cont_no?></td>
+                                                <td><?php echo $name?></td>
+                                                <td><?php echo $row['brgy1'].', '.$row['city1'];?></td>
+                                                <!-- <td class="text-center">
+                                                    <?php //echo "₱ ".number_format(floatval($loan->outStandingBalance),2)?>
+                                                </td> -->
+                                                <td class="text-center">
+                                                    <button type="button" class="btn btn-info btn-sml"
+                                                        data-toggle="modal" data-target="#credit<?php echo $cont_no?>">
+                                                        View Credit History <i class="fa fa-eye" aria-hidden="true"
+                                                            title="Copy to use save"></i></button>
+                                                    <div class="modal fade" id="credit<?php echo $cont_no?>"
+                                                        tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                                                        aria-hidden="true" align="left">
+                                                        <div class="modal-dialog modal-lg" style="width:60%"
+                                                            role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close"
+                                                                        data-dismiss="modal"
+                                                                        aria-hidden="true">&times;</button>
+                                                                    <center>
+                                                                        <h4 class="modal-title" id="myModalLabel">
+                                                                            Credit History</h4>
+                                                                    </center>
                                                                 </div>
-                                                                <!-- /.modal-dialog -->
+                                                                <div class="modal-body">
+                                                                    <div class="row">
+                                                                        <div class="col-lg-1">
+                                                                            <h4>Name:</h4>
+                                                                        </div>
+                                                                        <div class="col-lg-5">
+                                                                            <h4>
+                                                                                <b><?php echo $name ?></b>
+                                                                            </h4>
+                                                                        </div>
+                                                                        <div class="col-lg-3">
+                                                                            <h4>Borrowing History:</h4>
+                                                                        </div>
+                                                                        <div class="col-lg-3">
+                                                                            <h4><b><?php echo $loan->borrowingHistCount;?></b>
+                                                                            </h4>
+                                                                        </div>
+                                                                        <div class="col-lg-3">
+                                                                            <h4>Employee Status:</h4>
+                                                                        </div>
+                                                                        <div class="col-lg-3">
+                                                                            <h4>
+                                                                                <b><?php echo $loan->clientEmpStatus; ?></b>
+                                                                            </h4>
+                                                                        </div>
+                                                                    </div><br><br>
+                                                                    <div class="table-responsive">
+                                                                        <table
+                                                                            class="table table-striped table-bordered">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th>CONTRACT NO.</th>
+                                                                                    <th>LOAN TYPE</th>
+                                                                                    <th class="text-center">PRINCIPAL
+                                                                                    </th>
+                                                                                    <!-- <th class="text-center">AMOUNT PAID</th> -->
+                                                                                    <th class="text-center">OUSTANDING
+                                                                                        BALANCE</th>
+                                                                                    <th class="text-center">STATUS</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <tr>
+                                                                                    <td><?php echo $row['contract_no']?>
+                                                                                    </td>
+                                                                                    <td><?php echo $row['loan_type']?>
+                                                                                    </td>
+                                                                                    <td class="text-center">₱
+                                                                                        <?php echo number_format($row['loan_amount'],2);?>
+                                                                                    </td>
+                                                                                    <?php
+                                                                                        $query = "SELECT * FROM applicants_personal 
+                                                                                        LEFT JOIN loan_applications 
+                                                                                        ON applicants_personal.applicant_code=loan_applications.client_id 
+                                                                                        LEFT JOIN payments 
+                                                                                        ON payments.contract_no = loan_applications.contract_no 
+                                                                                        WHERE loan_applications.contract_no = '$cont_no' 
+                                                                                        AND loan_applications.paid = 1
+                                                                                        ORDER BY applicants_personal.lastname ASC";
+                                                                                        $qry_res = mysqli_query($con,$query);
+                                                                                            if(mysqli_num_rows($qry_res) > 0){
+                                                                                                while($rows = mysqli_fetch_assoc($qry_res)){
+                                                                                                    $get_name = $rows['lastname'].', '.$rows['firstname'].' '.$rows['middlename'];
+                                                                                    ?>
+                                                                                    <!-- <td class="text-center">₱
+                                                                                        <?php //echo number_format($rows['amount'],2)?>
+                                                                                    </td> -->
+                                                                                    <td class="text-center">
+                                                                                        <?php //echo "₱ ".number_format(floatval($loan->outStandingBalance),2)
+                                                                                        echo "₱ ".number_format(floatval($loan->outStandingBalance),2)
+                                                                                        ?>
+                                                                                    </td>
+                                                                                    <td class="text-center">
+                                                                                        <?php
+                                                                                        if($rows['loan_status'] == 1){
+                                                                                            echo '<button class="btn btn-success"> Active <i class="fa fa-check"></i>
+                                                                                            </button>';
+                                                                                        }else{
+                                                                                            echo '<button class="btn btn-warning"> Paid <i class="fa fa-thumbs-o-up"></i>
+                                                                                            </button>';
+                                                                                        }
+                                                                                    ?>
+                                                                                    </td>
+                                                                                    <?php
+                                                                                      }
+                                                                                    }
+                                                                            ?>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                            <!-- /.modal -->
+                                                            <!-- /.modal-content -->
                                                         </div>
-                                                        <?php
-                                                                                }
-                                                                                ?>
+                                                        <!-- /.modal-dialog -->
                                                     </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <a
+                                                        href="registry_applicant_update.php?id=<?php echo $row['applicant_code'];?>">
+                                                        <button type="button" class="btn btn-success"
+                                                            data-toggle="tooltip" data-placement="top" title="Update">
+                                                            Update Info
+                                                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                        </button>
+                                                    </a>
+                                                    <!-- Button trigger modal  Ako gi tangtang = [AND paid=0] sa query  -->
+
+                                                    <button type="button" class="btn btn-primary btn-sml"
+                                                        data-toggle="modal" data-target="#myModal_<?php echo $cid?>">
+                                                        Apply Loan <i class="fa fa-long-arrow-right" aria-hidden="true"
+                                                            title="Copy to use save"></i>
+                                                    </button>
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="myModal_<?php echo $cid?>" tabindex="-1"
+                                                        role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+                                                        align="left">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close"
+                                                                        data-dismiss="modal"
+                                                                        aria-hidden="true">&times;</button>
+                                                                    <h4 class="modal-title" id="myModalLabel">
+                                                                        Proceed to Reloan Application?</h4>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="row">
+                                                                        <div class="col-lg-12" align="right">
+                                                                            <!-- <div class=""> -->
+                                                                            <form action="loan_application_3.php"
+                                                                                method="POST">
+                                                                                <input type="text" name="loan_type"
+                                                                                    value="RELOAN" hidden>
+                                                                                <input type="text" name="id"
+                                                                                    value="<?php echo $cid;?>" hidden>
+                                                                                <input type="text" name="name"
+                                                                                    value="<?php echo $name;?>" hidden>
+                                                                                <button type="submit"
+                                                                                    class="btn btn-primary"
+                                                                                    name="submit">
+                                                                                    Proceed <i
+                                                                                        class="fa fa-long-arrow-right"
+                                                                                        aria-hidden="true"
+                                                                                        title="Copy to use save"></i>
+                                                                                </button>
+                                                                            </form>
+                                                                            <!-- </div> -->
+                                                                        </div>
+                                                                        <div class="col-lg-6">
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- /.modal-content -->
+                                                            </div>
+                                                            <!-- /.modal-dialog -->
+                                                        </div>
+                                                        <!-- /.modal -->
                                                 </td>
                                             </tr>
                                             <?php
-                                                            }
-                                                        
-                                                        ?>
+                                                }
+                                            }
+                                            ?>
                                         </tbody>
                                     </table>
                                 </div>
