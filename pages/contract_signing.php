@@ -101,7 +101,7 @@ if(isset($_GET['id'])){
                     <div class="col-lg-6 text-right">
                         <br>
                         <h1><button class="btn btn-md btn-primary" type="button"
-                                onclick="{window.open('generate_contract.php?id=<?= $client_id ?>', '_blank');window.open('generate_promissory_note.php?id=<?= $client_id ?>', '_blank');window.open('generate_disclosure.php?id=<?= $client_id ?>', '_blank');window.location.href='loan_approval.php'}"
+                                onclick="process()"
                                 class="btn btn-lg btn-primary"><i class="fa fa-print"></i> Print</button></h1>
                     </div>
                     <!-- /.col-lg-12 -->
@@ -265,6 +265,19 @@ var yyyy = today.getFullYear();
 
 today = yyyy + '-' + mm + '-' + dd;
 $('#effective_date').attr('min', today);
+</script>
+
+<script>
+    function process(){
+       if($('#effective_date').val() != ""){
+        window.open('generate_contract.php?id=<?= $client_id ?>', '_blank');
+        window.open('generate_promissory_note.php?id=<?= $client_id ?>&start='+$('#effective_date').val(), '_blank');
+        window.open('generate_disclosure.php?id=<?= $client_id ?>', '_blank');
+        window.location.href='loan_approval.php';
+       }else{
+        alert("Please set the effectivity date.");
+       }
+    }
 </script>
 
 </html>

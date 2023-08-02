@@ -6,6 +6,7 @@ include 'mvc/controller/class-autoload.cont.php';
 include 'mvc/model/sched.mod.php';
 
 $id = $_GET['id'];
+
 $sql = "SELECT *  FROM loan_applications WHERE client_id = '$id' AND paid=0";
 $res = mysqli_query($con,$sql);
 if(mysqli_num_rows($res) > 0){
@@ -14,9 +15,16 @@ if(mysqli_num_rows($res) > 0){
     }
 }
 
+$startDate = $_GET['start'];
+
+$sql = "UPDATE loan_applications SET effective_date='$startDate' WHERE client_id = '$id' AND contract_no = '$contract' AND paid=0";
+$resUp = mysqli_query($con,$sql);
+
 $sched = new Schedule($contract);
 
 define('sched', $sched);
+
+define('start', $_GET['start']);
 
 session_start();
 
@@ -117,9 +125,15 @@ class MYPDF extends TCPDF {
         $this->SetFont('');
         // Data
         $fill = 0;
-        $date = new DateTime(sched->startDate);
-
-        for($index = 0; $index < sched->duration; $index++){
+        $date = new DateTime(start);
+        if(sched->mop == 1){
+            $newDuration = sched->duration;
+        }else if(sched->mop == 2){
+            $newDuration = sched->duration * 2;
+        }else if(sched->mop == 3){
+            $newDuration = sched->duration * 4;
+        }
+        for($index = 0; $index < $newDuration; $index++){
             date_add($date, date_interval_create_from_date_string(sched->addDate." days"));
             $this->Cell($w[0], 6, date_format($date, 'F d, Y'), 'LR', 0, 'C', $fill);    
             $this->Cell($w[1], 6, number_format(sched->amortAmount, 2), 'LR', 0, 'C', $fill);

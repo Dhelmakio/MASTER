@@ -639,6 +639,10 @@ if(isset($_POST['id'])){
                                                                                 id="collection-per-cut_2"
                                                                                 style="text-align:right" value=""
                                                                                 disabled>
+                                                                                <input type="text" name="amortization2"
+                                                                                id="collection-per-cut2"
+                                                                                style="text-align:right" value=""
+                                                                                hidden>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -658,6 +662,10 @@ if(isset($_POST['id'])){
                                                                                 id="collection-per-cut_3"
                                                                                 style="text-align:right" value=""
                                                                                 disabled>
+                                                                                <input type="text" name="amortization3"
+                                                                                id="collection-per-cut3"
+                                                                                style="text-align:right" value=""
+                                                                                hidden>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -865,6 +873,8 @@ if(isset($_POST['id'])){
                 $("#total-ded").val(parseFloat(totalDeductions).toFixed(2));
                 $("#total-cashout").val(parseFloat(totalCashout).toFixed(2));
                 $("#collection-per-cut").val(parseFloat(collectionPerCut).toFixed(2));
+                $("#collection-per-cut2").val(parseFloat(collectionPerCut2).toFixed(2));
+                $("#collection-per-cut3").val(parseFloat(collectionPerCut3).toFixed(2));
                 $("#interest-amount_").val(parseFloat(interestAmount).toFixed(2));
                 $("#notarial-fee_").val(parseFloat(notarialFee).toFixed(2));
                 $("#total-ded_").val(parseFloat(totalDeductions).toFixed(2));
@@ -1045,7 +1055,7 @@ if(isset($_POST['id'])){
                     // );
                 });
                
-                if(totalDeduction => x){
+                if(newPL < 0){
                     alert('Cannot avail for renewal');
                 }else{
                     document.getElementById("submit_btn").style.visibility = "visible";

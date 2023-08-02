@@ -13,7 +13,15 @@ if(isset($_POST['client_id'])){
     // $now = date("Y/m/d");
     $mop = $_POST['mop'];
     $cid = $_POST['client_id'];
-    $mamort = $_POST['amortization'];
+    if($mop == 1){
+        $mamort = $_POST['amortization'];
+    }else if($mop == 2){
+        $mamort = $_POST['amortization2'];
+    }else if($mop == 3){
+        $mamort = $_POST['amortization3'];
+    }
+    
+    // die($mamort);
     $lamt = $_POST['lamt_'];
     $duration = $_POST['months_'];
     $ltype = $_POST['ltype'];

@@ -579,6 +579,10 @@ if(isset($_GET['id'])){
                                                                                 id="collection-per-cut_2"
                                                                                 style="text-align:right" value=""
                                                                                 disabled>
+                                                                                <input type="text" name="amortization2"
+                                                                                id="collection-per-cut2"
+                                                                                style="text-align:right" value=""
+                                                                                hidden>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -598,6 +602,10 @@ if(isset($_GET['id'])){
                                                                                 id="collection-per-cut_3"
                                                                                 style="text-align:right" value=""
                                                                                 disabled>
+                                                                                <input type="text" name="amortization3"
+                                                                                id="collection-per-cut3"
+                                                                                style="text-align:right" value=""
+                                                                                hidden>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -776,7 +784,7 @@ if(isset($_GET['id'])){
                 let proceedLoan = $("#lamt").val() - totalDeduction;
 
                 $("#udi_").val(parseFloat(udiValue).toFixed(2));
-                $("#udi_percentage").val(udi);
+                $("#udi_percentage").val($('#udi').val());
 
                 $("#interest_percentage").val(<?php echo $loan->moInterest * 100 ?>);
 
@@ -802,6 +810,8 @@ if(isset($_GET['id'])){
                 $("#total-ded").val(parseFloat(totalDeductions).toFixed(2));
                 $("#total-cashout").val(parseFloat(totalCashout).toFixed(2));
                 $("#collection-per-cut").val(parseFloat(collectionPerCut).toFixed(2));
+                $("#collection-per-cut2").val(parseFloat(collectionPerCut2).toFixed(2));
+                $("#collection-per-cut3").val(parseFloat(collectionPerCut3).toFixed(2));
                 $("#interest-amount_").val(parseFloat(interestAmount).toFixed(2));
                 $("#notarial-fee_").val(parseFloat(notarialFee).toFixed(2));
                 $("#total-ded_").val(parseFloat(totalDeductions).toFixed(2));
