@@ -12,4 +12,6 @@ class Statics{
     public static $SINGLECASUALAMORT = 5000;
     public static $MULTIPLEREGULARAMORT = 8000;
     public static $MULTIPLECASUALAMORT = 7000;
+    public static $SINGLE = 6000;
+    public static $MULTIPLE = 3000;
 }

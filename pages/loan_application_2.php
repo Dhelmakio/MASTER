@@ -785,7 +785,7 @@ if(isset($_POST['id'])){
         }
 
         duration = $("#months").val();
-        maxLoanAmount = duration * <?php echo $MA; ?>;
+        maxLoanAmount = duration * <?php echo $loan->netLoanPerMonth; ?>;
 
         $("#max-loanable").text("Maximum Loanable for desired duration: ₱ " + maxLoanAmount);
         $('#use-max').click(() => {

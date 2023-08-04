@@ -31,13 +31,15 @@ class Loan extends DbCon {
         // $this->clientID = $id;
 
         if($this->incomeSourceFlag > 0 ){
-            $this->clientSukli = Statics::$ATWOAFOURSUKLI;
+            // $this->clientSukli = Statics::$ATWOAFOURSUKLI;
             $this->incomeEarning = 'Multiple';
             // $this->moInterest = ;
         }else{
-            $this->clientSukli = Statics::$AONEATHREESUKLI;
+            // $this->clientSukli = Statics::$AONEATHREESUKLI;
             $this->incomeEarning = 'Single';
         }
+        
+        ($this->incomeEarning == 'Single') ?  $this->clientSukli = $this->sukli('single') : $this->clientSukli = $this->sukli('multiple');
 
         $this->netLoanPerMonth = $this->monthlyNetSal - $this->clientSukli;
 
@@ -116,6 +118,7 @@ class Loan extends DbCon {
 
 
     public function checkIfExistInLoanApp(){
+
         $sql = "SELECT client_id FROM loan_applications WHERE client_id = ?";
         $stmt = $this->connect()->prepare($sql);
         $stmt->execute([$this->clientID]);
@@ -131,6 +134,15 @@ class Loan extends DbCon {
         $result = $stmt->fetchColumn();
         
         $this->notarialFee = $result;
+    }
+
+    public function sukli($sukli){
+        $sql = "SELECT amount FROM sukli WHERE `name` = ?";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute([$sukli]);
+        $result = $stmt->fetchColumn();
+        
+        return $result;
     }
 
     //functions below are for renewal
