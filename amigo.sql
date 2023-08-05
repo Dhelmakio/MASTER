@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 27, 2023 at 05:34 PM
+-- Generation Time: Aug 05, 2023 at 12:34 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.1.17
 
@@ -225,7 +225,16 @@ INSERT INTO `activity_logs` (`log_id`, `user_id`, `name`, `activity`, `date_time
 (183, 1, 'Kevin Fontanoza', 'Added loan application', '2023-07-27 19:36:15'),
 (184, 1, 'Kevin Fontanoza', 'Logged out', '2023-07-27 19:55:18'),
 (185, 1, 'Kevin Fontanoza', 'Logged in', '2023-07-27 20:11:07'),
-(186, 1, 'Kevin Fontanoza', 'Added loan application', '2023-07-27 22:15:03');
+(186, 1, 'Kevin Fontanoza', 'Added loan application', '2023-07-27 22:15:03'),
+(187, 1, 'Kevin Fontanoza', 'Logged in', '2023-08-03 03:16:10'),
+(188, 1, 'Kevin Fontanoza', 'Added loan application', '2023-08-03 03:19:58'),
+(189, 1, 'Kevin Fontanoza', 'Logged out', '2023-08-03 03:22:57'),
+(190, 1, 'Kevin Fontanoza', 'Logged in', '2023-08-05 03:55:47'),
+(191, 1, 'Kevin Fontanoza', 'Added loan application', '2023-08-05 16:16:46'),
+(192, 0, '', 'Answered Relative Questionnaire: AMG001000000120230809085802', '2023-08-05 16:36:21'),
+(193, 1, 'Kevin Fontanoza', 'Answered Coworker Questionnaire: AMG001000000120230809085802', '2023-08-05 16:36:35'),
+(194, 1, 'Kevin Fontanoza', 'Approved CI', '2023-08-05 16:36:43'),
+(195, 1, 'Kevin Fontanoza', 'Logged in', '2023-08-05 16:40:36');
 
 -- --------------------------------------------------------
 
@@ -304,7 +313,8 @@ CREATE TABLE `answers` (
 --
 
 INSERT INTO `answers` (`questionnaire_id`, `contract_no`, `question1`, `question2`, `question3`, `question4`, `question5`, `question6`, `question7`, `question8`, `question9`, `question10`, `question11`, `question12`, `question13`, `question14`, `question15`, `question16`, `question17`, `question18`, `question19`, `question20`, `question21`, `question22`, `question23`, `question24`, `question25`, `question26`, `question27`, `question28`, `question29`, `question30`, `question31`, `question32`, `question33`, `question34`, `question35`, `question36`, `question37`, `question38`, `question39`, `question40`, `question41`, `question42`, `question43`, `question44`, `question45`, `question46`, `question47`, `question48`, `question49`, `question50`, `question51`, `question52`, `question53`, `question54`, `question55`, `question56`, `question57`, `question58`, `question59`, `question60`, `date`) VALUES
-(1, 'AMG001000000120230707074726', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 'ss', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', '2023-07-27 01:45:18');
+(1, 'AMG001000000120230707074726', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 'ss', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', '2023-07-27 01:45:18'),
+(2, 'AMG001000000120230809085802', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'aa', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'aa', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', '2023-08-05 16:36:21');
 
 -- --------------------------------------------------------
 
@@ -325,9 +335,7 @@ CREATE TABLE `applicants_child` (
 --
 
 INSERT INTO `applicants_child` (`child_id`, `applicant_code`, `child_name`, `child_dob`, `date_encoded`) VALUES
-(1, 'AMG0010000001', 'as', '2023-07-27', '2023-07-27'),
-(2, 'AMG0010000009', 'Delise', '2023-07-27', '2023-07-27'),
-(3, 'AMG0010000010', 'sad', '2023-07-27', '2023-07-27');
+(1, 'AMG0010000001', 'Nins', '2023-08-03', '2023-08-05');
 
 -- --------------------------------------------------------
 
@@ -379,16 +387,7 @@ CREATE TABLE `applicants_personal` (
 --
 
 INSERT INTO `applicants_personal` (`applicant_id`, `applicant_code`, `firstname`, `middlename`, `lastname`, `suffix`, `nickname`, `age`, `gender`, `contact1`, `mstatus`, `dob1`, `pob1`, `block1`, `street1`, `phase1`, `brgy1`, `city1`, `province1`, `map_url`, `residence1`, `lwith1`, `block2`, `street2`, `phase2`, `brgy2`, `city2`, `province2`, `residence2`, `lwith2`, `mothername`, `mothercon`, `fathername`, `fathercon`, `file`, `date_encoded`) VALUES
-(1, 'AMG0010000001', 'DHELMARK', 'SALIDAGA', 'BAYLON', '', 'DHEL', '', 'Male', '09924334454', 'Married', '2023-07-27', 'ALBAY, LEGAZPI CITY', '', '', '', 'BOTBOT', 'HAMTIC', 'ANTIQUE', 'https://www.google.com/maps/place/Ormoc,+Leyte/@11.0506297,124.5577437,36606m/data=!3m2!1e3!4b1!4m15!1m8!3m7!1s0x3396f79f47a8aadb:0x2c4be1dddb81922a!2sSan+Fernando,+Pampanga!3b1!8m2!3d15.0593937!4d120.6567054!16zL20vMDZwZ3pu!3m5!1s0x3307f730e0176ac1:0x913bc7c66a44f9a6!8m2!3d11.0384275!4d124.6192702!16zL20vMDI3djhu?hl=en-US&entry=ttu', 'Owned', 'Parents', '', '', '', 'BOTBOT', 'HAMTIC', 'ANTIQUE', 'Owned', 'Parents', 'MARICEL GO EBCAS', '09457545454', 'JOSE ELMER C. EBCAS', '09467673275', '', '2023-07-27'),
-(2, 'AMG0010000002', 'A', '', 'A', '', '', '', 'Male', '09123456789', '', '2023-07-27', 'AKLAN, BATAN', '', '', '', 'BGY. 8 - BAGUMBAYAN (POB.)', 'LEGAZPI CITY', 'ALBAY', 'https://www.google.com/maps/place/Ormoc,+Leyte/@11.0506297,124.5577437,36606m/data=!3m2!1e3!4b1!4m15!1m8!3m7!1s0x3396f79f47a8aadb:0x2c4be1dddb81922a!2sSan+Fernando,+Pampanga!3b1!8m2!3d15.0593937!4d120.6567054!16zL20vMDZwZ3pu!3m5!1s0x3307f730e0176ac1:0x913bc7c66a44f9a6!8m2!3d11.0384275!4d124.6192702!16zL20vMDI3djhu?hl=en-US&entry=ttu', 'Renting', 'Relatives', '', '', '', 'BGY. 8 - BAGUMBAYAN (POB.)', 'LEGAZPI CITY', 'ALBAY', 'Renting', 'Relatives', 'A', '09457545454', 'A', '09467673275', '', '2023-07-27'),
-(3, 'AMG0010000003', 'JUNE SIMEONE ELMER', '', 'EBCAS', '', '', '', 'Female', '09924334454', 'Widowed', '2023-07-27', 'AGUSAN DEL SUR, LA PAZ', '', '', '', 'DAYAPAN', 'LEMERY', 'BATANGAS', 'https://www.google.com/maps/place/San+Fernando,+Pampanga/@15.0650161,120.6456575,18008m/data=!3m1!1e3!4m15!1m8!3m7!1s0x3396f79f47a8aadb:0x2c4be1dddb81922a!2sSan+Fernando,+Pampanga!3b1!8m2!3d15.0593937!4d120.6567054!16zL20vMDZwZ3pu!3m5!1s0x3396f79f47a8aadb:0x2c4be1dddb81922a!8m2!3d15.0593937!4d120.6567054!16zL20vMDZwZ3pu?hl=en-US&entry=ttu', 'Owned', 'Relatives', '', '', '', 'DAYAPAN', 'LEMERY', 'BATANGAS', 'Owned', 'Relatives', 'MARICEL GO EBCAS', '09457545454', 'JOSE ELMER C. EBCAS', '09467673275', '', '2023-07-27'),
-(4, 'AMG0010000004', 'A', '', 'A', '', '', '', 'Male', '09924334454', 'Single', '2023-12-31', 'ABRA, BANGUED', '', 'MILLION', '', 'AGTANGAO', 'BANGUED', 'ABRA', '11.013128996612425, 124.59931147662442', 'Renting', 'Relatives', '', 'MILLION', '', 'AGTANGAO', 'BANGUED', 'ABRA', 'Renting', 'Relatives', 'MARICEL GO EBCAS', '09457545454', 'JOSE ELMER C. EBCAS', '09467673275', '', '2023-07-27'),
-(5, 'AMG0010000005', 'A', '', 'A', '', '', '', 'Male', '09924334454', '', '2023-07-27', 'AKLAN, BURUANGA', '', '', '', '', '', '', 'https://www.google.com/maps/place/Ormoc,+Leyte/@11.0506297,124.5577437,36606m/data=!3m2!1e3!4b1!4m15!1m8!3m7!1s0x3396f79f47a8aadb:0x2c4be1dddb81922a!2sSan+Fernando,+Pampanga!3b1!8m2!3d15.0593937!4d120.6567054!16zL20vMDZwZ3pu!3m5!1s0x3307f730e0176ac1:0x913bc7c66a44f9a6!8m2!3d11.0384275!4d124.6192702!16zL20vMDI3djhu?hl=en-US&entry=ttu', 'Owned', 'Wife/Husband/Live-in Partner', '', '', '', '', '', '', 'Owned', 'Wife/Husband/Live-in Partner', 'MARICEL GO EBCAS', '09457545454', 'JOSE ELMER C. EBCAS', '09467673275', '', '2023-07-27'),
-(6, 'AMG0010000006', 'A', '', 'A', '', '', '', 'Female', '09123456789', 'Single', '2023-07-27', 'AGUSAN DEL NORTE, BUTUAN CITY', '', '', '', 'SANKANAN', 'MANOLO FORTICH', 'BUKIDNON', 'https://www.google.com/maps/place/Ormoc,+Leyte/@11.0506297,124.5577437,36606m/data=!3m2!1e3!4b1!4m15!1m8!3m7!1s0x3396f79f47a8aadb:0x2c4be1dddb81922a!2sSan+Fernando,+Pampanga!3b1!8m2!3d15.0593937!4d120.6567054!16zL20vMDZwZ3pu!3m5!1s0x3307f730e0176ac1:0x913bc7c66a44f9a6!8m2!3d11.0384275!4d124.6192702!16zL20vMDI3djhu?hl=en-US&entry=ttu', 'Owned', 'Relatives', '', '', '', 'SANKANAN', 'MANOLO FORTICH', 'BUKIDNON', 'Owned', 'Relatives', 'MARICEL GO EBCAS', '09457545454', 'JOSE ELMER C. EBCAS', '09467673275', '', '2023-07-27'),
-(7, 'AMG0010000007', 'JUNE SIMEONE ELMER', '', 'EBCAS', '', '', '', 'Male', '09924334454', 'Single', '2023-07-27', 'ABRA, BUCLOC', '', '', 'ZONE 90', 'EDDET', 'KABAYAN', 'BENGUET', 'https://www.google.com/maps/place/Ormoc,+Leyte/@11.0506297,124.5577437,36606m/data=!3m2!1e3!4b1!4m15!1m8!3m7!1s0x3396f79f47a8aadb:0x2c4be1dddb81922a!2sSan+Fernando,+Pampanga!3b1!8m2!3d15.0593937!4d120.6567054!16zL20vMDZwZ3pu!3m5!1s0x3307f730e0176ac1:0x913bc7c66a44f9a6!8m2!3d11.0384275!4d124.6192702!16zL20vMDI3djhu?hl=en-US&entry=ttu', 'Renting', 'Parents', '', '', 'ZONE 90', 'EDDET', 'KABAYAN', 'BENGUET', 'Renting', 'Parents', 'MARICEL GO EBCAS', '09457545454', 'JOSE ELMER C. EBCAS', '09467673275', '', '2023-07-27'),
-(8, 'AMG0010000008', 'JUNE SIMEONE ELMER', '', 'EBCAS', '', '', '', 'Female', '09924334454', 'Single', '2023-07-27', 'AGUSAN DEL SUR, LA PAZ', '', '', '', 'CAPITAN JUAN', 'LANTAPAN', 'BUKIDNON', 'https://www.google.com/maps/place/Ormoc,+Leyte/@11.0506297,124.5577437,36606m/data=!3m2!1e3!4b1!4m15!1m8!3m7!1s0x3396f79f47a8aadb:0x2c4be1dddb81922a!2sSan+Fernando,+Pampanga!3b1!8m2!3d15.0593937!4d120.6567054!16zL20vMDZwZ3pu!3m5!1s0x3307f730e0176ac1:0x913bc7c66a44f9a6!8m2!3d11.0384275!4d124.6192702!16zL20vMDI3djhu?hl=en-US&entry=ttu', 'Owned', 'Relatives', '', '', '', 'CAPITAN JUAN', 'LANTAPAN', 'BUKIDNON', 'Owned', 'Relatives', 'MARICEL GO EBCAS', '09457545454', 'JOSE ELMER C. EBCAS', '09467673275', '', '2023-07-27'),
-(9, 'AMG0010000009', 'DHELMARK', 'S.', 'BAYLON', '', 'DHEL', '', 'Male', '09924334454', 'Married', '2023-07-27', 'ALBAY, LEGAZPI CITY', '', '', '', 'KASAPA II', 'LA PAZ', 'AGUSAN DEL SUR', 'https://www.google.com/maps/place/San+Fernando,+Pampanga/@15.0650161,120.6456575,18008m/data=!3m1!1e3!4m15!1m8!3m7!1s0x3396f79f47a8aadb:0x2c4be1dddb81922a!2sSan+Fernando,+Pampanga!3b1!8m2!3d15.0593937!4d120.6567054!16zL20vMDZwZ3pu!3m5!1s0x3396f79f47a8aadb:0x2c4be1dddb81922a!8m2!3d15.0593937!4d120.6567054!16zL20vMDZwZ3pu?hl=en-US&entry=ttu', 'Renting', 'Parents', '', '', '', 'KASAPA II', 'LA PAZ', 'AGUSAN DEL SUR', 'Renting', 'Parents', 'MOTHER', '09457545454', 'FATHER', '09467673275', '', '2023-07-27'),
-(10, 'AMG0010000010', 'REIGNHEART', 'ELLIOT', 'BAZARTE', '', 'REIGN', '', 'Male', '09123456789', 'Married', '2023-07-27', 'APAYAO, LUNA', '', '', '', 'SANTA CRUZ BIGAA', 'LEZO', 'AKLAN', 'https://www.google.com/maps/place/San+Fernando,+Pampanga/@15.0650161,120.6456575,18008m/data=!3m1!1e3!4m15!1m8!3m7!1s0x3396f79f47a8aadb:0x2c4be1dddb81922a!2sSan+Fernando,+Pampanga!3b1!8m2!3d15.0593937!4d120.6567054!16zL20vMDZwZ3pu!3m5!1s0x3396f79f47a8aadb:0x2c4be1dddb81922a!8m2!3d15.0593937!4d120.6567054!16zL20vMDZwZ3pu?hl=en-US&entry=ttu', 'Owned', 'Parents', '', '', '', 'SANTA CRUZ BIGAA', 'LEZO', 'AKLAN', 'Owned', 'Parents', 'MOTHER', '09457545454', 'FATHER', '09467673275', '', '2023-07-27');
+(1, 'AMG0010000001', 'JUNE SIMEONE ELMER', 'GO', 'EBCAS', '', 'SIMSIM', '', 'Male', '09924334454', 'Married', '2023-08-03', 'BILIRAN, KAWAYAN', '', '', '', 'DIKAPANIKIAN', 'DINGALAN', 'AURORA', 'https://www.google.com/maps/place/Ormoc,+Leyte/@11.0506297,124.5577437,36606m/data=!3m2!1e3!4b1!4m15!1m8!3m7!1s0x3396f79f47a8aadb:0x2c4be1dddb81922a!2sSan+Fernando,+Pampanga!3b1!8m2!3d15.0593937!4d120.6567054!16zL20vMDZwZ3pu!3m5!1s0x3307f730e0176ac1:0x913bc7c66a44f9a6!8m2!3d11.0384275!4d124.6192702!16zL20vMDI3djhu?hl=en-US&entry=ttu', 'Owned', 'Parents', '', '', '', 'DIKAPANIKIAN', 'DINGALAN', 'AURORA', 'Owned', '', 'MARICEL GO EBCAS', '09457545454', 'JOSE ELMER C. EBCAS', '09467673275', '', '2023-08-03');
 
 -- --------------------------------------------------------
 
@@ -410,16 +409,7 @@ CREATE TABLE `applicants_reference` (
 --
 
 INSERT INTO `applicants_reference` (`reference_id`, `applicant_code`, `source`, `loan_purpose`, `fb_acct`, `date_encoded`) VALUES
-(1, 'AMG0010000001', 'Referral', 'Pay Bills', 'facebook lang', '2023-07-27'),
-(2, 'AMG0010000002', 'Signage/Posters', 'Pay Bills', 'dhelmark@facebook.com', '2023-07-27'),
-(3, 'AMG0010000003', 'Referral', 'Pay Bills', 'facebook lang', '2023-07-27'),
-(4, 'AMG0010000004', 'Signage/Posters', 'Business', 'facebook lang', '2023-07-27'),
-(5, 'AMG0010000005', 'Signage/Posters', 'Pay Bills', 'dhelmark@facebook.com', '2023-07-27'),
-(6, 'AMG0010000006', 'Leaflets', 'Educational', 'facebook lang', '2023-07-27'),
-(7, 'AMG0010000007', 'Signage/Posters', 'Business', 'facebook lang', '2023-07-27'),
-(8, 'AMG0010000008', 'Signage/Posters', 'Vehicle maintenance and fees', 'facebook lang', '2023-07-27'),
-(9, 'AMG0010000009', 'Referral', 'Special Occassion', 'dhelmark@facebook.com', '2023-07-27'),
-(10, 'AMG0010000010', 'Referral', 'Vehicle maintenance and fees', 'reignheart@facebook.com', '2023-07-27');
+(1, 'AMG0010000001', 'Banners', 'Vehicle maintenance and fees', 'simsim@facebook.com', '2023-08-03');
 
 -- --------------------------------------------------------
 
@@ -442,9 +432,7 @@ CREATE TABLE `applicants_relative` (
 --
 
 INSERT INTO `applicants_relative` (`relative_id`, `applicant_code`, `relative_name`, `r_contact`, `r_relationship`, `r_ta`, `date_encoded`) VALUES
-(1, 'AMG0010000001', 'Rogelio P. Ebcas', '0944564564', 'Grandfather', '16:40', '2023-07-27'),
-(2, 'AMG0010000009', 'Louie', '09445645647', 'friend', '19:35', '2023-07-27'),
-(3, 'AMG0010000010', 'Louie', '09445645642', 'friend', '19:50', '2023-07-27');
+(1, 'AMG0010000001', 'Rodolfo', '09445645642', 'friend', '03:18', '2023-08-03');
 
 -- --------------------------------------------------------
 
@@ -470,9 +458,7 @@ CREATE TABLE `applicants_spouse` (
 --
 
 INSERT INTO `applicants_spouse` (`spouse_id`, `applicant_code`, `spouse_name`, `contact`, `s_dob`, `s_pob`, `s_address`, `s_occupation`, `s_company`, `date_encoded`) VALUES
-(1, 'AMG0010000001', 'A', '09164574545', '2023-07-27', 'AGUSAN DEL SUR, ESPERANZA', 'ALBAY, GUINOBATAN, BATBAT', 'STUDENT', 'EVSU', '2023-07-27'),
-(2, 'AMG0010000009', 'DENISE COSENS-BAYLON', '09164574545', '2023-07-27', 'AGUSAN DEL SUR, LORETO', 'BATANES, UYUGAN, KAYUGANAN (POB.)', 'STUDENT', 'EVSU', '2023-07-27'),
-(3, 'AMG0010000010', 'A', '09164574545', '2023-07-27', 'AKLAN, IBAJAY', 'AKLAN, KALIBO, BRIONES', 'ARCHITECTURE', 'TERADYNE', '2023-07-27');
+(1, 'AMG0010000001', 'NIñA ROVA DEJITO-EBCAS', '09164574545', '2023-08-03', 'ANTIQUE, LIBERTAD', 'BILIRAN, KAWAYAN, MASAGONGSONG', 'STUDENT', 'EVSU', '2023-08-03');
 
 -- --------------------------------------------------------
 
@@ -509,16 +495,7 @@ CREATE TABLE `applicants_work` (
 --
 
 INSERT INTO `applicants_work` (`work_id`, `applicant_code`, `employer`, `sector_type`, `tob`, `com_address`, `a_location`, `sup_name`, `hr_number`, `date_hired`, `e_status`, `m_salary`, `bank_name`, `atm_card`, `loan`, `monthly_salary`, `s_period`, `other_source`, `specify`, `max_loanable_amt`, `date_encoded`) VALUES
-(1, 'AMG0010000001', 'COMPTIA', 'Private Sector', 'Hotels & Restaurants', 'COGON, ORMOC CITY', 'COGON', 'KEVIN FONTANOZA', '09425454545', '2023-07-27', 'REGULAR', 'ATM', 'BPI', 'ATM CARD', 'Yes-Home Loan-8000', '24000', '', '10000', 'Pension', 0, '2023-07-27'),
-(2, 'AMG0010000002', 'A', 'Government Sector', 'Hotels & Restaurants', 'COGON, ORMOC CITY', 'COGON', 'KEVIN FONTANOZA', '09425454545', '2023-12-31', 'REGULAR', 'ATM', 'BPI', '', 'None--', '24000', '', '10000', 'Business', 0, '2023-07-27'),
-(3, 'AMG0010000003', 'CITY HALL', '', 'Firms which offer professional services, such as accounting, legal, engineering, business consulting, customer service and architecture', 'COGON, ORMOC CITY', 'COGON', 'KEVIN FONTANOZA', '09425454545', '2023-07-27', 'REGULAR', 'Cash', 'BPI', 'ATM CARD', 'None--', '24000', '', '10000', 'Commission', 0, '2023-07-27'),
-(4, 'AMG0010000004', 'CITY HALL', 'Government Sector', 'Entertainment, such as artists and movie houses', 'COGON, ORMOC CITY', 'COGON', 'KEVIN FONTANOZA', '09425454545', '2023-07-27', 'REGULAR', 'ATM', 'BPI', 'ATM CARD', 'None--', '24000', '', '20000', 'Business', 0, '2023-07-27'),
-(5, 'AMG0010000005', 'COMPTIA', 'Government Sector', 'Firms which offer professional services, such as accounting, legal, engineering, business consulting, customer service and architecture', 'COGON, ORMOC CITY', 'BASAK, LAPU-LAPU', 'KEVIN FONTANOZA', '09425454545', '2023-07-27', 'PROBATIONARY', 'Check', 'BPI', 'ATM CARD', 'Yes-Calamity Loan-4000', '24000', '', 'None', 'Allowance', 0, '2023-07-27'),
-(6, 'AMG0010000006', 'COMPTIA', 'Private Sector', 'Transportation companies, such as airlines, shipping, land tours and forwarders', 'COGON, ORMOC CITY', 'COGON', 'KEVIN FONTANOZA', '09425454545', '2023-07-27', 'REGULAR', 'Cash', 'BPI', 'ATM CARD', 'None--', '24000', '', '10000', 'Allowance', 0, '2023-07-27'),
-(7, 'AMG0010000007', 'CITY HALL', 'Private Sector', 'Firms which offer professional services, such as accounting, legal, engineering, business consulting, customer service and architecture', 'COGON, ORMOC CITY', 'COGON', 'KEVIN FONTANOZA', '09425454545', '2023-07-27', 'REGULAR', 'Cash', 'BPI', 'ATM CARD', 'Yes--', '24000', '', '10000', 'Allotment', 0, '2023-07-27'),
-(8, 'AMG0010000008', 'CITY HALL', 'Private Sector', 'Firms which offer professional services, such as accounting, legal, engineering, business consulting, customer service and architecture', 'COGON, ORMOC CITY', 'COGON', 'KEVIN FONTANOZA', '09425454545', '2023-07-27', 'PROBATIONARY', 'Cash', 'BPI', 'ATM CARD', 'None--', '24000', '', '', 'None', 0, '2023-07-27'),
-(9, 'AMG0010000009', 'TERADAYNE', 'Government Sector', 'Entertainment, such as artists and movie houses', 'BASAK, LAPU-LAPU, CEBU', 'COGON', 'KEVIN FONTANOZA', '09425454545', '2023-07-27', 'REGULAR', 'ATM', 'BPI', 'DEBIT CARD', 'Yes-Maternity Loan-2000', '30000', '', '5000', 'Commission', 0, '2023-07-27'),
-(10, 'AMG0010000010', 'METROBANK', 'Government Sector', 'Apartments', 'BASAK, LAPU-LAPU, CEBU', 'BASAK, LAPU-LAPU', 'TERADYNE 2', '09425454545', '2023-07-27', 'REGULAR', 'Check', 'BPI', 'DEBIT CARD', 'Yes-Home Loan-8000', '20000', '', '2000', 'Allotment', 0, '2023-07-27');
+(1, 'AMG0010000001', 'TERADAYNE', 'Private Sector', 'Business process outsourcing (BPO) companies', 'COGON, ORMOC CITY', 'COGON', 'KEVIN FONTANOZA', '09425454545', '2023-08-03', 'REGULAR', 'ATM', 'BPI', 'DEBIT CARD', 'None', '10000', '', '10000', 'Allotment', 0, '2023-08-03');
 
 -- --------------------------------------------------------
 
@@ -834,7 +811,7 @@ CREATE TABLE `fees` (
 --
 
 INSERT INTO `fees` (`notarial_id`, `notarial_fee`) VALUES
-(1, 400);
+(1, 500);
 
 -- --------------------------------------------------------
 
@@ -880,6 +857,7 @@ CREATE TABLE `loan_applications` (
   `date_flagged` datetime DEFAULT NULL,
   `remarks` text NOT NULL,
   `paid` int(11) NOT NULL,
+  `loan_status` text NOT NULL,
   `effective_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -887,8 +865,8 @@ CREATE TABLE `loan_applications` (
 -- Dumping data for table `loan_applications`
 --
 
-INSERT INTO `loan_applications` (`loan_id`, `contract_no`, `client_id`, `loan_type`, `loan_duration`, `loan_amount`, `interest_amount`, `other_fee`, `total_cashout`, `monthly_amortization`, `mop`, `ob`, `udi_percentage`, `udi_value`, `interest_percentage`, `application_date`, `ci_status`, `ci_by`, `ci_date`, `approval`, `processed_by`, `date_flagged`, `remarks`, `paid`, `effective_date`) VALUES
-(1, 'AMG001000000120230704070327', 'AMG0010000001', 1, 3, 24000, 0, 400, 15920, 8000, '1', 0, 18, 6240, 8, '2023-07-27 22:15:03', 0, '', NULL, 0, '', NULL, '', 0, '0000-00-00');
+INSERT INTO `loan_applications` (`loan_id`, `contract_no`, `client_id`, `loan_type`, `loan_duration`, `loan_amount`, `interest_amount`, `other_fee`, `total_cashout`, `monthly_amortization`, `mop`, `ob`, `udi_percentage`, `udi_value`, `interest_percentage`, `application_date`, `ci_status`, `ci_by`, `ci_date`, `approval`, `processed_by`, `date_flagged`, `remarks`, `paid`, `loan_status`, `effective_date`) VALUES
+(1, 'AMG001000000120230809085802', 'AMG0010000001', 1, 4, 10000, 0, 400, 21680, 4000, '2', 0, 25, 8000, 8, '2023-08-03 03:19:58', 1, 'Kevin Fontanoza', '2023-08-05 10:36:43', 0, '', NULL, '', 0, '', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -1005,6 +983,26 @@ INSERT INTO `questions` (`question_id`, `question`) VALUES
 (58, 'May pinagkakautangan ba sa individual o sa microfinance'),
 (59, 'May loan ba sa ibang kumpanya SSS, Pag-ibig'),
 (60, 'Maliban sa Fuerte may iba pa bang pinagkakautangan');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sukli`
+--
+
+CREATE TABLE `sukli` (
+  `sukli_id` int(11) NOT NULL,
+  `sukli_name` text NOT NULL,
+  `sukli_amount` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `sukli`
+--
+
+INSERT INTO `sukli` (`sukli_id`, `sukli_name`, `sukli_amount`) VALUES
+(1, 'Single', 6000),
+(2, 'Multiple', 3000);
 
 -- --------------------------------------------------------
 
@@ -1171,6 +1169,12 @@ ALTER TABLE `questions`
   ADD PRIMARY KEY (`question_id`);
 
 --
+-- Indexes for table `sukli`
+--
+ALTER TABLE `sukli`
+  ADD PRIMARY KEY (`sukli_id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -1184,85 +1188,85 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `activity_logs`
 --
 ALTER TABLE `activity_logs`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=187;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=196;
 
 --
 -- AUTO_INCREMENT for table `answers`
 --
 ALTER TABLE `answers`
-  MODIFY `questionnaire_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `questionnaire_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `applicants_child`
 --
 ALTER TABLE `applicants_child`
-  MODIFY `child_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `child_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `applicants_personal`
 --
 ALTER TABLE `applicants_personal`
-  MODIFY `applicant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `applicant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `applicants_reference`
 --
 ALTER TABLE `applicants_reference`
-  MODIFY `reference_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `reference_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `applicants_relative`
 --
 ALTER TABLE `applicants_relative`
-  MODIFY `relative_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `relative_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `applicants_spouse`
 --
 ALTER TABLE `applicants_spouse`
-  MODIFY `spouse_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `spouse_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `applicants_work`
 --
 ALTER TABLE `applicants_work`
-  MODIFY `work_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `work_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `archive_child`
 --
 ALTER TABLE `archive_child`
-  MODIFY `ar_child_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ar_child_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `archive_personal`
 --
 ALTER TABLE `archive_personal`
-  MODIFY `ar_personal_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ar_personal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `archive_reference`
 --
 ALTER TABLE `archive_reference`
-  MODIFY `ar_reference_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ar_reference_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `archive_relative`
 --
 ALTER TABLE `archive_relative`
-  MODIFY `ar_relative_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ar_relative_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `archive_spouse`
 --
 ALTER TABLE `archive_spouse`
-  MODIFY `ar_spouse_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ar_spouse_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `archive_work`
 --
 ALTER TABLE `archive_work`
-  MODIFY `ar_work_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ar_work_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `clients`
@@ -1298,7 +1302,7 @@ ALTER TABLE `gov_issued_id`
 -- AUTO_INCREMENT for table `loan_applications`
 --
 ALTER TABLE `loan_applications`
-  MODIFY `loan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `loan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `loan_types`
@@ -1317,6 +1321,12 @@ ALTER TABLE `payments`
 --
 ALTER TABLE `questions`
   MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+
+--
+-- AUTO_INCREMENT for table `sukli`
+--
+ALTER TABLE `sukli`
+  MODIFY `sukli_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
