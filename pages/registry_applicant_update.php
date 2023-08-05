@@ -650,8 +650,8 @@ if($_SESSION['user_id']){
                                                                                 <!-- separator -->
                                                                                 <div class="col-lg-12">
                                                                                     <hr>
-                                                                                </div><button type="button" name="next"
-                                                                                    class="next btn btn-primary pull-right">
+                                                                                </div><button type="button" name="next" id="first_next"
+                                                                                    class=" btn btn-primary pull-right">
                                                                                     Next <i
                                                                                         class="fa fa-arrow-right"></i></button>
                                                                             </fieldset>
@@ -1404,6 +1404,7 @@ if($_SESSION['user_id']){
     <!-- Custom Theme JavaScript -->
     <script src="../js/startmin.js"></script>
     <script>
+        showSpouse($('#m_status').val());
     function showSpouse(val) {
         // var x = document.getElementById("div_spouse").value;
         if (val == "Married") {
