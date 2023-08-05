@@ -15,11 +15,11 @@ class Loan extends DbCon {
     public $recLoanAmount;
     public $notarialFee;
     public $checkIfExistInLoanApplicaiton;
-
+    public $monthlyLoanAmortization;
 
     public function __construct(String $id){
         //get emp status, income sources, monthly net salary
-        $sql = "SELECT e_status, other_source, monthly_salary FROM applicants_work WHERE applicant_code= ?";
+        $sql = "SELECT e_status, other_source, monthly_salary, loan FROM applicants_work WHERE applicant_code= ?";
         $stmt = $this->connect()->prepare($sql);
         $stmt->execute([$id]);
         $result = $stmt->fetch();
@@ -42,6 +42,13 @@ class Loan extends DbCon {
         ($this->incomeEarning == 'Single') ?  $this->clientSukli = $this->sukli('single') : $this->clientSukli = $this->sukli('multiple');
 
         $this->netLoanPerMonth = $this->monthlyNetSal - $this->clientSukli;
+            
+        $this->tempExp = $result['loan']??null;
+
+        $this->tempExp = explode('-', $this->tempExp);
+
+        $this->monthlyLoanAmortization = $this->tempExp[2]??0;
+
 
         $this->getSemiMonthly();
         $this->getBorrowingCount();
@@ -137,7 +144,7 @@ class Loan extends DbCon {
     }
 
     public function sukli($sukli){
-        $sql = "SELECT amount FROM sukli WHERE `name` = ?";
+        $sql = "SELECT sukli_amount FROM sukli WHERE sukli_name = ?";
         $stmt = $this->connect()->prepare($sql);
         $stmt->execute([$sukli]);
         $result = $stmt->fetchColumn();

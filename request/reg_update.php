@@ -21,6 +21,7 @@ require_once('../controller/reg_app.php');
                 update($applicant);
        }
 
+       
        function update($applicant){
 
         $tor = (($_POST['tor'] == "Others") ? $_POST['tor_spec'] : $_POST['tor']);
@@ -47,35 +48,86 @@ require_once('../controller/reg_app.php');
                 $spouse_address = (($_POST['spouse_province']??null).', '.($_POST['spouse_city']??null).', '.($_POST['spouse_brgy']??null));
                 
                 $loan = $_POST['loan'];
+                $loan_spec = $_POST['loan_spec']??null;
                 $tempLoan = "";
-                if($loan == "Salary"){
-                        $tempLoan = $loan." Loan";
-                }else if($loan == "Personal"){
-                        $tempLoan = $loan." Loan";
-                }else if($loan == "Calamity"){
-                        $tempLoan = $loan." Loan";
-                }else if($loan == "Maternity"){
-                        $tempLoan = $loan." Loan";
-                }else if($loan == "Paternity"){
-                        $tempLoan = $loan." Loan";
-                }else if($loan == "Business"){
-                        $tempLoan = $loan." Loan";
-                }else if($loan == "Application/Gadget"){
-                        $tempLoan = $loan." Loan";
-                }else if($loan == "Vehicle"){
-                        $tempLoan = $loan." Loan";
-                }else if($loan == "Home"){
-                        $tempLoan = $loan." Loan";
-                }else if($loan == "Travel"){
-                        $tempLoan = $loan." Loan";
-                }else if($loan == "Credit"){
-                        $tempLoan = $loan." Card";
-                }else if($loan == "OFW"){
-                        $tempLoan = $loan." Loan";
+                $tempBusiness= "";
+                if($loan_spec == "Salary"){
+                        $tempLoan = $loan_spec." Loan";
+                }else if($loan_spec == "Personal"){
+                        $tempLoan = $loan_spec." Loan";
+                }else if($loan_spec == "Calamity"){
+                        $tempLoan = $loan_spec." Loan";
+                }else if($loan_spec == "Maternity"){
+                        $tempLoan = $loan_spec." Loan";
+                }else if($loan_spec == "Paternity"){
+                        $tempLoan = $loan_spec." Loan";
+                }else if($loan_spec == "Business"){
+                        $tempLoan = $loan_spec." Loan";
+                }else if($loan_spec == "Application/Gadget"){
+                        $tempLoan = $loan_spec." Loan";
+                }else if($loan_spec == "Vehicle"){
+                        $tempLoan = $loan_spec." Loan";
+                }else if($loan_spec == "Home"){
+                        $tempLoan = $loan_spec." Loan";
+                }else if($loan_spec == "Travel"){
+                        $tempLoan = $loan_spec." Loan";
+                }else if($loan_spec == "Credit"){
+                        $tempLoan = $loan_spec." Card";
+                }else if($loan_spec == "OFW"){
+                        $tempLoan = $loan_spec." Loan";
                 }else{
-                        $tempLoan = $loan;
+                        $tempLoan = $loan_spec;
                 }
 
+                if($_POST['business'] == "Firms"){
+                        $tempBusiness = $_POST['business']." which offer professional services, such as accounting, legal, engineering, business consulting, customer service and architecture";
+                }else if($_POST['business'] == "Transportation"){
+                        $tempBusiness = $_POST['business']." companies, such as airlines, shipping, land tours and forwarder";
+                }else if($_POST['business'] == "Entertainment,"){
+                        $tempBusiness = $_POST['business']." such as artists and movie houses";
+                }else if($_POST['business'] == "Hotels"){
+                        $tempBusiness = $_POST['business']." & Restaurants";
+                }else if($_POST['business'] == "Apartments"){
+                        $tempBusiness = $_POST['business'];
+                }else if($_POST['business'] == "Banks,"){
+                        $tempBusiness = $_POST['business']." lending companies and other financial institutions";
+                }else if($_POST['business'] == "Telecommunication"){
+                        $tempBusiness = $_POST['business']." companies";
+                }else if($_POST['business'] == "Event"){
+                        $tempBusiness = $_POST['business']." planners";
+                }else if($_POST['business'] == "Security"){
+                        $tempBusiness = $_POST['business']." and janitorial services";
+                }else if($_POST['business'] == "Media,"){
+                        $tempBusiness = $_POST['business']." blogging and advertising";
+                }else if($_POST['business'] == "Website"){
+                        $tempBusiness = $_POST['business']." developers";
+                }else if($_POST['business'] == "Graphic"){
+                        $tempBusiness = $_POST['business']." designers";
+                }else if($_POST['business'] == "Business"){
+                        $tempBusiness = $_POST['business']." process outsourcing (BPO) companies";
+                }else if($_POST['business'] == "Department"){
+                        $tempBusiness = $_POST['business']." Store";
+                }else if($_POST['business'] == "Distributor"){
+                        $tempBusiness = $_POST['business'];
+                }else if($_POST['business'] == "Real"){
+                        $tempBusiness = $_POST['business']." Estate Dealer";
+                }else if($_POST['business'] == "Car"){
+                        $tempBusiness = $_POST['business']." Dealer";
+                }else if($_POST['business'] == "Grocery"){
+                        $tempBusiness = $_POST['business']." Store";
+                }else if($_POST['business'] == "Car"){
+                        $tempBusiness = $_POST['business']." Manufacturer";
+                }else if($_POST['business'] == "Wine"){
+                        $tempBusiness = $_POST['business']." and Softdrinks Producer";
+                }else if($_POST['business'] == "Electronic"){
+                        $tempBusiness = $_POST['business']." Parts Manufacturer";
+                }else if($_POST['business'] == "Producer"){
+                        $tempBusiness = $_POST['business']." of drugs and other medical products";
+                }else if($_POST['business'] == "Agriculture"){
+                        $tempBusiness = $_POST['business'];     
+                }else if($_POST['business'] == "Mining"){
+                        $tempBusiness = $_POST['business']." Company";
+                }
                 
                 //personal tab 1
                 $applicant->personal_update($_POST['id'], $_POST['fname']??null,$_POST['mname']??null,$_POST['lname']??null,$_POST['suffix']??null,$_POST['nname']??null,$_POST['gender']??null,
@@ -87,8 +139,8 @@ require_once('../controller/reg_app.php');
                 $applicant->spouse_update($_POST['id'], $_POST['spouse_name']??null,$_POST['spouse_contact']??null,$_POST['spouse_dob']??null ,$spouse_pob, $spouse_address,
                 $_POST['spouse_occupation']??null,$_POST['spouse_company']??null);
                 //work tab 3
-                $applicant->work_update($_POST['id'], $_POST['agency']??null,$_POST['sector']." Sector"??null,$_POST['business']??null ,$_POST['ca_company']??null,$_POST['location']??null,$_POST['supervisor']??null,
-                $_POST['hr_number']??null,$_POST['date_hired']??null,$_POST['e_status']??null,$_POST['m_salary']??null,$_POST['bank']??null,$_POST['t_card']??null,(($tempLoan != "None") ? $tempLoan.'-'.$_POST['loan_spec'] : $tempLoan)??null,$_POST['ms_salary']??null,
+                $applicant->work_update($_POST['id'], $_POST['agency']??null,$_POST['sector']." Sector"??null, $tempBusiness ,$_POST['ca_company']??null,$_POST['location']??null,$_POST['supervisor']??null,
+                $_POST['hr_number']??null,$_POST['date_hired']??null,$_POST['e_status']??null,$_POST['m_salary']??null,$_POST['bank']??null,$_POST['t_card']??null,(($loan != "None") ? $loan.'-'.$tempLoan.'-'.$_POST['sma']: $loan) ,$_POST['ms_salary']??null,
                 $_POST['s_period']??null,$_POST['os_income']??null,$_POST['s_specify']??null);
                 // //work tab 4
                 $applicant->reference_update($_POST['id'], $tempPurp, $sources, $_POST['facebook']);

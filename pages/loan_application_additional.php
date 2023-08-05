@@ -76,7 +76,7 @@ if(!isset($_SESSION['user_id'])){
                                                 <th>CONTACT NO.</th>
                                                 <th>ADDRESS</th>
                                                 <th>BORROWING HISTORY</th>
-                                                <th>REMAINING SUKLI</th>
+                                                <!-- <th>REMAINING SUKLI</th> -->
                                                 <th>ACTIONS</th>
                                             </tr>
                                         </thead>
@@ -86,9 +86,9 @@ if(!isset($_SESSION['user_id'])){
                                                     //$sql = "SELECT * FROM clients left join loan_applications on clients.client_id=loan_applications.client_id left join employer on employer.client_id=clients.client_id where loan_applications.paid=0 group by clients.client_id order by clients.last_name asc ";
                                                     //$res = mysqli_query($con,$sql);
                                                     $sql = "SELECT * FROM applicants_personal 
+                                                    INNER JOIN applicants_work on applicants_work.applicant_code=applicants_personal.applicant_code 
                                                     LEFT JOIN loan_applications 
                                                     ON applicants_personal.applicant_code=loan_applications.client_id 
-                                                    LEFT JOIN applicants_work on applicants_work.applicant_code=applicants_personal.applicant_code 
                                                     WHERE loan_applications.paid=0 
                                                     GROUP BY applicants_personal.applicant_code 
                                                     ORDER BY applicants_personal.lastname ASC ";
@@ -100,10 +100,10 @@ if(!isset($_SESSION['user_id'])){
                                                                 
                                                                 $cid = $row['client_id'];
                                                                 $loan = new Loan($cid);
-                                                                $nsal = $row['monthly_salary'] - $loan->clientSukli;
-                                                                $remsukli = $nsal - $loan->monthlyAmortSum;
+                                                                // $nsal = $row['monthly_salary'] - $loan->clientSukli;
+                                                                // $remsukli = $nsal - $loan->monthlyAmortSum;
                                                                 $name = $row['lastname'].', '.$row['firstname'].' '.$row['suffix'].' '.$row['middlename'].' '.$row['suffix'];
-                                                                if($remsukli > 0){
+                                                                // if($remsukli > 0){
                                                                     ?>
                                             <tr class="odd gradeX">
                                                 <td><?php echo $row['contract_no']?></td>
@@ -112,8 +112,8 @@ if(!isset($_SESSION['user_id'])){
                                                 <td><?php echo $row['brgy1'].', '.$row['city1']. ', '.$row['province1'];?>
                                                 </td>
                                                 <td class="text-right"><?php echo $loan->borrowingHistCount;?></td>
-                                                <td class="text-center">₱
-                                                    <?php echo number_format(floatval($remsukli),2)?></td>
+                                                <!-- <td class="text-center">₱
+                                                    <?php echo number_format(floatval($remsukli),2)?></td> -->
 
                                                 <td style="text-align:center">
                                                     <?php
@@ -176,15 +176,6 @@ if(!isset($_SESSION['user_id'])){
                                                                             <form
                                                                                 action="loan_application_additional1.php"
                                                                                 method="POST">
-                                                                                <!-- <label>Loan Type</label> -->
-                                                                                <!-- <select class="form-control" name="loan_type" required style="width:80%;">
-                                                                                                                        <option value="" disabled selected=1>SELECT</option>
-                                                                                                                        <option value="NEW">New</option>
-                                                                                                                        <option value="RENEWAL">Renewal</option>
-                                                                                                                        <option value="RELOAN">Reloan</option>
-                                                                                                                        <option value="ADDITIONAL">Additional</option>
-                                                                                                                    </select> -->
-
                                                                                 <input type="text" name="max_add"
                                                                                     value="<?php echo $remsukli?>"
                                                                                     hidden>
@@ -229,7 +220,7 @@ if(!isset($_SESSION['user_id'])){
                                                 </td>
                                             </tr>
                                             <?php
-                                                                }
+                                                                //}
                                                                 ?>
 
                                             <?php

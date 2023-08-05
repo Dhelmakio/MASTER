@@ -54,7 +54,7 @@ if($_SESSION['user_id']){
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Applicant Information Registry</h1>
+                        <h1 class="page-header">Notarial Fee</h1>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>

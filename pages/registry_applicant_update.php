@@ -1045,7 +1045,7 @@ if($_SESSION['user_id']){
                                                                                         </label>
                                                                                         <select
                                                                                             class="form-control input-set-3"
-                                                                                            required name="loan_spec"
+                                                                                            required name="loan_spec" <?php echo ($exploan[0] == "Yes") ?  '' : 'disabled' ?>
                                                                                             id="loan_spec">
                                                                                             <option value="" selected
                                                                                                 disabled>
@@ -1073,29 +1073,7 @@ if($_SESSION['user_id']){
                                                                                                 maxlength="10"
                                                                                                 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                                                                                                 placeholder="₱" <?php 
-                                                                                                    if($exploan[0] == "Yes" && $exploan[1] == "Salary Loan"){
-                                                                                                        echo 'value="'.$exploan[2].'"';
-                                                                                                    }else if($exploan[1] == "Personal Loan"){
-                                                                                                        echo 'value="'.$exploan[2].'"';
-                                                                                                    }else if($exploan[1] == "Calamity Loan"){
-                                                                                                        echo 'value="'.$exploan[2].'"';
-                                                                                                    }else if($exploan[1] == "Maternity Loan"){
-                                                                                                        echo 'value="'.$exploan[2].'"';
-                                                                                                    }else if($exploan[1] == "Paternity Loan"){
-                                                                                                        echo 'value="'.$exploan[2].'"';
-                                                                                                    }else if($exploan[0] == "Yes" && $exploan[1] == "Business Loan"){
-                                                                                                        echo 'value="'.$exploan[2].'"';
-                                                                                                    }else if($exploan[1] == "Appliance/Gadget Loan"){
-                                                                                                        echo 'value="'.$exploan[2].'"';
-                                                                                                    }else if($exploan[1] == "Vehicle Loan"){
-                                                                                                        echo 'value="'.$exploan[2].'"';
-                                                                                                    }else if($exploan[1] == "Home Loan"){
-                                                                                                        echo 'value="'.$exploan[2].'"';
-                                                                                                    }else if($exploan[1] == "Travel Loan"){
-                                                                                                        echo 'value="'.$exploan[2].'"';
-                                                                                                    }else if($exploan[1] == "Credit Card"){
-                                                                                                        echo 'value="'.$exploan[2].'"';
-                                                                                                    }else if($exploan[1] == "OFW Loan"){
+                                                                                                    if($exploan[0] == "Yes"){
                                                                                                         echo 'value="'.$exploan[2].'"';
                                                                                                     }else{
                                                                                                         echo "disabled";

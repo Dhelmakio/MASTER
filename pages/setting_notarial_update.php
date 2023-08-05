@@ -95,21 +95,22 @@ if($_SESSION['user_id']){
                                                                     ?>
                                                                     <div class="col-lg-12">
                                                                         <form id="msform" method="POST"
-                                                                            action="../request/reg_notarial.php">
+                                                                            action="../request/reg_settings.php">
                                                                             <!-- fieldsets -->
                                                                             <div class="col-lg-12">
                                                                                 <div class="form-group">
-                                                                                    <label>Notarial Fee</label>
+                                                                                    <label>Notarial Fee (₱)</label>
                                                                                     <input
                                                                                         class="form-control text-right"
                                                                                         name="notarial"
+                                                                                        onkeypress="return onlyNumberKey(event)"
+                                                                                        maxlength="11"
                                                                                         value="<?php echo $row['notarial_fee'] ?>">
                                                                                 </div>
                                                                             </div>
                                                                             <a href="setting_notarial.php"
                                                                                 id="submit_add" class="btn-default btn"
                                                                                 style="margin-left: 10px;">
-                                                                                <i class="fa fa-arrow-left"></i>
                                                                                 Cancel</a>
 
                                                                             <button type="submit" name="submit_notarial"
@@ -169,38 +170,46 @@ if($_SESSION['user_id']){
     <script src="../js/multi-step.js"></script>
     <script src="../css/toast/beautyToast.js"></script>
     <script>
-    function submit() {
-        $.ajax({
-            type: 'POST',
-            url: '../request/reg_update.php',
-            data: $('form').serialize(),
-            dataType: 'json',
-            success: function(response) {
+    function onlyNumberKey(evt) {
 
-                setTimeout(() => {
-
-                    beautyToast.success({
-                        title: '',
-                        message: response.message,
-                        darkTheme: false,
-                        iconColor: 'green',
-                        iconWidth: 24,
-                        iconHeight: 24,
-                        animationTime: 100,
-                    });
-
-                    setTimeout(() => {
-                        window.location.replace(
-                            `loan_application_1.php?id=${response.code}`);
-                    }, 2500);
-                }, 2000);
-            },
-            error: function(xhr, status, error) {
-                alert(xhr.responseText);
-            }
-        });
+        // Only ASCII character in that range allowed
+        var ASCIICode = (evt.which) ? evt.which : evt.keyCode
+        if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+            return false;
+        return true;
     }
-    </script>
+    // function submit() {
+    //     $.ajax({
+    //         type: 'POST',
+    //         url: '../request/reg_update.php',
+    //         data: $('form').serialize(),
+    //         dataType: 'json',
+    //         success: function(response) {
+
+    //             setTimeout(() => {
+
+    //                 beautyToast.success({
+    //                     title: '',
+    //                     message: response.message,
+    //                     darkTheme: false,
+    //                     iconColor: 'green',
+    //                     iconWidth: 24,
+    //                     iconHeight: 24,
+    //                     animationTime: 100,
+    //                 });
+
+    //                 setTimeout(() => {
+    //                     window.location.replace(
+    //                         `loan_application_1.php?id=${response.code}`);
+    //                 }, 2500);
+    //             }, 2000);
+    //         },
+    //         error: function(xhr, status, error) {
+    //             alert(xhr.responseText);
+    //         }
+    //     });
+    // }
+    </script> 
 
 </body>
 

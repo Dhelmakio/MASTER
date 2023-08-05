@@ -204,10 +204,10 @@ if(!isset($_SESSION['user_id'])){
                                                                                     <td class="text-center">
                                                                                         <?php
                                                                                         if($rows['loan_status'] == 1){
-                                                                                            echo '<button class="btn btn-success"> Active <i class="fa fa-check"></i>
+                                                                                            echo '<button class="btn btn-warning"> Paid <i class="fa fa-thumbs-o-up"></i>
                                                                                             </button>';
                                                                                         }else{
-                                                                                            echo '<button class="btn btn-warning"> Paid <i class="fa fa-thumbs-o-up"></i>
+                                                                                            echo '<button class="btn btn-success"> Active <i class="fa fa-check"></i>
                                                                                             </button>';
                                                                                         }
                                                                                     ?>
