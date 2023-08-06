@@ -59,16 +59,30 @@ if(!isset($_SESSION['user_id'])){
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
+                <div class="row">
+                    <form action="" method="GET">
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                <input id="search_data" type="text" class="form-control" name="search" required
+                                    autocomplete="off" value="<?php if(isset($_GET['search'])){echo $_GET['search'];}?>"
+                                    placeholder="Search">
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
                 <!-- /.row -->
                 <div class="row">
-
                     <div class="col-lg-12">
                         <div class="panel panel-default">
                             <!-- /.panel-heading -->
                             <div class="panel-body">
                                 <div class="table-responsive">
-                                    <table class="table table-striped table-bordered table-hover"
-                                        id="dataTables-example">
+                                    <table class="table table-striped table-bordered table-hover">
                                         <thead>
                                             <tr>
                                                 <th>APPLICANT CODE</th>
@@ -80,12 +94,15 @@ if(!isset($_SESSION['user_id'])){
                                         </thead>
                                         <tbody>
                                             <?php
+                                            if(isset($_GET['search'])){
+                                                $search = $_GET['search'];
                                                     //$sql ="SELECT c.*,l.remarks FROM clients c left join loan_applications l on l.client_id=c.client_id where  (l.remarks is null or l.remarks='paid') and (l.approval!=0 or l.approval is null) group by c.client_id ORDER BY last_name ASC";
                                                     //$sql = "SELECT * FROM clients left join loan_applications on clients.client_id=loan_applications.client_id where loan_applications.paid=1 group by clients.client_id order by clients.last_name asc ";
                                                     $sql = "SELECT * FROM applicants_personal 
                                                     LEFT JOIN loan_applications 
                                                     ON applicants_personal.applicant_code=loan_applications.client_id
-                                                    WHERE loan_applications.paid = 1
+                                                    WHERE CONCAT(applicants_personal.firstname,applicants_personal.lastname,applicants_personal.middlename)
+                                                    LIKE '%$search%' AND loan_applications.paid = 1
                                                     ORDER BY applicants_personal.lastname ASC ";
                                                     $res = mysqli_query($con,$sql);
                                                         if(mysqli_num_rows($res) > 0){
@@ -284,18 +301,18 @@ if(!isset($_SESSION['user_id'])){
                                                             <!-- /.modal-dialog -->
                                                         </div>
                                                         <!-- /.modal -->
+                                                    </div>
                                                 </td>
                                             </tr>
                                             <?php
                                                 }
                                             }
-                                            ?>
+                                        }
+                                        ?>
                                         </tbody>
                                     </table>
                                 </div>
-
                                 <!-- /.table-responsive -->
-
                             </div>
                             <!-- /.panel-body -->
                         </div>
@@ -340,6 +357,10 @@ if(!isset($_SESSION['user_id'])){
         selector: "[data-toggle=tooltip]",
         container: "body"
     })
+
+    window.onload = function() {
+        document.getElementById('search_data').value = '';
+    }
     </script>
 
 </body>

@@ -59,16 +59,30 @@ if(!isset($_SESSION['user_id'])){
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
+                <div class="row">
+                    <form action="" method="GET">
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                <input id="search_data" type="text" class="form-control" name="search" required
+                                    autocomplete="off" value="<?php if(isset($_GET['search'])){echo $_GET['search'];}?>"
+                                    placeholder="Search">
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
                 <!-- /.row -->
                 <div class="row">
-
                     <div class="col-lg-12">
                         <div class="panel panel-default">
                             <!-- /.panel-heading -->
                             <div class="panel-body">
                                 <div class="table-responsive">
-                                    <table class="table table-striped table-bordered table-hover"
-                                        id="dataTables-example">
+                                    <table class="table table-striped table-bordered table-hover">
                                         <thead>
                                             <tr>
                                                 <th>CONTRACT NO.</th>
@@ -85,11 +99,14 @@ if(!isset($_SESSION['user_id'])){
                                                     //$sql ="SELECT c.*,l.remarks FROM clients c left join loan_applications l on l.client_id=c.client_id where  (l.remarks is null or l.remarks='paid') and (l.approval!=0 or l.approval is null) group by c.client_id ORDER BY last_name ASC";
                                                     //$sql = "SELECT * FROM clients left join loan_applications on clients.client_id=loan_applications.client_id left join employer on employer.client_id=clients.client_id where loan_applications.paid=0 group by clients.client_id order by clients.last_name asc ";
                                                     //$res = mysqli_query($con,$sql);
+                                                if(isset($_GET['search'])){
+                                                    $search = $_GET['search'];
                                                     $sql = "SELECT * FROM applicants_personal 
                                                     INNER JOIN applicants_work on applicants_work.applicant_code=applicants_personal.applicant_code 
                                                     LEFT JOIN loan_applications 
                                                     ON applicants_personal.applicant_code=loan_applications.client_id 
-                                                    WHERE loan_applications.paid=0 
+                                                    WHERE CONCAT(applicants_personal.firstname,applicants_personal.lastname,applicants_personal.middlename)
+                                                    LIKE '%$search%' AND loan_applications.paid=0 
                                                     GROUP BY applicants_personal.applicant_code 
                                                     ORDER BY applicants_personal.lastname ASC ";
                                                     $res = mysqli_query($con,$sql);
@@ -201,38 +218,26 @@ if(!isset($_SESSION['user_id'])){
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <!-- <a href="loan_application_1.php?id=<?php echo $cid;?>">
-                                                                                                    <button type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Apply">
-                                                                                                        <i class="fa fa-long-arrow-right" aria-hidden="true"></i> 
-                                                                                                    </button>
-                                                                                                </a> -->
                                                             </div>
                                                             <!-- /.modal-content -->
                                                         </div>
-                                                        <!-- /.modal-dialog -->
-
-                                                        <!-- /.modal -->
-
                                                         <?php
-                                                                                }
-                                                                                ?>
+                                                            }
+                                                    ?>
                                                     </div>
                                                 </td>
                                             </tr>
                                             <?php
-                                                                //}
-                                                                ?>
-
-                                            <?php
-                                                            }
-                                                        }
-                                                        ?>
+                                                    }
+                                                }else{
+                                                    echo '<script>alert("No data found.")</script>';
+                                                }
+                                            }
+                                            ?>
                                         </tbody>
                                     </table>
                                 </div>
-
                                 <!-- /.table-responsive -->
-
                             </div>
                             <!-- /.panel-body -->
                         </div>
@@ -277,6 +282,10 @@ if(!isset($_SESSION['user_id'])){
         selector: "[data-toggle=tooltip]",
         container: "body"
     })
+
+    window.onload = function() {
+        document.getElementById('search_data').value = '';
+    }
     </script>
 
 </body>

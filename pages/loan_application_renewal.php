@@ -61,21 +61,28 @@ if(!isset($_SESSION['user_id'])){
                 </div>
                 <!-- /.row -->
                 <div class="row">
-
+                    <form action="" method="GET">
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                <input id="search_data" type="text" class="form-control" name="search" required
+                                    autocomplete="off" value="<?php if(isset($_GET['search'])){echo $_GET['search'];}?>"
+                                    placeholder="Search">
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="row">
                     <div class="col-lg-12">
                         <div class="panel panel-default">
-                            <!-- <div class="panel-heading" align="right">
-                                    <a href="reg_applicant_1.php">
-                                        <button type="button" class="btn btn-success">
-                                            <i class="fa fa-fw" aria-hidden="true" title="Copy to use user-plus">&#xf234</i> Add Applicant
-                                        </button>
-                                    </a>
-                                </div> -->
                             <!-- /.panel-heading -->
                             <div class="panel-body">
                                 <div class="table-responsive">
-                                    <table class="table table-striped table-bordered table-hover"
-                                        id="dataTables-example">
+                                    <table class="table table-striped table-bordered table-hover">
                                         <thead>
                                             <tr>
                                                 <th>CONTRACT NO.</th>
@@ -86,26 +93,30 @@ if(!isset($_SESSION['user_id'])){
                                                 <th class="text-center">ACTIONS</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="data_sql">
                                             <?php
+                                            if(isset($_GET['search'])){
+                                                $search = $_GET['search'];
                                                 $sql = "SELECT * FROM applicants_personal
                                                 LEFT JOIN loan_applications
                                                 ON applicants_personal.applicant_code = loan_applications.client_id
+                                                WHERE CONCAT(applicants_personal.firstname,applicants_personal.lastname,applicants_personal.middlename)
+                                                LIKE '%$search%'
                                                 ORDER BY loan_applications.application_date ASC";
                                                 $res = mysqli_query($con,$sql);
-                                                    if(mysqli_num_rows($res) > 0){
-                                                        while($row = mysqli_fetch_assoc($res)) {
-                                                        // $name = $row['last_name'].', '.$row['first_name'].' '.$row['middle_name'];
-                                                        // $suffix = $row['suffix'];
-                                                        $cid = $row['client_id'];
-                                                        $loan = new Loan(strval($cid));
-                                                        $name = $row['lastname'].', '.$row['firstname'].' '.$row['middlename'] .' '.$row['suffix'];
-                                                        $cont_no = $row['contract_no'];
-                                                ?>
+                                                if(mysqli_num_rows($res) > 0){
+                                                    while($row = mysqli_fetch_assoc($res)) {
+                                                    // $name = $row['last_name'].', '.$row['first_name'].' '.$row['middle_name'];
+                                                    // $suffix = $row['suffix'];
+                                                    $cid = $row['client_id'];
+                                                    $loan = new Loan(strval($cid));
+                                                    $name = $row['lastname'].', '.$row['firstname'].' '.$row['middlename'] .' '.$row['suffix'];
+                                                    $cont_no = $row['contract_no'];
+                                        ?>
                                             <tr class="odd gradeX">
                                                 <td><?php echo $cont_no;?></td>
                                                 <td><?php echo $name;?></td>
-                                                
+
                                                 <!--<td><?php //echo $row['contact1'];?></td> -->
                                                 <td><?php echo $row['brgy1'].', '.$row['city1'] .', '.$row['province1'];?>
                                                 </td>
@@ -280,9 +291,6 @@ if(!isset($_SESSION['user_id'])){
                                                                             </form>
                                                                             <!-- </div> -->
                                                                         </div>
-                                                                        <div class="col-lg-6">
-
-                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -291,16 +299,18 @@ if(!isset($_SESSION['user_id'])){
                                                         <!-- /.modal-dialog -->
                                                     </div>
                                                 </td>
+                                            </tr>
                                         </tbody>
                                         <?php  
                                             }
+                                        }else{
+                                            echo '<script>alert("No data found.")</script>';
                                         }
+                                    }
                                     ?>
                                     </table>
                                 </div>
-
                                 <!-- /.table-responsive -->
-
                             </div>
                             <!-- /.panel-body -->
                         </div>
@@ -345,6 +355,10 @@ if(!isset($_SESSION['user_id'])){
         selector: "[data-toggle=tooltip]",
         container: "body"
     })
+
+    window.onload = function() {
+        document.getElementById('search_data').value = '';
+    }
     </script>
 
 </body>
