@@ -65,7 +65,7 @@ if(!isset($_SESSION['user_id'])){
                             <div class="form-group">
                                 <input id="search_data" type="text" class="form-control" name="search" required
                                     autocomplete="off" value="<?php if(isset($_GET['search'])){echo $_GET['search'];}?>"
-                                    placeholder="Search">
+                                    placeholder="Search Name">
                             </div>
                         </div>
                         <div class="col-lg-3">
