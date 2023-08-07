@@ -75,6 +75,7 @@ if(!isset($_SESSION['user_id'])){
                                                 <th>NAME</th>
                                                 <th>LOAN DETAILS</th>
                                                 <th class="text-center">CI REMARKS</th>
+                                                <th class="text-center">LOAN REMARKS</th>
                                                 <th class="text-center">ACTIONS</th>
                                             </tr>
                                         </thead>
@@ -102,34 +103,46 @@ if(!isset($_SESSION['user_id'])){
                                                     <?php 
                                                     if($row['ci_status']==1){
                                                         $cis = 1;
-                                                            echo '<button type="button" class="btn btn-success btn-circle"><i class="fa fa-check"></i></button>';}
+                                                            echo '<button type="button" class="btn btn-primary btn-circle"><i class="fa fa-check"></i></button>';}
                                                         else{
                                                         $cis = 0;
                                                             echo '<button type="button" class="btn btn-danger btn-circle"><i class="fa fa-times"></i></button>';
                                                         }
                                                     ?>
                                                 </td>
+                                                <td style="text-align:center">
+                                                    <?php 
+                                                    if($row['remarks']== "approved"){
+                                                        echo '<button type="button" class="btn btn-primary"> Approved</button>';
+                                                    }else if($row['remarks']== "decline"){
+                                                        echo '<button type="button" class="btn btn-danger"> Declined</button>';
+                                                    }else if($row['remarks']== "hold"){
+                                                        echo '<button type="button" class="btn btn-warning"> On Hold</button>';
+                                                    }else{
+                                                        echo '<span class="btn btn-default"> None </span>';
+                                                    }                                    
+                                                    ?>
+                                                </td>
                                                 <td class="text-center">
-                                                    <button type="button"
-                                                        class="btn btn-warning btn-sml"
-                                                        data-target="#modal-<?= $row['ci_status'] ?>"
+                                                    <button type="button" class="btn btn-warning btn-sml"
+                                                        data-target="#hold-<?= $row['contract_no'] ?>"
                                                         data-toggle="modal">
                                                         Hold <i class="fa fa-pause" aria-hidden="true"
                                                             title="Copy to use save"></i></button>
                                                     <button type="button" class="btn btn-danger btn-sml"
-                                                        data-target="#modal-<?= $row['client_id'] ?>"
+                                                        data-target="#decline-<?= $row['contract_no'] ?>"
                                                         data-toggle="modal">
                                                         Decline <i class="fa fa-times" aria-hidden="true"
                                                             title="Copy to use save"></i></button>
                                                     <button type="button" class="btn btn-primary btn-sml"
-                                                        data-target="#modal-<?= $row['contract_no'] ?>"
+                                                        data-target="#approve-<?= $row['contract_no'] ?>"
                                                         data-toggle="modal">
                                                         Approve <i class="fa fa-thumbs-up" aria-hidden="true"
                                                             title="Copy to use save"></i></button>
-                                                                    <!--Modals-->
+                                                    <!--Modals-->
                                                     <div class="modal fade text-left"
-                                                        id="modal-<?=$row['contract_no'] ?>" tabindex="-1" role="dialog"
-                                                        aria-labelledby="myModalLabel" aria-hidden="true"
+                                                        id="approve-<?=$row['contract_no'] ?>" tabindex="-1"
+                                                        role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
                                                         data-backdrop="static">
                                                         <div class="modal-dialog modal-md" role="document">
                                                             <div class="modal-content">
@@ -143,29 +156,29 @@ if(!isset($_SESSION['user_id'])){
                                                                         <center>
                                                                             <h5>Approve?</h5>
                                                                         </center>
-
                                                                     </p>
                                                                 </div>
                                                                 <div class="modal-footer" style="padding: 5px;">
-                                                                    <form action="#" method="post">
+                                                                    <form action="../request/reg_remarks.php"
+                                                                        method="post">
                                                                         <button type="button"
                                                                             class="btn btn-default text-small"
                                                                             data-dismiss="modal">Cancel</button>
-                                                                        <a
-                                                                            href="loan_approval_preview.php?con=<?php echo $row['contract_no']?>">
-                                                                            <button type="button"
-                                                                                class="btn btn-primary btn-sml">
-                                                                                Confirm </button>
-                                                                        </a>
+                                                                        <input type="hidden" name="id"
+                                                                            value="<?=$row['contract_no'] ?>">
+                                                                        <button type="submit" name="approve"
+                                                                            class="btn btn-primary btn-sml">
+                                                                            Confirm </button>
                                                                     </form>
                                                                 </div>
                                                             </div>
                                                             <!-- /.modal-content -->
                                                         </div>
                                                     </div>
-                                                    <div class="modal fade text-left" id="modal-<?=$row['client_id'] ?>"
-                                                        tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-                                                        aria-hidden="true" data-backdrop="static">
+                                                    <div class="modal fade text-left"
+                                                        id="decline-<?=$row['contract_no'] ?>" tabindex="-1"
+                                                        role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+                                                        data-backdrop="static">
                                                         <div class="modal-dialog modal-md" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-body">
@@ -178,17 +191,17 @@ if(!isset($_SESSION['user_id'])){
                                                                         <center>
                                                                             <h5>Decline?</h5>
                                                                         </center>
-
                                                                     </p>
                                                                 </div>
                                                                 <div class="modal-footer" style="padding: 5px;">
-                                                                    <form action="#" method="post">
+                                                                    <form action="../request/reg_remarks.php"
+                                                                        method="post">
                                                                         <button type="button"
                                                                             class="btn btn-default text-small"
                                                                             data-dismiss="modal">Cancel</button>
                                                                         <input type="hidden" name="id"
                                                                             value="<?=$row['contract_no'] ?>">
-                                                                        <button type="submit" name=""
+                                                                        <button type="submit" name="decline"
                                                                             class="btn btn-primary text-small">Confirm</button>
                                                                     </form>
                                                                 </div>
@@ -196,9 +209,10 @@ if(!isset($_SESSION['user_id'])){
                                                             <!-- /.modal-content -->
                                                         </div>
                                                     </div>
-                                                    <div class="modal fade text-left" id="modal-<?=$row['ci_status'] ?>"
-                                                        tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-                                                        aria-hidden="true" data-backdrop="static">
+                                                    <div class="modal fade text-left"
+                                                        id="hold-<?=$row['contract_no'] ?>" tabindex="-1" role="dialog"
+                                                        aria-labelledby="myModalLabel" aria-hidden="true"
+                                                        data-backdrop="static">
                                                         <div class="modal-dialog modal-md" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-body">
@@ -211,17 +225,17 @@ if(!isset($_SESSION['user_id'])){
                                                                         <center>
                                                                             <h5>Hold?</h5>
                                                                         </center>
-
                                                                     </p>
                                                                 </div>
                                                                 <div class="modal-footer" style="padding: 5px;">
-                                                                    <form action="#" method="post">
+                                                                    <form action="../request/reg_remarks.php"
+                                                                        method="post">
                                                                         <button type="button"
                                                                             class="btn btn-default text-small"
                                                                             data-dismiss="modal">Cancel</button>
                                                                         <input type="hidden" name="id"
                                                                             value="<?=$row['contract_no'] ?>">
-                                                                        <button type="submit" name=""
+                                                                        <button type="submit" name="hold"
                                                                             class="btn btn-primary text-small">Confirm</button>
                                                                     </form>
                                                                 </div>
