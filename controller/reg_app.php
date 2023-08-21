@@ -34,7 +34,7 @@ class Registry extends DatabaseConnection {
         $esc_loan = $this->connect()->real_escape_string($loan);
         $sql = "INSERT INTO applicants_work
         (applicant_code, employer, sector_type, tob, com_address, a_location, sup_name, hr_number, date_hired, e_status, m_salary,
-        bank_name, atm_card, loan, monthly_salary, s_period, other_source, specify, max_loanable_amt, date_encoded) 
+        bank_name, atm_card, loan, monthly_salary, salary_period, other_source, specify, max_loanable_amt, date_encoded) 
         VALUES
         ('$code', '$employer','$stype','$tob','$caddress','$alocation','$supname','$hrname','$dhired','$estatus','$msalary',
         '$bname','$atmcard','$esc_loan','$monthlysalary','$speriod','$osource','$specify', 0, CURRENT_DATE())";
@@ -150,7 +150,7 @@ class Registry extends DatabaseConnection {
            tob = '$tob', com_address = '$caddress', a_location = '$alocation', sup_name = '$supname', 
            hr_number = '$hrname', date_hired = '$dhired', e_status = '$estatus', m_salary = '$msalary',
            bank_name = '$bname', atm_card = '$atmcard', loan = '$esc_loan', monthly_salary = '$monthlysalary', 
-           s_period = '$speriod', other_source = '$osource', specify = '$specify' WHERE applicant_code = '$code'";
+           salary_period = '$speriod', other_source = '$osource', specify = '$specify' WHERE applicant_code = '$code'";
            return mysqli_query($this->connect(), $sql);
        }
        function reference_update($code, $purpose, $source, $fb){
@@ -246,9 +246,9 @@ class Registry extends DatabaseConnection {
             $result5 = mysqli_query($this->connect(), $query5);
             //work
             $query6 ="INSERT INTO archive_work(work_id, applicant_code, employer, sector_type, tob, com_address, a_location, sup_name, hr_number, date_hired, e_status, m_salary,
-            bank_name, atm_card, loan, monthly_salary, s_period, other_source, specify, max_loanable_amt, date_encoded)
+            bank_name, atm_card, loan, monthly_salary, salary_period, other_source, specify, max_loanable_amt, date_encoded)
             SELECT work_id, applicant_code, employer, sector_type, tob, com_address, a_location, sup_name, hr_number, date_hired, e_status, m_salary,
-            bank_name, atm_card, loan, monthly_salary, s_period, other_source, specify, max_loanable_amt, date_encoded
+            bank_name, atm_card, loan, monthly_salary, salary_period, other_source, specify, max_loanable_amt, date_encoded
             FROM applicants_work WHERE applicant_code = '$id'";
             $result6 = mysqli_query($this->connect(), $query6);
             if($result1 && $result2 && $result3 && $result4 && $result5 && $result6 && $action == "archive"){
@@ -282,9 +282,9 @@ class Registry extends DatabaseConnection {
                     $result2 = mysqli_query($this->connect(), $query2);
                     //work
                     $query3 ="INSERT INTO archive_work(work_id, applicant_code, employer, sector_type, tob, com_address, a_location, sup_name, hr_number, date_hired, e_status, m_salary,
-                    bank_name, atm_card, loan, monthly_salary, s_period, other_source, specify, max_loanable_amt, date_encoded)
+                    bank_name, atm_card, loan, monthly_salary, salary_period, other_source, specify, max_loanable_amt, date_encoded)
                     SELECT work_id, applicant_code, employer, sector_type, tob, com_address, a_location, sup_name, hr_number, date_hired, e_status, m_salary,
-                    bank_name, atm_card, loan, monthly_salary, s_period, other_source, specify, max_loanable_amt, date_encoded
+                    bank_name, atm_card, loan, monthly_salary, salary_period, other_source, specify, max_loanable_amt, date_encoded
                     FROM applicants_work WHERE applicant_code = '$id'";
                     $result3 = mysqli_query($this->connect(), $query3);
                     if($result1 && $result2 && $result3 && $action == "archive"){
@@ -313,9 +313,9 @@ class Registry extends DatabaseConnection {
                     $result2 = mysqli_query($this->connect(), $query2);
                     //work
                     $query3 ="INSERT INTO archive_work(work_id, applicant_code, employer, sector_type, tob, com_address, a_location, sup_name, hr_number, date_hired, e_status, m_salary,
-                    bank_name, atm_card, loan, monthly_salary, s_period, other_source, specify, max_loanable_amt, date_encoded)
+                    bank_name, atm_card, loan, monthly_salary, salary_period, other_source, specify, max_loanable_amt, date_encoded)
                     SELECT work_id, applicant_code, employer, sector_type, tob, com_address, a_location, sup_name, hr_number, date_hired, e_status, m_salary,
-                    bank_name, atm_card, loan, monthly_salary, s_period, other_source, specify, max_loanable_amt, date_encoded
+                    bank_name, atm_card, loan, monthly_salary, salary_period, other_source, specify, max_loanable_amt, date_encoded
                     FROM applicants_work WHERE applicant_code = '$id'";
                     $result3 = mysqli_query($this->connect(), $query3);
                     //spouse
@@ -354,9 +354,9 @@ class Registry extends DatabaseConnection {
                     $result3 = mysqli_query($this->connect(), $query3);
                     //work
                     $query4 ="INSERT INTO archive_work(work_id, applicant_code, employer, sector_type, tob, com_address, a_location, sup_name, hr_number, date_hired, e_status, m_salary,
-                    bank_name, atm_card, loan, monthly_salary, s_period, other_source, specify, max_loanable_amt, date_encoded)
+                    bank_name, atm_card, loan, monthly_salary, salary_period, other_source, specify, max_loanable_amt, date_encoded)
                     SELECT work_id, applicant_code, employer, sector_type, tob, com_address, a_location, sup_name, hr_number, date_hired, e_status, m_salary,
-                    bank_name, atm_card, loan, monthly_salary, s_period, other_source, specify, max_loanable_amt, date_encoded
+                    bank_name, atm_card, loan, monthly_salary, salary_period, other_source, specify, max_loanable_amt, date_encoded
                     FROM applicants_work WHERE applicant_code = '$id'";
                     $result4 = mysqli_query($this->connect(), $query4);
                     if($result1 && $result2 && $result3 && $result4 && $action == "archive"){
@@ -386,9 +386,9 @@ class Registry extends DatabaseConnection {
                     $result2 = mysqli_query($this->connect(), $query2);
                     //work
                     $query3 ="INSERT INTO archive_work(work_id, applicant_code, employer, sector_type, tob, com_address, a_location, sup_name, hr_number, date_hired, e_status, m_salary,
-                    bank_name, atm_card, loan, monthly_salary, s_period, other_source, specify, max_loanable_amt, date_encoded)
+                    bank_name, atm_card, loan, monthly_salary, salary_period, other_source, specify, max_loanable_amt, date_encoded)
                     SELECT work_id, applicant_code, employer, sector_type, tob, com_address, a_location, sup_name, hr_number, date_hired, e_status, m_salary,
-                    bank_name, atm_card, loan, monthly_salary, s_period, other_source, specify, max_loanable_amt, date_encoded
+                    bank_name, atm_card, loan, monthly_salary, salary_period, other_source, specify, max_loanable_amt, date_encoded
                     FROM applicants_work WHERE applicant_code = '$id'";
                     $result3 = mysqli_query($this->connect(), $query3);
                     if($result1 && $result2 && $result3 && $action == "archive"){
@@ -428,9 +428,9 @@ class Registry extends DatabaseConnection {
                     $result5 = mysqli_query($this->connect(), $query5);
                     //work
                     $query6 ="INSERT INTO archive_work(work_id, applicant_code, employer, sector_type, tob, com_address, a_location, sup_name, hr_number, date_hired, e_status, m_salary,
-                    bank_name, atm_card, loan, monthly_salary, s_period, other_source, specify, max_loanable_amt, date_encoded)
+                    bank_name, atm_card, loan, monthly_salary, salary_period, other_source, specify, max_loanable_amt, date_encoded)
                     SELECT work_id, applicant_code, employer, sector_type, tob, com_address, a_location, sup_name, hr_number, date_hired, e_status, m_salary,
-                    bank_name, atm_card, loan, monthly_salary, s_period, other_source, specify, max_loanable_amt, date_encoded
+                    bank_name, atm_card, loan, monthly_salary, salary_period, other_source, specify, max_loanable_amt, date_encoded
                     FROM applicants_work WHERE applicant_code = '$id'";
                     $result6 = mysqli_query($this->connect(), $query6);
                     if($result1 && $result3 && $result4 && $result5 && $result6  && $action == "archive"){
@@ -465,9 +465,9 @@ class Registry extends DatabaseConnection {
                     $result3 = mysqli_query($this->connect(), $query3);
                     //work
                     $query6 ="INSERT INTO archive_work(work_id, applicant_code, employer, sector_type, tob, com_address, a_location, sup_name, hr_number, date_hired, e_status, m_salary,
-                    bank_name, atm_card, loan, monthly_salary, s_period, other_source, specify, max_loanable_amt, date_encoded)
+                    bank_name, atm_card, loan, monthly_salary, salary_period, other_source, specify, max_loanable_amt, date_encoded)
                     SELECT work_id, applicant_code, employer, sector_type, tob, com_address, a_location, sup_name, hr_number, date_hired, e_status, m_salary,
-                    bank_name, atm_card, loan, monthly_salary, s_period, other_source, specify, max_loanable_amt, date_encoded
+                    bank_name, atm_card, loan, monthly_salary, salary_period, other_source, specify, max_loanable_amt, date_encoded
                     FROM applicants_work WHERE applicant_code = '$id'";
                     $result6 = mysqli_query($this->connect(), $query6);
                     if($result1 && $result2 && $result3 && $result6  && $action == "archive"){
@@ -506,9 +506,9 @@ class Registry extends DatabaseConnection {
                     $result5 = mysqli_query($this->connect(), $query5);
                     //work
                     $query6 ="INSERT INTO archive_work(work_id, applicant_code, employer, sector_type, tob, com_address, a_location, sup_name, hr_number, date_hired, e_status, m_salary,
-                    bank_name, atm_card, loan, monthly_salary, s_period, other_source, specify, max_loanable_amt, date_encoded)
+                    bank_name, atm_card, loan, monthly_salary, salary_period, other_source, specify, max_loanable_amt, date_encoded)
                     SELECT work_id, applicant_code, employer, sector_type, tob, com_address, a_location, sup_name, hr_number, date_hired, e_status, m_salary,
-                    bank_name, atm_card, loan, monthly_salary, s_period, other_source, specify, max_loanable_amt, date_encoded
+                    bank_name, atm_card, loan, monthly_salary, salary_period, other_source, specify, max_loanable_amt, date_encoded
                     FROM applicants_work WHERE applicant_code = '$id'";
                     $result6 = mysqli_query($this->connect(), $query6);
                     if($result1 && $result2 && $result3 && $result5 && $result6  && $action == "archive"){

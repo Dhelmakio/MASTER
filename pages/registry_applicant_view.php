@@ -222,9 +222,9 @@ if($_SESSION['user_id']){
                                                 <u><?php  echo  "₱ ".number_format(floatval($row['monthly_salary']),2);?></label>
                                         </div>
                                         <div class="col-lg-12"><label>Salary Period:
-                                                <u><?php echo $row['s_period'];?></label></div>
+                                                <u><?php echo $row['salary_period'];?></label></div>
                                         <div class="col-lg-12"><label>Other Source of Income:
-                                                <u><?php echo $row['other_source'];?></label></div>
+                                                <u><?php echo  "₱ ".number_format(floatval($row['other_source']),2);?></label></div>
                                         <div class="col-lg-12"><label>(Specify):
                                                 <u><?php echo strtoupper($row['specify']);?></label></div>
                                         <div class="col-lg-12">

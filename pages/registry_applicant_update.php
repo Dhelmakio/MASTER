@@ -1093,7 +1093,29 @@ if($_SESSION['user_id']){
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="col-lg-12"></div>
-                                                                                    <div class="col-lg-6">
+                                                                                    <div class="col-lg-4">
+                                                                                        <div class="form-group">
+                                                                                            <label>Salary Period</label>
+                                                                                            <select id="salary_period"
+                                                                                                name="salary_period"
+                                                                                                type="text"
+                                                                                                class="form-control">
+                                                                                                <option value=""
+                                                                                                    selected disabled>
+                                                                                                    SELECT</option>
+                                                                                                <?php 
+                                                                                            $sourceIncome = $edit->getClientData($id, 'applicants_work', 'applicant_code', 'salary_period')??null;
+                                                                                            $incomeSet = ['5/20', '6/21', '7/22', '8/23','10/25','15/30','WEEKLY (EVERY FRIDAY)', 'EVERY 2ND SATURDAY'];
+
+                                                                                            foreach($incomeSet as $key => $val){
+                                                                                              $sourceOf = ($sourceIncome == $val) ? '<option selected value='.$sourceIncome.'>'.$val.'</option>' : '<option value='.$val.'>'.$val.'</option>';
+                                                                                             echo $sourceOf;
+                                                                                            }
+                                                                                            ?>
+                                                                                            </select>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-lg-4">
                                                                                         <div class="form-group">
                                                                                             <label>Specify Other
                                                                                                 Source
@@ -1119,7 +1141,7 @@ if($_SESSION['user_id']){
                                                                                             </select>
                                                                                         </div>
                                                                                     </div>
-                                                                                    <div class="col-lg-6">
+                                                                                    <div class="col-lg-4">
                                                                                         <div class="form-group">
                                                                                             <label>Total Other
                                                                                                 Income (₱)</label>

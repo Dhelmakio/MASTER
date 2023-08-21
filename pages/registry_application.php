@@ -407,43 +407,6 @@ if(!isset($_SESSION['user_id'])){
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-lg-12"><br></div>
-                                                                                <!-- <div class="col-lg-12">
-                                                                                    <div class="form-group">
-                                                                                        <label>Type of
-                                                                                            Residency:</label>
-                                                                                        <div class="radio">
-                                                                                            <label>
-                                                                                                <input type="radio"
-                                                                                                    name="tor"
-                                                                                                    id="owned"
-                                                                                                    value="Owned"
-                                                                                                    onclick="enableField('owned', 'specific')">Owned
-                                                                                                &nbsp;
-                                                                                            </label>
-                                                                                            <label>
-                                                                                                <input type="radio"
-                                                                                                    name="tor"
-                                                                                                    id="renting"
-                                                                                                    value="Renting/Leasing"
-                                                                                                    onclick="enableField('renting', 'specific')">Renting/Leasing
-                                                                                                &nbsp;
-                                                                                            </label>
-                                                                                            <label>
-                                                                                                <input type="radio"
-                                                                                                    name="tor"
-                                                                                                    id="specify"
-                                                                                                    value="Specify"
-                                                                                                    onclick="enableField('specify', 'specific')">Others
-                                                                                                (Specify):
-                                                                                            </label>
-                                                                                            <input type="text"
-                                                                                                name="tor_spec"
-                                                                                                id="specific"
-                                                                                                class="form-group"
-                                                                                                disabled="true">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div> -->
                                                                                 <div class="col-lg-3">
                                                                                     <div class="form-group">
                                                                                         <label><span style="color:red">*
@@ -832,16 +795,6 @@ if(!isset($_SESSION['user_id'])){
                                                                                             </select>
                                                                                         </div>
                                                                                     </div>
-                                                                                    <!-- <div class="col-lg-6">
-                                                                                        <div class="form-group">
-                                                                                            <label>Present
-                                                                                                Address</label>
-                                                                                            <input name="spouse_address"
-                                                                                                type="text"
-                                                                                                class="form-control"
-                                                                                                placeholder="Present Address">
-                                                                                        </div>
-                                                                                    </div> -->
                                                                                     <div class="col-lg-4">
                                                                                         <div class="form-group">
                                                                                             <label><span
@@ -1143,12 +1096,7 @@ if(!isset($_SESSION['user_id'])){
                                                                                                     value="Mining Company">
                                                                                                     Mining Company
                                                                                                 </option>
-
                                                                                             </select>
-                                                                                            <!-- <input name="business"
-                                                                                                type="text"
-                                                                                                class="form-control input-set-3" required
-                                                                                                placeholder="Type of Business"> -->
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="col-lg-4">
@@ -1404,7 +1352,50 @@ if(!isset($_SESSION['user_id'])){
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="col-lg-12"></div>
-                                                                                    <div class="col-lg-6">
+                                                                                    <div class="col-lg-4">
+                                                                                        <div class="form-group">
+                                                                                            <label><span
+                                                                                                    style="color:red">*
+                                                                                                </span>Salary
+                                                                                                Period</label>
+                                                                                            <select
+                                                                                                class="form-control input-set-3"
+                                                                                                name="salary_period"
+                                                                                                required>
+                                                                                                <option value=""
+                                                                                                    selected disabled>
+                                                                                                    SELECT</option>
+                                                                                                <option value="5/20">
+                                                                                                    5/20
+                                                                                                </option>
+                                                                                                <option value="6/21">
+                                                                                                    6/21
+                                                                                                </option>
+                                                                                                <option value="7/22">
+                                                                                                    7/22
+                                                                                                </option>
+                                                                                                <option value="8/23">
+                                                                                                    8/23
+                                                                                                </option>
+                                                                                                <option value="10/25">
+                                                                                                    10/25
+                                                                                                </option>
+                                                                                                <option value="15/30">
+                                                                                                    15/30
+                                                                                                </option>
+                                                                                                <option
+                                                                                                    value="Weekly (every friday)">
+                                                                                                    Weekly (every
+                                                                                                    friday)
+                                                                                                </option>
+                                                                                                <option
+                                                                                                    value="Every 2nd Saturday">
+                                                                                                    Every 2nd Saturday
+                                                                                                </option>
+                                                                                            </select>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-lg-4">
                                                                                         <div class="form-group">
                                                                                             <label><span
                                                                                                     style="color:red">*
@@ -1453,7 +1444,7 @@ if(!isset($_SESSION['user_id'])){
                                                                                             </select>
                                                                                         </div>
                                                                                     </div>
-                                                                                    <div class="col-lg-6">
+                                                                                    <div class="col-lg-4">
                                                                                         <div class="form-group">
                                                                                             <label><span
                                                                                                     style="color:red">*
@@ -1498,7 +1489,6 @@ if(!isset($_SESSION['user_id'])){
                                                                                             Add Character Reference
                                                                                         </button></br></br>
                                                                                     </div>
-
                                                                                     <div class="row">
                                                                                         <div id="div_depChar">
                                                                                         </div>
@@ -2261,6 +2251,10 @@ if(!isset($_SESSION['user_id'])){
 
         $('#disp_atm').text(
             `${$('input[name=t_card]').val().toUpperCase()}`
+        );
+
+        $('#disp_salaryperiod').text(
+            `${$('input[name=salary_period]').val().toUpperCase()}`
         );
 
         $('#disp_loan').text(
