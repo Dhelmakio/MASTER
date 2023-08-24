@@ -113,8 +113,10 @@ class MYPDF extends TCPDF {
         $this->SetLineWidth(0.3);
         $this->SetFont('', 'B');
         // Header
-        $w = array(90,90);
+        $w = array(60,60,60);
+
         $num_headers = count($header);
+        
         for($i = 0; $i < $num_headers; ++$i) {
             $this->Cell($w[$i], 7, $header[$i], 1, 0, 'C', 1);
         }
@@ -123,6 +125,7 @@ class MYPDF extends TCPDF {
         $this->SetFillColor(224, 235, 255);
         $this->SetTextColor(0);
         $this->SetFont('');
+
         // Data
         $fill = 0;
         $date = new DateTime(start);
@@ -134,14 +137,44 @@ class MYPDF extends TCPDF {
             $newDuration = sched->duration * 4;
         }
         for($index = 0; $index < $newDuration; $index++){
+            
             date_add($date, date_interval_create_from_date_string(sched->addDate." days"));
-            $this->Cell($w[0], 6, date_format($date, 'F d, Y'), 'LR', 0, 'C', $fill);    
-            $this->Cell($w[1], 6, number_format(sched->amortAmount, 2), 'LR', 0, 'C', $fill);
+
+            // if ( date_format($date, 't') == 31 ) {
+
+            //     date_add($date, date_interval_create_from_date_string(sched->addDate." days"));
+
+            //     if (sched->salaryPeriod == "Weekly (every Friday)") {
+
+            //     }else if (sched->salaryPeriod == "Every 2nd Saturday") {
+        
+            //     }else{
+
+            //         $expSP = explode('/', sched->salaryPeriod);
+        
+            //         if(date_format($date, 'd') < $expSP[0]) {
+            //             date_add($date, date_interval_create_from_date_string("1 days"));
+            //         }else if(date_format($date, 'd') < $expSP[1]){
+            //             date_add($date, date_interval_create_from_date_string("1 days"));
+            //         }
+
+            //     }
+              
+            // } else {
+
+            //     date_add($date, date_interval_create_from_date_string(sched->addDate." days"));
+
+            // }
+            
+            $this->Cell($w[0], 6, ($index+1), 'LR', 0, 'C', $fill);
+            $this->Cell($w[1], 6, date_format($date, 'F d, Y'), 'LR', 0, 'C', $fill);    
+            $this->Cell($w[2], 6, number_format(sched->amortAmount, 2), 'LR', 0, 'C', $fill);
             $this->Ln();
             $fill=!$fill;
         }
-            $this->Cell($w[0], 6, 'TOTAL:', 'LR', 0, 'C', $fill);
-            $this->Cell($w[1], 6, number_format(sched->principal, 2), 'LR', 0, 'C', $fill);        
+            $this->Cell($w[0], 6, '', 'LR', 0, 'C', $fill);
+            $this->Cell($w[1], 6, 'TOTAL:', 'LR', 0, 'C', $fill);
+            $this->Cell($w[2], 6, number_format(sched->principal, 2), 'LR', 0, 'C', $fill);        
         $this->Ln();
         $this->Cell(array_sum($w), 0, '', 'T');
     }
@@ -209,7 +242,7 @@ $pdf->Ln(8);
 $pdf->SetFont('courier','B','12');
 $pdf->cell(189,5,'PAYMENT SCHEDULE',0,1,'C');
 $pdf->SetFont('courier','','10');
-$header = array('DATE','INSTALLMENT');
+$header = array('PAYMENT NO.','DATE', 'AMOUNT');
 
 //data loading
 // $data = $pdf->LoadData();

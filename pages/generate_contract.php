@@ -131,6 +131,10 @@ $pdf->AddPage();
 // $pdf->WriteHtml($pdf->loadHTML());
 $pdf->Ln(2);
 $pdf->SetFont('pdfahelvetica','B','12');
+$pdf->cell(0,0,'Contract No. : '.$_GET['contract'],0,5,'L');
+
+$pdf->Ln(5);
+$pdf->SetFont('pdfahelvetica','B','12');
 $pdf->cell(0,0,'Personal Information',0,5,'L');
 $pdf->SetFont('courier','','10');
 $pdf->MultiCell(0,1,'

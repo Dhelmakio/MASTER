@@ -74,8 +74,9 @@ if(!isset($_SESSION['user_id'])){
                                                 <th>CONTRACT NO.</th>
                                                 <th>NAME</th>
                                                 <th>LOAN DETAILS</th>
+                                                <th class="text-center">CI STATUS</th>
                                                 <th class="text-center">CI REMARKS</th>
-                                                <th class="text-center">LOAN REMARKS</th>
+                                                <th class="text-center">LOAN STATUS</th>
                                                 <th class="text-center">ACTIONS</th>
                                             </tr>
                                         </thead>
@@ -97,18 +98,20 @@ if(!isset($_SESSION['user_id'])){
                                                 <td><?php echo $row['contract_no'];?></td>
                                                 <td><?php echo $row['lastname'].', '.$row['firstname'].' '.$row['suffix'].' '.$row['middlename'];?>
                                                 </td>
+                                                <!-- tbd -->
                                                 <td class="text-center">₱
                                                     <?php echo number_format($row['loan_amount'],2);?></td>
                                                 <td style="text-align:center">
                                                     <?php 
                                                     if($row['ci_status']==1){
-                                                        $cis = 1;
                                                             echo '<button type="button" class="btn btn-primary btn-circle"><i class="fa fa-check"></i></button>';}
-                                                        else{
-                                                        $cis = 0;
+                                                    else{
                                                             echo '<button type="button" class="btn btn-danger btn-circle"><i class="fa fa-times"></i></button>';
                                                         }
                                                     ?>
+                                                </td>
+                                                <td style="text-align:center">
+                                                    <?php echo $row['ci_remarks']?>
                                                 </td>
                                                 <td style="text-align:center">
                                                     <?php 

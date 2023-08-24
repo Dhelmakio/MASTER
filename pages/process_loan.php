@@ -73,7 +73,7 @@ if(!isset($_SESSION['user_id'])){
                                             <tr>
                                                 <th style="text-align:center;">CONTRACT NO.</th>
                                                 <th style="text-align:center;">NAME</th>
-                                                <th style="text-align:center;">LOAN AMOUNT</th>
+                                                <th style="text-align:center;">PROMISSORY NOTE (PN)</th>
                                                 <th style="text-align:center;">DATE OF APPLICATION</th>
                                                 <th style="text-align:center;">DATE VALIDATED</th>
                                                 <th style="text-align:center;">STATUS</th>
@@ -102,7 +102,7 @@ if(!isset($_SESSION['user_id'])){
                                                 <td><?php echo $row['contract_no'];?></td>
                                                 <td><?php echo $row['lastname'].', '.$row['firstname'].' '.$row['suffix'].' '.$row['middlename'];?>
                                                 </td>
-                                                <td style="text-align:right;">₱
+                                                <td style="text-align:center;">₱
                                                     <?php echo number_format($row['loan_amount'],2);?></td>
                                                 <td class="text-center"><?php echo date('F d, Y',strtotime($adate));?>
                                                 </td>

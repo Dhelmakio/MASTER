@@ -1270,7 +1270,7 @@ if(!isset($_SESSION['user_id'])){
                                                                                             </select>
                                                                                         </div>
                                                                                     </div>
-                                                                                    <div class="col-lg-3">
+                                                                                    <div class="col-lg-6">
                                                                                         <label for="">Specify:</label>
                                                                                         <select
                                                                                             class="form-control input-set-3"
@@ -1327,7 +1327,7 @@ if(!isset($_SESSION['user_id'])){
                                                                                     </div>
                                                                                     <div class="col-lg-3">
                                                                                         <div class="form-group">
-                                                                                            <label>Specify Monthly
+                                                                                            <label>Other Loan Monthly
                                                                                                 Amortization</label>
                                                                                             <input name="sma" id="sma"
                                                                                                 disabled type="text"
@@ -1337,22 +1337,8 @@ if(!isset($_SESSION['user_id'])){
                                                                                                 placeholder="₱">
                                                                                         </div>
                                                                                     </div>
-                                                                                    <div class="col-lg-3">
-                                                                                        <div class="form-group">
-                                                                                            <label><span
-                                                                                                    style="color:red">*
-                                                                                                </span>Monthly Salary
-                                                                                                (Net/Gross)</label>
-                                                                                            <input name="ms_salary"
-                                                                                                type="text"
-                                                                                                class="form-control text-right input-set-3"
-                                                                                                required maxlength="10"
-                                                                                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                                                                                placeholder="₱">
-                                                                                        </div>
-                                                                                    </div>
                                                                                     <div class="col-lg-12"></div>
-                                                                                    <div class="col-lg-4">
+                                                                                    <!-- <div class="col-lg-4">
                                                                                         <div class="form-group">
                                                                                             <label><span
                                                                                                     style="color:red">*
@@ -1394,8 +1380,36 @@ if(!isset($_SESSION['user_id'])){
                                                                                                 </option>
                                                                                             </select>
                                                                                         </div>
+                                                                                    </div> -->
+                                                                                    <div class="col-lg-3">
+                                                                                        <div class="form-group">
+                                                                                            <label><span
+                                                                                                    style="color:red">*
+                                                                                                </span>Monthly Salary
+                                                                                                (Gross Pay)</label>
+                                                                                            <input name="grosspay"
+                                                                                                type="text"
+                                                                                                class="form-control text-right input-set-3"
+                                                                                                required maxlength="10"
+                                                                                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                                                                                placeholder="₱">
+                                                                                        </div>
                                                                                     </div>
-                                                                                    <div class="col-lg-4">
+                                                                                    <div class="col-lg-3">
+                                                                                        <div class="form-group">
+                                                                                            <label><span
+                                                                                                    style="color:red">*
+                                                                                                </span>Monthly Salary
+                                                                                                (Net Pay)</label>
+                                                                                            <input name="netpay"
+                                                                                                type="text"
+                                                                                                class="form-control text-right input-set-3"
+                                                                                                required maxlength="10"
+                                                                                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                                                                                placeholder="₱">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-lg-3">
                                                                                         <div class="form-group">
                                                                                             <label><span
                                                                                                     style="color:red">*
@@ -1444,11 +1458,11 @@ if(!isset($_SESSION['user_id'])){
                                                                                             </select>
                                                                                         </div>
                                                                                     </div>
-                                                                                    <div class="col-lg-4">
+                                                                                    <div class="col-lg-3">
                                                                                         <div class="form-group">
                                                                                             <label><span
                                                                                                     style="color:red">*
-                                                                                                </span>Total Other
+                                                                                                </span>Total Monthly Other
                                                                                                 Income (₱)</label>
                                                                                             <input name="os_income"
                                                                                                 id="os_income"

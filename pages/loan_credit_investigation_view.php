@@ -23,7 +23,7 @@ $date_answered;
 if(isset($_GET['id'])){
     $contract = $_GET['id'];
 
-    $sql = "select concat(applicants_personal.firstname,' ',applicants_personal.middlename,' ',applicants_personal.lastname,' ',applicants_personal.suffix) as name, loan_applications.* from loan_applications inner join applicants_personal on applicants_personal.applicant_code = loan_applications.client_id where contract_no='$contract'";
+    $sql = "SELECT CONCAT(applicants_personal.firstname,' ',applicants_personal.middlename,' ',applicants_personal.lastname,' ',applicants_personal.suffix) as name, loan_applications.* from loan_applications inner join applicants_personal on applicants_personal.applicant_code = loan_applications.client_id where contract_no='$contract'";
     $res = mysqli_query($con,$sql);
     if(mysqli_num_rows($res) > 0){
         while($row = mysqli_fetch_assoc($res)) {
@@ -199,7 +199,113 @@ if(isset($_GET['id'])){
                                                         }
                                                     ?>
                                                     <div class="col-lg-12" align="center"><br>
-                                                        <a
+                                                        <button type="button" class="btn btn-danger btn-sml"
+                                                            data-toggle="modal"
+                                                            data-target="#fail<?php echo $contract?>">
+                                                            <i class="fa fa-times" aria-hidden="true"></i> Fail
+                                                        </button>
+                                                        <button type="button" class="btn btn-primary btn-sml"
+                                                            data-toggle="modal"
+                                                            data-target="#pass<?php echo $contract?>">
+                                                            Pass <i class="fa fa-check" aria-hidden="true"></i>
+                                                        </button>
+                                                        <div class="modal fade" id="fail<?php echo $contract?>"
+                                                            tabindex="-1" role="dialog" data-backdrop="static"
+                                                            aria-labelledby="myModalLabel" aria-hidden="true"
+                                                            align="left">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <button type="button" class="close"
+                                                                            data-dismiss="modal"
+                                                                            aria-hidden="true">&times;</button>
+                                                                        <h4 class="modal-title" id="myModalLabel">
+                                                                            Proceed to Fail?</h4>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <!-- <div class=""> -->
+                                                                        <form
+                                                                            action="loan_credit_investigation_fail.php?contract=<?php echo $contract?>"
+                                                                            method="POST">
+                                                                            <div class="row">
+                                                                                <div class="col-lg-12">
+                                                                                    <div class="form-group">
+                                                                                        <label><span style="color:red">*
+                                                                                            </span>Remarks</label>
+                                                                                        <input name="contract"
+                                                                                            value="<?php echo $contract;?>"
+                                                                                            type="hidden">
+                                                                                        <input name="remarks"
+                                                                                            type="text"
+                                                                                            class="form-control"
+                                                                                            placeholder="Remarks">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="text-right">
+                                                                            <button
+                                                                                class="btn btn-primary text-right"
+                                                                                name="submit_fail_remarks" type="submit">
+                                                                                Confirm
+                                                                            </button>
+                                                                            </div>
+                                                                        </form>
+                                                                        <!-- </div> -->
+                                                                    </div>
+                                                                </div>
+                                                                <!-- /.modal-content -->
+                                                            </div>
+                                                            <!-- /.modal-dialog -->
+                                                        </div>
+                                                        <div class="modal fade" id="pass<?php echo $contract?>"
+                                                            tabindex="-1" role="dialog" data-backdrop="static"
+                                                            aria-labelledby="myModalLabel" aria-hidden="true"
+                                                            align="left">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <button type="button" class="close"
+                                                                            data-dismiss="modal"
+                                                                            aria-hidden="true">&times;</button>
+                                                                        <h4 class="modal-title" id="myModalLabel">
+                                                                            Proceed to Pass?</h4>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <!-- <div class=""> -->
+                                                                        <form
+                                                                            action="loan_credit_investigation_pass.php?contract=<?php echo $contract?>"
+                                                                            method="POST">
+                                                                            <div class="row">
+                                                                                <div class="col-lg-12">
+                                                                                    <div class="form-group">
+                                                                                        <label><span style="color:red">*
+                                                                                            </span>Remarks</label>
+                                                                                        <input name="contract"
+                                                                                            value="<?php echo $contract;?>"
+                                                                                            type="hidden">
+                                                                                        <input name="remarks"
+                                                                                            type="text"
+                                                                                            class="form-control"
+                                                                                            placeholder="Remarks">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="text-right">
+                                                                            <button
+                                                                                class="btn btn-primary text-right"
+                                                                                name="submit_pass_remarks" type="submit">
+                                                                                Confirm
+                                                                            </button>
+                                                                            </div>
+                                                                        </form>
+                                                                        <!-- </div> -->
+                                                                    </div>
+                                                                </div>
+                                                                <!-- /.modal-content -->
+                                                            </div>
+                                                            <!-- /.modal-dialog -->
+                                                        </div>
+                                                        <!-- <a
                                                             href="loan_credit_investigation_fail.php?contract=<?php echo $contract?>">
                                                             <button type="button" class="btn btn-danger"
                                                                 data-toggle="tooltip" data-placement="top" title="Fail">
@@ -212,28 +318,20 @@ if(isset($_GET['id'])){
                                                                 data-toggle="tooltip" data-placement="top" title="Pass">
                                                                 <i class="fa fa-check" aria-hidden="true"></i> Pass
                                                             </button>
-                                                        </a>
-
+                                                        </a> -->
                                                     </div>
-
                                                     <!-- </form> -->
-
                                                 </div>
                                                 <!-- /.row (nested) -->
                                             </div>
                                             <!-- /.panel-body -->
                                         </div>
                                         <!-- /.panel -->
-
                                     </div>
-
                                 </div>
                             </div>
                         </div>
                         <!-- /.panel -->
-                    </div>
-                    <div class="col-lg-12">
-
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
@@ -242,10 +340,8 @@ if(isset($_GET['id'])){
             <!-- /.container-fluid -->
         </div>
         <!-- /#page-wrapper -->
-
     </div>
     <!-- /#wrapper -->
-
     <!-- jQuery -->
     <script src="../js/jquery.min.js"></script>
 
@@ -258,13 +354,7 @@ if(isset($_GET['id'])){
     <!-- Custom Theme JavaScript -->
     <script src="../js/startmin.js"></script>
     <script>
-
-
-
-
-
     </script>
-
 </body>
 
 </html>

@@ -14,6 +14,9 @@ class Schedule extends DbCon {
     public $loanType;
     public $applicationDate;
     public $mop;
+    public $applicantCode;
+    public $salaryPeriod;
+    public $date;
 
 
     public function __construct(String $id){
@@ -26,7 +29,7 @@ class Schedule extends DbCon {
         $this->clientID = $id;
         $this->amortFrequency = $result['mop']??null;
         $this->duration = $result['loan_duration']??null;
-        $this->startDate = $result['date_flagged']??$result['ci_date']??null;
+        // $this->startDate = $result['date_flagged']??$result['ci_date']??null;
         $this->amortAmount = $result['monthly_amortization']??null;
         $this->principal = $result['loan_amount']??null;
         $this->notarial = $result['other_fee']??null;
@@ -34,13 +37,15 @@ class Schedule extends DbCon {
         $this->interestVal = $result['udi_value']??null;
         $this->loanType = $result['loan_type']??null;
         $this->mop = $result['mop']??null;
+        $this->applicantCode = $result['client_id']??null;
         $this->applicationDate = $result['application_date']??null;
         $this->applicationDate = date_format(new DateTime($this->applicationDate), "F d, Y ");
 
+        
         $this->mop();
+        //$this->getSalaryPeriod();
         $this->loadTable();
         $this->loanType();
-
     }
 
     public function loadTable(){
@@ -49,25 +54,26 @@ class Schedule extends DbCon {
             id='dataTables-example'>
             <thead>
                 <tr>
-                    <th>".$this->amortFrequency."</th>
+                    <th>Payment No.</th>
                     <th>DATE</th>
                     <th>AMOUNT</th>
-                    <th>STATUS</th>
-                    <th>DATE PAID</th>
                 </tr>
             </thead>
             <tbody>
                 ".$this->loadTableRow()."
             </tbody>
         </table>
-    </div>";
-    return $content;
+        </div>";
+        return $content;
     }
 
     private function loadTableRow(){
 
         $content = "";
-        $date = new DateTime(date('Y-m-d'));
+
+        //$date = new DateTime(date('Y-m-d'));
+        $date = new DateTime($this->startDate);
+
         $newDuration;
         if($this->mop == 1){
             $newDuration = $this->duration;
@@ -76,6 +82,7 @@ class Schedule extends DbCon {
         }else if($this->mop == 3){
             $newDuration = $this->duration * 4;
         }
+
         for($index = 0; $index < $newDuration; $index++){
 
             //will add days for payment schedule based on mop
@@ -83,15 +90,11 @@ class Schedule extends DbCon {
 
             $content .= "<tr>
                 <td>".($index+1)."</td>
-                <td>".date_format($date, "F d, Y ")."</td>
+                <td>".date_format($date, "F d, Y")."</td>
                 <td class='text-right'><strong>₱ ".number_format($this->amortAmount, 2)."</strong></td>
-                <td class='text-center'><span class='btn-sm btn-warning'> <i class='fa fa-spinner'></i> PENDING</span></td>
-                <td>-- -- ----</td>
             </tr>";
         }
         $content .= "<tr>
-        <td></td>
-        <td></td>
         <td></td>
         <td class='text-right'><strong>TOTAL</strong></td>
         <td class='text-right' style='color:red'><strong>₱ ".number_format($this->principal, 2)."</strong></td>
@@ -101,16 +104,33 @@ class Schedule extends DbCon {
     }
     
     private function mop(){
+
+        if ($this->salaryPeriod == "Every") {
+
+        }else if ($this->salaryPeriod == "Weekly") {
+
+        }else{
+            $expSP = explode('/', $this->salaryPeriod);
+        }
+
         if($this->amortFrequency == 1){
             $this->amortFrequency = "MONTH";
             $this->addDate = 30;
         }else if($this->amortFrequency == 2){
             $this->amortFrequency = "SEMI-MONTH";
+
+            // $baseDate = new DateTime($a);
+            // date_add($baseDate, date_interval_create_from_date_string("15 days"));
+            
+            // $this->date = date_format($baseDate, 'Y-m-d');
+            // $this->addDate = 15;
             $this->addDate = 15;
+
         }else if($this->amortFrequency == 3){
             $this->amortFrequency = "WEEK";
             $this->addDate = 7;
         }
+
     }
 
     private function loanType(){
@@ -124,6 +144,17 @@ class Schedule extends DbCon {
             $this->loanType = "ADDITIONAL";
         }
     }
-
     
+    // private function getSalaryPeriod(){
+    //     $sql = "SELECT monthly_gross FROM applicants_work WHERE applicant_code = ?";
+    //     $stmt = $this->connect()->prepare($sql);
+    //     $stmt->execute([$this->applicantCode]);
+    //     $result = $stmt->fetchColumn();
+    //     $this->salaryPeriod = $result;
+    // }
+
+    public function setStartDate($date) {
+        $this->startDate = $date;
+    }
+
 }

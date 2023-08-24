@@ -71,13 +71,13 @@ if(!isset($_SESSION['user_id'])){
                                         id="dataTables-example">
                                         <thead>
                                             <tr>
-                                                <th style="text-align:center;">CONTRACT NO.</th>
-                                                <th style="text-align:center;">NAME</th>
-                                                <th style="text-align:center;">LOAN AMOUNT</th>
-                                                <th style="text-align:center;">DATE OF APPLICATION</th>
-                                                <th style="text-align:center;">LOCATION</th>
-                                                <th style="text-align:center;">INFORMATION</th>
-                                                <th style="text-align:center;">ACTIONS</th>
+                                                <th class="text-center">CONTRACT NO.</th>
+                                                <th class="text-center">NAME</th>
+                                                <th class="text-center">PROMISSORY NOTE (PN)</th>
+                                                <th class="text-center">DATE OF APPLICATION</th>
+                                                <th class="text-center">LOCATION</th>
+                                                <th class="text-center">INFORMATION</th>
+                                                <th class="text-center">QUESTIONNAIRE (ACTIONS)</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -96,13 +96,14 @@ if(!isset($_SESSION['user_id'])){
                                                         $lid = $row['loan_id'];
                                                         $name = $row['lastname'].', '.$row['firstname'].' '.$row['suffix'].' '.$row['middlename'].' '.$row['suffix'];
                                                         $adate = $row['application_date'];
+                                                        $contract = $row['contract_no'];
                                                         //$cis = $row['ci_status'];
                                                 ?>
-                                                <tr class="odd gradeX">
-                                                <td><?php echo $row['contract_no'];?></td>
+                                            <tr class="odd gradeX">
+                                                <td><?php echo $contract;?></td>
                                                 <td><?php echo $row['lastname'].', '.$row['firstname'].' '.$row['suffix'].' '.$row['middlename'];?>
                                                 </td>
-                                                <td style="text-align:right;">₱
+                                                <td class="text-center">₱
                                                     <?php echo number_format($row['loan_amount'],2);?></td>
                                                 <td class="text-center"><?php echo date('F d, Y',strtotime($adate));?>
                                                 </td>
@@ -110,83 +111,23 @@ if(!isset($_SESSION['user_id'])){
                                                         href="<?php echo $row['map_url'];?>" target="_blank"><i
                                                             class="fa fa-map"></i> View Map</a></td>
                                                 <td style="text-align:center;"><a class="btn btn-info"
-                                                        href="registry_applicant_view.php?id=<?php echo $cid?>"><i
+                                                        href="registry_applicant_view.php?id=<?php echo $cid;?>"><i
                                                             class="fa fa-eye"></i> View info</td>
                                                 <td style="text-align:center">
-                                                    <!-- <a
-                                                        href="loan_credit_investigation_validate.php?id=<?php echo $row['contract_no']?>">
-                                                        <button type="button" class="btn btn-warning"
-                                                            data-toggle="tooltip" data-placement="top" title="Validate">
-                                                            <i class="fa fa-search" aria-hidden="true"></i> Validate
+                                                    <a
+                                                        href="loan_credit_investigation_validate.php?contract=<?php echo $contract;?>">
+                                                        <button type="button" class="btn btn-warning btn-sml">
+                                                            For Relative <i class="fa fa-long-arrow-right"
+                                                                aria-hidden="true" title="Copy to use save"></i>
                                                         </button>
-                                                    </a> -->
-                                                    <?php 
-                                                        $contract = $row['contract_no'];
-                                                        $exists = "SELECT * FROM answers WHERE contract_no='$contract'";
-                                                        $res_ex = mysqli_query($con,$exists);
-                                                        $control;
-                                                        $control2;
-                                                        if(mysqli_num_rows($res_ex) > 0){
-                                                            while($row = mysqli_fetch_assoc($res_ex)) {
-                                                                $control = $row['question31'] == null;
-                                                               
-                                                            }
-
-                                                            if($control == 1){
-                                                                echo '
-                                                                <a href="loan_credit_investigation_validate_coworker.php?id='.$contract.'">
-                                                                    <button type="button" class="btn btn-warning btn-sml">
-                                                                        Validate Coworker <i class="fa fa-long-arrow-right" aria-hidden="true" title="Copy to use save"></i>
-                                                                    </button>
-                                                                </a>';
-                                                            }else {
-                                                                echo '
-                                                                <a href="loan_credit_investigation_validate_coworker.php?id='.$contract.'">
-                                                                    <button type="button" class="btn btn-warning btn-sml">
-                                                                        Validate <i class="fa fa-long-arrow-right" aria-hidden="true" title="Copy to use save"></i>
-                                                                    </button>
-                                                                </a>';
-                                                            }
-                                                          
-                                                        }else{
-                                                            // echo '<a href="loan_credit_investigation_validate.php?id='.$contract.'">
-                                                            // <button type="button" class="btn btn-warning btn-sml">
-                                                            //     Validate Relative <i class="fa fa-long-arrow-right" aria-hidden="true" title="Copy to use save"></i>
-                                                            // </button>
-                                                            // </a>
-                                                            // <a href="loan_credit_investigation_validate_coworker.php?id='.$contract.'">
-                                                            //     <button type="button" class="btn btn-warning btn-sml">
-                                                            //         Validate Coworker <i class="fa fa-long-arrow-right" aria-hidden="true" title="Copy to use save"></i>
-                                                            //     </button>
-                                                            // </a>';
-
-                                                            echo '<a href="loan_credit_investigation_validate.php?id='.$contract.'">
-                                                            <button type="button" class="btn btn-warning btn-sml">
-                                                                Validate Relative <i class="fa fa-long-arrow-right" aria-hidden="true" title="Copy to use save"></i>
-                                                            </button>
-                                                            </a>';
-                                                            
-                                                        }
-                                                       
-                                                                        // if($row['ci_status']==1){
-                                                                        // // echo '<a href="#validated">
-                                                                        // //     <button disabled type="button" class="btn btn-success btn-sml">
-                                                                        // //             Validated <i class="fa fa-check" aria-hidden="true" title="Copy to use save"></i></button>
-                                                                        // // </a>';
-                                                                        // // }else{
-                                                                        // // echo '<a href="loan_credit_investigation_validate.php?id='.$row['contract_no'].'">
-                                                                        // //     <button type="button" class="btn btn-warning btn-sml">
-                                                                        // //         Validate Relative <i class="fa fa-long-arrow-right" aria-hidden="true" title="Copy to use save"></i>
-                                                                        // //     </button>
-                                                                        // // </a>
-                                                                        // // <a href="loan_credit_investigation_validate_coworker.php?id='.$row['contract_no'].'">
-                                                                        // //     <button type="button" class="btn btn-warning btn-sml">
-                                                                        // //         Validate Coworker <i class="fa fa-long-arrow-right" aria-hidden="true" title="Copy to use save"></i>
-                                                                        // //     </button>
-                                                                        // // </a>
-                                                                        // // ';
-                                                                        // }
-                                                                        ?>
+                                                    </a>
+                                                    <a
+                                                        href="loan_credit_investigation_validate_coworker.php?contract=<?php echo $contract;?>">
+                                                        <button type="button" class="btn btn-warning btn-sml">
+                                                            For Co-worker <i class="fa fa-long-arrow-right"
+                                                                aria-hidden="true" title="Copy to use save"></i>
+                                                        </button>
+                                                    </a>
                                                 </td>
                                             </tr>
                                             <?php

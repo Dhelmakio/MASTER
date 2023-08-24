@@ -25,4 +25,28 @@ if(isset($_POST['submit_sukli'])){
         header("location:../pages/setting_sukli.php");
     }
 }
+
+if(isset($_POST['submit_collection'])){
+    $id = $_POST['id'];
+    $collection = $_POST['collection'];
+
+    $sql = "UPDATE collection SET collection_percentage = '$collection' WHERE id = '$id'";
+    $result = mysqli_query($con, $sql);
+
+    if($result){
+        header("location:../pages/setting_collection.php");
+    }
+}
+
+if(isset($_POST['submit_processing'])){
+    $id = $_POST['id'];
+    $processing = $_POST['processing'];
+
+    $sql = "UPDATE processing SET processing_percentage = '$processing' WHERE id = '$id'";
+    $result = mysqli_query($con, $sql);
+
+    if($result){
+        header("location:../pages/setting_processing.php");
+    }
+}
 ?>

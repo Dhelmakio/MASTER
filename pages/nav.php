@@ -66,17 +66,25 @@
                         Investigate</a>
                 </li>
                 <li>
-                    <a href="process_loan.php"><i class="fa fa-spinner"></i> Process Loan</a>
+                    <a href="process_loan.php"><i class="fa fa-spinner"></i> Loan Processing</a>
                 </li>
                 <li>
                     <a href="loan_approval.php"><i class="fa fa-check fa-fw"></i> Loan Approval</a>
-                <!-- </li>
                 <li>
-                    <a href="setting_notarial.php"><i class="fa fa-money fa-fw"></i> Notarial Fee</a>
-                </li> -->
+                <li>
+                    <a href="#"><i class="fa fa-file fa-fw"></i> Collections</a>
+                <li>
+                <li>
+                    <a href="#"><i class="fa fa-clipboard fa-fw"></i> Reports</a>
                 <li>
                     <a href="#"><i class="fa fa-cogs fa-fw"></i> Settings<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
+                        <li>
+                            <a href="setting_collection.php"> Collection Fee</a>
+                        </li>
+                        <li>
+                            <a href="setting_processing.php"> Processing Fee</a>
+                        </li>
                         <li>
                             <a href="setting_notarial.php"> Notarial Fee</a>
                         </li>

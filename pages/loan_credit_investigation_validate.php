@@ -20,8 +20,8 @@ $contract;
 $name;
 
 
-if(isset($_GET['id'])){
-    $contract = $_GET['id'];
+if(isset($_GET['contract'])){
+    $contract = $_GET['contract'];
 
     $exists = "SELECT * FROM answers WHERE contract_no='$contract'";
     $res_ex = mysqli_query($con,$exists);

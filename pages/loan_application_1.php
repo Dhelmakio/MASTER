@@ -152,15 +152,18 @@ if(isset($_GET['id'])){
                                                     ?>
                                                     <br><br>
                                                     <div class="col-lg-11" style="font-size:15px;"><br>
-                                                        <div class="col-lg-3">Employee Status: </div>
+                                                        <div class="col-lg-3">Employment Status: </div>
                                                         <div class="col-lg-3"><label>
                                                                 <?php echo $loan->clientEmpStatus; ?></label></div>
-                                                        <div class="col-lg-3">Net Salary per Month: </div>
+                                                        <div class="col-lg-3">Net Pay: </div>
                                                         <div class="col-lg-3"><label>₱
                                                                 <?php echo number_format(floatval($loan->monthlyNetSal), 2); ?></label></div>
-                                                        <div class="col-lg-3">Income Earning: </div>
+                                                        <div class="col-lg-3">Source of Income: </div>
                                                         <div class="col-lg-3"><label>
-                                                                <?php echo $loan->incomeEarning; ?></label></div>
+                                                                <?php echo strtoupper($loan->incomeEarning); ?></label></div>
+                                                        <div class="col-lg-3">Other Monthly Amortization: </div>
+                                                        <div class="col-lg-3"><label>₱
+                                                                <?php echo number_format(floatval($loan->otherMonthlyAmortization), 2); ?></label></div>
                                                         <div class="col-lg-3">Minimum Sukli: </div>
                                                         <div class="col-lg-3"><label>₱ <?php echo number_format(floatval($loan->clientSukli), 2); ?>
                                                         </div>
@@ -192,7 +195,7 @@ if(isset($_GET['id'])){
                                                             hidden>
                                                         <input type="text" name="interest_percentage" id="interest_percentage" 
                                                             hidden>
-                                                            <input type="text" name="udi_percentage"  id="udi_percentage"
+                                                        <input type="text" name="udi_percentage"  id="udi_percentage"
                                                             hidden>
                                                         
 
@@ -242,21 +245,28 @@ if(isset($_GET['id'])){
 
                                                         <div class="col-lg-4">
                                                             <div class="form-group">
+                                                                <label>Monthly Interest (%) </label>
+
+                                                                <input type="number" id="monthly_interest" class="form-control"
+                                                                    step="0.01" min="1" max="<?php echo $max_loan?>"
+                                                                    name="monthly_interest" placeholder="Monthly Interest Percent" required>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- <div class="col-lg-4">
+                                                            <div class="form-group">
                                                                 <label>UDI (%) </label>
 
                                                                 <input type="number" id="udi" class="form-control"
                                                                     step="0.01" min="1" max="<?php echo $max_loan?>"
                                                                     name="udi" placeholder="UDI Percent" required>
                                                                 
-                                                                <!-- <i id="max-loanable" style="color:red;"></i>
-                                                                &nbsp;&nbsp;&nbsp; Use maximum loanable?
-                                                                <input type="checkbox" id="use-max" value=""> -->
-
                                                             </div>
-                                                        </div>
+                                                        </div> -->
+
                                                         <div class="col-lg-4">
                                                             <div class="form-group" id="term-section" style="visibility:hidden">
-                                                                <label>Loan Duration </label>
+                                                                <label>Loan Terms </label>
                                                                 <!-- <input class="form-control" id="months" type="number" name="duration" min="1" max="<?php echo $max_month?>" placeholder=""?> -->
                                                                 <input hidden type="text" id="months_" name="months_"
                                                                     value="">
@@ -293,7 +303,7 @@ if(isset($_GET['id'])){
                                                         <div class="col-lg-4">
                                                             <div class="form-group" id="loan-amnt-section"
                                                             style="visibility:hidden">
-                                                                <label>Loan Amount (₱) </label>
+                                                                <label>Promissory Note (PN) </label>
 
                                                                 <input type="number" id="lamt" class="form-control text-right"
                                                                     step="0.01" min="1" max="<?php echo $max_loan?>"
@@ -331,7 +341,7 @@ if(isset($_GET['id'])){
                                                                 <div class="col-lg-12">
                                                                     <div class="col-lg-6" align="right">
                                                                         <div class="form-group">
-                                                                            <label>Principal (₱):</label>
+                                                                            <label>Promissory Note (PN):</label>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-lg-6">
@@ -386,7 +396,7 @@ if(isset($_GET['id'])){
                                                                     <div class="col-lg-6" align="right">
                                                                         <div class="form-group">
                                                                             <label>UDI (<span
-                                                                                    id="udiper"></span>%):</label>
+                                                                                    id="udiper"></span>₱):</label>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-lg-6">
@@ -520,7 +530,7 @@ if(isset($_GET['id'])){
                                                                     <!-- <h4><b>Cashout:</b></h4><br> -->
                                                                     <div class="col-lg-6" align="right">
                                                                         <div class="form-group">
-                                                                            <label>Proceeds of Loan (₱):</label>
+                                                                            <label>Cash Out (₱):</label>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-lg-6">
@@ -708,8 +718,8 @@ if(isset($_GET['id'])){
     let maxLoanAmount;
     var maxdur = document.getElementById("max_dur").value;
 
-    $('#udi').change(() => {
-        ($('#udi').val() == "") ? $('#term-section').attr('style', 'visibility: hidden') : $('#term-section').attr('style', 'visibility: visible');
+    $('#monthly_interest').change(() => {
+        ($('#monthly_interest').val() == "") ? $('#term-section').attr('style', 'visibility: hidden') : $('#term-section').attr('style', 'visibility: visible');
         
     });
 
@@ -759,12 +769,13 @@ if(isset($_GET['id'])){
                 // let interestAmount = ($("#lamt").val() * <?php echo $loan->moInterest; ?>) * duration;
                 let interestAmount = ($("#lamt").val() * <?php echo $loan->moInterest; ?>);
                 let notarialFee = <?php echo $loan->notarialFee ?>;
+                let monthlyInterest = $('#monthly_interest').val() / 100;
 
 
-
-
-                let collectionFeePer = 0.03;
-                let processingFeePer = 0.03;
+                let collectionFeePer = <?= $loan->collectionFee / 100 ?>;
+                let processingFeePer = <?= $loan->processingFee / 100 ?>;
+                // let collectionFeePer = 0.03;
+                // let processingFeePer = 0.03;
                 let collectionFee = $("#lamt").val() * collectionFeePer;
                 let processingFee = $("#lamt").val() * processingFeePer;
                 let totalDeductions = interestAmount + notarialFee;
@@ -778,17 +789,20 @@ if(isset($_GET['id'])){
                 let collectionPerCut2 = ($("#lamt").val() / (duration)) / 2;
                 let collectionPerCut3 = ($("#lamt").val() / (duration)) / 4;
 
-                let udi = ( <?php echo $loan->moInterest * 100 ?>  * duration) - ( (collectionFeePer * 100) + (processingFeePer * 100));
-                let udiValue = $("#lamt").val() * ($('#udi').val() / 100);
+                // let udi = ( <?php echo $loan->moInterest * 100 ?>  * duration) - ( (collectionFeePer * 100) + (processingFeePer * 100));
+                // let udiValue = $("#lamt").val() * ($('#udi').val() / 100);
+
+                let udiValue =  monthlyInterest * duration * $("#lamt").val();
+                
                 let totalDeduction = udiValue + processingFee + collectionFee + notarialFee;
                 let proceedLoan = $("#lamt").val() - totalDeduction;
 
-                $("#udi_").val(parseFloat(udiValue).toFixed(2));
-                $("#udi_percentage").val($('#udi').val());
+                // $("#udi_").val(parseFloat(udiValue).toFixed(2));
+                // $("#udi_percentage").val($('#udi').val());
 
                 $("#interest_percentage").val(<?php echo $loan->moInterest * 100 ?>);
 
-                $("#udiper").text($('#udi').val());
+                // $("#udiper").text(udiValue/100);
                 $("#pfper").text(processingFeePer * 100);
                 $("#cfper").text(collectionFeePer * 100);
 
@@ -881,7 +895,7 @@ if(isset($_GET['id'])){
                             <div class="col-lg-12">
                                 <div class="col-lg-6" align="right">
                                     <div class="form-group">
-                                        <label>Principal (₱):</label>
+                                        <label>Promissory Note (PN):</label>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
@@ -893,12 +907,12 @@ if(isset($_GET['id'])){
                             <div class="col-lg-12">
                                 <div class="col-lg-6" align="right">
                                     <div class="form-group">
-                                        <label>Interest Amount (<i><?php echo $loan->getInterestRate()*100;?>%</i>):</label>
+                                        <label>Interest Amount (<i>${monthlyInterest*100}%</i>):</label>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <input type="number" name="interest_" class="form-control" step="0.01" id="interest-amount_" value="${parseFloat(interestAmount).toFixed(2)}" disabled style="color:red;text-align:right">
+                                        <input type="number" name="interest_" class="form-control" step="0.01" id="interest-amount_" value="${parseFloat(udiValue).toFixed(2)}" disabled style="color:red;text-align:right">
                                     </div>
                                 </div>
                             </div>
@@ -961,7 +975,7 @@ if(isset($_GET['id'])){
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <input style="color:red;text-align:right;" type="number" name="amortization_2" class="form-control" step="0.01" id="collection-per-cut_2" style="text-align:right" value="${parseFloat(collectionPerCut).toFixed(2)}" disabled>
+                                        <input style="color:red;text-align:right;" type="number" name="amortization_2" class="form-control" step="0.01" id="collection-per-cut_2" style="text-align:right" value="${parseFloat(collectionPerCut2).toFixed(2)}" disabled>
                                     </div>
                                 </div>
                             </div>
@@ -979,7 +993,8 @@ if(isset($_GET['id'])){
                             </div>
                             `);
 
-                    // newWin.focus();
+                    
+                            // newWin.focus();
                     // newWind.onload = () => {
                     //     let html = 
                     //     `
@@ -990,6 +1005,7 @@ if(isset($_GET['id'])){
                     // newWin.document.write(
                     //     "<script>window.oponer.document.body.innerHTML= 'Test'<\/script>"
                     // );
+                    
                 });
 
             } else {

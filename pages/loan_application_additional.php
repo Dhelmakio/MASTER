@@ -184,7 +184,7 @@ if(!isset($_SESSION['user_id'])){
                                                                         data-dismiss="modal"
                                                                         aria-hidden="true">&times;</button>
                                                                     <h4 class="modal-title" id="myModalLabel">
-                                                                        Proceed to Reloan Application?</h4>
+                                                                        Proceed to Additional Application?</h4>
                                                                 </div>
                                                                 <div class="modal-body">
                                                                     <div class="row">
@@ -197,7 +197,7 @@ if(!isset($_SESSION['user_id'])){
                                                                                     value="<?php echo $remsukli?>"
                                                                                     hidden>
                                                                                 <input type="text" name="loan_type"
-                                                                                    value="RENEWAL" hidden>
+                                                                                    value="ADDITIONAL" hidden>
                                                                                 <input type="text" name="id"
                                                                                     value="<?php echo $cid;?>" hidden>
                                                                                 <input type="text" name="name"

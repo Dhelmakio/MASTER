@@ -91,7 +91,7 @@ if(isset($_GET['id'])){
 
         <!-- Navigation -->
         <?php include('nav.php');?>
-
+        <input type="hidden" id="contract" value="<?= $_GET['cn'] ?>">
         <div id="page-wrapper">
             <div class="container-fluid">
                 <div class="row">
@@ -102,7 +102,7 @@ if(isset($_GET['id'])){
                         <br>
                         <h1><button class="btn btn-md btn-primary" type="button"
                                 onclick="process()"
-                                class="btn btn-lg btn-primary"><i class="fa fa-print"></i> Print</button></h1>
+                                class="btn btn-lg btn-primary"><i class="fa fa-print"></i> Process Loan</button></h1>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
@@ -202,8 +202,8 @@ if(isset($_GET['id'])){
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-lg-12">
-                                                <?= $sched->loadTable(); ?>
+                                            <div class="col-lg-12" id="forTableDisplay">
+                                               
                                             </div>
                                         </div>
                                         <div class="row">
@@ -270,14 +270,39 @@ $('#effective_date').attr('min', today);
 <script>
     function process(){
        if($('#effective_date').val() != ""){
-        window.open('generate_contract.php?id=<?= $client_id ?>', '_blank');
+
+        window.open('generate_contract.php?id=<?= $client_id ?>&contract=<?= $_GET['cn'] ?>', '_blank');
         window.open('generate_promissory_note.php?id=<?= $client_id ?>&start='+$('#effective_date').val(), '_blank');
         window.open('generate_disclosure.php?id=<?= $client_id ?>', '_blank');
         window.location.href='loan_approval.php';
+        
        }else{
         alert("Please set the effectivity date.");
        }
+
     }
+
+    let objTo = document.getElementById('forTableDisplay');
+    let divtest = document.createElement("div");
+                
+    $('#effective_date').change(() => {
+
+        $.ajax({
+            type: 'POST',
+            url: '../request/req_paysched.php',
+            data: {contract : $('#contract').val(), startDate : $('#effective_date').val()},
+            dataType: 'json',
+            success : (response) => {
+                console.log(response.table);
+              
+                divtest.innerHTML = response.table;
+                objTo.appendChild(divtest);
+            },
+            error: (xhr, status, error) => {
+                alert(xhr.responseText);
+            }
+        });
+    })
 </script>
 
 </html>

@@ -30,7 +30,7 @@ if(isset($_POST['client_id'])){
     $cashout = $_POST['cashout'];
     $ltypeTemp = 0;
     $ob = $_POST['outstanding_balance']??0;
-    $udi_percentage = $_POST['udi_percentage']??0;
+    $udi_percentage = $_POST['monthly_interest']??0;
     $udi_value = $_POST['prevudi_']??0;
     $interest_percentage = $_POST['interest_percentage']??0;
 

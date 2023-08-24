@@ -74,7 +74,8 @@ if($_SESSION['user_id']){
                     </div>
                     <div class="col-lg-6 text-right">
                         <br>
-                    <h1> <a href="contract_signing.php?id=<?= $id ?>&cn=<?= $cn ?>" class="btn btn-primary"><i class="fa fa-eye"></i> View Contract</a></h1>
+                        <h1> <a href="contract_signing.php?id=<?= $id ?>&cn=<?= $cn ?>" class="btn btn-primary"><i
+                                    class="fa fa-eye"></i> View Contract</a></h1>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
@@ -104,19 +105,20 @@ if($_SESSION['user_id']){
                                                 <u><?php echo $row['lastname'].", ".$row['firstname']." ".$row['middlename']." ".$row['suffix'];?>
                                                     </h4></label></div>
                                         <div class="col-lg-12"><label>Address:
-                                                <u><?php echo $row['street1'].", ".$row['brgy1'].", ".$row['city1'].", ".$row['province1'].", ".$row['phase1'];?></label>
+                                                <u><?php echo $row['brgy1'].", ".$row['city1'].", ".$row['province1'];?></label>
                                         </div>
-                                        <div class="col-lg-12"><label>Gender: <u><?php echo strtoupper($row['gender'])?></label>
+                                        <div class="col-lg-12"><label>Gender:
+                                                <u><?php echo strtoupper($row['gender'])?></label>
                                         </div>
                                         <div class="col-lg-12"><label>Date of Birth:
                                                 <u><?php echo date('F d, Y',strtotime($row['dob1'])) ?></label></div>
                                         <div class="col-lg-12"><label>Place of Birth:
                                                 <u><?php echo $row['pob1']?></label></div>
-                                                <div class="col-lg-12"><label>Marital Status:
+                                        <div class="col-lg-12"><label>Marital Status:
                                                 <u><?php echo strtoupper($row['mstatus'])?></label></div>
                                         <div class="col-lg-12"><label>Contact No.:
                                                 <u><?php echo $row['contact1']?></label></div>
-                                              
+
                                         <div class="col-lg-12">
                                             <hr>
                                         </div>
@@ -218,13 +220,15 @@ if($_SESSION['user_id']){
                                                     echo strtoupper($exploan[0]);
                                                 }
                                                 ?></label></div>
-                                        <div class="col-lg-12"><label>Gross (Monthly):
+                                        <div class="col-lg-12"><label>Gross Pay(Monthly):
+                                                <u><?php  echo  "₱ ".number_format(floatval($row['monthly_gross']),2);?></label>
+                                        </div>
+                                        <div class="col-lg-12"><label>Net Pay(Monthly):
                                                 <u><?php  echo  "₱ ".number_format(floatval($row['monthly_salary']),2);?></label>
                                         </div>
-                                        <div class="col-lg-12"><label>Salary Period:
-                                                <u><?php echo $row['salary_period'];?></label></div>
-                                        <div class="col-lg-12"><label>Other Source of Income:
-                                                <u><?php echo  "₱ ".number_format(floatval($row['other_source']),2);?></label></div>
+                                        <div class="col-lg-12"><label>Total Monthly Other Income:
+                                                <u><?php echo  "₱ ".number_format(floatval($row['other_source']),2);?></label>
+                                        </div>
                                         <div class="col-lg-12"><label>(Specify):
                                                 <u><?php echo strtoupper($row['specify']);?></label></div>
                                         <div class="col-lg-12">

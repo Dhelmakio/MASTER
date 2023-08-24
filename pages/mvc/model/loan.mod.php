@@ -1,4 +1,5 @@
 <?php
+
 class Loan extends DbCon {
     private $clientID;
     public $clientEmpStatus;
@@ -16,6 +17,9 @@ class Loan extends DbCon {
     public $notarialFee;
     public $checkIfExistInLoanApplicaiton;
     public $monthlyLoanAmortization;
+    public $otherMonthlyAmortization;
+    public $collectionFee;
+    public $processingFee;
 
     public function __construct(String $id){
         //get emp status, income sources, monthly net salary
@@ -41,13 +45,15 @@ class Loan extends DbCon {
         
         ($this->incomeEarning == 'Single') ?  $this->clientSukli = $this->sukli('single') : $this->clientSukli = $this->sukli('multiple');
 
-        $this->netLoanPerMonth = $this->monthlyNetSal - $this->clientSukli;
+       
+        
+
             
         $this->tempExp = $result['loan']??null;
 
         $this->tempExp = explode('-', $this->tempExp);
 
-        $this->monthlyLoanAmortization = $this->tempExp[2]??0;
+        $this->otherMonthlyAmortization = $this->tempExp[2]??0;
 
 
         $this->getSemiMonthly();
@@ -59,7 +65,18 @@ class Loan extends DbCon {
         $this->getRenewalBasesInfo();
         $this->getOutstandingBalance();
         $this->getNotarialFee();
+        $this->getCollectionFee();
+        $this->getProcessingFee();
         $this->checkIfExistInLoanApp();
+        $this->getActiveLoanAmortization();
+
+        
+        if ($this->borrowingHistCount > 5){
+            $this->netLoanPerMonth = 8000;
+        } else {
+            $this->netLoanPerMonth = $this->monthlyNetSal - $this->clientSukli - $this->otherMonthlyAmortization;
+        }
+
     }
 
     public function getSemiMonthly(){
@@ -82,6 +99,17 @@ class Loan extends DbCon {
         $result = $stmt->fetchColumn();
 
         $this->borrowingHistCount = $result;
+        //$this->borrowingHistCount = 6;
+    }
+
+    public function getActiveLoanAmortization(){
+        $sql = "SELECT monthly_amortization FROM loan_applications WHERE paid=0 AND client_id = ?";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute([$this->clientID]);
+
+        $result = $stmt->fetchColumn();
+
+        $this->monthlyLoanAmortization = $result;
     }
 
     public function getBorrowCount(){
@@ -143,6 +171,24 @@ class Loan extends DbCon {
         $this->notarialFee = $result;
     }
 
+    public function getCollectionFee(){
+        $sql = "SELECT collection_percentage FROM collection WHERE id = ?";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute([1]);
+        $result = $stmt->fetchColumn();
+        
+        $this->collectionFee = $result;
+    }
+
+    public function getProcessingFee(){
+        $sql = "SELECT processing_percentage FROM processing WHERE id = ?";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute([2]);
+        $result = $stmt->fetchColumn();
+        
+        $this->processingFee = $result;
+    }
+
     public function sukli($sukli){
         $sql = "SELECT sukli_amount FROM sukli WHERE sukli_name = ?";
         $stmt = $this->connect()->prepare($sql);
@@ -181,4 +227,5 @@ class Loan extends DbCon {
     //     $stmt->execute([$id]);
     //     $result = $stmt->fetch();
     // }
+
 }

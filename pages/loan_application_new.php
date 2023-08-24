@@ -116,91 +116,73 @@ if(!isset($_SESSION['user_id'])){
                                                 </td>
                                                 <td style="text-align:center">
                                                     <div class="tooltip-demo">
-
-                                                        <div class="panel-body">
-                                                            <!-- Button trigger modal -->
-                                                            
-                                                            <button type="button" class="btn btn-primary btn-sml"
-                                                                data-toggle="modal"
-                                                                data-target="#myModal_<?php echo $cid?>">
-                                                                NEW <i class="fa fa-long-arrow-right"
-                                                                    aria-hidden="true" title="Copy to use save"></i>
-                                                            </button>
-                                                            <!-- Modal -->
-                                                            <div class="modal fade" id="myModal_<?php echo $cid?>"
-                                                                tabindex="-1" role="dialog" data-backdrop="static"
-                                                                aria-labelledby="myModalLabel" aria-hidden="true"
-                                                                align="left">
-                                                                <div class="modal-dialog" role="document">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <button type="button" class="close"
-                                                                                data-dismiss="modal"
-                                                                                aria-hidden="true">&times;</button>
-                                                                            <h4 class="modal-title" id="myModalLabel">
-                                                                                Proceed to New?</h4>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            <div class="row">
-                                                                                <div class="col-lg-12" align="right">
-                                                                                    <!-- <div class=""> -->
-                                                                                    <form
-                                                                                        action="loan_application_1.php"
-                                                                                        method="POST">
-                                                                                        <input type="text"
-                                                                                            name="loan_type"
-                                                                                            value="RENEWAL" hidden>
-                                                                                        <input type="text" name="id"
-                                                                                            value="<?php echo $cid;?>"
-                                                                                            hidden>
-                                                                                        <input type="text" name="name"
-                                                                                            value="<?php echo $name;?>"
-                                                                                            hidden>
-                                                                                        <a href="loan_application_1.php?id=<?php echo $cid?>"
-                                                                                            class="btn btn-primary"
-                                                                                            name="submit">
-                                                                                            Proceed <i
-                                                                                                class="fa fa-long-arrow-right"
-                                                                                                aria-hidden="true"
-                                                                                                title="Copy to use save"></i>
-                                                                                        </a>
-                                                                                    </form>
-                                                                                    <!-- </div> -->
-                                                                                </div>
-                                                                                <div class="col-lg-6">
-
-                                                                                </div>
+                                                        <button type="button" class="btn btn-primary btn-sml"
+                                                            data-toggle="modal"
+                                                            data-target="#myModal_<?php echo $cid?>">
+                                                            NEW <i class="fa fa-long-arrow-right" aria-hidden="true"
+                                                                title="Copy to use save"></i>
+                                                        </button>
+                                                        <!-- Modal -->
+                                                        <div class="modal fade" id="myModal_<?php echo $cid?>"
+                                                            tabindex="-1" role="dialog" data-backdrop="static"
+                                                            aria-labelledby="myModalLabel" aria-hidden="true"
+                                                            align="left">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <button type="button" class="close"
+                                                                            data-dismiss="modal"
+                                                                            aria-hidden="true">&times;</button>
+                                                                        <h4 class="modal-title" id="myModalLabel">
+                                                                            Proceed to New?</h4>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div class="row">
+                                                                            <div class="col-lg-12" align="right">
+                                                                                <!-- <div class=""> -->
+                                                                                <form action="loan_application_1.php"
+                                                                                    method="POST">
+                                                                                    <input type="text" name="loan_type"
+                                                                                        value="RENEWAL" hidden>
+                                                                                    <input type="text" name="id"
+                                                                                        value="<?php echo $cid;?>"
+                                                                                        hidden>
+                                                                                    <input type="text" name="name"
+                                                                                        value="<?php echo $name;?>"
+                                                                                        hidden>
+                                                                                    <a href="loan_application_1.php?id=<?php echo $cid?>"
+                                                                                        class="btn btn-primary"
+                                                                                        name="submit">
+                                                                                        Proceed <i
+                                                                                            class="fa fa-long-arrow-right"
+                                                                                            aria-hidden="true"
+                                                                                            title="Copy to use save"></i>
+                                                                                    </a>
+                                                                                </form>
+                                                                                <!-- </div> -->
                                                                             </div>
                                                                         </div>
-                                                                        <!-- <a href="loan_application_1.php?id=<?php echo $cid;?>">
-                                                                                                                    <button type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Apply">
-                                                                                                                        <i class="fa fa-long-arrow-right" aria-hidden="true"></i> 
-                                                                                                                    </button>
-                                                                                                                </a> -->
                                                                     </div>
-                                                                    <!-- /.modal-content -->
                                                                 </div>
-                                                                <!-- /.modal-dialog -->
+                                                                <!-- /.modal-content -->
                                                             </div>
-                                                            <!-- /.modal -->
+                                                            <!-- /.modal-dialog -->
                                                         </div>
+                                                        <!-- /.modal -->
                                                         <?php
-                                                                                                                        }
-                                                                                                ?>
+                                                            }
+                                                        ?>
                                                     </div>
                                                 </td>
                                             </tr>
                                             <?php
-                                                        }
-                                                                    }
-                                                                
-                                                            ?>
+                                                }
+                                            }
+                                            ?>
                                         </tbody>
                                     </table>
                                 </div>
-
                                 <!-- /.table-responsive -->
-
                             </div>
                             <!-- /.panel-body -->
                         </div>
