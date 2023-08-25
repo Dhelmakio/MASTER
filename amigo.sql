@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 24, 2023 at 01:22 PM
+-- Generation Time: Aug 25, 2023 at 09:09 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.1.17
 
@@ -249,7 +249,8 @@ INSERT INTO `activity_logs` (`log_id`, `user_id`, `name`, `activity`, `date_time
 (207, 1, 'Kevin Fontanoza', 'Approved CI', '2023-08-24 15:32:38'),
 (208, 1, 'Kevin Fontanoza', 'Approved CI', '2023-08-24 15:33:36'),
 (209, 1, 'Kevin Fontanoza', 'Logged out', '2023-08-24 15:36:44'),
-(210, 1, 'Kevin Fontanoza', 'Logged in', '2023-08-24 19:12:36');
+(210, 1, 'Kevin Fontanoza', 'Logged in', '2023-08-24 19:12:36'),
+(211, 1, 'Kevin Fontanoza', 'Approved CI', '2023-08-24 21:19:26');
 
 -- --------------------------------------------------------
 
@@ -765,7 +766,7 @@ INSERT INTO `client_info` (`client_info_id`, `client_id`, `mother_name`, `mother
 --
 
 CREATE TABLE `collection` (
-  `id` int(11) NOT NULL,
+  `collection_id` int(11) NOT NULL,
   `collection_name` text NOT NULL,
   `collection_percentage` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -774,7 +775,7 @@ CREATE TABLE `collection` (
 -- Dumping data for table `collection`
 --
 
-INSERT INTO `collection` (`id`, `collection_name`, `collection_percentage`) VALUES
+INSERT INTO `collection` (`collection_id`, `collection_name`, `collection_percentage`) VALUES
 (1, 'Collection Fee', '3');
 
 -- --------------------------------------------------------
@@ -904,6 +905,7 @@ CREATE TABLE `loan_applications` (
   `remarks` text NOT NULL,
   `paid` int(11) NOT NULL,
   `loan_status` text NOT NULL,
+  `process_status` int(11) NOT NULL,
   `effective_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -911,9 +913,9 @@ CREATE TABLE `loan_applications` (
 -- Dumping data for table `loan_applications`
 --
 
-INSERT INTO `loan_applications` (`loan_id`, `contract_no`, `client_id`, `loan_type`, `loan_duration`, `loan_amount`, `interest_amount`, `other_fee`, `total_cashout`, `monthly_amortization`, `mop`, `ob`, `udi_percentage`, `udi_value`, `interest_percentage`, `application_date`, `ci_status`, `ci_by`, `ci_remarks`, `ci_date`, `approval`, `processed_by`, `date_flagged`, `remarks`, `paid`, `loan_status`, `effective_date`) VALUES
-(1, 'AMG001000000120230810083023', 'AMG0010000001', 1, 4, 88000, 0, 500, 60220, 11000, '2', 0, 25, 22000, 8, '2023-08-23 16:01:30', 0, '', '', NULL, 0, '', NULL, '', 0, '', '0000-00-00'),
-(2, 'AMG001000000220230806085324', 'AMG0010000002', 1, 3, 48000, 0, 500, 32620, 8000, '2', 0, 25, 12000, 8, '2023-08-24 12:56:53', 0, '', '', NULL, 0, '', NULL, '', 0, '', '0000-00-00');
+INSERT INTO `loan_applications` (`loan_id`, `contract_no`, `client_id`, `loan_type`, `loan_duration`, `loan_amount`, `interest_amount`, `other_fee`, `total_cashout`, `monthly_amortization`, `mop`, `ob`, `udi_percentage`, `udi_value`, `interest_percentage`, `application_date`, `ci_status`, `ci_by`, `ci_remarks`, `ci_date`, `approval`, `processed_by`, `date_flagged`, `remarks`, `paid`, `loan_status`, `process_status`, `effective_date`) VALUES
+(1, 'AMG001000000120230810083023', 'AMG0010000001', 1, 4, 88000, 0, 500, 60220, 11000, '2', 0, 25, 22000, 8, '2023-08-23 16:01:30', 0, '', '', NULL, 0, '', NULL, '', 0, '', 0, '0000-00-00'),
+(2, 'AMG001000000220230806085324', 'AMG0010000002', 1, 3, 48000, 0, 500, 32620, 8000, '2', 0, 25, 12000, 8, '2023-08-24 12:56:53', 1, 'Kevin Fontanoza', 'Good reasons', '2023-08-24 15:19:26', 0, '', NULL, '', 0, '', 0, '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -961,7 +963,7 @@ CREATE TABLE `payments` (
 --
 
 CREATE TABLE `processing` (
-  `id` int(11) NOT NULL,
+  `processing_id` int(11) NOT NULL,
   `processing_name` text NOT NULL,
   `processing_percentage` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -970,7 +972,7 @@ CREATE TABLE `processing` (
 -- Dumping data for table `processing`
 --
 
-INSERT INTO `processing` (`id`, `processing_name`, `processing_percentage`) VALUES
+INSERT INTO `processing` (`processing_id`, `processing_name`, `processing_percentage`) VALUES
 (1, 'Processing Fee', '3');
 
 -- --------------------------------------------------------
@@ -1196,7 +1198,7 @@ ALTER TABLE `client_info`
 -- Indexes for table `collection`
 --
 ALTER TABLE `collection`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`collection_id`);
 
 --
 -- Indexes for table `dependents`
@@ -1238,7 +1240,7 @@ ALTER TABLE `payments`
 -- Indexes for table `processing`
 --
 ALTER TABLE `processing`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`processing_id`);
 
 --
 -- Indexes for table `questions`
@@ -1266,7 +1268,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `activity_logs`
 --
 ALTER TABLE `activity_logs`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=211;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=212;
 
 --
 -- AUTO_INCREMENT for table `answers`
@@ -1362,7 +1364,7 @@ ALTER TABLE `client_info`
 -- AUTO_INCREMENT for table `collection`
 --
 ALTER TABLE `collection`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `collection_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `dependents`
@@ -1404,7 +1406,7 @@ ALTER TABLE `payments`
 -- AUTO_INCREMENT for table `processing`
 --
 ALTER TABLE `processing`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `processing_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `questions`
