@@ -12,16 +12,27 @@ if(isset($_POST['startDate'])){
 
     $sched->setStartDate($_POST['startDate']);
 
-    echo json_encode(array("table" => $sched->loadTable())); 
+    $key = 'table'; $value = $sched->loadTable();
 
 }else if(isset($_POST['status'])){
 
     $sched->setProcessStatus($_POST['status']);
 
-    echo json_encode(array("msg" => 'Process loan sucessful.'));
+    $key = 'msg'; $value = 'Process loan sucessful.';
+   
+}else if(isset($_POST['update'])){
+
+    $sched->updateLoanDetails($_POST['loan_terms'],$_POST['promissory_note'],$_POST['cash_out'],$_POST['amort_amount'],$_POST['udi_value']);
+
+    $key = 'msg'; $value = 'Loan details updated.';
+   
 }
 
 //die(strval($sched->loadTable()));
+
+echo json_encode(array($key => $value));
+
+
 
 
 ?>

@@ -166,7 +166,7 @@ if(isset($_GET['id'])){
                                                         }
                                                     ?>
                                                     <!-- $questions = "select * From questions where question_id>29 order by question_id asc "; -->
-                                                    <div class="col-lg-12" align="center">
+                                                    <!-- <div class="col-lg-12" align="center">
                                                         <hr>
                                                         <h4>Questionnaire | For Co-worker</h4>
                                                     </div>
@@ -197,8 +197,8 @@ if(isset($_GET['id'])){
                                                     <?php
                                                             }
                                                         }
-                                                    ?>
-                                                    <div class="col-lg-12" align="center"><br>
+                                                    ?> -->
+                                                    <!-- <div class="col-lg-12" align="center"><br>
                                                         <button type="button" class="btn btn-danger btn-sml"
                                                             data-toggle="modal"
                                                             data-target="#fail<?php echo $contract?>">
@@ -223,7 +223,6 @@ if(isset($_GET['id'])){
                                                                             Proceed to Fail?</h4>
                                                                     </div>
                                                                     <div class="modal-body">
-                                                                        <!-- <div class=""> -->
                                                                         <form
                                                                             action="loan_credit_investigation_fail.php?contract=<?php echo $contract?>"
                                                                             method="POST">
@@ -250,12 +249,9 @@ if(isset($_GET['id'])){
                                                                             </button>
                                                                             </div>
                                                                         </form>
-                                                                        <!-- </div> -->
                                                                     </div>
                                                                 </div>
-                                                                <!-- /.modal-content -->
                                                             </div>
-                                                            <!-- /.modal-dialog -->
                                                         </div>
                                                         <div class="modal fade" id="pass<?php echo $contract?>"
                                                             tabindex="-1" role="dialog" data-backdrop="static"
@@ -271,7 +267,6 @@ if(isset($_GET['id'])){
                                                                             Proceed to Pass?</h4>
                                                                     </div>
                                                                     <div class="modal-body">
-                                                                        <!-- <div class=""> -->
                                                                         <form
                                                                             action="loan_credit_investigation_pass.php?contract=<?php echo $contract?>"
                                                                             method="POST">
@@ -298,14 +293,11 @@ if(isset($_GET['id'])){
                                                                             </button>
                                                                             </div>
                                                                         </form>
-                                                                        <!-- </div> -->
                                                                     </div>
                                                                 </div>
-                                                                <!-- /.modal-content -->
                                                             </div>
-                                                            <!-- /.modal-dialog -->
                                                         </div>
-                                                        <!-- <a
+                                                         <a
                                                             href="loan_credit_investigation_fail.php?contract=<?php echo $contract?>">
                                                             <button type="button" class="btn btn-danger"
                                                                 data-toggle="tooltip" data-placement="top" title="Fail">
@@ -318,8 +310,8 @@ if(isset($_GET['id'])){
                                                                 data-toggle="tooltip" data-placement="top" title="Pass">
                                                                 <i class="fa fa-check" aria-hidden="true"></i> Pass
                                                             </button>
-                                                        </a> -->
-                                                    </div>
+                                                        </a>
+                                                    </div> -->
                                                     <!-- </form> -->
                                                 </div>
                                                 <!-- /.row (nested) -->

@@ -107,7 +107,15 @@ if(!isset($_SESSION['user_id'])){
                                                 <td class="text-center"><?php echo date('F d, Y',strtotime($adate));?>
                                                 </td>
                                                 <td style="text-align:center;">
-                                                    <?php echo date('F d, Y',strtotime($row['ci_date']));?></td>
+                                                    <?php 
+                                                    if($row['ci_date'] != null){
+                                                        echo date('F d, Y',strtotime($row['ci_date']));
+                                                    }else{
+                                                     echo date('F d, Y',strtotime($row['date_flagged']));
+                                                    }
+                                                    //echo date('F d, Y',strtotime($row['ci_date']));
+                                                    ?>
+                                                </td><!--ci_date-->
                                                 <td style="text-align:center;"><span class='btn btn-success'> <i
                                                             class='fa fa-check'></i> Validated</span></td>
                                                 <td style="text-align:center">

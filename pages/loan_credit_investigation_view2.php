@@ -18,48 +18,19 @@ if(!isset($_SESSION['user_id'])){
 // $loan_type;
 $contract;
 $name;
+$date_answered;
 
+if(isset($_GET['id'])){
+    $contract = $_GET['id'];
 
-if(isset($_GET['contract'])){
-    $contract = $_GET['contract'];
-    
-    $exists = "SELECT * FROM answers WHERE contract_no='$contract'";
-    $res_ex = mysqli_query($con,$exists);
-    if(mysqli_num_rows($res_ex) > 0){
-
-        while($row = mysqli_fetch_assoc($res_ex)) {
-            $control = $row['question31'] == null;
-            if($control != 1){
-                header('location:loan_credit_investigation_view2.php?id='.$contract);
-            }else{
-                $sql = "SELECT CONCAT(applicants_personal.firstname,' ',applicants_personal.middlename,' ',applicants_personal.lastname,' ',applicants_personal.suffix) AS names, 
-                loan_applications.* FROM loan_applications 
-                INNER JOIN applicants_personal ON applicants_personal.applicant_code = loan_applications.client_id 
-                WHERE contract_no='$contract'";
-                $res = mysqli_query($con,$sql);
-                if(mysqli_num_rows($res) > 0){
-                    while($row = mysqli_fetch_assoc($res)) {
-                        $name = $row['names'];
-                        // $name = $row['name'];
-                    }
-                }
-            }
-        }
-    }else{
-        $sql = "SELECT CONCAT(applicants_personal.firstname,' ',applicants_personal.middlename,' ',applicants_personal.lastname,' ',applicants_personal.suffix) AS names, 
-        loan_applications.* FROM loan_applications 
-        INNER JOIN applicants_personal ON applicants_personal.applicant_code = loan_applications.client_id 
-        WHERE contract_no='$contract'";
-        $res = mysqli_query($con,$sql);
-        if(mysqli_num_rows($res) > 0){
-            while($row = mysqli_fetch_assoc($res)) {
-                $name = $row['names'];
-                // $name = $row['name'];
-            }
+    $sql = "SELECT CONCAT(applicants_personal.firstname,' ',applicants_personal.middlename,' ',applicants_personal.lastname,' ',applicants_personal.suffix) as name, loan_applications.* from loan_applications inner join applicants_personal on applicants_personal.applicant_code = loan_applications.client_id where contract_no='$contract'";
+    $res = mysqli_query($con,$sql);
+    if(mysqli_num_rows($res) > 0){
+        while($row = mysqli_fetch_assoc($res)) {
+            $name = $row['name'];
+            // $name = $row['name'];
         }
     }
-
-    
 
 }else{
     header('location:loan_credit_investigation.php');
@@ -132,85 +103,79 @@ if(isset($_GET['contract'])){
                                                 <div class="row">
                                                     <div class="col-lg-12">
                                                         <center>
-                                                            <h3><b>Questionnaire | For Co-worker</b></h3>
+                                                            <h3><b>Credit Investigation | Questionnaire</b></h3>
                                                         </center>
                                                         <hr>
                                                     </div>
                                                     <div class="col-lg-12">
-                                                        <div class="col-lg-4 col-sm-12" align="left">
+                                                        <div class="col-lg-4">
+                                                            <h5>Name of Borrower: &nbsp;<b><?php echo $name;?></b></h5>
+                                                        </div>
+                                                        <div class="col-lg-4" align="right">
                                                             <h5>Contract No.: <b><?php echo $contract;?></b></h5>
                                                         </div>
-                                                        <div class="col-lg-4 col-sm-12" align="center">
-                                                            <h5>Borrower: <b><?php echo $name;?></b></h5>
-                                                        </div>
-                                                        <div class="col-lg-4 col-sm-12" align="right">
+                                                        <div class="col-lg-4" align="right">
                                                             <h5>Date: <b><?php echo date('F d, Y');?></b></h5>
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-12" align="center">
-                                                            <hr>
-                                                            <h3>Questionnaire | For Co-worker</h3>
-                                                            <br>
-                                                        </div>
                                                     <br><br>
 
-                                                    <!-- <div class="col-lg-12"><hr></div> -->
+                                                    <div class="col-lg-12">
+                                                        <hr>
+                                                    </div>
 
-                                                    <!-- <div class="col-lg-12"><br><br></div> -->
+                                                    <div class="col-lg-12"><i style="color:red;">NOTE: All fields are
+                                                            required.</i><br><br></div>
 
-                                                    <form role="form" action="save_questionnaire_process.php"
-                                                        method="post">
-                                                        <input type="text" name="contract"
-                                                            value="<?php echo $contract?>" hidden>
-                                                        <!-- <input type="text" name="client_id" value="<?php echo $cid?>" hidden> -->
-                                                        <?php
-                                                        $questions = "SELECT * FROM questions WHERE question_id>30 ORDER BY question_id ASC ";
+                                                    <!-- <form role="form" action="save_questionnaire_process.php" method="post"> -->
+                                                    <input type="text" name="contract" value="<?php echo $contract?>"
+                                                        hidden>
+                                                    <!-- <input type="text" name="client_id" value="<?php echo $cid?>" hidden> -->
+                                                    <!-- $questions = "select * From questions where question_id>29 order by question_id asc "; -->
+                                                    <div class="col-lg-12" align="center">
+                                                        <hr>
+                                                        <h4>Questionnaire | For Co-worker</h4>
+                                                    </div>
+                                                    <?php
+                                                        $questions = "select * From questions where question_id>30 order by question_id asc ";
                                                         $qres = mysqli_query($con,$questions);
                                                         if(mysqli_num_rows($qres) > 0){
                                                             while($row = mysqli_fetch_assoc($qres)) {
                                                                 ?>
+                                                    <div class="col-lg-12">
                                                         <div class="col-lg-12">
-                                                            <div class="col-lg-12">
-                                                                <div class="form-group">
-                                                                    <label><?php echo $row['question_id']?>.
-                                                                        <?php echo $row['question']?></label>
-                                                                    <input type="text" class="form-control"
-                                                                        name="q<?php echo $row['question_id']?>"
-                                                                        placeholder="<?php echo $row['question']?>"
-                                                                        required>
-                                                                </div>
+                                                            <div class="form-group">
+                                                                <label><?php echo $row['question_id']?>.
+                                                                    <?php echo $row['question']?></label>
+                                                                <input type="text" class="form-control"
+                                                                    name="q<?php echo $row['question_id']?>" value="<?php 
+                                                                                    $answer = "select * from answers where contract_no='$contract'";
+                                                                                    $res_ans = mysqli_query($con,$answer);
+                                                                                    if(mysqli_num_rows($res_ans) > 0){
+                                                                                        while($row2 = mysqli_fetch_assoc($res_ans)) {
+                                                                                            echo $row2['question'.$row['question_id']];
+                                                                                        }
+                                                                                    }
+                                                                                ?>" disabled required>
                                                             </div>
                                                         </div>
-                                                        <?php
+                                                    </div>
+                                                    <?php
                                                             }
                                                         }
                                                     ?>
-                                                        <div class="col-lg-12" align="right"><br>
-                                                            <button onclick="" class="btn btn-primary" name="submit_coworker">
-                                                                <i class="fa fa-send" aria-hidden="true"
-                                                                    title="Copy to use save"></i> Submit
-                                                            </button>
-                                                            <!-- <button type="reset" class="btn btn-warning">Reset Button</button> -->
-                                                        </div>
-
-                                                    </form>
-
+                                                    <!-- </form> -->
                                                 </div>
                                                 <!-- /.row (nested) -->
                                             </div>
                                             <!-- /.panel-body -->
                                         </div>
                                         <!-- /.panel -->
-
                                     </div>
-
                                 </div>
                             </div>
                         </div>
                         <!-- /.panel -->
-                    </div>
-                    <div class="col-lg-12">
-
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
@@ -219,10 +184,8 @@ if(isset($_GET['contract'])){
             <!-- /.container-fluid -->
         </div>
         <!-- /#page-wrapper -->
-
     </div>
     <!-- /#wrapper -->
-
     <!-- jQuery -->
     <script src="../js/jquery.min.js"></script>
 
@@ -235,13 +198,7 @@ if(isset($_GET['contract'])){
     <!-- Custom Theme JavaScript -->
     <script src="../js/startmin.js"></script>
     <script>
-
-
-
-
-
     </script>
-
 </body>
 
 </html>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 25, 2023 at 09:09 AM
+-- Generation Time: Aug 25, 2023 at 08:04 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.1.17
 
@@ -250,7 +250,40 @@ INSERT INTO `activity_logs` (`log_id`, `user_id`, `name`, `activity`, `date_time
 (208, 1, 'Kevin Fontanoza', 'Approved CI', '2023-08-24 15:33:36'),
 (209, 1, 'Kevin Fontanoza', 'Logged out', '2023-08-24 15:36:44'),
 (210, 1, 'Kevin Fontanoza', 'Logged in', '2023-08-24 19:12:36'),
-(211, 1, 'Kevin Fontanoza', 'Approved CI', '2023-08-24 21:19:26');
+(211, 1, 'Kevin Fontanoza', 'Approved CI', '2023-08-24 21:19:26'),
+(212, 1, 'Kevin Fontanoza', 'Reject CI', '2023-08-25 20:12:29'),
+(213, 1, 'Kevin Fontanoza', 'Approved CI', '2023-08-25 21:01:10'),
+(214, 0, '', 'Answered Relative Questionnaire: AMG001000000220230806085324', '2023-08-25 21:19:54'),
+(215, 1, 'Kevin Fontanoza', 'Answered Coworker Questionnaire: AMG001000000220230806085324', '2023-08-25 21:20:03'),
+(216, 0, '', 'Answered Relative Questionnaire: AMG001000000220230806085324', '2023-08-25 22:15:24'),
+(217, 1, 'Kevin Fontanoza', 'Answered Coworker Questionnaire: AMG001000000220230806085324', '2023-08-25 22:15:33'),
+(218, 1, 'Kevin Fontanoza', 'Reject CI', '2023-08-25 22:21:53'),
+(219, 1, 'Kevin Fontanoza', 'Approved CI', '2023-08-25 22:24:36'),
+(220, 1, 'Kevin Fontanoza', 'Reject CI', '2023-08-25 22:25:21'),
+(221, 1, 'Kevin Fontanoza', 'Approved CI', '2023-08-25 22:31:04'),
+(222, 1, 'Kevin Fontanoza', 'Approved CI', '2023-08-25 22:31:58'),
+(223, 1, 'Kevin Fontanoza', 'Approved CI', '2023-08-25 22:34:11'),
+(224, 1, 'Kevin Fontanoza', 'Approved CI', '2023-08-25 22:34:47'),
+(225, 1, 'Kevin Fontanoza', 'Approved CI', '2023-08-25 22:35:19'),
+(226, 1, 'Kevin Fontanoza', 'Approved CI', '2023-08-25 22:35:28'),
+(227, 0, '', 'Answered Relative Questionnaire: AMG001000000220230806085324', '2023-08-26 01:27:38'),
+(228, 1, 'Kevin Fontanoza', 'Answered Coworker Questionnaire: AMG001000000220230806085324', '2023-08-26 01:27:45'),
+(229, 0, '', 'Answered Relative Questionnaire: AMG001000000220230806085324', '2023-08-26 01:31:44'),
+(230, 0, '', 'Answered Relative Questionnaire: AMG001000000220230806085324', '2023-08-26 01:35:29'),
+(231, 1, 'Kevin Fontanoza', 'Answered Coworker Questionnaire: AMG001000000220230806085324', '2023-08-26 01:40:27'),
+(232, 0, '', 'Answered Relative Questionnaire: AMG001000000220230806085324', '2023-08-26 01:41:26'),
+(233, 0, '', 'Answered Relative Questionnaire: AMG001000000220230806085324', '2023-08-26 01:43:41'),
+(234, 1, 'Kevin Fontanoza', 'Answered Coworker Questionnaire: AMG001000000220230806085324', '2023-08-26 01:43:49'),
+(235, 0, '', 'Answered Relative Questionnaire: AMG001000000220230806085324', '2023-08-26 01:54:02'),
+(236, 1, 'Kevin Fontanoza', 'Approved CI', '2023-08-26 01:54:05'),
+(237, 0, '', 'Answered Relative Questionnaire: AMG001000000220230806085324', '2023-08-26 01:55:44'),
+(238, 1, 'Kevin Fontanoza', 'Approved CI', '2023-08-26 01:55:48'),
+(239, 0, '', 'Answered Relative Questionnaire: AMG001000000220230806085324', '2023-08-26 01:56:56'),
+(240, 1, 'Kevin Fontanoza', 'Answered Coworker Questionnaire: AMG001000000220230806085324', '2023-08-26 01:58:01'),
+(241, 1, 'Kevin Fontanoza', 'Approved CI', '2023-08-26 01:58:15'),
+(242, 1, 'Kevin Fontanoza', 'Reject CI', '2023-08-26 02:00:09'),
+(243, 1, 'Kevin Fontanoza', 'Approved CI', '2023-08-26 02:01:12'),
+(244, 1, 'Kevin Fontanoza', 'Reject CI', '2023-08-26 02:04:01');
 
 -- --------------------------------------------------------
 
@@ -329,9 +362,7 @@ CREATE TABLE `answers` (
 --
 
 INSERT INTO `answers` (`questionnaire_id`, `contract_no`, `question1`, `question2`, `question3`, `question4`, `question5`, `question6`, `question7`, `question8`, `question9`, `question10`, `question11`, `question12`, `question13`, `question14`, `question15`, `question16`, `question17`, `question18`, `question19`, `question20`, `question21`, `question22`, `question23`, `question24`, `question25`, `question26`, `question27`, `question28`, `question29`, `question30`, `question31`, `question32`, `question33`, `question34`, `question35`, `question36`, `question37`, `question38`, `question39`, `question40`, `question41`, `question42`, `question43`, `question44`, `question45`, `question46`, `question47`, `question48`, `question49`, `question50`, `question51`, `question52`, `question53`, `question54`, `question55`, `question56`, `question57`, `question58`, `question59`, `question60`, `date`) VALUES
-(1, 'AMG001000000120230707074726', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 'ss', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', '2023-07-27 01:45:18'),
-(2, 'AMG001000000120230809085802', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'aa', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'aa', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', '2023-08-05 16:36:21'),
-(3, 'AMG001000000220230806085324', 'as', 's', 'a', 's', 's', 's', 's', 's', 's', 's', 'a', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', '2023-08-24 12:59:15');
+(1, 'AMG001000000220230806085324', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', '2023-08-26 01:56:56');
 
 -- --------------------------------------------------------
 
@@ -915,7 +946,7 @@ CREATE TABLE `loan_applications` (
 
 INSERT INTO `loan_applications` (`loan_id`, `contract_no`, `client_id`, `loan_type`, `loan_duration`, `loan_amount`, `interest_amount`, `other_fee`, `total_cashout`, `monthly_amortization`, `mop`, `ob`, `udi_percentage`, `udi_value`, `interest_percentage`, `application_date`, `ci_status`, `ci_by`, `ci_remarks`, `ci_date`, `approval`, `processed_by`, `date_flagged`, `remarks`, `paid`, `loan_status`, `process_status`, `effective_date`) VALUES
 (1, 'AMG001000000120230810083023', 'AMG0010000001', 1, 4, 88000, 0, 500, 60220, 11000, '2', 0, 25, 22000, 8, '2023-08-23 16:01:30', 0, '', '', NULL, 0, '', NULL, '', 0, '', 0, '0000-00-00'),
-(2, 'AMG001000000220230806085324', 'AMG0010000002', 1, 3, 48000, 0, 500, 32620, 8000, '2', 0, 25, 12000, 8, '2023-08-24 12:56:53', 1, 'Kevin Fontanoza', 'Good reasons', '2023-08-24 15:19:26', 0, '', NULL, '', 0, '', 0, '0000-00-00');
+(2, 'AMG001000000220230806085324', 'AMG0010000002', 1, 3, 48000, 0, 500, 32620, 8000, '2', 0, 25, 12000, 8, '2023-08-24 12:56:53', 0, '', '', NULL, 0, '', NULL, '', 0, '', 0, '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -1268,13 +1299,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `activity_logs`
 --
 ALTER TABLE `activity_logs`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=212;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=245;
 
 --
 -- AUTO_INCREMENT for table `answers`
 --
 ALTER TABLE `answers`
-  MODIFY `questionnaire_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `questionnaire_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `applicants_child`

@@ -18,6 +18,8 @@ class Schedule extends DbCon {
     public $salaryPeriod;
     public $date;
     public $ciRemarks;
+    public $monthlyInterest;
+    public $cashOut;
     
 
 
@@ -45,10 +47,12 @@ class Schedule extends DbCon {
         $this->applicationDate = $result['application_date']??null;
         $this->applicationDate = date_format(new DateTime($this->applicationDate), "F d, Y ");
         $this->ciRemarks = $result['ci_remarks']??$defaultMsg;
+        $this->monthlyInterest = $result['udi_percentage']??null;
+        $this->cashOut = $result['total_cashout']??null;
 
         
         $this->mop();
-        $this->getSalaryPeriod();
+        //$this->getSalaryPeriod();
         $this->loadTable();
         $this->loanType();
     }
@@ -150,13 +154,13 @@ class Schedule extends DbCon {
         }
     }
     
-    private function getSalaryPeriod(){
-        $sql = "SELECT salary_period FROM applicants_work WHERE applicant_code = ?";
-        $stmt = $this->connect()->prepare($sql);
-        $stmt->execute([$this->applicantCode]);
-        $result = $stmt->fetchColumn();
-        $this->salaryPeriod = $result;
-    }
+    // private function getSalaryPeriod(){
+    //     $sql = "SELECT salary_period FROM applicants_work WHERE applicant_code = ?";
+    //     $stmt = $this->connect()->prepare($sql);
+    //     $stmt->execute([$this->applicantCode]);
+    //     $result = $stmt->fetchColumn();
+    //     $this->salaryPeriod = $result;
+    // }
 
     public function setStartDate($date) {
 
@@ -176,6 +180,13 @@ class Schedule extends DbCon {
         $stmt = $this->connect()->prepare($sql);
         $stmt->execute([$status, $this->clientID]); 
 
+    }
+
+    public function updateLoanDetails($terms, $lamt, $cashout, $amortAmount, $udiValue){
+        $sql = "UPDATE loan_applications SET loan_duration = ?, loan_amount = ?, total_cashout = ?, monthly_amortization = ?, udi_value = ?
+        WHERE contract_no = ?";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute([$terms, $lamt, $cashout, $amortAmount, $udiValue, $this->clientID]); 
     }
 
 

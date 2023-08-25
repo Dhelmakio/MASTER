@@ -89,7 +89,7 @@ if($_SESSION['user_id']){
                                                                 <div class="row">
                                                                     <?php
                                                                     include '../config/conn.php';
-                                                                    $sql = "SELECT * FROM collection WHERE id = '$id'";
+                                                                    $sql = "SELECT * FROM collection WHERE collection_id = '$id'";
                                                                     $result = mysqli_query($con, $sql);
                                                                     foreach($result as $row){
                                                                     ?>
@@ -100,7 +100,7 @@ if($_SESSION['user_id']){
                                                                                 <div class="form-group">
                                                                                     <input type="hidden"
                                                                                         class="form-control" name="id"
-                                                                                        value="<?php echo $row['id'] ?>">
+                                                                                        value="<?php echo $row['collection_id'] ?>">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-lg-6">

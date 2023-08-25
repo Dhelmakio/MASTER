@@ -95,7 +95,7 @@ if($_SESSION['user_id']){
                                                 </td>
                                                 <td class="text-center">
                                                     <a
-                                                        href="setting_processing_update.php?id=<?php echo $rows['id'];?>">
+                                                        href="setting_processing_update.php?id=<?php echo $rows['processing_id'];?>">
                                                         <button type="button" class="btn btn-success"
                                                             data-toggle="tooltip" data-placement="top" title="Update">
                                                             <i class="fa fa-pencil" aria-hidden="true"></i> Update

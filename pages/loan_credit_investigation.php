@@ -60,10 +60,8 @@ if(!isset($_SESSION['user_id'])){
                 </div>
                 <!-- /.row -->
                 <div class="row">
-
                     <div class="col-lg-12">
                         <div class="panel panel-default">
-
                             <!-- /.panel-heading -->
                             <div class="panel-body">
                                 <div class="table-responsive">
@@ -74,7 +72,7 @@ if(!isset($_SESSION['user_id'])){
                                                 <th class="text-center">CONTRACT NO.</th>
                                                 <th class="text-center">NAME</th>
                                                 <th class="text-center">PROMISSORY NOTE (PN)</th>
-                                                <th class="text-center">DATE OF APPLICATION</th>
+                                                <th class="text-center">APPLICATION DATE</th>
                                                 <th class="text-center">LOCATION</th>
                                                 <th class="text-center">INFORMATION</th>
                                                 <th class="text-center">QUESTIONNAIRE (ACTIONS)</th>
@@ -108,26 +106,105 @@ if(!isset($_SESSION['user_id'])){
                                                 <td class="text-center"><?php echo date('F d, Y',strtotime($adate));?>
                                                 </td>
                                                 <td style="text-align:center;"><a class="btn btn-primary"
-                                                        href="<?php echo $row['map_url'];?>" target="_blank"><i
-                                                            class="fa fa-map"></i> View Map</a></td>
+                                                        href="<?php echo $row['map_url'];?>" target="_blank">View <i
+                                                            class="fa fa-map"></i> </a></td>
                                                 <td style="text-align:center;"><a class="btn btn-info"
-                                                        href="registry_applicant_view.php?id=<?php echo $cid;?>"><i
-                                                            class="fa fa-eye"></i> View info</td>
+                                                        href="registry_applicant_view.php?id=<?php echo $cid;?>">View <i
+                                                            class="fa fa-eye"></i> </td>
                                                 <td style="text-align:center">
                                                     <a
                                                         href="loan_credit_investigation_validate.php?contract=<?php echo $contract;?>">
                                                         <button type="button" class="btn btn-warning btn-sml">
-                                                            For Relative <i class="fa fa-long-arrow-right"
+                                                            Relative <i class="fa fa-long-arrow-right"
                                                                 aria-hidden="true" title="Copy to use save"></i>
                                                         </button>
                                                     </a>
                                                     <a
                                                         href="loan_credit_investigation_validate_coworker.php?contract=<?php echo $contract;?>">
                                                         <button type="button" class="btn btn-warning btn-sml">
-                                                            For Co-worker <i class="fa fa-long-arrow-right"
+                                                            Co-worker <i class="fa fa-long-arrow-right"
                                                                 aria-hidden="true" title="Copy to use save"></i>
                                                         </button>
                                                     </a>
+                                                    
+                                                    <?php
+                                                    $code = "SELECT * FROM answers WHERE contract_no = '$contract'";
+                                                    $code_res = mysqli_query($con,$code);
+                                                    if(mysqli_num_rows($code_res) > 0){
+                                                        while($row = mysqli_fetch_assoc($code_res)) {
+                                                    ?>
+                                                    <button type="button" class="btn btn-success btn-sml"
+                                                        data-toggle="modal"
+                                                        data-target="#recommend<?php echo $contract?>">
+                                                        Recommendation
+                                                    </button>
+                                                    <?php
+                                                        }
+                                                    }else{
+                                                    ?>
+                                                    <button type="button" class="btn btn-success btn-sml"
+                                                        data-toggle="modal" disabled
+                                                        data-target="#recommend<?php echo $contract?>">
+                                                        Recommendation
+                                                    </button>
+                                                    <?php 
+                                                    }
+                                                     ?>
+                                                    <div class="modal fade" id="recommend<?php echo $contract?>"
+                                                        tabindex="-1" role="dialog" data-backdrop="static"
+                                                        aria-labelledby="myModalLabel" aria-hidden="true" align="left">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close"
+                                                                        data-dismiss="modal"
+                                                                        aria-hidden="true">&times;</button>
+                                                                    <h4 class="modal-title text-center"
+                                                                        id="myModalLabel">
+                                                                        PASS OR FAIL?</h4>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <!-- <div class=""> -->
+                                                                    <form
+                                                                        action="loan_credit_investigation_pass.php?contract=<?php echo $contract?>"
+                                                                        method="POST">
+                                                                        <div class="row">
+                                                                            <div class="col-lg-12">
+                                                                                <div class="form-group">
+                                                                                    <label><span style="color:red">*
+                                                                                        </span>Remarks</label><br>
+                                                                                    <input name="contract"
+                                                                                        value="<?php echo $contract;?>"
+                                                                                        type="hidden">
+                                                                                    <textarea style="width: 315%;"
+                                                                                        name="remarks" type="text"
+                                                                                        class="form-control" col="10"
+                                                                                        row="2" required
+                                                                                        placeholder="Remarks"></textarea>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <br>
+                                                                        <div class="text-center">
+                                                                            <button class="btn btn-danger"
+                                                                                name="submit_fail_remarks"
+                                                                                type="submit">
+                                                                                FAIL <i class="fa fa-times" aria-hidden="true"></i> 
+                                                                            </button>
+                                                                            <button class="btn btn-primary"
+                                                                                name="submit_pass_remarks"
+                                                                                type="submit">
+                                                                                PASS <i class="fa fa-check" aria-hidden="true"></i>
+                                                                            </button>
+                                                                        </div>
+                                                                    </form>
+                                                                    <!-- </div> -->
+                                                                </div>
+                                                            </div>
+                                                            <!-- /.modal-content -->
+                                                        </div>
+                                                        <!-- /.modal-dialog -->
+                                                    </div>
                                                 </td>
                                             </tr>
                                             <?php
