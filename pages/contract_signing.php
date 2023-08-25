@@ -73,7 +73,8 @@ if(isset($_GET['id'])){
 
     <!-- Custom CSS -->
     <link href="../css/startmin.css" rel="stylesheet">
-
+    <link href="../css/toast/beautyToast.css" rel="stylesheet">
+    <link href="../css/loader.css" rel="stylesheet">
     <!-- Custom Fonts -->
     <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
@@ -100,8 +101,9 @@ if(isset($_GET['id'])){
                     </div>
                     <div class="col-lg-6 text-right">
                         <br>
-                        <h1><button class="btn btn-md btn-primary" type="button"
-                                onclick="process()"
+                        <h1><button class="btn btn-md btn-primary" type="button" id="print"
+                                class="btn btn-lg btn-primary"><i class="fa fa-print"></i> Print Docs</button>
+                            <button class="btn btn-md btn-primary" type="button" onclick="process()"
                                 class="btn btn-lg btn-primary"><i class="fa fa-print"></i> Process Loan</button></h1>
                     </div>
                     <!-- /.col-lg-12 -->
@@ -164,16 +166,17 @@ if(isset($_GET['id'])){
                                                     ?>
                                                 <br><br>
                                                 <div class="col-lg-11" style="font-size:15px;"><br>
-                                                    <div class="col-lg-3">Employee Status: </div>
+                                                    <div class="col-lg-3">Employment Status: </div>
                                                     <div class="col-lg-3"><label>
                                                             <?php echo $loan->clientEmpStatus; ?></label></div>
-                                                    <div class="col-lg-3">Principal: </div>
+                                                    <div class="col-lg-3">Promissory Note (PN): </div>
                                                     <div class="col-lg-3"><label>₱
                                                             <?php echo number_format(floatval($sched->principal), 2); ?></label>
                                                     </div>
-                                                    <div class="col-lg-3">Income Earning: </div>
+                                                    <div class="col-lg-3">Source of Income: </div>
                                                     <div class="col-lg-3"><label>
-                                                            <?php echo $loan->incomeEarning; ?></label></div>
+                                                            <?php echo strtoupper($loan->incomeEarning); ?></label>
+                                                    </div>
                                                     <div class="col-lg-3">Interest (<?=$sched->interestPer?>%):
                                                     </div>
                                                     <div class="col-lg-3"><label>₱
@@ -190,21 +193,44 @@ if(isset($_GET['id'])){
                                                     <div class="col-lg-3"><label>
                                                             <?= $sched->loanType ?></label>
                                                     </div>
+                                                    <div class="col-lg-3">Collection Fee: </div>
+                                                    <div class="col-lg-3"><label>₱
+                                                            <?php echo number_format((floatval($loan->collectionFee)/100 * floatval($sched->principal)), 2); ?></label>
+                                                    </div>
                                                     <div class="col-lg-3">Amortization Frequency: </div>
                                                     <div class="col-lg-3"><label>
                                                             <?= $sched->amortFrequency.'LY' ?></label>
                                                     </div>
-
+                                                    <div class="col-lg-3">Processing Fee: </div>
+                                                    <div class="col-lg-3"><label>₱
+                                                            <?php echo number_format((floatval($loan->processingFee)/100 * floatval($sched->principal)), 2); ?></label>
+                                                    </div>
+                                                    <div class="col-lg-3">Loan Terms: </div>
+                                                    <div class="col-lg-3"><label>
+                                                            <?php echo $sched->duration.' MONTHS'; ?></label></div>
+                                                    <div class="col-lg-3">Amortization Amount: </div>
+                                                    <div class="col-lg-3"><label>₱
+                                                            <?php echo number_format(floatval($sched->amortAmount), 2); ?></label>
+                                                    </div>
                                                 </div>
                                                 <div class="col-lg-12">
                                                     <hr>
+                                                </div>
+                                                <div class="col-lg-12" align="left"><b><i style="color:green;">NOTE:
+                                                            <?= $sched->ciRemarks ?></i></b><br><br>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-lg-12" id="forTableDisplay">
-                                               
+                                                <center>
+                                                    <div class="orbit"
+                                                        style="display:none;position:absolute;left:50%;top:50%;"
+                                                        id="orbit">
+                                                    </div>
+                                                </center>
                                             </div>
+
                                         </div>
                                         <div class="row">
                                             <div class="col-lg-3">
@@ -236,12 +262,44 @@ if(isset($_GET['id'])){
         </div>
         <!-- /.row -->
     </div>
+
     <!-- /.container-fluid -->
     </div>
     <!-- /#page-wrapper -->
 
     </div>
     <!-- /#wrapper -->
+
+    <!-- delete modal -->
+    <div class="modal fade text-left" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p>
+                        <center><i class="fa fa-fw fa-5x" style="color:#337ab7;" aria-hidden="true"
+                                title="Copy to use archive">&#xf164</i>
+                        </center>
+                        <center>
+                            <h3>Process Loan?</h3>
+                        </center>
+
+                    </p>
+                </div>
+                <div class="modal-footer" style="padding: 5px;">
+                    <!-- <form action="#" method="post">
+                        <button type="button" class="btn btn-default text-small" data-dismiss="modal">Cancel</button>
+                        <input type="hidden" name="id" value="<?=  $display['applicant_code'] ?>">
+                        <button type="submit" name="delete" class="btn btn-danger text-small">Yes</button>
+                    </form> -->
+                    <button type="button" class="btn btn-default text-small" data-dismiss="modal">Cancel</button>
+
+                    <button type="button" id="process" class="btn btn-primary text-small">Confirm</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+    </div>
 
     <!-- jQuery -->
     <script src="../js/jquery.min.js"></script>
@@ -254,6 +312,8 @@ if(isset($_GET['id'])){
 
     <!-- Custom Theme JavaScript -->
     <script src="../js/startmin.js"></script>
+    
+    <script src="../css/toast/beautyToast.js"></script>
 
 </body>
 <?php require_once('footer.php'); ?>
@@ -268,41 +328,109 @@ $('#effective_date').attr('min', today);
 </script>
 
 <script>
-    function process(){
-       if($('#effective_date').val() != ""){
+function process() {
 
-        window.open('generate_contract.php?id=<?= $client_id ?>&contract=<?= $_GET['cn'] ?>', '_blank');
-        window.open('generate_promissory_note.php?id=<?= $client_id ?>&start='+$('#effective_date').val(), '_blank');
-        window.open('generate_disclosure.php?id=<?= $client_id ?>', '_blank');
-        window.location.href='loan_approval.php';
-        
-       }else{
-        alert("Please set the effectivity date.");
-       }
+    if ($('#effective_date').val() != "") {
+
+        // window.open('generate_contract.php?id=<?= $client_id ?>&contract=<?= $_GET['cn'] ?>', '_blank');
+        // window.open('generate_promissory_note.php?id=<?= $client_id ?>&start=' + $('#effective_date').val(), '_blank');
+        // window.open('generate_disclosure.php?id=<?= $client_id ?>', '_blank');
+        // window.location.href = 'loan_approval.php';
+
+        $('#modal').modal('show');
+
+    } else {
+
+        alert("Effectivity date must be specified.");
 
     }
 
-    let objTo = document.getElementById('forTableDisplay');
-    let divtest = document.createElement("div");
-                
-    $('#effective_date').change(() => {
+}
 
-        $.ajax({
-            type: 'POST',
-            url: '../request/req_paysched.php',
-            data: {contract : $('#contract').val(), startDate : $('#effective_date').val()},
-            dataType: 'json',
-            success : (response) => {
-                console.log(response.table);
-              
-                divtest.innerHTML = response.table;
-                objTo.appendChild(divtest);
-            },
-            error: (xhr, status, error) => {
-                alert(xhr.responseText);
-            }
-        });
-    })
+let objTo = document.getElementById('forTableDisplay');
+let divtest = document.createElement("div");
+
+$('#effective_date').change(() => {
+
+    $.ajax({
+        type: 'POST',
+        url: '../request/req_paysched.php',
+        data: {
+            contract: $('#contract').val(),
+            startDate: $('#effective_date').val()
+        },
+        dataType: 'json',
+        success: (response) => {
+            //console.log(response.table);
+            divtest.innerHTML = response.table;
+            objTo.appendChild(divtest);
+        },
+        error: (xhr, status, error) => {
+            alert(xhr.responseText);
+        }
+    });
+
+})
+
+$('#print').click(() => {
+    if ($('#effective_date').val() != "") {
+
+    window.open('generate_contract.php?id=<?= $client_id ?>&contract=<?= $_GET['cn'] ?>', '_blank');
+    window.open('generate_promissory_note.php?id=<?= $client_id ?>&start=' + $('#effective_date').val(), '_blank');
+    window.open('generate_disclosure.php?id=<?= $client_id ?>', '_blank');
+    //window.location.href = 'loan_approval.php';
+
+    //$('#modal').modal('show');
+
+    } else {
+
+    alert("Effectivity date must be specified.");
+
+    }
+});
+
+$('#process').click(() => {
+
+    $('#orbit').css('display', 'block');
+    $('#modal').modal('hide');
+
+    $.ajax({
+        type: 'POST',
+        url: '../request/req_paysched.php',
+        data: {
+            contract: $('#contract').val(),
+            status: 1
+        },
+        dataType: 'json',
+        success: (response) => {
+            
+            setTimeout(() => {
+                
+                setTimeout(() => {
+                    $('#orbit').css('display', 'none');
+                }, 300);
+                beautyToast.success({
+                    title: '',
+                    message: response.msg,
+                    darkTheme: false,
+                    iconColor: 'green',
+                    iconWidth: 24,
+                    iconHeight: 24,
+                    animationTime: 100,
+                });
+
+                setTimeout(() => {
+                    window.location.replace(
+                        `loan_approval.php`);
+                }, 2500);
+            }, 2000);
+        },
+        error: (xhr, status, error) => {
+            alert(xhr.responseText);
+        }
+    });
+
+})
 </script>
 
 </html>

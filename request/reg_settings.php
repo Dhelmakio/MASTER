@@ -30,7 +30,7 @@ if(isset($_POST['submit_collection'])){
     $id = $_POST['id'];
     $collection = $_POST['collection'];
 
-    $sql = "UPDATE collection SET collection_percentage = '$collection' WHERE id = '$id'";
+    $sql = "UPDATE collection SET collection_percentage = '$collection' WHERE collection_id = '$id'";
     $result = mysqli_query($con, $sql);
 
     if($result){
@@ -42,7 +42,7 @@ if(isset($_POST['submit_processing'])){
     $id = $_POST['id'];
     $processing = $_POST['processing'];
 
-    $sql = "UPDATE processing SET processing_percentage = '$processing' WHERE id = '$id'";
+    $sql = "UPDATE processing SET processing_percentage = '$processing' WHERE processing_id = '$id'";
     $result = mysqli_query($con, $sql);
 
     if($result){

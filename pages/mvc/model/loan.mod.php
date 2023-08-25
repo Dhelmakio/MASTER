@@ -172,7 +172,7 @@ class Loan extends DbCon {
     }
 
     public function getCollectionFee(){
-        $sql = "SELECT collection_percentage FROM collection WHERE id = ?";
+        $sql = "SELECT collection_percentage FROM collection WHERE collection_id = ?";
         $stmt = $this->connect()->prepare($sql);
         $stmt->execute([1]);
         $result = $stmt->fetchColumn();
@@ -181,9 +181,9 @@ class Loan extends DbCon {
     }
 
     public function getProcessingFee(){
-        $sql = "SELECT processing_percentage FROM processing WHERE id = ?";
+        $sql = "SELECT processing_percentage FROM processing WHERE processing_id = ?";
         $stmt = $this->connect()->prepare($sql);
-        $stmt->execute([2]);
+        $stmt->execute([1]);
         $result = $stmt->fetchColumn();
         
         $this->processingFee = $result;

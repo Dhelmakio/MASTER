@@ -17,6 +17,8 @@ class Schedule extends DbCon {
     public $applicantCode;
     public $salaryPeriod;
     public $date;
+    public $ciRemarks;
+    
 
 
     public function __construct(String $id){
@@ -25,6 +27,8 @@ class Schedule extends DbCon {
         $stmt = $this->connect()->prepare($sql);
         $stmt->execute([$id]);
         $result = $stmt->fetch();
+
+        $defaultMsg = "Successfully Reviewed by CI";
 
         $this->clientID = $id;
         $this->amortFrequency = $result['mop']??null;
@@ -40,10 +44,11 @@ class Schedule extends DbCon {
         $this->applicantCode = $result['client_id']??null;
         $this->applicationDate = $result['application_date']??null;
         $this->applicationDate = date_format(new DateTime($this->applicationDate), "F d, Y ");
+        $this->ciRemarks = $result['ci_remarks']??$defaultMsg;
 
         
         $this->mop();
-        //$this->getSalaryPeriod();
+        $this->getSalaryPeriod();
         $this->loadTable();
         $this->loanType();
     }
@@ -145,16 +150,33 @@ class Schedule extends DbCon {
         }
     }
     
-    // private function getSalaryPeriod(){
-    //     $sql = "SELECT monthly_gross FROM applicants_work WHERE applicant_code = ?";
-    //     $stmt = $this->connect()->prepare($sql);
-    //     $stmt->execute([$this->applicantCode]);
-    //     $result = $stmt->fetchColumn();
-    //     $this->salaryPeriod = $result;
-    // }
+    private function getSalaryPeriod(){
+        $sql = "SELECT salary_period FROM applicants_work WHERE applicant_code = ?";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute([$this->applicantCode]);
+        $result = $stmt->fetchColumn();
+        $this->salaryPeriod = $result;
+    }
 
     public function setStartDate($date) {
+
+        $sql = "UPDATE loan_applications SET effective_date = ?
+        WHERE contract_no = ?";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute([$date, $this->clientID]); 
+
         $this->startDate = $date;
+
     }
+
+    public function setProcessStatus($status) {
+
+        $sql = "UPDATE loan_applications SET process_status = ?
+        WHERE contract_no = ?";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute([$status, $this->clientID]); 
+
+    }
+
 
 }
