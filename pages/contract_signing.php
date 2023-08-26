@@ -669,16 +669,22 @@ $('#update').click(() => {
             amortAmount = collectionPerCut3;
         }
 
-        if (newPL < 0) {
-            beautyToast.error({
-                title: '',
-                message: 'Promissory note amount is not enough that cause final cash out to a negative value.',
-                darkTheme: false,
-                iconColor: 'red',
-                iconWidth: 24,
-                iconHeight: 24,
-                animationTime: 100,
-            });
+        if (cashout < 0) {
+
+            setTimeout(() => {
+                $('#orbit').css('display', 'none');
+
+                beautyToast.error({
+                    title: '',
+                    message: 'Promissory note amount is not enough that cause final cash out to a negative value.',
+                    darkTheme: false,
+                    iconColor: 'red',
+                    iconWidth: 24,
+                    iconHeight: 24,
+                    animationTime: 100,
+                });
+            }, 1000);
+          
         } else {
 
             $.ajax({
@@ -696,8 +702,31 @@ $('#update').click(() => {
                 dataType: 'json',
                 success: (response) => {
 
+
                     setTimeout(() => {
+                       
                         $('#orbit').css('display', 'none');
+
+                        
+                        if($('#effective_date').val() != ""){
+                            $.ajax({
+                                type: 'POST',
+                                url: '../request/req_paysched.php',
+                                data: {
+                                    contract: $('#contract').val(),
+                                    startDate: $('#effective_date').val()
+                                },
+                                dataType: 'json',
+                                success: (response) => {
+                                    //console.log(response.table);
+                                    divtest.innerHTML = response.table;
+                                    objTo.appendChild(divtest);
+                                },
+                                error: (xhr, status, error) => {
+                                    alert(xhr.responseText);
+                                }
+                            });
+                        }
 
                         //update preview of loan details
                         $('#loan_terms').text(`${duration} MONTHS`);

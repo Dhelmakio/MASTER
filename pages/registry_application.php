@@ -1462,7 +1462,8 @@ if(!isset($_SESSION['user_id'])){
                                                                                         <div class="form-group">
                                                                                             <label><span
                                                                                                     style="color:red">*
-                                                                                                </span>Total Monthly Other
+                                                                                                </span>Total Monthly
+                                                                                                Other
                                                                                                 Income (₱)</label>
                                                                                             <input name="os_income"
                                                                                                 id="os_income"

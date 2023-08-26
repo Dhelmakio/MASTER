@@ -80,7 +80,7 @@ if(!isset($_SESSION['user_id'])){
                                         </thead>
                                         <tbody>
                                             <?php
-                                            //LEFT or INNER?
+                                            //LEFT or INNER? bisag asa basta ma join HAHAHHAHA
                                                 $sql ="SELECT * FROM loan_applications 
                                                 INNER JOIN applicants_personal 
                                                 ON applicants_personal.applicant_code = loan_applications.client_id WHERE loan_applications.ci_status = 0
@@ -112,44 +112,170 @@ if(!isset($_SESSION['user_id'])){
                                                         href="registry_applicant_view.php?id=<?php echo $cid;?>">View <i
                                                             class="fa fa-eye"></i> </td>
                                                 <td style="text-align:center">
+                                                    <?php 
+                                                        $contract = $row['contract_no'];
+                                                        $exists = "SELECT * FROM answers WHERE contract_no='$contract'";
+                                                        $res_ex = mysqli_query($con,$exists);
+                                                        $control;
+                                                        $control2;
+                                                        if(mysqli_num_rows($res_ex) > 0){
+                                                            while($row = mysqli_fetch_assoc($res_ex)) {
+                                                                $control = $row['question31'] == null;
+                                                                $control2 =  $row['question1'] == null;
+                                                            }
+
+                                                            if($control == 1 && $control2 == 1){
+                                                                ?>
                                                     <a
-                                                        href="loan_credit_investigation_validate.php?contract=<?php echo $contract;?>">
+                                                        href="loan_credit_investigation_validate.php?contract=<?php echo $contract ?>">
                                                         <button type="button" class="btn btn-warning btn-sml">
+
                                                             Relative <i class="fa fa-long-arrow-right"
                                                                 aria-hidden="true" title="Copy to use save"></i>
-                                                        </button>
-                                                    </a>
+                                                        </button></a>
+
                                                     <a
-                                                        href="loan_credit_investigation_validate_coworker.php?contract=<?php echo $contract;?>">
+                                                        href="loan_credit_investigation_validate_coworker.php?contract=<?php echo $contract ?>">
                                                         <button type="button" class="btn btn-warning btn-sml">
-                                                            Co-worker <i class="fa fa-long-arrow-right"
+
+                                                            Coworker <i class="fa fa-long-arrow-right"
                                                                 aria-hidden="true" title="Copy to use save"></i>
-                                                        </button>
-                                                    </a>
-                                                    
+                                                        </button></a>
+
+                                                    <button type="button" disabled class="btn btn-success btn-sml"
+                                                        data-toggle="modal"
+                                                        data-target="#recommend<?php echo $contract?>">
+                                                        Recommendation
+                                                    </button>
                                                     <?php
-                                                    $code = "SELECT * FROM answers WHERE contract_no = '$contract'";
-                                                    $code_res = mysqli_query($con,$code);
-                                                    if(mysqli_num_rows($code_res) > 0){
-                                                        while($row = mysqli_fetch_assoc($code_res)) {
+                                                    }else if ($control == 1 && $control2 == 0) {
+                                                   ?>
+                                                    <button type="button" disabled class="btn btn-warning btn-sml">
+                                                        <a
+                                                            href="loan_credit_investigation_validate.php?contract=<?php echo $contract ?>"></a>
+                                                        Relative <i class="fa fa-long-arrow-right"
+                                                            aria-hidden="true" title="Copy to use save"></i>
+                                                    </button>
+
+                                                    <a
+                                                        href="loan_credit_investigation_validate_coworker.php?contract=<?php echo $contract ?>">
+                                                        <button type="button" class="btn btn-warning btn-sml">
+
+                                                            Coworker <i class="fa fa-long-arrow-right"
+                                                                aria-hidden="true" title="Copy to use save"></i>
+                                                        </button></a>
+
+                                                    <button type="button" disabled class="btn btn-success btn-sml"
+                                                        data-toggle="modal"
+                                                        data-target="#recommend<?php echo $contract?>">
+                                                        Recommendation
+                                                    </button>
+                                                    <?php
+                                                    }else if ($control == 0 && $control2 == 1) {
                                                     ?>
+                                                    <a
+                                                        href="loan_credit_investigation_validate.php?contract=<?php echo $contract ?>">
+                                                        <button type="button" class="btn btn-warning btn-sml">
+
+                                                            Validate Relative <i class="fa fa-long-arrow-right"
+                                                                aria-hidden="true" title="Copy to use save"></i>
+                                                        </button></a>
+
+
+                                                    <button type="button" disabled class="btn btn-warning btn-sml">
+                                                        <a
+                                                            href="loan_credit_investigation_validate_coworker.php?contract=<?php echo $contract ?>"></a>
+                                                        Coworker <i class="fa fa-long-arrow-right"
+                                                            aria-hidden="true" title="Copy to use save"></i>
+                                                    </button>
+
+                                                    <button type="button" disabled class="btn btn-success btn-sml"
+                                                        data-toggle="modal"
+                                                        data-target="#recommend<?php echo $contract?>">
+                                                        Recommendation
+                                                    </button>
+                                                    <?php
+                                                    }else if ($control == 0 && $control2 == 0) {
+                                                    ?>
+                                                    <button type="button" disabled class="btn btn-warning btn-sml">
+                                                        <a
+                                                            href="loan_credit_investigation_validate.php?contract=<?php echo $contract ?>"></a>
+                                                        Relative <i class="fa fa-long-arrow-right"
+                                                            aria-hidden="true" title="Copy to use save"></i>
+                                                    </button>
+
+
+                                                    <button type="button" disabled class="btn btn-warning btn-sml">
+                                                        <a
+                                                            href="loan_credit_investigation_validate_coworker.php?contract=<?php echo $contract ?>"></a>
+                                                        Coworker <i class="fa fa-long-arrow-right"
+                                                            aria-hidden="true" title="Copy to use save"></i>
+                                                    </button>
+
+
+
                                                     <button type="button" class="btn btn-success btn-sml"
                                                         data-toggle="modal"
                                                         data-target="#recommend<?php echo $contract?>">
                                                         Recommendation
                                                     </button>
                                                     <?php
-                                                        }
-                                                    }else{
-                                                    ?>
-                                                    <button type="button" class="btn btn-success btn-sml"
-                                                        data-toggle="modal" disabled
+                                                    }
+
+                                                          
+                                                          
+                                                        }else{
+                                                         
+                                                            ?>
+                                                    <a
+                                                        href="loan_credit_investigation_validate.php?contract=<?php echo $contract ?>">
+                                                        <button type="button" class="btn btn-warning btn-sml">
+                                                            Relative <i class="fa fa-long-arrow-right"
+                                                                aria-hidden="true" title="Copy to use save"></i>
+                                                        </button>
+                                                    </a>
+
+                                                    <a
+                                                        href="loan_credit_investigation_validate_coworker.php?contract=<?php echo $contract ?>">
+                                                        <button type="button" class="btn btn-warning btn-sml">
+                                                            Coworker <i class="fa fa-long-arrow-right"
+                                                                aria-hidden="true" title="Copy to use save"></i>
+                                                        </button>
+                                                    </a>
+                                                    <button type="button" disabled class="btn btn-success btn-sml"
+                                                        data-toggle="modal"
                                                         data-target="#recommend<?php echo $contract?>">
                                                         Recommendation
                                                     </button>
+                                                    <?php
+                                                        }
+                                                    ?>
+
+
+                                                    <!-- <?php
+                                                    // $code = "SELECT * FROM answers WHERE contract_no = '$contract'";
+                                                    // $code_res = mysqli_query($con,$code);
+                                                    // if(mysqli_num_rows($code_res) > 0){
+                                                    //     while($row = mysqli_fetch_assoc($code_res)) {
+                                                    ?>
+                                                    <button type="button" class="btn btn-success btn-sml"
+                                                        data-toggle="modal" disabled
+                                                        data-target="#recommend<?php //echo $contract?>">
+                                                        Recommendation
+                                                    </button>
+                                                    <?php
+                                                    //     }
+                                                    // }else{
+                                                    ?>
+                                                    <button type="button" class="btn btn-success btn-sml"
+                                                        data-toggle="modal" disabled
+                                                        data-target="#recommend<?php //echo $contract?>">
+                                                        Recommendation
+                                                    </button>
                                                     <?php 
-                                                    }
-                                                     ?>
+                                                    //}
+                                                     ?> -->
+
                                                     <div class="modal fade" id="recommend<?php echo $contract?>"
                                                         tabindex="-1" role="dialog" data-backdrop="static"
                                                         aria-labelledby="myModalLabel" aria-hidden="true" align="left">
@@ -189,12 +315,14 @@ if(!isset($_SESSION['user_id'])){
                                                                             <button class="btn btn-danger"
                                                                                 name="submit_fail_remarks"
                                                                                 type="submit">
-                                                                                FAIL <i class="fa fa-times" aria-hidden="true"></i> 
+                                                                                FAIL <i class="fa fa-times"
+                                                                                    aria-hidden="true"></i>
                                                                             </button>
                                                                             <button class="btn btn-primary"
                                                                                 name="submit_pass_remarks"
                                                                                 type="submit">
-                                                                                PASS <i class="fa fa-check" aria-hidden="true"></i>
+                                                                                PASS <i class="fa fa-check"
+                                                                                    aria-hidden="true"></i>
                                                                             </button>
                                                                         </div>
                                                                     </form>

@@ -1040,7 +1040,7 @@ if($_SESSION['user_id']){
                                                                                             </select>
                                                                                         </div>
                                                                                     </div>
-                                                                                    <div class="col-lg-6">
+                                                                                    <div class="col-lg-3">
                                                                                         <label for="">Specify:
                                                                                         </label>
                                                                                         <select
@@ -1065,8 +1065,8 @@ if($_SESSION['user_id']){
                                                                                     <!--MASTERRRRRRRRRRRRRRRRRRRRRRRRRR WALA DIAY NA SAVE NI SA DATABASE-->
                                                                                     <div class="col-lg-3">
                                                                                         <div class="form-group">
-                                                                                            <label>Other Loan Monthly
-                                                                                                Amortization (₱)</label>
+                                                                                            <label>Specify Monthly
+                                                                                                Amortization</label>
                                                                                             <input name="sma" id="sma"
                                                                                                 type="text"
                                                                                                 class="form-control text-right input-set-3"
@@ -1081,32 +1081,23 @@ if($_SESSION['user_id']){
                                                                                                 ?>>
                                                                                         </div>
                                                                                     </div>
-                                                                                    <div class="col-lg-12"></div>
                                                                                     <div class="col-lg-3">
                                                                                         <div class="form-group">
                                                                                             <label>Monthly Salary
-                                                                                                (Gross Pay) (₱)</label>
-                                                                                            <input name="grosspay"
+                                                                                                (Net/Gross)</label>
+                                                                                            <input name="ms_salary"
                                                                                                 type="text"
                                                                                                 class="form-control text-right"
+                                                                                                placeholder="₱"
                                                                                                 value="<?= $edit->getClientData($id, 'applicants_work', 'applicant_code', 'monthly_salary')??null; ?>">
                                                                                         </div>
                                                                                     </div>
-                                                                                    <div class="col-lg-3">
-                                                                                        <div class="form-group">
-                                                                                            <label>Monthly Salary
-                                                                                                (Net Pay) (₱)</label>
-                                                                                            <input name="netpay"
-                                                                                                type="text"
-                                                                                                class="form-control text-right"
-                                                                                                value="<?= $edit->getClientData($id, 'applicants_work', 'applicant_code', 'monthly_netpay')??null; ?>">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="col-lg-3">
+                                                                                    <div class="col-lg-12"></div>
+                                                                                    <div class="col-lg-6">
                                                                                         <div class="form-group">
                                                                                             <label>Specify Other
                                                                                                 Source
-                                                                                                of Income </label>
+                                                                                                of Income</label>
                                                                                             <select id="s_specify"
                                                                                                 name="s_specify"
                                                                                                 type="text"
@@ -1128,9 +1119,9 @@ if($_SESSION['user_id']){
                                                                                             </select>
                                                                                         </div>
                                                                                     </div>
-                                                                                    <div class="col-lg-3">
+                                                                                    <div class="col-lg-6">
                                                                                         <div class="form-group">
-                                                                                            <label>Total Monthly Other Source of
+                                                                                            <label>Total Other
                                                                                                 Income (₱)</label>
                                                                                             <input name="os_income"
                                                                                                 id="os_income"
