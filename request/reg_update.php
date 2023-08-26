@@ -51,6 +51,7 @@ require_once('../controller/reg_app.php');
                 $loan_spec = $_POST['loan_spec']??null;
                 $tempLoan = "";
                 $tempBusiness= "";
+                $tempSource="";
                 if($loan_spec == "Salary"){
                         $tempLoan = $loan_spec." Loan";
                 }else if($loan_spec == "Personal"){
@@ -128,6 +129,22 @@ require_once('../controller/reg_app.php');
                 }else if($_POST['business'] == "Mining"){
                         $tempBusiness = $_POST['business']." Company";
                 }
+
+                if($_POST['s_specify'] == "Business"){
+                        $tempSource = $_POST['s_specify'];
+                }else if($_POST['s_specify'] == "Allowance"){
+                        $tempSource = $_POST['s_specify'];
+                }else if($_POST['s_specify'] == "Pension,"){
+                        $tempSource = $_POST['s_specify'];
+                }else if($_POST['s_specify'] == "Commission"){
+                        $tempSource = $_POST['s_specify'];
+                }else if($_POST['s_specify'] == "Part"){
+                        $tempSource = $_POST['s_specify']." time Job";
+                }else if($_POST['s_specify'] == "Allotment"){
+                        $tempSource = $_POST['s_specify'];
+                }else if($_POST['s_specify'] == "Family"){
+                        $tempSource = $_POST['s_specify']." Financial Support";
+                }
                 
                 //personal tab 1
                 $applicant->personal_update($_POST['id'], $_POST['fname']??null,$_POST['mname']??null,$_POST['lname']??null,$_POST['suffix']??null,$_POST['nname']??null,$_POST['gender']??null,
@@ -141,7 +158,7 @@ require_once('../controller/reg_app.php');
                 //work tab 3
                 $applicant->work_update($_POST['id'], $_POST['agency']??null,$_POST['sector']." Sector"??null, $tempBusiness ,$_POST['ca_company']??null,$_POST['location']??null,$_POST['supervisor']??null,
                 $_POST['hr_number']??null,$_POST['date_hired']??null,$_POST['e_status']??null,$_POST['m_salary']??null,$_POST['bank']??null,$_POST['t_card']??null,(($loan != "None") ? $loan.'-'.$tempLoan.'-'.$_POST['sma']: $loan) ,$_POST['grosspay']??null,
-                $_POST['netpay']??null,$_POST['os_income']??null,$_POST['s_specify']??null);
+                $_POST['netpay']??null,$_POST['os_income']??null, $tempSource??null);
                 // //work tab 4
                 $applicant->reference_update($_POST['id'], $tempPurp, $sources, $_POST['facebook']);
                 

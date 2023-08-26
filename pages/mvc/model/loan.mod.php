@@ -56,7 +56,7 @@ class Loan extends DbCon {
         $this->otherMonthlyAmortization = $this->tempExp[2]??0;
 
 
-        $this->getSemiMonthly();
+        //$this->getSemiMonthly();
         $this->getBorrowingCount();
         $this->getBorrowingCount();
         $this->getBorrowingSum();

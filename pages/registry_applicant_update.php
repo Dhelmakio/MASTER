@@ -1120,12 +1120,15 @@ if($_SESSION['user_id']){
                                                                                                 <option value=""
                                                                                                     selected disabled>
                                                                                                     SELECT</option>
-                                                                                                <?php 
+                                                                                            <?php 
                                                                                             $sourceIncome = $edit->getClientData($id, 'applicants_work', 'applicant_code', 'specify')??null;
-                                                                                            $incomeSet = ['None', 'Business', 'Allowance', 'Pension','Commission','Part time job','Allotment', 'Family Financial Support'];
 
+                                                                                            
+                                                                                            //echo "<input type='text' value='".$sourceIncome."' >";
+                                                                                           
+                                                                                            $incomeSet = ['None', 'Business', 'Allowance', 'Pension','Commission','Part time Job','Allotment','Family Financial Support'];
                                                                                             foreach($incomeSet as $key => $val){
-                                                                                              $sourceOf = ($sourceIncome == $val) ? '<option selected value='.$sourceIncome.'>'.$val.'</option>' : '<option value='.$val.'>'.$val.'</option>';
+                                                                                              $sourceOf = ($sourceIncome == $val) ? '<option selected style="background:yellow" value='.$sourceIncome.'>'.$val.'</option>' : '<option style="background:red" value='.$val.'>'.$val.'</option>';
                                                                                              echo $sourceOf;
                                                                                             }
                                                                                             ?>
