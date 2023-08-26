@@ -1715,11 +1715,15 @@ if(!isset($_SESSION['user_id'])){
                                                                                         class="fa fa-arrow-left"></i>
                                                                                     Prev</button>
                                                                             </fieldset>
-                                                                            <fieldset style="height: 300px">
-                                                                                <center>
-                                                                                    <div class="orbit"></div>
-                                                                                </center>
-                                                                            </fieldset>
+                                                                            <center>
+                                                                                <div class="orbit"
+                                                                                    style="display:none;top:50%;left:50%;position:absolute;"
+                                                                                    id="orbit">
+                                                                                </div>
+                                                                            </center>
+                                                                            <!-- <fieldset style="height: 300px">
+                                                                               
+                                                                            </fieldset> -->
                                                                             <textarea id="sigpad" name="signature_image"
                                                                                 style="display: none"></textarea>
                                                                         </form>
@@ -2325,8 +2329,14 @@ if(!isset($_SESSION['user_id'])){
     });
 
     $('#confirm_sig').click(() => {
+        $('#orbit').css('display', 'block');
         if ($('#sigpad').val() == "") {
             $('#sig_pad_modal').modal("hide");
+
+            setTimeout(() => {
+                $('#orbit').css('display', 'none');
+            }, 300);
+
             beautyToast.error({
                 title: '',
                 message: 'Please attach a signature.',
@@ -2357,6 +2367,10 @@ if(!isset($_SESSION['user_id'])){
                 success: function(response) {
 
                     setTimeout(() => {
+
+                        setTimeout(() => {
+                            $('#orbit').css('display', 'none');
+                        }, 300);
 
                         beautyToast.success({
                             title: '',
