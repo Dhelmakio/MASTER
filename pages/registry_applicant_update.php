@@ -266,7 +266,7 @@ if($_SESSION['user_id']){
                                                                                 <!--All goods-->
                                                                                 <div class="col-lg-12">
                                                                                     <h3><b>Present Address</b></h3>
-                                                                                </div>                                                                             
+                                                                                </div>
                                                                                 <input type="hidden" id="db_province"
                                                                                     value="<?php echo $edit->getClientData($id, 'applicants_personal', 'applicant_code', 'province1')??null;?>">
                                                                                 <div class="col-lg-4">
@@ -650,7 +650,8 @@ if($_SESSION['user_id']){
                                                                                 <!-- separator -->
                                                                                 <div class="col-lg-12">
                                                                                     <hr>
-                                                                                </div><button type="button" name="next" id="first_next"
+                                                                                </div><button type="button" name="next"
+                                                                                    id="first_next"
                                                                                     class=" btn btn-primary pull-right">
                                                                                     Next <i
                                                                                         class="fa fa-arrow-right"></i></button>
@@ -882,7 +883,7 @@ if($_SESSION['user_id']){
                                                                                                 <option value=""
                                                                                                     selected disabled>
                                                                                                     SELECT</option>
-                                                                                                <?php 
+                                                                                            <?php 
                                                                                             $typeOfBusiness = $edit->getClientData($id, 'applicants_work', 'applicant_code', 'tob')??null;
                                                                                             $businessSet = ['Firms which offer professional services, such as accounting, legal, engineering, business consulting, customer service and architecture',
                                                                                             'Transportation companies, such as airlines, shipping, land tours and forwarders', 'Entertainment, such as artists and movie houses', 'Hotels & Restaurants',
@@ -1040,12 +1041,13 @@ if($_SESSION['user_id']){
                                                                                             </select>
                                                                                         </div>
                                                                                     </div>
-                                                                                    <div class="col-lg-3">
+                                                                                    <div class="col-lg-6">
                                                                                         <label for="">Specify:
                                                                                         </label>
                                                                                         <select
                                                                                             class="form-control input-set-3"
-                                                                                            required name="loan_spec" <?php echo ($exploan[0] == "Yes") ?  '' : 'disabled' ?>
+                                                                                            required name="loan_spec"
+                                                                                            <?php echo ($exploan[0] == "Yes") ?  '' : 'disabled' ?>
                                                                                             id="loan_spec">
                                                                                             <option value="" selected
                                                                                                 disabled>
@@ -1065,7 +1067,7 @@ if($_SESSION['user_id']){
                                                                                     <!--MASTERRRRRRRRRRRRRRRRRRRRRRRRRR WALA DIAY NA SAVE NI SA DATABASE-->
                                                                                     <div class="col-lg-3">
                                                                                         <div class="form-group">
-                                                                                            <label>Specify Monthly
+                                                                                            <label>Other Loan Monthly
                                                                                                 Amortization</label>
                                                                                             <input name="sma" id="sma"
                                                                                                 type="text"
@@ -1081,19 +1083,30 @@ if($_SESSION['user_id']){
                                                                                                 ?>>
                                                                                         </div>
                                                                                     </div>
+                                                                                    <div class="col-lg-12"></div>
                                                                                     <div class="col-lg-3">
                                                                                         <div class="form-group">
                                                                                             <label>Monthly Salary
-                                                                                                (Net/Gross)</label>
-                                                                                            <input name="ms_salary"
+                                                                                                (Gross Pay)</label>
+                                                                                            <input name="grosspay"
+                                                                                                type="text"
+                                                                                                class="form-control text-right"
+                                                                                                placeholder="₱"
+                                                                                                value="<?= $edit->getClientData($id, 'applicants_work', 'applicant_code', 'monthly_gross')??null; ?>">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-lg-3">
+                                                                                        <div class="form-group">
+                                                                                            <label>Monthly Salary
+                                                                                                (Net Pay)</label>
+                                                                                            <input name="netpay"
                                                                                                 type="text"
                                                                                                 class="form-control text-right"
                                                                                                 placeholder="₱"
                                                                                                 value="<?= $edit->getClientData($id, 'applicants_work', 'applicant_code', 'monthly_salary')??null; ?>">
                                                                                         </div>
                                                                                     </div>
-                                                                                    <div class="col-lg-12"></div>
-                                                                                    <div class="col-lg-6">
+                                                                                    <div class="col-lg-3">
                                                                                         <div class="form-group">
                                                                                             <label>Specify Other
                                                                                                 Source
@@ -1109,7 +1122,7 @@ if($_SESSION['user_id']){
                                                                                                     SELECT</option>
                                                                                                 <?php 
                                                                                             $sourceIncome = $edit->getClientData($id, 'applicants_work', 'applicant_code', 'specify')??null;
-                                                                                            $incomeSet = ['None', 'Business', 'Allowance', 'Pension','Commission','Part time Job','Allotment', 'Family Financial Support'];
+                                                                                            $incomeSet = ['None', 'Business', 'Allowance', 'Pension','Commission','Part time job','Allotment', 'Family Financial Support'];
 
                                                                                             foreach($incomeSet as $key => $val){
                                                                                               $sourceOf = ($sourceIncome == $val) ? '<option selected value='.$sourceIncome.'>'.$val.'</option>' : '<option value='.$val.'>'.$val.'</option>';
@@ -1119,9 +1132,10 @@ if($_SESSION['user_id']){
                                                                                             </select>
                                                                                         </div>
                                                                                     </div>
-                                                                                    <div class="col-lg-6">
+                                                                                    <div class="col-lg-3">
                                                                                         <div class="form-group">
-                                                                                            <label>Total Other
+                                                                                            <label>Total Monthly
+                                                                                                Other
                                                                                                 Income (₱)</label>
                                                                                             <input name="os_income"
                                                                                                 id="os_income"
@@ -1404,7 +1418,8 @@ if($_SESSION['user_id']){
     <!-- Custom Theme JavaScript -->
     <script src="../js/startmin.js"></script>
     <script>
-        showSpouse($('#m_status').val());
+    showSpouse($('#m_status').val());
+
     function showSpouse(val) {
         // var x = document.getElementById("div_spouse").value;
         if (val == "Married") {
