@@ -226,11 +226,11 @@ if($_SESSION['user_id']){
                                         <div class="col-lg-12"><label>Net Pay(Monthly):
                                                 <u><?php  echo  "₱ ".number_format(floatval($row['monthly_salary']),2);?></label>
                                         </div>
+                                        <div class="col-lg-12"><label>Other Source of Income:
+                                                <u><?php echo strtoupper($row['specify']);?></label></div>
                                         <div class="col-lg-12"><label>Total Monthly Other Income:
                                                 <u><?php echo  "₱ ".number_format(floatval($row['other_source']),2);?></label>
                                         </div>
-                                        <div class="col-lg-12"><label>(Specify):
-                                                <u><?php echo strtoupper($row['specify']);?></label></div>
                                         <div class="col-lg-12">
                                             <hr>
                                         </div>
