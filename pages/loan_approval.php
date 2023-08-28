@@ -74,14 +74,16 @@ if(!isset($_SESSION['user_id'])){
                                                 <th>CONTRACT NO.</th>
                                                 <th>NAME</th>
                                                 <th>LOAN DETAILS</th>
-                                                <th class="text-center">CI STATUS</th>
                                                 <th class="text-center">CI REMARKS</th>
-                                                <th class="text-center">LOAN STATUS</th>
+                                                <th class="text-center">LOAN REMARKS</th>
                                                 <th class="text-center">ACTIONS</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
+                                                    include 'mvc/controller/class-autoload.cont.php';
+                                                    include 'mvc/model/sched.mod.php';
+                                                    
                                                     $sql ="SELECT * FROM loan_applications 
                                                     INNER JOIN applicants_personal 
                                                     ON applicants_personal.applicant_code = loan_applications.client_id 
@@ -89,29 +91,30 @@ if(!isset($_SESSION['user_id'])){
                                                     $res = mysqli_query($con,$sql);
                                                         if(mysqli_num_rows($res) > 0){
                                                             while($row = mysqli_fetch_assoc($res)) {
+
                                                                 // $name = $row['last_name'].', '.$row['first_name'].' '.$row['middle_name'];
                                                                 // $suffix = $row['suffix'];
                                                                 $cid = $row['client_id'];
+                                                                $loan = new Loan($cid);
+                                                                $sched = new Schedule($row['contract_no']);
                                                                 $name = $row['lastname'].', '.$row['firstname'].' '.$row['suffix'].' '.$row['middlename'].' '.$row['suffix'];
                                                                 $cis;
                                                                 ?><tr class="odd gradeX">
                                                 <td><?php echo $row['contract_no'];?></td>
                                                 <td><?php echo $row['lastname'].', '.$row['firstname'].' '.$row['suffix'].' '.$row['middlename'];?>
                                                 </td>
-                                                <!-- tbd -->
                                                 <td class="text-center">₱
                                                     <?php echo number_format($row['loan_amount'],2);?></td>
                                                 <td style="text-align:center">
                                                     <?php 
                                                     if($row['ci_status']==1){
+                                                        $cis = 1;
                                                             echo '<button type="button" class="btn btn-primary btn-circle"><i class="fa fa-check"></i></button>';}
-                                                    else{
+                                                        else{
+                                                        $cis = 0;
                                                             echo '<button type="button" class="btn btn-danger btn-circle"><i class="fa fa-times"></i></button>';
                                                         }
                                                     ?>
-                                                </td>
-                                                <td style="text-align:center">
-                                                    <?php echo $row['ci_remarks']?>
                                                 </td>
                                                 <td style="text-align:center">
                                                     <?php 
@@ -147,10 +150,11 @@ if(!isset($_SESSION['user_id'])){
                                                         id="approve-<?=$row['contract_no'] ?>" tabindex="-1"
                                                         role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
                                                         data-backdrop="static">
-                                                        <div class="modal-dialog modal-md" role="document">
+                                                        <div class="modal-dialog modal-lg" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-body">
-                                                                    <p>
+                                                                    <?php echo $sched->loadDataApproval($name, $loan->clientEmpStatus, $loan->incomeEarning, $loan->borrowingHistCount, $loan->collectionFee, $loan->processingFee, $loan->clientSukli, $loan->outStandingBalance, $loan->netLoanPerMonth) ?>
+                                                                    <!-- <p>
                                                                         <center><i class="fa fa-thumbs-up fa-5x"
                                                                                 style="color:#428bca;"
                                                                                 aria-hidden="true"
@@ -159,7 +163,7 @@ if(!isset($_SESSION['user_id'])){
                                                                         <center>
                                                                             <h5>Approve?</h5>
                                                                         </center>
-                                                                    </p>
+                                                                    </p> -->
                                                                 </div>
                                                                 <div class="modal-footer" style="padding: 5px;">
                                                                     <form action="../request/reg_remarks.php"
@@ -182,10 +186,11 @@ if(!isset($_SESSION['user_id'])){
                                                         id="decline-<?=$row['contract_no'] ?>" tabindex="-1"
                                                         role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
                                                         data-backdrop="static">
-                                                        <div class="modal-dialog modal-md" role="document">
+                                                        <div class="modal-dialog modal-lg" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-body">
-                                                                    <p>
+                                                                <?php echo $sched->loadDataApproval($name, $loan->clientEmpStatus, $loan->incomeEarning, $loan->borrowingHistCount, $loan->collectionFee, $loan->processingFee, $loan->clientSukli, $loan->outStandingBalance, $loan->netLoanPerMonth) ?>
+                                                                    <!-- <p>
                                                                         <center><i class="fa fa-times fa-5x"
                                                                                 style="color:#FF0000;"
                                                                                 aria-hidden="true"
@@ -194,7 +199,7 @@ if(!isset($_SESSION['user_id'])){
                                                                         <center>
                                                                             <h5>Decline?</h5>
                                                                         </center>
-                                                                    </p>
+                                                                    </p> -->
                                                                 </div>
                                                                 <div class="modal-footer" style="padding: 5px;">
                                                                     <form action="../request/reg_remarks.php"
@@ -216,10 +221,11 @@ if(!isset($_SESSION['user_id'])){
                                                         id="hold-<?=$row['contract_no'] ?>" tabindex="-1" role="dialog"
                                                         aria-labelledby="myModalLabel" aria-hidden="true"
                                                         data-backdrop="static">
-                                                        <div class="modal-dialog modal-md" role="document">
+                                                        <div class="modal-dialog modal-lg" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-body">
-                                                                    <p>
+                                                                <?php echo $sched->loadDataApproval($name, $loan->clientEmpStatus, $loan->incomeEarning, $loan->borrowingHistCount, $loan->collectionFee, $loan->processingFee, $loan->clientSukli, $loan->outStandingBalance, $loan->netLoanPerMonth) ?>   
+                                                                <!-- <p>
                                                                         <center><i class="fa fa-pause fa-5x"
                                                                                 style="color:#FFA500;"
                                                                                 aria-hidden="true"
@@ -228,7 +234,7 @@ if(!isset($_SESSION['user_id'])){
                                                                         <center>
                                                                             <h5>Hold?</h5>
                                                                         </center>
-                                                                    </p>
+                                                                    </p> -->
                                                                 </div>
                                                                 <div class="modal-footer" style="padding: 5px;">
                                                                     <form action="../request/reg_remarks.php"
