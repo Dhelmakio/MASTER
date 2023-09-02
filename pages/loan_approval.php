@@ -130,11 +130,11 @@ if(!isset($_SESSION['user_id'])){
                                                             <div class="modal-content">
                                                                 <div class="modal-body">
                                                                     <?php echo $sched->loadDataApproval($name, $loan->clientEmpStatus, $loan->incomeEarning, $loan->borrowingHistCount, $loan->collectionFee, $loan->processingFee, $loan->clientSukli, $loan->outStandingBalance, $loan->netLoanPerMonth) ?>
-                                                                    <div class="modal-footer" style="padding: 5px;">
-                                                                        <button type="button"
-                                                                            class="btn btn-default text-small"
-                                                                            data-dismiss="modal">Cancel</button>
-                                                                    </div>
+
+                                                                    <button type="button"
+                                                                        class="btn btn-default text-small"
+                                                                        data-dismiss="modal">Cancel</button>
+
                                                                 </div>
                                                             </div>
                                                             <!-- /.modal-content -->
