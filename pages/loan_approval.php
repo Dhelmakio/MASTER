@@ -75,7 +75,7 @@ if(!isset($_SESSION['user_id'])){
                                                 <th>NAME</th>
                                                 <th>LOAN DETAILS</th>
                                                 <th class="text-center">CI REMARKS</th>
-                                                <th class="text-center">LOAN REMARKS</th>
+                                                <th class="text-center">LOAN DETAILS</th>
                                                 <th class="text-center">ACTIONS</th>
                                             </tr>
                                         </thead>
@@ -117,17 +117,29 @@ if(!isset($_SESSION['user_id'])){
                                                     ?>
                                                 </td>
                                                 <td style="text-align:center">
-                                                    <?php 
-                                                    if($row['remarks']== "approved"){
-                                                        echo '<button type="button" class="btn btn-primary"> Approved</button>';
-                                                    }else if($row['remarks']== "decline"){
-                                                        echo '<button type="button" class="btn btn-danger"> Declined</button>';
-                                                    }else if($row['remarks']== "hold"){
-                                                        echo '<button type="button" class="btn btn-warning"> On Hold</button>';
-                                                    }else{
-                                                        echo '<span class="btn btn-default"> None </span>';
-                                                    }                                    
-                                                    ?>
+                                                    <button type="button" class="btn btn-info btn-sml"
+                                                        data-target="#view-<?= $row['contract_no'] ?>"
+                                                        data-toggle="modal">
+                                                        View Loan Details <i class="fa fa-eye" aria-hidden="true"
+                                                            title="Copy to use save"></i></button>
+                                                    <div class="modal fade text-left"
+                                                        id="view-<?=$row['contract_no'] ?>" tabindex="-1" role="dialog"
+                                                        aria-labelledby="myModalLabel" aria-hidden="true"
+                                                        data-backdrop="static">
+                                                        <div class="modal-dialog modal-lg" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-body">
+                                                                    <?php echo $sched->loadDataApproval($name, $loan->clientEmpStatus, $loan->incomeEarning, $loan->borrowingHistCount, $loan->collectionFee, $loan->processingFee, $loan->clientSukli, $loan->outStandingBalance, $loan->netLoanPerMonth) ?>
+                                                                    <div class="modal-footer" style="padding: 5px;">
+                                                                        <button type="button"
+                                                                            class="btn btn-default text-small"
+                                                                            data-dismiss="modal">Cancel</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- /.modal-content -->
+                                                        </div>
+                                                    </div>
                                                 </td>
                                                 <td class="text-center">
                                                     <button type="button" class="btn btn-warning btn-sml"
@@ -189,7 +201,7 @@ if(!isset($_SESSION['user_id'])){
                                                         <div class="modal-dialog modal-lg" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-body">
-                                                                <?php echo $sched->loadDataApproval($name, $loan->clientEmpStatus, $loan->incomeEarning, $loan->borrowingHistCount, $loan->collectionFee, $loan->processingFee, $loan->clientSukli, $loan->outStandingBalance, $loan->netLoanPerMonth) ?>
+                                                                    <?php echo $sched->loadDataApproval($name, $loan->clientEmpStatus, $loan->incomeEarning, $loan->borrowingHistCount, $loan->collectionFee, $loan->processingFee, $loan->clientSukli, $loan->outStandingBalance, $loan->netLoanPerMonth) ?>
                                                                     <!-- <p>
                                                                         <center><i class="fa fa-times fa-5x"
                                                                                 style="color:#FF0000;"
@@ -224,8 +236,8 @@ if(!isset($_SESSION['user_id'])){
                                                         <div class="modal-dialog modal-lg" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-body">
-                                                                <?php echo $sched->loadDataApproval($name, $loan->clientEmpStatus, $loan->incomeEarning, $loan->borrowingHistCount, $loan->collectionFee, $loan->processingFee, $loan->clientSukli, $loan->outStandingBalance, $loan->netLoanPerMonth) ?>   
-                                                                <!-- <p>
+                                                                    <?php echo $sched->loadDataApproval($name, $loan->clientEmpStatus, $loan->incomeEarning, $loan->borrowingHistCount, $loan->collectionFee, $loan->processingFee, $loan->clientSukli, $loan->outStandingBalance, $loan->netLoanPerMonth) ?>
+                                                                    <!-- <p>
                                                                         <center><i class="fa fa-pause fa-5x"
                                                                                 style="color:#FFA500;"
                                                                                 aria-hidden="true"
