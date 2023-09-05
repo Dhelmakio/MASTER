@@ -245,7 +245,7 @@ if(isset($_GET['id'])){
                                                     </div>
                                                     <div class="col-lg-3">Collection Fee: </div>
                                                     <div class="col-lg-3"><label id='collection_fee'>₱
-                                                            <?php echo number_format((floatval($loan->collectionFee)/100 * floatval($sched->principal)), 2); ?></label>
+                                                            <?php echo number_format((floatval($loan->collectionFee * $sched ->duration)/100 * floatval($sched->principal)), 2); ?></label>
                                                     </div>
                                                     <div class="col-lg-3">Amortization Frequency: </div>
                                                     <div class="col-lg-3"><label>
@@ -253,7 +253,7 @@ if(isset($_GET['id'])){
                                                     </div>
                                                     <div class="col-lg-3">Processing Fee: </div>
                                                     <div class="col-lg-3"><label id='processing_fee'>₱
-                                                            <?php echo number_format((floatval($loan->processingFee)/100 * floatval($sched->principal)), 2); ?></label>
+                                                            <?php echo number_format((floatval($loan->processingFee * $sched ->duration)/100 * floatval($sched->principal)), 2); ?></label>
                                                     </div>
                                                     <div class="col-lg-3">Loan Terms: </div>
                                                     <div class="col-lg-3"><label
@@ -641,8 +641,8 @@ $('#update').click(() => {
         let monthlyInterest = <?= $sched->monthlyInterest ?> / 100;
 
 
-        let collectionFeePer = <?= $loan->collectionFee / 100 ?>;
-        let processingFeePer = <?= $loan->processingFee / 100 ?>;
+        let collectionFeePer = <?= $loan->collectionFee / 100 ?> * duration;
+                let processingFeePer = <?= $loan->processingFee / 100 ?> * duration;
 
         let collectionFee = $("#lamt").val() * collectionFeePer;
         let processingFee = $("#lamt").val() * processingFeePer;

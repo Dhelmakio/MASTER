@@ -156,13 +156,13 @@ class Schedule extends DbCon {
         }
     }
     
-    // private function getSalaryPeriod(){
-    //     $sql = "SELECT salary_period FROM applicants_work WHERE applicant_code = ?";
-    //     $stmt = $this->connect()->prepare($sql);
-    //     $stmt->execute([$this->applicantCode]);
-    //     $result = $stmt->fetchColumn();
-    //     $this->salaryPeriod = $result;
-    // }
+    private function getSalaryPeriod(){
+        $sql = "SELECT salary_period FROM applicants_work WHERE applicant_code = ?";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute([$this->applicantCode]);
+        $result = $stmt->fetchColumn();
+        $this->salaryPeriod = $result;
+    }
 
     public function setStartDate($date) {
 
@@ -255,7 +255,7 @@ class Schedule extends DbCon {
             </div>
             <div class="col-lg-3">Collection Fee: </div>
             <div class="col-lg-3"><label id="collection_fee">₱
-                    '. number_format((floatval($collectionFee)/100 * floatval($this->principal)), 2).'</label>
+                    '. number_format((floatval($collectionFee * $this->duration)/100 * floatval($this->principal)), 2).'</label>
             </div>
             <div class="col-lg-3">Amortization Frequency: </div>
             <div class="col-lg-3"><label>
@@ -263,7 +263,7 @@ class Schedule extends DbCon {
             </div>
             <div class="col-lg-3">Processing Fee: </div>
             <div class="col-lg-3"><label id="processing_fee">₱
-                    '.number_format((floatval($processingFee)/100 * floatval($this->principal)), 2).'</label>
+                    '.number_format((floatval($processingFee * $this->duration)/100 * floatval($this->principal)), 2).'</label>
             </div>
             <div class="col-lg-3">Loan Terms: </div>
             <div class="col-lg-3"><label

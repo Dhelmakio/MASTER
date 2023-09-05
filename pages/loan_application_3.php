@@ -768,8 +768,9 @@ if(isset($_POST['id'])){
 
 
 
-                let collectionFeePer = <?= $loan->collectionFee / 100 ?>;
-                let processingFeePer = <?= $loan->processingFee / 100 ?>;
+                let collectionFeePer = <?= $loan->collectionFee / 100 ?> * duration;
+                let processingFeePer = <?= $loan->processingFee / 100 ?> * duration;
+
                 // let collectionFeePer = 0.03;
                 // let processingFeePer = 0.03;
                 let collectionFee = $("#lamt").val() * collectionFeePer;

@@ -827,8 +827,8 @@ if(isset($_POST['id'])){
 
 
 
-                let collectionFeePer = <?= $loan->collectionFee / 100 ?>;
-                let processingFeePer = <?= $loan->processingFee / 100 ?>;
+                let collectionFeePer = <?= $loan->collectionFee / 100 ?> * duration;
+                let processingFeePer = <?= $loan->processingFee / 100 ?> * duration;
 
 
                 let collectionFee = $("#lamt").val() * collectionFeePer;
@@ -851,6 +851,7 @@ if(isset($_POST['id'])){
 
                 let totalDeduction = udiValue + processingFee + collectionFee + notarialFee;
                 let proceedLoan = $("#lamt").val() - totalDeduction;
+                
                 let newPL = proceedLoan - <?= $loan->outStandingBalance ?>;
                
                  
