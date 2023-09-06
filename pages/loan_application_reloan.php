@@ -94,28 +94,90 @@ if(!isset($_SESSION['user_id'])){
                                         </thead>
                                         <tbody>
                                             <?php
+
+                                            function checkActiveLoan($name, $con){
+
+                                                $sql = "SELECT approval AS active FROM applicants_personal 
+                                                LEFT JOIN loan_applications 
+                                                ON applicants_personal.applicant_code=loan_applications.client_id
+                                                WHERE CONCAT(applicants_personal.firstname,applicants_personal.lastname,applicants_personal.middlename)
+                                                LIKE '%$name%' AND loan_applications.approval = 0
+                                                ORDER BY applicants_personal.lastname ASC ";
+                                                $res = mysqli_query($con,$sql);
+                                                return mysqli_num_rows($res) > 0;
+
+                                            }
+
+                                            function checkBorrowingHistory($name, $con){
+
+                                                $sql = "SELECT COUNT(client_id) as history FROM loan_applications 
+                                                LEFT JOIN applicants_personal 
+                                                ON applicants_personal.applicant_code=loan_applications.client_id
+                                                WHERE CONCAT(applicants_personal.firstname,applicants_personal.lastname,applicants_personal.middlename)
+                                                LIKE '%$name%' AND loan_applications.paid = 1";
+                                                $res = mysqli_query($con,$sql);
+                                                
+                                                return mysqli_fetch_assoc($res)['history'];
+
+                                            }
+
+                                            function checkOutstandingBalance($name, $con){
+
+                                                $sql = "SELECT SUM(amount) as total_pay, loan_amount FROM payments
+                                                LEFT JOIN loan_applications 
+                                                ON loan_applications.contract_no = payments.contract_no
+                                                LEFT JOIN applicants_personal 
+                                                ON applicants_personal.applicant_code=loan_applications.client_id
+                                                WHERE CONCAT(applicants_personal.firstname,applicants_personal.lastname,applicants_personal.middlename)
+                                                LIKE '%$name%'";
+                                                $res = mysqli_query($con,$sql);
+                                                $row = mysqli_fetch_assoc($res);
+
+                                                return floatval($row['loan_amount'] - $row['total_pay']);
+
+                                            }
+
                                             if(isset($_GET['search'])){
+
                                                 $search = $_GET['search'];
                                                     //$sql ="SELECT c.*,l.remarks FROM clients c left join loan_applications l on l.client_id=c.client_id where  (l.remarks is null or l.remarks='paid') and (l.approval!=0 or l.approval is null) group by c.client_id ORDER BY last_name ASC";
                                                     //$sql = "SELECT * FROM clients left join loan_applications on clients.client_id=loan_applications.client_id where loan_applications.paid=1 group by clients.client_id order by clients.last_name asc ";
-                                                    $sql = "SELECT * FROM applicants_personal 
-                                                    LEFT JOIN loan_applications 
-                                                    ON applicants_personal.applicant_code=loan_applications.client_id
-                                                    WHERE CONCAT(applicants_personal.firstname,applicants_personal.lastname,applicants_personal.middlename)
-                                                    LIKE '%$search%' AND loan_applications.paid = 1
-                                                    ORDER BY applicants_personal.lastname ASC ";
-                                                    $res = mysqli_query($con,$sql);
+                                                    
+                                                    
+
+
+                                                        $activeLoan = checkActiveLoan($search, $con);
+                                                        $borrowHist = checkBorrowingHistory($search, $con);
+                                                        $ob = checkOutstandingBalance($search, $con);
+
+                                                        //  die('active ? ' . $activeLoan.' history ? ' .$borrowHist.'  ob ? '.$ob);
+
+                                                        if($activeLoan == null && $borrowHist > 0 && $ob == 0){
+                                                            $sql = "SELECT * FROM applicants_personal 
+                                                        
+                                                            WHERE CONCAT(firstname,lastname,middlename)
+                                                            LIKE '%$search%'
+                                                            ORDER BY lastname ASC";
+                                                            $res = mysqli_query($con,$sql);
+                                                        }else{
+                                                            die('<script>alert("Not eligible or no data found.")</script>');
+                                                        }
+
+                                                        
+                                                        
+
+
                                                         if(mysqli_num_rows($res) > 0){
                                                             while($row = mysqli_fetch_assoc($res)) {
                                                                 // $name = $row['last_name'].', '.$row['first_name'].' '.$row['middle_name'];
                                                                 // $suffix = $row['suffix'];
-                                                                $cid = $row['client_id'];
+                                                                $cid = $row['applicant_code'];
                                                                 $loan = new Loan($cid);
                                                                 $name = $row['lastname'].', '.$row['firstname'].' '.$row['middlename'];
-                                                                $cont_no = $row['contract_no'];
+                                                               
                                                                 ?>
                                             <tr class="odd gradeX">
-                                                <td><?php echo $cont_no?></td>
+                                                <td><?php echo $cid?></td>
                                                 <td><?php echo $name?></td>
                                                 <td><?php echo $row['brgy1'].', '.$row['city1'];?></td>
                                                 <!-- <td class="text-center">
@@ -123,12 +185,13 @@ if(!isset($_SESSION['user_id'])){
                                                 </td> -->
                                                 <td class="text-center">
                                                     <button type="button" class="btn btn-info btn-sml"
-                                                        data-toggle="modal" data-target="#credit<?php echo $cont_no?>">
+                                                        data-toggle="modal" data-target="#credit<?php echo $cid?>">
                                                         View Credit History <i class="fa fa-eye" aria-hidden="true"
                                                             title="Copy to use save"></i></button>
-                                                    <div class="modal fade" id="credit<?php echo $cont_no?>"
-                                                        tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-                                                        aria-hidden="true" align="left">
+
+                                                    <div class="modal fade" id="credit<?php echo $cid?>" tabindex="-1"
+                                                        role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+                                                        align="left">
                                                         <div class="modal-dialog modal-lg" style="width:60%"
                                                             role="document">
                                                             <div class="modal-content">
@@ -184,50 +247,46 @@ if(!isset($_SESSION['user_id'])){
                                                                             </thead>
                                                                             <tbody>
                                                                                 <tr>
-                                                                                    <td><?php echo $row['contract_no']?>
-                                                                                    </td>
-                                                                                    <td><?php echo $row['loan_type']?>
-                                                                                    </td>
-                                                                                    <td class="text-center">₱
-                                                                                        <?php echo number_format($row['loan_amount'],2);?>
-                                                                                    </td>
+
                                                                                     <?php
                                                                                         $query = "SELECT * FROM applicants_personal 
                                                                                         LEFT JOIN loan_applications 
                                                                                         ON applicants_personal.applicant_code=loan_applications.client_id 
-                                                                                        LEFT JOIN payments 
-                                                                                        ON payments.contract_no = loan_applications.contract_no 
-                                                                                        WHERE loan_applications.contract_no = '$cont_no' 
+                                                                                        WHERE loan_applications.client_id = '$cid' 
                                                                                         AND loan_applications.paid = 1
                                                                                         ORDER BY applicants_personal.lastname ASC";
                                                                                         $qry_res = mysqli_query($con,$query);
                                                                                             if(mysqli_num_rows($qry_res) > 0){
                                                                                                 while($rows = mysqli_fetch_assoc($qry_res)){
-                                                                                                    $get_name = $rows['lastname'].', '.$rows['firstname'].' '.$rows['middlename'];
+                                                                                                    
                                                                                     ?>
-                                                                                    <!-- <td class="text-center">₱
-                                                                                        <?php //echo number_format($rows['amount'],2)?>
-                                                                                    </td> -->
+                                                                                    <td><?php echo $rows['contract_no']?>
+                                                                                    </td>
+                                                                                    <td><?php echo $rows['loan_type']?>
+                                                                                    </td>
+                                                                                    <td class="text-center">₱
+                                                                                        <?php echo number_format($rows['loan_amount'],2);?>
+                                                                                    </td>
                                                                                     <td class="text-center">
                                                                                         <?php //echo "₱ ".number_format(floatval($loan->outStandingBalance),2)
-                                                                                        echo "₱ ".number_format(floatval($loan->outStandingBalance),2)
-                                                                                        ?>
+                                                                                                    echo "₱ ".number_format(floatval($loan->outStandingBalance),2)
+                                                                                                    ?>
                                                                                     </td>
                                                                                     <td class="text-center">
                                                                                         <?php
-                                                                                        if($rows['loan_status'] == 1){
-                                                                                            echo '<button class="btn btn-success"> Active <i class="fa fa-check"></i>
-                                                                                            </button>';
-                                                                                        }else{
-                                                                                            echo '<button class="btn btn-warning"> Paid <i class="fa fa-thumbs-o-up"></i>
-                                                                                            </button>';
-                                                                                        }
-                                                                                    ?>
+                                                                                                    if($rows['loan_status'] == 1){
+                                                                                                        echo '<button class="btn btn-success"> Active <i class="fa fa-check"></i>
+                                                                                                        </button>';
+                                                                                                    }else{
+                                                                                                        echo '<button class="btn btn-warning"> Paid <i class="fa fa-thumbs-o-up"></i>
+                                                                                                        </button>';
+                                                                                                    }
+                                                                                                ?>
                                                                                     </td>
                                                                                     <?php
-                                                                                      }
-                                                                                    }
-                                                                            ?>
+                                                                                                }
+                                                                                            }
+                                                                                            ?>
                                                                                 </tr>
                                                                             </tbody>
                                                                         </table>

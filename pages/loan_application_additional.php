@@ -99,17 +99,51 @@ if(!isset($_SESSION['user_id'])){
                                                     //$sql ="SELECT c.*,l.remarks FROM clients c left join loan_applications l on l.client_id=c.client_id where  (l.remarks is null or l.remarks='paid') and (l.approval!=0 or l.approval is null) group by c.client_id ORDER BY last_name ASC";
                                                     //$sql = "SELECT * FROM clients left join loan_applications on clients.client_id=loan_applications.client_id left join employer on employer.client_id=clients.client_id where loan_applications.paid=0 group by clients.client_id order by clients.last_name asc ";
                                                     //$res = mysqli_query($con,$sql);
+
+                                                    
+                                            function checkEligibility($name, $con){
+
+                                                $loan = new Loan(1);
+
+                                                $sql = "SELECT * FROM applicants_personal 
+                                                INNER JOIN applicants_work on applicants_work.applicant_code=applicants_personal.applicant_code 
+                                                LEFT JOIN loan_applications 
+                                                ON applicants_personal.applicant_code=loan_applications.client_id 
+                                                WHERE CONCAT(applicants_personal.firstname,applicants_personal.lastname,applicants_personal.middlename)
+                                                LIKE '%$name%' AND loan_applications.paid=0 AND loan_applications.approval=1
+                                                GROUP BY applicants_personal.applicant_code 
+                                                ORDER BY applicants_personal.lastname ASC";
+                                                $res = mysqli_query($con,$sql);
+                                                $row = mysqli_fetch_assoc($res);
+                                                $net_pay = $row['monthly_salary']??null;
+                                                $sukli = $row['other_source']??null;
+
+                                                $sukli = ($sukli > 0) ? 'Multiple' : 'Single';
+
+                                                $sukli = $loan->sukli($sukli);
+
+                                                return $net_pay > $sukli;
+
+                                            }
+
                                                 if(isset($_GET['search'])){
                                                     $search = $_GET['search'];
-                                                    $sql = "SELECT * FROM applicants_personal 
-                                                    INNER JOIN applicants_work on applicants_work.applicant_code=applicants_personal.applicant_code 
-                                                    LEFT JOIN loan_applications 
-                                                    ON applicants_personal.applicant_code=loan_applications.client_id 
-                                                    WHERE CONCAT(applicants_personal.firstname,applicants_personal.lastname,applicants_personal.middlename)
-                                                    LIKE '%$search%' AND loan_applications.paid=0 
-                                                    GROUP BY applicants_personal.applicant_code 
-                                                    ORDER BY applicants_personal.lastname ASC ";
-                                                    $res = mysqli_query($con,$sql);
+
+                                                    if($eligibility = checkEligibility($search, $con) == 1) {
+                                                        $sql = "SELECT * FROM applicants_personal 
+                                                        INNER JOIN applicants_work on applicants_work.applicant_code=applicants_personal.applicant_code 
+                                                        LEFT JOIN loan_applications 
+                                                        ON applicants_personal.applicant_code=loan_applications.client_id 
+                                                        WHERE CONCAT(applicants_personal.firstname,applicants_personal.lastname,applicants_personal.middlename)
+                                                        LIKE '%$search%' AND loan_applications.paid=0 
+                                                        GROUP BY applicants_personal.applicant_code 
+                                                        ORDER BY applicants_personal.lastname ASC ";
+                                                        $res = mysqli_query($con,$sql);
+                                                    }else{
+                                                        die('<script>alert("Not eligible or no data found.")</script>');
+                                                    }
+
+                                                  
                                                         if(mysqli_num_rows($res) > 0){
                                                             while($row = mysqli_fetch_assoc($res)) {
                                                                 // $name = $row['last_name'].', '.$row['first_name'].' '.$row['middle_name'];

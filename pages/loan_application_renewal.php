@@ -94,16 +94,78 @@ if(!isset($_SESSION['user_id'])){
                                             </tr>
                                         </thead>
                                         <tbody id="data_sql">
+
                                             <?php
+
+                                            function checkActiveLoan($name, $con){
+
+                                                $sql = "SELECT approval AS active FROM applicants_personal 
+                                                LEFT JOIN loan_applications 
+                                                ON applicants_personal.applicant_code=loan_applications.client_id
+                                                WHERE CONCAT(applicants_personal.firstname,applicants_personal.lastname,applicants_personal.middlename)
+                                                LIKE '%$name%' AND loan_applications.approval = 1
+                                                ORDER BY applicants_personal.lastname ASC ";
+                                                $res = mysqli_query($con,$sql);
+                                                return mysqli_num_rows($res) > 0;
+
+                                            }
+
+                                            function checkPayments($name, $con){
+
+                                                $sql = "SELECT COUNT(payments.contract_no) AS pays FROM payments
+                                                LEFT JOIN loan_applications 
+                                                ON loan_applications.contract_no = payments.contract_no
+                                                LEFT JOIN applicants_personal 
+                                                ON applicants_personal.applicant_code=loan_applications.client_id
+                                                WHERE CONCAT(applicants_personal.firstname,applicants_personal.lastname,applicants_personal.middlename)
+                                                LIKE '%$name%' AND payments.contract_no = loan_applications.contract_no"; 
+                                                $res = mysqli_query($con,$sql);
+                                                
+                                                return mysqli_fetch_assoc($res)['pays'];
+
+                                            }
+
+                                            function checkOutstandingBalance($name, $con){
+
+                                                $sql = "SELECT SUM(amount) as total_pay, loan_amount FROM payments
+                                                LEFT JOIN loan_applications 
+                                                ON loan_applications.contract_no = payments.contract_no
+                                                LEFT JOIN applicants_personal 
+                                                ON applicants_personal.applicant_code=loan_applications.client_id
+                                                WHERE CONCAT(applicants_personal.firstname,applicants_personal.lastname,applicants_personal.middlename)
+                                                LIKE '%$name%'";
+                                                $res = mysqli_query($con,$sql);
+                                                $row = mysqli_fetch_assoc($res);
+
+                                                return floatval($row['loan_amount'] - $row['total_pay']);
+
+                                            }
+
+
+
                                             if(isset($_GET['search'])){
                                                 $search = $_GET['search'];
-                                                $sql = "SELECT * FROM applicants_personal
-                                                LEFT JOIN loan_applications
-                                                ON applicants_personal.applicant_code = loan_applications.client_id
-                                                WHERE CONCAT(applicants_personal.firstname,applicants_personal.lastname,applicants_personal.middlename)
-                                                LIKE '%$search%'
-                                                ORDER BY loan_applications.application_date ASC";
-                                                $res = mysqli_query($con,$sql);
+
+                                                $activeLoan = checkActiveLoan($search, $con);
+                                                $payments = checkPayments($search, $con);
+                                                $ob = checkOutstandingBalance($search, $con);
+
+                                                //die('active ? ' . $activeLoan.' history ? ' .$borrowHist.'  ob ? '.$ob);
+                                                if($activeLoan && $payments >= 2 && $ob > 0){
+                                                    
+                                                    $sql = "SELECT * FROM applicants_personal
+                                                    LEFT JOIN loan_applications
+                                                    ON applicants_personal.applicant_code = loan_applications.client_id
+                                                    WHERE CONCAT(applicants_personal.firstname,applicants_personal.lastname,applicants_personal.middlename)
+                                                    LIKE '%$search%'
+                                                    ORDER BY loan_applications.application_date ASC";
+                                                    $res = mysqli_query($con,$sql);
+
+                                                } else {
+                                                    die('<script>alert("Not eligible or no data found.")</script>');
+                                                }
+
+                                               
                                                 if(mysqli_num_rows($res) > 0){
                                                     while($row = mysqli_fetch_assoc($res)) {
                                                     // $name = $row['last_name'].', '.$row['first_name'].' '.$row['middle_name'];
