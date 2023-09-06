@@ -112,6 +112,8 @@ if(!isset($_SESSION['user_id'])){
                                                         href="registry_applicant_view.php?id=<?php echo $cid;?>">View <i
                                                             class="fa fa-eye"></i> </td>
                                                 <td style="text-align:center">
+                                                    <!-- DHELMARRKKKKK HEELLPPP -->
+
                                                     <?php 
                                                         $contract = $row['contract_no'];
                                                         $exists = "SELECT * FROM answers WHERE contract_no='$contract'";
@@ -130,7 +132,7 @@ if(!isset($_SESSION['user_id'])){
                                                         href="loan_credit_investigation_validate.php?contract=<?php echo $contract ?>">
                                                         <button type="button" class="btn btn-warning btn-sml">
 
-                                                            Relative <i class="fa fa-long-arrow-right"
+                                                            Validate Relative <i class="fa fa-long-arrow-right"
                                                                 aria-hidden="true" title="Copy to use save"></i>
                                                         </button></a>
 
@@ -138,7 +140,7 @@ if(!isset($_SESSION['user_id'])){
                                                         href="loan_credit_investigation_validate_coworker.php?contract=<?php echo $contract ?>">
                                                         <button type="button" class="btn btn-warning btn-sml">
 
-                                                            Coworker <i class="fa fa-long-arrow-right"
+                                                            Validate Coworker <i class="fa fa-long-arrow-right"
                                                                 aria-hidden="true" title="Copy to use save"></i>
                                                         </button></a>
 
@@ -150,18 +152,19 @@ if(!isset($_SESSION['user_id'])){
                                                     <?php
                                                     }else if ($control == 1 && $control2 == 0) {
                                                    ?>
-                                                    <button type="button" disabled class="btn btn-warning btn-sml">
-                                                        <a
-                                                            href="loan_credit_investigation_validate.php?contract=<?php echo $contract ?>"></a>
-                                                        Relative <i class="fa fa-long-arrow-right"
-                                                            aria-hidden="true" title="Copy to use save"></i>
-                                                    </button>
+                                                    <a
+                                                        href="loan_credit_investigation_validate.php?contract=<?php echo $contract ?>">
+                                                        <button type="button" class="btn btn-warning btn-sml">
+
+                                                            Validate Relative <i class="fa fa-long-arrow-right"
+                                                                aria-hidden="true" title="Copy to use save"></i>
+                                                        </button></a>
 
                                                     <a
                                                         href="loan_credit_investigation_validate_coworker.php?contract=<?php echo $contract ?>">
                                                         <button type="button" class="btn btn-warning btn-sml">
 
-                                                            Coworker <i class="fa fa-long-arrow-right"
+                                                            Validate Coworker <i class="fa fa-long-arrow-right"
                                                                 aria-hidden="true" title="Copy to use save"></i>
                                                         </button></a>
 
@@ -181,13 +184,14 @@ if(!isset($_SESSION['user_id'])){
                                                                 aria-hidden="true" title="Copy to use save"></i>
                                                         </button></a>
 
+                                                    <a
+                                                        href="loan_credit_investigation_validate_coworker.php?contract=<?php echo $contract ?>">
+                                                        <button type="button" class="btn btn-warning btn-sml">
 
-                                                    <button type="button" disabled class="btn btn-warning btn-sml">
-                                                        <a
-                                                            href="loan_credit_investigation_validate_coworker.php?contract=<?php echo $contract ?>"></a>
-                                                        Coworker <i class="fa fa-long-arrow-right"
-                                                            aria-hidden="true" title="Copy to use save"></i>
-                                                    </button>
+                                                            Validate Coworker <i class="fa fa-long-arrow-right"
+                                                                aria-hidden="true" title="Copy to use save"></i>
+                                                        </button>
+                                                    </a>
 
                                                     <button type="button" disabled class="btn btn-success btn-sml"
                                                         data-toggle="modal"
@@ -197,20 +201,22 @@ if(!isset($_SESSION['user_id'])){
                                                     <?php
                                                     }else if ($control == 0 && $control2 == 0) {
                                                     ?>
-                                                    <button type="button" disabled class="btn btn-warning btn-sml">
-                                                        <a
-                                                            href="loan_credit_investigation_validate.php?contract=<?php echo $contract ?>"></a>
-                                                        Relative <i class="fa fa-long-arrow-right"
-                                                            aria-hidden="true" title="Copy to use save"></i>
-                                                    </button>
+                                                    <a
+                                                        href="loan_credit_investigation_validate.php?contract=<?php echo $contract ?>">
+                                                        <button type="button" class="btn btn-warning btn-sml">
 
+                                                            Validate Relative <i class="fa fa-long-arrow-right"
+                                                                aria-hidden="true" title="Copy to use save"></i>
+                                                        </button> </a>
 
-                                                    <button type="button" disabled class="btn btn-warning btn-sml">
-                                                        <a
-                                                            href="loan_credit_investigation_validate_coworker.php?contract=<?php echo $contract ?>"></a>
-                                                        Coworker <i class="fa fa-long-arrow-right"
-                                                            aria-hidden="true" title="Copy to use save"></i>
-                                                    </button>
+                                                    <a
+                                                        href="loan_credit_investigation_validate_coworker.php?contract=<?php echo $contract ?>">
+                                                        <button type="button" class="btn btn-warning btn-sml">
+
+                                                            Validate Coworker <i class="fa fa-long-arrow-right"
+                                                                aria-hidden="true" title="Copy to use save"></i>
+                                                        </button>
+                                                    </a>
 
 
 
@@ -230,7 +236,7 @@ if(!isset($_SESSION['user_id'])){
                                                     <a
                                                         href="loan_credit_investigation_validate.php?contract=<?php echo $contract ?>">
                                                         <button type="button" class="btn btn-warning btn-sml">
-                                                            Relative <i class="fa fa-long-arrow-right"
+                                                            Validate Relative <i class="fa fa-long-arrow-right"
                                                                 aria-hidden="true" title="Copy to use save"></i>
                                                         </button>
                                                     </a>
@@ -238,7 +244,7 @@ if(!isset($_SESSION['user_id'])){
                                                     <a
                                                         href="loan_credit_investigation_validate_coworker.php?contract=<?php echo $contract ?>">
                                                         <button type="button" class="btn btn-warning btn-sml">
-                                                            Coworker <i class="fa fa-long-arrow-right"
+                                                            Validate Coworker <i class="fa fa-long-arrow-right"
                                                                 aria-hidden="true" title="Copy to use save"></i>
                                                         </button>
                                                     </a>
