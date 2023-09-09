@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 05, 2023 at 07:16 PM
+-- Generation Time: Sep 09, 2023 at 05:46 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.1.17
 
@@ -34,6 +34,28 @@ CREATE TABLE `activity_logs` (
   `activity` text NOT NULL,
   `date_time` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `activity_logs`
+--
+
+INSERT INTO `activity_logs` (`log_id`, `user_id`, `name`, `activity`, `date_time`) VALUES
+(1, 1, 'Kevin Fontanoza', 'Logged in', '2023-09-06 21:34:12'),
+(2, 1, 'Kevin Fontanoza', 'Added loan application', '2023-09-06 21:45:57'),
+(3, 0, '', 'Answered Relative Questionnaire: AMG001000000120230903095706', '2023-09-06 22:41:43'),
+(4, 1, 'Kevin Fontanoza', 'Answered Coworker Questionnaire: AMG001000000120230903095706', '2023-09-06 22:42:41'),
+(5, 1, 'Kevin Fontanoza', 'Approved CI', '2023-09-06 22:43:42'),
+(6, 1, 'Kevin Fontanoza', 'Added loan application', '2023-09-06 22:46:03'),
+(7, 1, 'Kevin Fontanoza', 'Added loan application', '2023-09-06 23:35:24'),
+(8, 0, '', 'Answered Relative Questionnaire: AMG001000000120230905092406', '2023-09-06 23:42:19'),
+(9, 1, 'Kevin Fontanoza', 'Answered Coworker Questionnaire: AMG001000000120230905092406', '2023-09-06 23:42:30'),
+(10, 1, 'Kevin Fontanoza', 'Approved CI', '2023-09-06 23:42:35'),
+(11, 1, 'Kevin Fontanoza', 'Approved loan application: AMG001000000120230905092406', '2023-09-06 23:42:41'),
+(12, 1, 'Kevin Fontanoza', 'Added loan application', '2023-09-06 23:44:18'),
+(13, 0, '', 'Answered Relative Questionnaire: AMG001000000120230905091806', '2023-09-06 23:44:34'),
+(14, 1, 'Kevin Fontanoza', 'Answered Coworker Questionnaire: AMG001000000120230905091806', '2023-09-06 23:44:41'),
+(15, 1, 'Kevin Fontanoza', 'Approved CI', '2023-09-06 23:44:47'),
+(16, 1, 'Kevin Fontanoza', 'Approved loan application: AMG001000000120230905091806', '2023-09-06 23:44:59');
 
 -- --------------------------------------------------------
 
@@ -166,6 +188,13 @@ CREATE TABLE `applicants_personal` (
   `date_encoded` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `applicants_personal`
+--
+
+INSERT INTO `applicants_personal` (`applicant_id`, `applicant_code`, `firstname`, `middlename`, `lastname`, `suffix`, `nickname`, `age`, `gender`, `contact1`, `mstatus`, `dob1`, `pob1`, `block1`, `street1`, `phase1`, `brgy1`, `city1`, `province1`, `map_url`, `residence1`, `lwith1`, `block2`, `street2`, `phase2`, `brgy2`, `city2`, `province2`, `residence2`, `lwith2`, `mothername`, `mothercon`, `fathername`, `fathercon`, `file`, `date_encoded`) VALUES
+(1, 'AMG0010000001', 'JUNE SIMEONE ELMER', 'GO', 'EBCAS', '', 'SIMSIM', '', 'Male', '09924334454', 'Single', '2001-06-16', 'LEYTE, ORMOC CITY', '', 'MILLION', '', 'PUNTA', 'ORMOC CITY', 'LEYTE', 'https://www.google.com/maps/place/Ormoc,+Leyte/@11.0506297,124.5577437,36606m/data=!3m2!1e3!4b1!4m15!1m8!3m7!1s0x3396f79f47a8aadb:0x2c4be1dddb81922a!2sSan+Fernando,+Pampanga!3b1!8m2!3d15.0593937!4d120.6567054!16zL20vMDZwZ3pu!3m5!1s0x3307f730e0176ac1:0x913bc7c66a44f9a6!8m2!3d11.0384275!4d124.6192702!16zL20vMDI3djhu?hl=en-US&entry=ttu', 'Owned', 'Parents', '', 'MILLION', '', 'PUNTA', 'ORMOC CITY', 'LEYTE', 'Owned', 'Parents', 'MARICEL GO EBCAS', '09457545454', 'JOSE ELMER C. EBCAS', '09467673275', '', '2023-09-06');
+
 -- --------------------------------------------------------
 
 --
@@ -180,6 +209,13 @@ CREATE TABLE `applicants_reference` (
   `fb_acct` text NOT NULL,
   `date_encoded` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `applicants_reference`
+--
+
+INSERT INTO `applicants_reference` (`reference_id`, `applicant_code`, `source`, `loan_purpose`, `fb_acct`, `date_encoded`) VALUES
+(1, 'AMG0010000001', 'Referral', 'Special Occassion', 'simsim@facebook.com', '2023-09-06');
 
 -- --------------------------------------------------------
 
@@ -196,6 +232,13 @@ CREATE TABLE `applicants_relative` (
   `r_ta` text NOT NULL,
   `date_encoded` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `applicants_relative`
+--
+
+INSERT INTO `applicants_relative` (`relative_id`, `applicant_code`, `relative_name`, `r_contact`, `r_relationship`, `r_ta`, `date_encoded`) VALUES
+(1, 'AMG0010000001', 'Rogelio P. Ebcas', '09445645642', 'Grandfather', '21:43', '2023-09-06');
 
 -- --------------------------------------------------------
 
@@ -245,6 +288,13 @@ CREATE TABLE `applicants_work` (
   `max_loanable_amt` float NOT NULL,
   `date_encoded` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `applicants_work`
+--
+
+INSERT INTO `applicants_work` (`work_id`, `applicant_code`, `employer`, `sector_type`, `tob`, `com_address`, `a_location`, `sup_name`, `hr_number`, `date_hired`, `e_status`, `m_salary`, `bank_name`, `atm_card`, `loan`, `monthly_salary`, `monthly_gross`, `other_source`, `specify`, `max_loanable_amt`, `date_encoded`) VALUES
+(1, 'AMG0010000001', 'CITY HALL', 'Private Sector', 'Medical and dental services', 'COGON, ORMOC CITY', 'COGON', 'KEVIN FONTANOZA', '09425454545', '2023-09-06', 'REGULAR', 'ATM', 'BPI', 'ATM CARD', 'Yes-Paternity Loan-4000', '19000', '25000', '5000', 'Part time Job', 0, '2023-09-06');
 
 -- --------------------------------------------------------
 
@@ -616,18 +666,27 @@ CREATE TABLE `loan_applications` (
   `udi_percentage` int(11) NOT NULL,
   `udi_value` double NOT NULL,
   `interest_percentage` int(11) NOT NULL,
+  `pay1` int(11) NOT NULL,
+  `pay2` int(11) NOT NULL,
+  `pay3` int(11) NOT NULL,
+  `pay4` int(11) NOT NULL,
   `application_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `initiated_by` text NOT NULL,
+  `initiated_date` datetime DEFAULT NULL,
   `ci_status` int(11) NOT NULL,
   `ci_by` text NOT NULL,
   `ci_remarks` text NOT NULL,
   `ci_date` datetime DEFAULT NULL,
-  `approval` int(11) NOT NULL,
+  `process_status` int(11) NOT NULL,
   `processed_by` text NOT NULL,
+  `processed_date` datetime DEFAULT NULL,
+  `approval` int(11) NOT NULL,
+  `aprroved_by` text NOT NULL,
+  `aprroved_date` datetime DEFAULT NULL,
   `date_flagged` datetime DEFAULT NULL,
   `remarks` text NOT NULL,
   `paid` int(11) NOT NULL,
   `loan_status` text NOT NULL,
-  `process_status` int(11) NOT NULL,
   `effective_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -982,7 +1041,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `activity_logs`
 --
 ALTER TABLE `activity_logs`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `answers`
@@ -1000,19 +1059,19 @@ ALTER TABLE `applicants_child`
 -- AUTO_INCREMENT for table `applicants_personal`
 --
 ALTER TABLE `applicants_personal`
-  MODIFY `applicant_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `applicant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `applicants_reference`
 --
 ALTER TABLE `applicants_reference`
-  MODIFY `reference_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `reference_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `applicants_relative`
 --
 ALTER TABLE `applicants_relative`
-  MODIFY `relative_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `relative_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `applicants_spouse`
@@ -1024,7 +1083,7 @@ ALTER TABLE `applicants_spouse`
 -- AUTO_INCREMENT for table `applicants_work`
 --
 ALTER TABLE `applicants_work`
-  MODIFY `work_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `work_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `archive_child`

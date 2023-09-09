@@ -157,22 +157,27 @@ if(isset($_GET['id'])){
                                                                 <?php echo $loan->clientEmpStatus; ?></label></div>
                                                         <div class="col-lg-3">Net Pay: </div>
                                                         <div class="col-lg-3"><label>₱
-                                                                <?php echo number_format(floatval($loan->monthlyNetSal), 2); ?></label></div>
+                                                                <?php echo number_format(floatval($loan->monthlyNetSal), 2); ?></label>
+                                                        </div>
                                                         <div class="col-lg-3">Source of Income: </div>
                                                         <div class="col-lg-3"><label>
-                                                                <?php echo strtoupper($loan->incomeEarning); ?></label></div>
+                                                                <?php echo strtoupper($loan->incomeEarning); ?></label>
+                                                        </div>
                                                         <div class="col-lg-3">Other Monthly Amortization: </div>
                                                         <div class="col-lg-3"><label>₱
-                                                                <?php echo number_format(floatval($loan->otherMonthlyAmortization), 2); ?></label></div>
-                                                        <div class="col-lg-3">Minimum Sukli: </div>
-                                                        <div class="col-lg-3"><label>₱ <?php echo number_format(floatval($loan->clientSukli), 2); ?>
+                                                                <?php echo number_format(floatval($loan->otherMonthlyAmortization), 2); ?></label>
                                                         </div>
-                                                        <div class="col-lg-3">Borrowing History: </div>
+                                                        <div class="col-lg-3">Minimum Sukli: </div>
+                                                        <div class="col-lg-3"><label>₱
+                                                                <?php echo number_format(floatval($loan->clientSukli), 2); ?>
+                                                        </div>
+                                                        <!-- <div class="col-lg-3">Borrowing History: </div>
                                                         <div class="col-lg-3"><label>
-                                                                <?php echo $loan->borrowingHistCount; ?></label></div>
+                                                                <?php echo $loan->borrowingHistCount; ?></label></div> -->
                                                         <div class="col-lg-3">Net Loanable per month: </div>
                                                         <div class="col-lg-3"><label>₱
-                                                                <?php echo number_format(floatval($loan->netLoanPerMonth), 2); ?></label></div>
+                                                                <?php echo number_format(floatval($loan->netLoanPerMonth), 2); ?></label>
+                                                        </div>
 
                                                     </div>
                                                     <div class="col-lg-12">
@@ -193,11 +198,11 @@ if(isset($_GET['id'])){
                                                             hidden>
                                                         <input type="text" name="ltype" value="<?php echo $loan_type?>"
                                                             hidden>
-                                                        <input type="text" name="interest_percentage" id="interest_percentage" 
+                                                        <input type="text" name="interest_percentage"
+                                                            id="interest_percentage" hidden>
+                                                        <input type="text" name="udi_percentage" id="udi_percentage"
                                                             hidden>
-                                                        <input type="text" name="udi_percentage"  id="udi_percentage"
-                                                            hidden>
-                                                        
+
 
                                                         <?php
                                                             $mo_int;
@@ -247,9 +252,10 @@ if(isset($_GET['id'])){
                                                             <div class="form-group">
                                                                 <label>Monthly Interest (%) </label>
 
-                                                                <input type="number" id="monthly_interest" class="form-control"
-                                                                    step="0.01" min="1" max="<?php echo $max_loan?>"
-                                                                    name="monthly_interest" placeholder="Monthly Interest Percent" required>
+                                                                <input type="number" id="monthly_interest"
+                                                                    class="form-control" step="0.01" min="1"
+                                                                    max="<?php echo $max_loan?>" name="monthly_interest"
+                                                                    placeholder="Monthly Interest Percent" required>
                                                             </div>
                                                         </div>
 
@@ -265,7 +271,8 @@ if(isset($_GET['id'])){
                                                         </div> -->
 
                                                         <div class="col-lg-4">
-                                                            <div class="form-group" id="term-section" style="visibility:hidden">
+                                                            <div class="form-group" id="term-section"
+                                                                style="visibility:hidden">
                                                                 <label>Loan Terms </label>
                                                                 <!-- <input class="form-control" id="months" type="number" name="duration" min="1" max="<?php echo $max_month?>" placeholder=""?> -->
                                                                 <input hidden type="text" id="months_" name="months_"
@@ -302,12 +309,13 @@ if(isset($_GET['id'])){
 
                                                         <div class="col-lg-4">
                                                             <div class="form-group" id="loan-amnt-section"
-                                                            style="visibility:hidden">
+                                                                style="visibility:hidden">
                                                                 <label>Promissory Note (PN) </label>
 
-                                                                <input type="number" id="lamt" class="form-control text-right"
-                                                                    step="0.01" min="1" max="<?php echo $max_loan?>"
-                                                                    name="loan_amt" placeholder="Loan Amount" required>
+                                                                <input type="number" id="lamt"
+                                                                    class="form-control text-right" step="0.01" min="1"
+                                                                    max="<?php echo $max_loan?>" name="loan_amt"
+                                                                    placeholder="Loan Amount" required>
                                                                 <input hidden type="text" id="lamt_" name="lamt_"
                                                                     value="">
                                                                 <i id="max-loanable" style="color:red;"></i>
@@ -405,8 +413,8 @@ if(isset($_GET['id'])){
                                                                                 class="form-control" step="0.01"
                                                                                 id="prevudi" value="" disabled
                                                                                 style="color:red;text-align:right">
-                                                                            <input type="text" name="prevudi_" id="prevudi_"
-                                                                                value="" hidden
+                                                                            <input type="text" name="prevudi_"
+                                                                                id="prevudi_" value="" hidden
                                                                                 style="text-align:right">
                                                                         </div>
                                                                     </div>
@@ -554,8 +562,13 @@ if(isset($_GET['id'])){
                                                                     <div class="col-lg-6" align="right">
                                                                         <div class="form-group">
                                                                             <label>Monthly (₱):<input type="radio"
-                                                                                    name="mop" id="mop" value="1"
-                                                                                     required></label>
+                                                                                    name="mop" id="mop1" value="1"
+                                                                                    onclick="{
+                                                                                 document.getElementById('monthly-salPeriod-section').style.display = 'block';
+                                                                                document.getElementById('semi-monthly-salPeriod-section').style.display = 'none';
+                                                                                document.getElementById('weekly-salPeriod-section').style.display = 'none';
+                                                                                
+                                                                            }" required /></label>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-lg-6">
@@ -572,13 +585,63 @@ if(isset($_GET['id'])){
                                                                                 hidden>
                                                                         </div>
                                                                     </div>
+                                                                    <div id="monthly-salPeriod-section"
+                                                                        style="display:none">
+                                                                        <div class="col-lg-6" align="right">
+                                                                            <div class="form-group">
+                                                                                <label>Salary Period:</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-6">
+                                                                            <div class="form-group">
+                                                                                <select name="m1" class="form-control">
+                                                                                    <option value="1">1</option>
+                                                                                    <option value="2">2</option>
+                                                                                    <option value="3">3</option>
+                                                                                    <option value="4">4</option>
+                                                                                    <option value="5">5</option>
+                                                                                    <option value="6">6</option>
+                                                                                    <option value="7">7</option>
+                                                                                    <option value="8">8</option>
+                                                                                    <option value="9">9</option>
+                                                                                    <option value="10">10</option>
+                                                                                    <option value="11">11</option>
+                                                                                    <option value="12">12</option>
+                                                                                    <option value="13">13</option>
+                                                                                    <option value="14">14</option>
+                                                                                    <option value="15">15</option>
+                                                                                    <option value="16">16</option>
+                                                                                    <option value="17">17</option>
+                                                                                    <option value="18">18</option>
+                                                                                    <option value="19">19</option>
+                                                                                    <option value="20">20</option>
+                                                                                    <option value="21">21</option>
+                                                                                    <option value="22">22</option>
+                                                                                    <option value="23">23</option>
+                                                                                    <option value="24">24</option>
+                                                                                    <option value="25">25</option>
+                                                                                    <option value="26">26</option>
+                                                                                    <option value="27">27</option>
+                                                                                    <option value="28">28</option>
+                                                                                    <option value="29">29</option>
+                                                                                    <option value="30">30</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                                 <div class="col-lg-12">
                                                                     <div class="col-lg-6" align="right">
                                                                         <div class="form-group">
-                                                                            <label>Semi-monthly (₱):<input type="radio" checked
-                                                                                    name="mop" id="mop"
-                                                                                    value="2"></label>
+                                                                            <label>Semi-monthly (₱):<input type="radio"
+                                                                                    onclick="{
+                                                                                 document.getElementById('monthly-salPeriod-section').style.display = 'none';
+                                                                                document.getElementById('semi-monthly-salPeriod-section').style.display = 'block';
+                                                                                document.getElementById('weekly-salPeriod-section').style.display = 'none';
+                                                                                
+                                                                            }
+                                                                            " checked name="mop" id="mop2"
+                                                                                    value="2" /></label>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-lg-6">
@@ -589,10 +652,94 @@ if(isset($_GET['id'])){
                                                                                 id="collection-per-cut_2"
                                                                                 style="text-align:right" value=""
                                                                                 disabled>
-                                                                                <input type="text" name="amortization2"
+                                                                            <input type="text" name="amortization2"
                                                                                 id="collection-per-cut2"
                                                                                 style="text-align:right" value=""
                                                                                 hidden>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div id="semi-monthly-salPeriod-section"
+                                                                        style="display:none">
+                                                                        <div class="col-lg-6" align="right">
+                                                                            <div class="form-group">
+                                                                                <label>Salary Period:</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-3">
+                                                                            <div class="form-group">
+                                                                                <select name="sm1"
+                                                                                    onchange="salPeriodDropdown(this.value, 'sm2')"
+                                                                                    ; class="form-control">
+                                                                                    <option value="1">1</option>
+                                                                                    <option value="2">2</option>
+                                                                                    <option value="3">3</option>
+                                                                                    <option value="4">4</option>
+                                                                                    <option value="5">5</option>
+                                                                                    <option value="6">6</option>
+                                                                                    <option value="7">7</option>
+                                                                                    <option value="8">8</option>
+                                                                                    <option value="9">9</option>
+                                                                                    <option value="10">10</option>
+                                                                                    <option value="11">11</option>
+                                                                                    <option value="12">12</option>
+                                                                                    <option value="13">13</option>
+                                                                                    <option value="14">14</option>
+                                                                                    <option value="15">15</option>
+                                                                                    <option value="16">16</option>
+                                                                                    <option value="17">17</option>
+                                                                                    <option value="18">18</option>
+                                                                                    <option value="19">19</option>
+                                                                                    <option value="20">20</option>
+                                                                                    <option value="21">21</option>
+                                                                                    <option value="22">22</option>
+                                                                                    <option value="23">23</option>
+                                                                                    <option value="24">24</option>
+                                                                                    <option value="25">25</option>
+                                                                                    <option value="26">26</option>
+                                                                                    <option value="27">27</option>
+                                                                                    <option value="28">28</option>
+                                                                                    <option value="29">29</option>
+                                                                                    <option value="30">30</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-3">
+                                                                            <div class="form-group">
+                                                                                <select name="sm2" class="form-control">
+                                                                                    <option value=""></option>
+                                                                                    <option value="1">1</option>
+                                                                                    <option value="2">2</option>
+                                                                                    <option value="3">3</option>
+                                                                                    <option value="4">4</option>
+                                                                                    <option value="5">5</option>
+                                                                                    <option value="6">6</option>
+                                                                                    <option value="7">7</option>
+                                                                                    <option value="8">8</option>
+                                                                                    <option value="9">9</option>
+                                                                                    <option value="10">10</option>
+                                                                                    <option value="11">11</option>
+                                                                                    <option value="12">12</option>
+                                                                                    <option value="13">13</option>
+                                                                                    <option value="14">14</option>
+                                                                                    <option value="15">15</option>
+                                                                                    <option value="16">16</option>
+                                                                                    <option value="17">17</option>
+                                                                                    <option value="18">18</option>
+                                                                                    <option value="19">19</option>
+                                                                                    <option value="20">20</option>
+                                                                                    <option value="21">21</option>
+                                                                                    <option value="22">22</option>
+                                                                                    <option value="23">23</option>
+                                                                                    <option value="24">24</option>
+                                                                                    <option value="25">25</option>
+                                                                                    <option value="26">26</option>
+                                                                                    <option value="27">27</option>
+                                                                                    <option value="28">28</option>
+                                                                                    <option value="29">29</option>
+                                                                                    <option value="30">30</option>
+
+                                                                                </select>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -600,8 +747,12 @@ if(isset($_GET['id'])){
                                                                     <div class="col-lg-6" align="right">
                                                                         <div class="form-group">
                                                                             <label>Weekly (₱):<input type="radio"
-                                                                                    name="mop" id="mop"
-                                                                                    value="3"></label>
+                                                                                    name="mop" id="mop3" onclick="{
+                                                                                 document.getElementById('monthly-salPeriod-section').style.display = 'none';
+                                                                                document.getElementById('semi-monthly-salPeriod-section').style.display = 'none';
+                                                                                document.getElementById('weekly-salPeriod-section').style.display = 'block';
+                                                                                
+                                                                            }" value="3" /></label>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-lg-6">
@@ -612,36 +763,234 @@ if(isset($_GET['id'])){
                                                                                 id="collection-per-cut_3"
                                                                                 style="text-align:right" value=""
                                                                                 disabled>
-                                                                                <input type="text" name="amortization3"
+                                                                            <input type="text" name="amortization3"
                                                                                 id="collection-per-cut3"
                                                                                 style="text-align:right" value=""
                                                                                 hidden>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div id="weekly-salPeriod-section"
+                                                                        style="display:none">
+                                                                        <div class="col-lg-4" align="right">
+                                                                            <div class="form-group">
+                                                                                <label>Salary Period:</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-2">
+                                                                            <div class="form-group">
+                                                                                <select name="w1"
+                                                                                    onchange="salPeriodDropdown(this.value, 'w2')"
+                                                                                    ; class="form-control">
+                                                                                    <option value="1">1</option>
+                                                                                    <option value="2">2</option>
+                                                                                    <option value="3">3</option>
+                                                                                    <option value="4">4</option>
+                                                                                    <option value="5">5</option>
+                                                                                    <option value="6">6</option>
+                                                                                    <option value="7">7</option>
+                                                                                    <option value="8">8</option>
+                                                                                    <option value="9">9</option>
+                                                                                    <option value="10">10</option>
+                                                                                    <option value="11">11</option>
+                                                                                    <option value="12">12</option>
+                                                                                    <option value="13">13</option>
+                                                                                    <option value="14">14</option>
+                                                                                    <option value="15">15</option>
+                                                                                    <option value="16">16</option>
+                                                                                    <option value="17">17</option>
+                                                                                    <option value="18">18</option>
+                                                                                    <option value="19">19</option>
+                                                                                    <option value="20">20</option>
+                                                                                    <option value="21">21</option>
+                                                                                    <option value="22">22</option>
+                                                                                    <option value="23">23</option>
+                                                                                    <option value="24">24</option>
+                                                                                    <option value="25">25</option>
+                                                                                    <option value="26">26</option>
+                                                                                    <option value="27">27</option>
+                                                                                    <option value="28">28</option>
+                                                                                    <option value="29">29</option>
+                                                                                    <option value="30">30</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-2">
+                                                                            <div class="form-group">
+                                                                                <select name="w2"
+                                                                                    onchange="salPeriodDropdown(this.value, 'w3')"
+                                                                                    ; class="form-control">
+                                                                                    <option value=""></option>
+                                                                                    <option value="1">1</option>
+                                                                                    <option value="2">2</option>
+                                                                                    <option value="3">3</option>
+                                                                                    <option value="4">4</option>
+                                                                                    <option value="5">5</option>
+                                                                                    <option value="6">6</option>
+                                                                                    <option value="7">7</option>
+                                                                                    <option value="8">8</option>
+                                                                                    <option value="9">9</option>
+                                                                                    <option value="10">10</option>
+                                                                                    <option value="11">11</option>
+                                                                                    <option value="12">12</option>
+                                                                                    <option value="13">13</option>
+                                                                                    <option value="14">14</option>
+                                                                                    <option value="15">15</option>
+                                                                                    <option value="16">16</option>
+                                                                                    <option value="17">17</option>
+                                                                                    <option value="18">18</option>
+                                                                                    <option value="19">19</option>
+                                                                                    <option value="20">20</option>
+                                                                                    <option value="21">21</option>
+                                                                                    <option value="22">22</option>
+                                                                                    <option value="23">23</option>
+                                                                                    <option value="24">24</option>
+                                                                                    <option value="25">25</option>
+                                                                                    <option value="26">26</option>
+                                                                                    <option value="27">27</option>
+                                                                                    <option value="28">28</option>
+                                                                                    <option value="29">29</option>
+                                                                                    <option value="30">30</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-2">
+                                                                            <div class="form-group">
+                                                                                <select name="w3"
+                                                                                    onchange="salPeriodDropdown(this.value, 'w4')"
+                                                                                    ; class="form-control">
+                                                                                    <option value=""></option>
+                                                                                    <option value="1">1</option>
+                                                                                    <option value="2">2</option>
+                                                                                    <option value="3">3</option>
+                                                                                    <option value="4">4</option>
+                                                                                    <option value="5">5</option>
+                                                                                    <option value="6">6</option>
+                                                                                    <option value="7">7</option>
+                                                                                    <option value="8">8</option>
+                                                                                    <option value="9">9</option>
+                                                                                    <option value="10">10</option>
+                                                                                    <option value="11">11</option>
+                                                                                    <option value="12">12</option>
+                                                                                    <option value="13">13</option>
+                                                                                    <option value="14">14</option>
+                                                                                    <option value="15">15</option>
+                                                                                    <option value="16">16</option>
+                                                                                    <option value="17">17</option>
+                                                                                    <option value="18">18</option>
+                                                                                    <option value="19">19</option>
+                                                                                    <option value="20">20</option>
+                                                                                    <option value="21">21</option>
+                                                                                    <option value="22">22</option>
+                                                                                    <option value="23">23</option>
+                                                                                    <option value="24">24</option>
+                                                                                    <option value="25">25</option>
+                                                                                    <option value="26">26</option>
+                                                                                    <option value="27">27</option>
+                                                                                    <option value="28">28</option>
+                                                                                    <option value="29">29</option>
+                                                                                    <option value="30">30</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-2">
+                                                                            <div class="form-group">
+                                                                                <select name="w4" class="form-control">
+                                                                                    <option value=""></option>
+                                                                                    <option value="1">1</option>
+                                                                                    <option value="2">2</option>
+                                                                                    <option value="3">3</option>
+                                                                                    <option value="4">4</option>
+                                                                                    <option value="5">5</option>
+                                                                                    <option value="6">6</option>
+                                                                                    <option value="7">7</option>
+                                                                                    <option value="8">8</option>
+                                                                                    <option value="9">9</option>
+                                                                                    <option value="10">10</option>
+                                                                                    <option value="11">11</option>
+                                                                                    <option value="12">12</option>
+                                                                                    <option value="13">13</option>
+                                                                                    <option value="14">14</option>
+                                                                                    <option value="15">15</option>
+                                                                                    <option value="16">16</option>
+                                                                                    <option value="17">17</option>
+                                                                                    <option value="18">18</option>
+                                                                                    <option value="19">19</option>
+                                                                                    <option value="20">20</option>
+                                                                                    <option value="21">21</option>
+                                                                                    <option value="22">22</option>
+                                                                                    <option value="23">23</option>
+                                                                                    <option value="24">24</option>
+                                                                                    <option value="25">25</option>
+                                                                                    <option value="26">26</option>
+                                                                                    <option value="27">27</option>
+                                                                                    <option value="28">28</option>
+                                                                                    <option value="29">29</option>
+                                                                                    <option value="30">30</option>
+                                                                                </select>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <!-- right -->
                                                             <div class="col-lg-6" align="left">
-                                                                <!-- <h5><b>Preview</b></h5><br> -->
-                                                                <!-- <div class="col-lg-6" style="font-size:15px;"><br> -->
-                                                                <!-- <div class="col-lg-12"><h5><b>Loan Details: </b></h5></div>
-                                                                <div class="col-lg-4" align="right"><i>Monthly Interest Rate: </i></div>
-                                                                <div class="col-lg-8"><b><?php //echo $loan->getInterestRate()*100;?>%</b></div>
-                                                                <div class="col-lg-4" align="right"><i>Loan Amount: </i></div>
-                                                                <div class="col-lg-8">₱ <input type="text" disabled id="prev_loan_amt" style="color:blue;text-align:right" value=""></div>
-                                                                <div class="col-lg-4" align="right"><i>Interest Amount: </i></div>
-                                                                <div class="col-lg-8">₱ <input type="text" disabled id="prev_int_amt" style="color:red;text-align:right" value=""></div>
-                                                                <div class="col-lg-4" align="right"><i>Notarial Fee: </i></div>
-                                                                <div class="col-lg-8">₱ <input type="text" disabled id="prev_not_fee" style="color:red;text-align:right" value=""><hr></div>
-                                                                <div class="col-lg-4" align="right"><i>Net Cashout: </i></div>
-                                                                <div class="col-lg-8">₱ <input type="text" disabled id="prev_cash_out" style="color:blue;text-align:right" value=""><br><br></div>
-                                                                <div class="col-lg-12"><b><h5>Payments Terms: </b></h5></div>
-                                                                <div class="col-lg-4" align="right"><i>Monthly: </i></div>
-                                                                <div class="col-lg-8">₱ <input type="text" disabled id="prev_pay_1" style="color:black;text-align:right" value=""><br></div>
-                                                                <div class="col-lg-4" align="right"><i>Semi-monthly: </i></div>
-                                                                <div class="col-lg-8">₱ <input type="text" disabled id="prev_pay_2" style="color:black;text-align:right" value=""><br></div>
-                                                                <div class="col-lg-4" align="right"><i>Weekly: </i></div>
-                                                                <div class="col-lg-8">₱ <input type="text" disabled id="prev_pay_3" style="color:black;text-align:right" value=""><br></div> -->
+                                                                <!-- <h5><b>Preview</b></h5><br>
+                                                                <div class="col-lg-6" style="font-size:15px;"><br>
+                                                                    <div class="col-lg-12">
+                                                                        <h5><b>Loan Details: </b></h5>
+                                                                    </div>
+                                                                    <div class="col-lg-4" align="right"><i>Monthly
+                                                                            Interest Rate: </i></div>
+                                                                    <div class="col-lg-8">
+                                                                        <b><?php //echo $loan->getInterestRate()*100;?>%</b>
+                                                                    </div>
+                                                                    <div class="col-lg-4" align="right"><i>Loan Amount:
+                                                                        </i></div>
+                                                                    <div class="col-lg-8">₱ <input type="text" disabled
+                                                                            id="prev_loan_amt"
+                                                                            style="color:blue;text-align:right"
+                                                                            value=""></div>
+                                                                    <div class="col-lg-4" align="right"><i>Interest
+                                                                            Amount: </i></div>
+                                                                    <div class="col-lg-8">₱ <input type="text" disabled
+                                                                            id="prev_int_amt"
+                                                                            style="color:red;text-align:right" value="">
+                                                                    </div>
+                                                                    <div class="col-lg-4" align="right"><i>Notarial Fee:
+                                                                        </i></div>
+                                                                    <div class="col-lg-8">₱ <input type="text" disabled
+                                                                            id="prev_not_fee"
+                                                                            style="color:red;text-align:right" value="">
+                                                                        <hr>
+                                                                    </div>
+                                                                    <div class="col-lg-4" align="right"><i>Net Cashout:
+                                                                        </i></div>
+                                                                    <div class="col-lg-8">₱ <input type="text" disabled
+                                                                            id="prev_cash_out"
+                                                                            style="color:blue;text-align:right"
+                                                                            value=""><br><br></div>
+                                                                    <div class="col-lg-12"><b>
+                                                                            <h5>Payments Terms:
+                                                                        </b></h5>
+                                                                    </div>
+                                                                    <div class="col-lg-4" align="right"><i>Monthly: </i>
+                                                                    </div>
+                                                                    <div class="col-lg-8">₱ <input type="text" disabled
+                                                                            id="prev_pay_1"
+                                                                            style="color:black;text-align:right"
+                                                                            value=""><br></div>
+                                                                    <div class="col-lg-4" align="right"><i>Semi-monthly:
+                                                                        </i></div>
+                                                                    <div class="col-lg-8">₱ <input type="text" disabled
+                                                                            id="prev_pay_2"
+                                                                            style="color:black;text-align:right"
+                                                                            value=""><br></div>
+                                                                    <div class="col-lg-4" align="right"><i>Weekly: </i>
+                                                                    </div>
+                                                                    <div class="col-lg-8">₱ <input type="text" disabled
+                                                                            id="prev_pay_3"
+                                                                            style="color:black;text-align:right"
+                                                                            value=""><br></div> -->
 
 
                                                             </div>
@@ -673,29 +1022,29 @@ if(isset($_GET['id'])){
 
                                                 </div>
                                                 </form>
-
                                             </div>
-                                            <!-- /.row (nested) -->
                                         </div>
-                                        <!-- /.panel-body -->
+                                        <!-- /.row (nested) -->
                                     </div>
-                                    <!-- /.panel -->
-
+                                    <!-- /.panel-body -->
                                 </div>
+                                <!-- /.panel -->
 
                             </div>
+
                         </div>
                     </div>
-                    <!-- /.panel -->
                 </div>
-                <div class="col-lg-12">
-
-                </div>
-                <!-- /.col-lg-12 -->
+                <!-- /.panel -->
             </div>
-            <!-- /.row -->
+            <div class="col-lg-12">
+
+            </div>
+            <!-- /.col-lg-12 -->
         </div>
-        <!-- /.container-fluid -->
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
     </div>
     <!-- /#page-wrapper -->
 
@@ -719,8 +1068,9 @@ if(isset($_GET['id'])){
     var maxdur = document.getElementById("max_dur").value;
 
     $('#monthly_interest').change(() => {
-        ($('#monthly_interest').val() == "") ? $('#term-section').attr('style', 'visibility: hidden') : $('#term-section').attr('style', 'visibility: visible');
-        
+        ($('#monthly_interest').val() == "") ? $('#term-section').attr('style', 'visibility: hidden'): $(
+            '#term-section').attr('style', 'visibility: visible');
+
     });
 
     $("#months").change(function() {
@@ -793,8 +1143,8 @@ if(isset($_GET['id'])){
                 // let udi = ( <?php echo $loan->moInterest * 100 ?>  * duration) - ( (collectionFeePer * 100) + (processingFeePer * 100));
                 // let udiValue = $("#lamt").val() * ($('#udi').val() / 100);
 
-                let udiValue =  monthlyInterest * duration * $("#lamt").val();
-                
+                let udiValue = monthlyInterest * duration * $("#lamt").val();
+
                 let totalDeduction = udiValue + processingFee + collectionFee + notarialFee;
                 let proceedLoan = $("#lamt").val() - totalDeduction;
 
@@ -994,8 +1344,8 @@ if(isset($_GET['id'])){
                             </div>
                             `);
 
-                    
-                            // newWin.focus();
+
+                    // newWin.focus();
                     // newWind.onload = () => {
                     //     let html = 
                     //     `
@@ -1006,7 +1356,7 @@ if(isset($_GET['id'])){
                     // newWin.document.write(
                     //     "<script>window.oponer.document.body.innerHTML= 'Test'<\/script>"
                     // );
-                    
+
                 });
 
             } else {
@@ -1072,6 +1422,47 @@ if(isset($_GET['id'])){
         //         }
         //     }
         // }
+
+    }
+
+
+    if ($('#mop2').attr('checked', true)) {
+        $('#semi-monthly-salPeriod-section').css('display', 'block');
+    }
+
+    function salPeriodDropdown(value, select) {
+        
+        let static = 30;
+
+        let s = document.querySelector(`select[name=${select}]`);
+
+        let index = s.options.length;
+
+        let frag = document.createDocumentFragment(),
+            elOption = null;
+
+        while (index > 0) {
+            s.remove(index);
+            index--;
+        }
+
+        while (index < static) {
+            elOption = frag.appendChild(document.createElement('option'));
+            elOption.value = (index+1);
+            elOption.text = (index+1);
+            index++;
+        }
+
+        s.appendChild(frag);
+
+        while (index > 0) {
+
+            if (index <= value) {
+                s.options[index].disabled = true;
+            }
+
+            index--;
+        }
 
     }
     </script>
