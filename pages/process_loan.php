@@ -73,7 +73,7 @@ if(!isset($_SESSION['user_id'])){
                                             <tr>
                                                 <th style="text-align:center;">CONTRACT NO.</th>
                                                 <th style="text-align:center;">NAME</th>
-                                                <th style="text-align:center;">PROMISSORY NOTE (PN)</th>
+                                                <th style="text-align:center;">LOAN AMOUNT</th>
                                                 <th style="text-align:center;">DATE OF APPLICATION</th>
                                                 <th style="text-align:center;">DATE VALIDATED</th>
                                                 <th style="text-align:center;">STATUS</th>
@@ -96,28 +96,26 @@ if(!isset($_SESSION['user_id'])){
                                                         $lid = $row['loan_id'];
                                                         $name = $row['lastname'].', '.$row['firstname'].' '.$row['suffix'].' '.$row['middlename'].' '.$row['suffix'];
                                                         $adate = $row['application_date'];
+                                                        $process_status = $row['process_status'];
                                                         //$cis = $row['ci_status'];
                                                 ?>
                                             <tr class="odd gradeX">
                                                 <td><?php echo $row['contract_no'];?></td>
                                                 <td><?php echo $row['lastname'].', '.$row['firstname'].' '.$row['suffix'].' '.$row['middlename'];?>
                                                 </td>
-                                                <td style="text-align:center;">₱
+                                                <td style="text-align:right;">₱
                                                     <?php echo number_format($row['loan_amount'],2);?></td>
                                                 <td class="text-center"><?php echo date('F d, Y',strtotime($adate));?>
                                                 </td>
                                                 <td style="text-align:center;">
-                                                    <?php 
-                                                    if($row['ci_date'] != null){
-                                                        echo date('F d, Y',strtotime($row['ci_date']));
-                                                    }else{
-                                                     echo date('F d, Y',strtotime($row['date_flagged']));
-                                                    }
-                                                    //echo date('F d, Y',strtotime($row['ci_date']));
-                                                    ?>
-                                                </td><!--ci_date-->
-                                                <td style="text-align:center;"><span class='btn btn-success'> <i
-                                                            class='fa fa-check'></i> Validated</span></td>
+                                                    <?php echo date('F d, Y',strtotime($row['ci_date']));?></td>
+                                                <td style="text-align:center;">
+                                                <?php
+                                                echo ($process_status == 2) ? "<span class='btn btn-danger'> <i
+                                                class='fa fa-check'></i> Re-validated</span>" : "<span class='btn btn-success'> <i
+                                                class='fa fa-check'></i> Validated</span>";
+                                                ?>
+                                                </td>
                                                 <td style="text-align:center">
                                                     <button type="button"
                                                         onclick="{window.location.href = 'contract_signing.php?id=<?= $cid ?>&cn=<?= $row['contract_no'] ?>'}"

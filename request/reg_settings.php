@@ -26,27 +26,15 @@ if(isset($_POST['submit_sukli'])){
     }
 }
 
-if(isset($_POST['submit_collection'])){
+if(isset($_POST['submit_base'])){
     $id = $_POST['id'];
-    $collection = $_POST['collection'];
+    $base = $_POST['base'];
 
-    $sql = "UPDATE collection SET collection_percentage = '$collection' WHERE collection_id = '$id'";
+    $sql = "UPDATE borrowing_history SET base = '$base' WHERE bh_id = '$id'";
     $result = mysqli_query($con, $sql);
 
     if($result){
-        header("location:../pages/setting_collection.php");
-    }
-}
-
-if(isset($_POST['submit_processing'])){
-    $id = $_POST['id'];
-    $processing = $_POST['processing'];
-
-    $sql = "UPDATE processing SET processing_percentage = '$processing' WHERE processing_id = '$id'";
-    $result = mysqli_query($con, $sql);
-
-    if($result){
-        header("location:../pages/setting_processing.php");
+        header("location:../pages/setting_borrowing_history.php");
     }
 }
 ?>

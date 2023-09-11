@@ -50,41 +50,41 @@ if(isset($_GET['id'])){
     $mo_int;
     $variation = $loan->clientEmpStatus;
     $max_month;
-        if($variation == "REGULAR" && strtoupper($loan->incomeEarning) == "MULTIPLE"){
-            if($loan->borrowingHistCount > 5){
-                $max_month = 6; 
-            }else {
-                $max_month = 4; 
-            }
-            $MA = Statics::$MULTIPLEREGULARAMORT;
-        }else  if($variation == "REGULAR" && strtoupper($loan->incomeEarning) == "SINGLE"){
-            if($loan->borrowingHistCount > 5){
-                $max_month = 6; 
-            }else {
-                $max_month = 4; 
-            }
-            $MA = Statics::$SINGLEREGULARAMORT;
-        }
-        else if($variation == "CASUAL" && strtoupper($loan->incomeEarning) == "MULTIPLE"){
-            $max_month = 3;
-            $MA = Statics::$MULTIPLECASUALAMORT;
-        } else if($variation == "CASUAL" && strtoupper($loan->incomeEarning) == "SINGLE"){
-            $max_month = 3;
-            $MA = Statics::$SINGLECASUALAMORT;
-        }else if($variation == "PROBATIONARY" && strtoupper($loan->incomeEarning) == "MULTIPLE"){
-            $max_month = 3;
-            $MA = Statics::$MULTIPLECASUALAMORT;
-        }else if($variation == "PROBATIONARY" && strtoupper($loan->incomeEarning) == "SINGLE"){
-            $max_month = 3;
-            $MA = Statics::$SINGLECASUALAMORT;
-        }else if($variation == "TRAINEE" && strtoupper($loan->incomeEarning) == "MULTIPLE"){
-            $max_month = 3;
-            $MA = Statics::$MULTIPLECASUALAMORT;
-        }else if($variation == "TRAINEE" && strtoupper($loan->incomeEarning) == "SINGLE"){
-            $max_month = 3;
-            $MA = Statics::$SINGLECASUALAMORT;
-        }
-
+        // if($variation == "REGULAR" && strtoupper($loan->incomeEarning) == "MULTIPLE"){
+        //     if($loan->borrowingHistCount > 5){
+        //         $max_month = 6; 
+        //     }else {
+        //         $max_month = 4; 
+        //     }
+        //     $MA = Statics::$MULTIPLEREGULARAMORT;
+        // }else  if($variation == "REGULAR" && strtoupper($loan->incomeEarning) == "SINGLE"){
+        //     if($loan->borrowingHistCount > 5){
+        //         $max_month = 6; 
+        //     }else {
+        //         $max_month = 4; 
+        //     }
+        //     $MA = Statics::$SINGLEREGULARAMORT;
+        // }
+        // else if($variation == "CASUAL" && strtoupper($loan->incomeEarning) == "MULTIPLE"){
+        //     $max_month = 3;
+        //     $MA = Statics::$MULTIPLECASUALAMORT;
+        // } else if($variation == "CASUAL" && strtoupper($loan->incomeEarning) == "SINGLE"){
+        //     $max_month = 3;
+        //     $MA = Statics::$SINGLECASUALAMORT;
+        // }else if($variation == "PROBATIONARY" && strtoupper($loan->incomeEarning) == "MULTIPLE"){
+        //     $max_month = 3;
+        //     $MA = Statics::$MULTIPLECASUALAMORT;
+        // }else if($variation == "PROBATIONARY" && strtoupper($loan->incomeEarning) == "SINGLE"){
+        //     $max_month = 3;
+        //     $MA = Statics::$SINGLECASUALAMORT;
+        // }else if($variation == "TRAINEE" && strtoupper($loan->incomeEarning) == "MULTIPLE"){
+        //     $max_month = 3;
+        //     $MA = Statics::$MULTIPLECASUALAMORT;
+        // }else if($variation == "TRAINEE" && strtoupper($loan->incomeEarning) == "SINGLE"){
+        //     $max_month = 3;
+        //     $MA = Statics::$SINGLECASUALAMORT;
+        // }
+        $max_month = 6;
 
 
 }else{
@@ -257,7 +257,7 @@ if(isset($_GET['id'])){
                                                     </div>
                                                     <div class="col-lg-3">Loan Terms: </div>
                                                     <div class="col-lg-3"><label
-                                                            id='loan_terms'><?php echo $sched->duration.' MONTHS'; ?></label>
+                                                            id='loan_terms'><?php echo $sched->duration.' MONTH(S)'; ?></label>
                                                     </div>
                                                     <div class="col-lg-3">Amortization Amount: </div>
                                                     <div class="col-lg-3"><label id='amortization_amount'>₱
@@ -355,6 +355,11 @@ if(isset($_GET['id'])){
                                 title="Copy to use archive">&#xf164</i>
                         </center>
                         <center>
+                                    <div class="orbit" style="display:none;top:50%;left:43%;position:absolute;"
+                                        id="orbit_process">
+                                    </div>
+                                </center>
+                        <center>
                             <h3>Process Loan?</h3>
                         </center>
 
@@ -378,7 +383,7 @@ if(isset($_GET['id'])){
     <!-- recalculation of promissory note -->
     <div class="modal fade text-left" id="recalculation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
         aria-hidden="true" data-backdrop="static">
-        <div class="modal-dialog modal-md" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     Update Loan Terms and Promissory Note
@@ -393,22 +398,34 @@ if(isset($_GET['id'])){
                                     <div class="panel panel-primary">
                                         <div class="panel-body">
                                             <div class="row">
-                                                <div class="col-lg-6">
-                                                    <label>Loan Terms </label>
-                                                    <select class="form-control" name="duration" id="months">
-                                                        <option value="" selected disabled>SELECT</option>
-                                                        <?php 
+                                                <div class="col-lg-4">
+                                                    <div class="form-group">
+                                                        <label>Monthly Interest (%) </label>
+
+                                                        <input type="number" id="monthly_interest" class="form-control"
+                                                            step="0.01" min="1" max="<?php echo $max_loan?>"
+                                                            name="monthly_interest"
+                                                            placeholder="Monthly Interest Percent" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="form-group" id="term-section" style="visibility:hidden">
+                                                        <label>Loan Terms </label>
+                                                        <select class="form-control" name="duration" id="months">
+                                                            <option value="" selected disabled>SELECT</option>
+                                                            <?php 
                                                             for($index = 0; $index < $max_month; $index++){
                                                                 echo '<option value="'.($index+1).'">'.($index+1).'</option>';
                                                             }
                                                         ?>
-                                                    </select>
-                                                    <i style="color:red;">
-                                                        <?php echo "Maximum duration: ".$max_month." mos."; ?>
-                                                    </i>
+                                                        </select>
+                                                        <i style="color:red;">
+                                                            <?php echo "Maximum duration: ".$max_month." mos."; ?>
+                                                        </i>
+                                                    </div>
                                                 </div>
 
-                                                <div class="col-lg-6">
+                                                <div class="col-lg-4">
                                                     <div class="form-group" id="loan-amnt-section"
                                                         style="visibility:hidden">
                                                         <label>Promissory Note (PN) </label>
@@ -442,6 +459,158 @@ if(isset($_GET['id'])){
         </div>
     </div>
 
+    <!-- confirmation admin access -->
+    <div class="modal fade text-left" id="admin_confirmation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="text-right">
+                    <span class="btn text-medium" style="border:none;" data-dismiss="modal"><b>X</b></span>
+
+                </div>
+                <div class="modal-body">
+                    <label for=""> Enter admin access code to confirm update.</label>
+                    <div class="tab-pane fade in active" id="tab-default-1">
+                        <div class="panel panel-primary">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <label></label>
+                                        <input type="password" id="access_code" placeholder="Enter admin access code"
+                                            class="form-control text-center">
+                                        <center>
+                                            <label id="message" class="text-danger"></label>
+                                        </center>
+                                        <center>
+                                            <div class="orbit" style="display:none;top:50%;left:45%;position:absolute;"
+                                                id="orbit_adminConfirmation">
+                                            </div>
+                                        </center>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer" style="padding: 5px;">
+
+                    <button type="button" class="btn btn-default text-small border-none" data-toggle="modal"
+                        data-target="#confirmation" data-dismiss="modal">Back</button>
+
+
+                    <button type="button" id="confirm_admin" class="btn btn-primary text-small">Confirm</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+    </div>
+
+    <!-- loan summary confirmation : Updates -->
+    <div class="modal fade text-left" id="confirmation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="text-right">
+                    <span class="btn text-medium" style="border:none;" data-dismiss="modal"><b>X</b></span>
+
+                </div>
+                <div class="modal-header">
+                    <strong>
+                        Update Loan Summary
+                    </strong>
+                </div>
+                <div class="modal-body">
+                    <!-- <label for=""> Enter admin access code to confirm update.</label> -->
+                    <div class="tab-pane fade in active" id="tab-default-1">
+                        <div class="panel panel-primary">
+                            <div class="panel-body">
+                                <label class="text-primary">CURRENT LOAN DETAILS</label>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <label for="">Monthly Interest: </label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label><?=$sched->interestPer?> %</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label for="">Loan Terms: </label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label><?php echo $sched->duration.' MONTH(S)'; ?></label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label for="">Promissory Note: </label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label><?php echo number_format(floatval($sched->principal), 2); ?></label>
+                                    </div>
+                                </div>
+                                <center>
+                                    <div class="orbit" style="display:none;top:50%;left:45%;position:absolute;"
+                                        id="orbit_confirmation">
+                                    </div>
+                                </center>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <hr>
+                                    </div>
+                                </div>
+
+                                <label class="text-success">NEW LOAN DETAILS</label>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <label for="">Monthly Interest: </label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label id="mi"></label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label for="">Loan Terms: </label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label id="lt"></label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label for="">Promissory Note: </label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label id="pn"></label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <hr>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <!-- note section -->
+                                    <div id="note-section" style="visibility: hidden">
+                                        <div class="col-lg-6">
+                                            <label for="">Note: </label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label id="note" style="color: red"></label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer" style="padding: 5px;">
+
+                    <button type="button" class="btn btn-default text-small border-none" data-toggle="modal"
+                        data-target="#recalculation" data-dismiss="modal">Back</button>
+
+
+                    <button type="button" id="confirm" class="btn btn-primary text-small">Confirm</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+    </div>
+
     <!-- jQuery -->
     <script src="../js/jquery.min.js"></script>
 
@@ -465,7 +634,9 @@ var mm = String(today.getMonth() + 1).padStart(2, '0');
 var yyyy = today.getFullYear();
 
 today = yyyy + '-' + mm + '-' + dd;
+
 $('#effective_date').attr('min', today);
+
 </script>
 
 <script>
@@ -538,8 +709,8 @@ $('#print').click(() => {
 //Process Loan
 $('#process').click(() => {
 
-    $('#orbit').css('display', 'block');
-    $('#modal').modal('hide');
+    $('#orbit_process').css('display', 'block');
+    $('button').attr('disabled', true);
 
     $.ajax({
         type: 'POST',
@@ -552,9 +723,11 @@ $('#process').click(() => {
         success: (response) => {
 
             setTimeout(() => {
-
+                $('#orbit_process').css('display', 'none');
+                $('button').attr('disabled', false);
                 setTimeout(() => {
-                    $('#orbit').css('display', 'none');
+                    
+                    $('#modal').modal('hide');
                 }, 300);
                 beautyToast.success({
                     title: '',
@@ -584,6 +757,12 @@ $('#reasses').click(() => {
     $('#recalculation').modal('show');
 });
 
+$('#monthly_interest').change(() => {
+
+    $('#term-section').attr('style', 'visibility: visible');
+
+});
+
 $('#months').change(() => {
 
     $('#loan-amnt-section').attr('style', 'visibility: visible');
@@ -602,13 +781,28 @@ $('#months').change(() => {
 
 });
 
+
 $('#update').click(() => {
 
-    if ($('#months').val() == null) {
+    if ($('#monthly_interest').val() == null) {
         $('#recalculation').modal('hide');
         beautyToast.error({
             title: '',
-            message: 'Months must be specified.',
+            message: 'Monthly interest must be specified.',
+            darkTheme: false,
+            iconColor: 'red',
+            iconWidth: 24,
+            iconHeight: 24,
+            animationTime: 100,
+        });
+        setTimeout(() => {
+            $('#recalculation').modal('show');
+        }, 1000);
+    } else if ($('#months').val() == null) {
+        $('#recalculation').modal('hide');
+        beautyToast.error({
+            title: '',
+            message: 'Loan terms must be specified.',
             darkTheme: false,
             iconColor: 'red',
             iconWidth: 24,
@@ -633,147 +827,250 @@ $('#update').click(() => {
             $('#recalculation').modal('show');
         }, 1000);
     } else {
-        $('#recalculation').modal('hide');
-        $('#orbit').css('display', 'block');
 
 
-        let notarialFee = <?php echo $loan->notarialFee ?>;
-        let monthlyInterest = <?= $sched->monthlyInterest ?> / 100;
+        $('#mi').text(`${$('#monthly_interest').val()} %`);
+        $('#lt').text(`${$('#months').val()} MONTH(S)`);
+        $('#pn').text(
+            `₱ ${parseFloat($('#lamt').val()).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`);
 
 
-        let collectionFeePer = <?= $loan->collectionFee / 100 ?> * duration;
-                let processingFeePer = <?= $loan->processingFee / 100 ?> * duration;
-
-        let collectionFee = $("#lamt").val() * collectionFeePer;
-        let processingFee = $("#lamt").val() * processingFeePer;
+        let adminConfirmation = false;
+        let error = '';
+        let noteSection = 'hidden';
 
 
-        let collectionPerCut = $("#lamt").val() / (duration);
-        let collectionPerCut2 = ($("#lamt").val() / (duration)) / 2;
-        let collectionPerCut3 = ($("#lamt").val() / (duration)) / 4;
 
-        let udiValue = (monthlyInterest * duration) * $("#lamt").val();
 
-        let totalDeduction = udiValue + processingFee + collectionFee + notarialFee;
-        let proceedLoan = $("#lamt").val() - totalDeduction;
-
-        let newPL = proceedLoan - <?= $loan->outStandingBalance ?>;
-
-        let cashout = ($('#loanType') == 'RENEWAL') ? newPL : proceedLoan;
-
-        if (<?= $sched->mop ?> == 1) {
-            amortAmount = collectionPerCut;
-        } else if (<?= $sched->mop ?> == 2) {
-            amortAmount = collectionPerCut2;
-        } else if (<?= $sched->mop ?> == 3) {
-            amortAmount = collectionPerCut3;
+        if (maxLoanAmount < $('#lamt').val()) {
+            noteSection = 'visible';
+            adminConfirmation = true;
+            error +=
+                `Promissory note exceeds the max loanable amount ${parseFloat(maxLoanAmount).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}. `;
         }
 
-        if (cashout < 0) {
+        if (parseFloat($('#monthly_interest').val()) < 6.5) {
+            noteSection = 'visible';
+            adminConfirmation = true;
+            error += `Monthly interest is below 6.5 %. `;
+        }
 
-            setTimeout(() => {
-                $('#orbit').css('display', 'none');
+        $('#note-section').attr('style', `visibility:  ${noteSection}`);
+        $('#note').text(`${error} Thus, admin confirmation is needed.`);
 
-                beautyToast.error({
-                    title: '',
-                    message: 'Promissory note amount is not enough that cause final cash out to a negative value.',
-                    darkTheme: false,
-                    iconColor: 'red',
-                    iconWidth: 24,
-                    iconHeight: 24,
-                    animationTime: 100,
-                });
-            }, 1000);
-          
-        } else {
+        $('#confirmation').modal('show');
 
-            $.ajax({
-                type: 'POST',
-                url: '../request/req_paysched.php',
-                data: {
-                    update: 1,
-                    contract: $('#contract').val(),
-                    loan_terms: duration,
-                    promissory_note: $("#lamt").val(),
-                    udi_value: udiValue,
-                    amort_amount: amortAmount,
-                    cash_out: cashout
-                },
-                dataType: 'json',
-                success: (response) => {
+        $('#recalculation').modal('hide');
+
+        (adminConfirmation == true) ? $('#confirm').html('Proceed'): '';
 
 
-                    setTimeout(() => {
-                       
-                        $('#orbit').css('display', 'none');
 
-                        
-                        if($('#effective_date').val() != ""){
-                            $.ajax({
-                                type: 'POST',
-                                url: '../request/req_paysched.php',
-                                data: {
-                                    contract: $('#contract').val(),
-                                    startDate: $('#effective_date').val()
-                                },
-                                dataType: 'json',
-                                success: (response) => {
-                                    //console.log(response.table);
-                                    divtest.innerHTML = response.table;
-                                    objTo.appendChild(divtest);
-                                },
-                                error: (xhr, status, error) => {
-                                    alert(xhr.responseText);
-                                }
-                            });
-                        }
+        if (adminConfirmation == true) {
 
-                        //update preview of loan details
-                        $('#loan_terms').text(`${duration} MONTHS`);
-                        $('#promissory_note').text(
-                            `₱ ${parseFloat($('#lamt').val()).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`
-                            );
-                        $('#udi_value').text(
-                            `₱ ${parseFloat(udiValue).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`
-                            );
-                        $('#collection_fee').text(
-                            `₱ ${parseFloat(collectionFee).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`
-                            );
-                        $('#processing_fee').text(
-                            `₱ ${parseFloat(processingFee).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`
-                            );
-                        $('#amortization_amount').text(
-                            `₱ ${parseFloat(amortAmount).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`
-                            );
-                        $('#cash_out').text(
-                            `₱ ${parseFloat(cashout).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`
-                            );
-
-                        beautyToast.success({
-                            title: '',
-                            message: response.msg,
-                            darkTheme: false,
-                            iconColor: 'green',
-                            iconWidth: 24,
-                            iconHeight: 24,
-                            animationTime: 100,
-                        });
-                    }, 1000);
-
-                },
-                error: (xhr, status, error) => {
-                    alert(xhr.responseText);
-                }
+            $('#confirm').click(() => {
+                $('#admin_confirmation').modal('show');
+                $('#confirmation').modal('hide');
             });
 
+            //send access code to validation
+            $('#confirm_admin').click(() => {
+                $.ajax({
+                    type: 'POST',
+                    url: '../request/req_access.php',
+                    data: {
+                        access: $('#access_code').val()
+                    },
+                    dataType: 'json',
+                    success: (response) => {
+                        $('#orbit_adminConfirmation').css('display', 'block');
+                        $('#access_code').attr('disabled', true);
+                        setTimeout(() => {
+                            $('#orbit_adminConfirmation').css('display', 'none');
+                            if (response.access) {
+                                $('#message').removeClass('text-danger');
+                                $('#message').addClass('text-success');
+                                $('#message').text(response.access);
 
+
+                                setTimeout(() => {
+                                    $('#admin_confirmation').modal('hide');
+                                    $('#confirmation').modal('show');
+                                    updateLoan(2);
+                                     window.location.replace('process_loan.php');
+                                }, 1000);
+
+
+
+                            } else {
+                                $('#message').removeClass('text-success');
+                                $('#message').addClass('text-danger');
+                                $('#message').text(response.noAccess);
+                                $('#access_code').attr('disabled', false);
+                            }
+                        }, 1000);
+
+
+                    },
+                    error: (xhr, status, error) => {
+                        alert(xhr.responseText);
+                    }
+                });
+            });
+
+        } else {
+            $('#confirm').click(() => {
+                updateLoan(0);
+            });
         }
+
+
 
 
 
     }
 
 });
+
+function updateLoan(stat) {
+    $('#orbit_confirmation').css('display', 'block');
+    let notarialFee = <?php echo $loan->notarialFee ?>;
+    let monthlyInterest = <?= $sched->monthlyInterest ?> / 100;
+
+
+    let collectionFeePer = <?= $loan->collectionFee / 100 ?> * duration;
+    let processingFeePer = <?= $loan->processingFee / 100 ?> * duration;
+
+    let collectionFee = $("#lamt").val() * collectionFeePer;
+    let processingFee = $("#lamt").val() * processingFeePer;
+
+
+    let collectionPerCut = $("#lamt").val() / (duration);
+    let collectionPerCut2 = ($("#lamt").val() / (duration)) / 2;
+    let collectionPerCut3 = ($("#lamt").val() / (duration)) / 4;
+
+    let udiValue = (monthlyInterest * duration) * $("#lamt").val();
+
+    let totalDeduction = udiValue + processingFee + collectionFee + notarialFee;
+    let proceedLoan = $("#lamt").val() - totalDeduction;
+
+    let newPL = proceedLoan - <?= $loan->outStandingBalance ?>;
+
+    let cashout = ($('#loanType') == 'RENEWAL') ? newPL : proceedLoan;
+
+    if (<?= $sched->mop ?> == 1) {
+        amortAmount = collectionPerCut;
+    } else if (<?= $sched->mop ?> == 2) {
+        amortAmount = collectionPerCut2;
+    } else if (<?= $sched->mop ?> == 3) {
+        amortAmount = collectionPerCut3;
+    }
+
+    if (cashout < 0) {
+
+        setTimeout(() => {
+            $('#orbit_confirmation').css('display', 'none');
+
+            beautyToast.error({
+                title: '',
+                message: 'Promissory note amount is not enough that cause final cash out to be a negative value.',
+                darkTheme: false,
+                iconColor: 'red',
+                iconWidth: 24,
+                iconHeight: 24,
+                animationTime: 100,
+            });
+        }, 1000);
+
+    } else {
+        $.ajax({
+            type: 'POST',
+            url: '../request/req_paysched.php',
+            data: {
+                update: 1,
+                contract: $('#contract').val(),
+                loan_terms: duration,
+                promissory_note: $("#lamt").val(),
+                udi_percentage: $('#monthly_interest').val(),
+                udi_value: udiValue,
+                amort_amount: amortAmount,
+                cash_out: cashout,
+                process_status: stat
+            },
+            dataType: 'json',
+            success: (response) => {
+
+
+                setTimeout(() => {
+
+                    $('#orbit_confirmation').css('display', 'none');
+
+
+                    if ($('#effective_date').val() != "") {
+                        $.ajax({
+                            type: 'POST',
+                            url: '../request/req_paysched.php',
+                            data: {
+                                contract: $('#contract').val(),
+                                startDate: $('#effective_date').val()
+                            },
+                            dataType: 'json',
+                            success: (response) => {
+                                //console.log(response.table);
+                                divtest.innerHTML = response.table;
+                                objTo.appendChild(divtest);
+                            },
+                            error: (xhr, status, error) => {
+                                alert(xhr.responseText);
+                            }
+                        });
+                    }
+
+                   setTimeout(() => {
+                    $('#confirmation').modal('hide');
+
+                    //update preview of loan details
+                    $('#loan_terms').text(`${duration} MONTHS`);
+                    $('#promissory_note').text(
+                        `₱ ${parseFloat($('#lamt').val()).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`
+                    );
+                    $('#udi_value').text(
+                        `₱ ${parseFloat(udiValue).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`
+                    );
+                    $('#collection_fee').text(
+                        `₱ ${parseFloat(collectionFee).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`
+                    );
+                    $('#processing_fee').text(
+                        `₱ ${parseFloat(processingFee).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`
+                    );
+                    $('#amortization_amount').text(
+                        `₱ ${parseFloat(amortAmount).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`
+                    );
+                    $('#cash_out').text(
+                        `₱ ${parseFloat(cashout).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`
+                    );
+
+                    beautyToast.success({
+                        title: '',
+                        message: response.msg,
+                        darkTheme: false,
+                        iconColor: 'green',
+                        iconWidth: 24,
+                        iconHeight: 24,
+                        animationTime: 100,
+                    });
+                   }, 1000);
+                }, 1000);
+
+            },
+            error: (xhr, status, error) => {
+                alert(xhr.responseText);
+            }
+        });
+
+
+    }
+}
 </script>
 
 </html>

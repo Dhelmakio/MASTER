@@ -80,6 +80,9 @@
                     <a href="#"><i class="fa fa-cogs fa-fw"></i> Settings<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
+                            <a href="setting_borrowing_history.php"> Borrowing History</a>
+                        </li>
+                        <li>
                             <a href="setting_collection.php"> Collection Fee</a>
                         </li>
                         <li>

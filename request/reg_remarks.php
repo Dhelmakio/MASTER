@@ -7,6 +7,7 @@ $alog_id;
 $alog_name;
 
 if(isset($_POST['approve'])){
+    $now = date('Y-m-d G:i:s');
     $contract = $_POST['id'];
     $remark = "approved";
     $sql = "UPDATE loan_applications SET remarks = '$remark' WHERE contract_no = '$contract'";
@@ -27,7 +28,7 @@ if(isset($_POST['approve'])){
             $alog_id = $_SESSION['user_id'];
             $alog_name = $_SESSION['name'];
             $contract_no = $_POST['id'];
-            $approve = "UPDATE loan_applications set approval=1, date_flagged='$now', processed_by='$alog_name' where contract_no='$contract_no'";
+            $approve = "UPDATE loan_applications set approval=1, date_flagged='$now', approved_by='$alog_name', approved_date='$now' where contract_no='$contract_no'";
             $stmt = $con->prepare($approve);
             if($stmt->execute()){
                 $msg = "Approved loan application: ".$contract_no;
@@ -57,7 +58,7 @@ if(isset($_POST['approve'])){
             $alog_id = $_SESSION['user_id'];
             $alog_name = $_SESSION['name'];
             $contract_no = $_POST['id'];
-            $approve = "UPDATE loan_applications set approval=2, date_flagged='$now', processed_by='$alog_name' where contract_no='$contract_no'";
+            $approve = "UPDATE loan_applications set approval=2, date_flagged='$now', approved_by='$alog_name', approved_date='$now' where contract_no='$contract_no'";
             $stmt = $con->prepare($approve);
             if($stmt->execute()){
                 $msg = "Rejected loan application: ".$contract_no;
@@ -87,7 +88,7 @@ if(isset($_POST['approve'])){
             $alog_id = $_SESSION['user_id'];
             $alog_name = $_SESSION['name'];
             $contract_no = $_POST['id'];
-            $hold = "UPDATE loan_applications set approval=3, date_flagged='$now', processed_by='$alog_name' where contract_no='$contract_no'";
+            $hold = "UPDATE loan_applications set approval=3, date_flagged='$now', approved_by='$alog_name', approved_date='$now' where contract_no='$contract_no'";
             $stmt = $con->prepare($hold);
             if($stmt->execute()){
                 $msg = "Holded loan application: ".$contract_no;

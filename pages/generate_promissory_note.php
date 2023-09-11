@@ -15,9 +15,9 @@ if(mysqli_num_rows($res) > 0){
     }
 }
 
-$startDate = $_GET['start'];
+//$startDate = $_GET['start'];
 
-$sql = "UPDATE loan_applications SET effective_date='$startDate' WHERE client_id = '$id' AND contract_no = '$contract' AND paid=0";
+//$sql = "UPDATE loan_applications SET effective_date='$startDate' WHERE client_id = '$id' AND contract_no = '$contract' AND paid=0";
 $resUp = mysqli_query($con,$sql);
 
 $sched = new Schedule($contract);
@@ -136,40 +136,299 @@ class MYPDF extends TCPDF {
         }else if(sched->mop == 3){
             $newDuration = sched->duration * 4;
         }
-        for($index = 0; $index < $newDuration; $index++){
+
+
+        $count = 1;
+        $count1 = 2;
+        $count2 = 3;
+        $count3 = 4;
+        $flag = 1;
+
+
+
+        for($index = 0; $index < sched->duration; $index++){
             
-            date_add($date, date_interval_create_from_date_string(sched->addDate." days"));
+            if(sched->mop == 1){
 
-            // if ( date_format($date, 't') == 31 ) {
+                date_add($date, date_interval_create_from_date_string("1 months"));
+                
+                $this->Cell($w[0], 6, ($index+1), 'LR', 0, 'C', $fill);
+                $this->Cell($w[1], 6, date_format($date, 'F d, Y'), 'LR', 0, 'C', $fill);    
+                $this->Cell($w[2], 6, number_format(sched->amortAmount, 2), 'LR', 0, 'C', $fill);
+                $this->Ln();
 
-            //     date_add($date, date_interval_create_from_date_string(sched->addDate." days"));
+            }else if(sched->mop == 2) {
+                
+                $date2 = (date_format($date, 'd') == sched->pay1) ? sched->pay2 : sched->pay1 ;
+                
 
-            //     if (sched->salaryPeriod == "Weekly (every Friday)") {
+                if(date_format($date, 'd') == sched->pay1) {
 
-            //     }else if (sched->salaryPeriod == "Every 2nd Saturday") {
-        
-            //     }else{
+                    if($flag == 1){
 
-            //         $expSP = explode('/', sched->salaryPeriod);
-        
-            //         if(date_format($date, 'd') < $expSP[0]) {
-            //             date_add($date, date_interval_create_from_date_string("1 days"));
-            //         }else if(date_format($date, 'd') < $expSP[1]){
-            //             date_add($date, date_interval_create_from_date_string("1 days"));
-            //         }
+                        $this->Cell($w[0], 6, ($count++), 'LR', 0, 'C', $fill);
+                        $this->Cell($w[1], 6, date_format($date, "F ".$date2.", Y"), 'LR', 0, 'C', $fill);    
+                        $this->Cell($w[2], 6, number_format(sched->amortAmount, 2), 'LR', 0, 'C', $fill);
+                        $this->Ln();
+    
+                        date_add($date, date_interval_create_from_date_string("1 months"));
+                        $flag = 0;
+                    }else if($flag == 0){
 
-            //     }
-              
-            // } else {
+                        $this->Cell($w[0], 6, ($count++), 'LR', 0, 'C', $fill);
+                        $this->Cell($w[1], 6, date_format($date, "F d, Y"), 'LR', 0, 'C', $fill);    
+                        $this->Cell($w[2], 6, number_format(sched->amortAmount, 2), 'LR', 0, 'C', $fill);
+                        $this->Ln();
 
-            //     date_add($date, date_interval_create_from_date_string(sched->addDate." days"));
+                        $this->Cell($w[0], 6, ($count1+1), 'LR', 0, 'C', $fill);
+                        $this->Cell($w[1], 6, date_format($date, "F ".$date2.", Y"), 'LR', 0, 'C', $fill);    
+                        $this->Cell($w[2], 6, number_format(sched->amortAmount, 2), 'LR', 0, 'C', $fill);
+                        $this->Ln();
 
-            // }
+                        $count = $count + 1;
+                        $count1 = $count1 + 2;
+                        date_add($date, date_interval_create_from_date_string("1 months"));
+                        if(($index+1) == intval(sched->duration)){
+
+                            $this->Cell($w[0], 6, ($count++), 'LR', 0, 'C', $fill);
+                            $this->Cell($w[1], 6, date_format($date, "F d, Y"), 'LR', 0, 'C', $fill);    
+                            $this->Cell($w[2], 6, number_format(sched->amortAmount, 2), 'LR', 0, 'C', $fill);
+                            $this->Ln();
+
+                        }    
+                    }
+
+                }else {
+                    date_add($date, date_interval_create_from_date_string("1 months"));
+
+                    $this->Cell($w[0], 6, ($count++), 'LR', 0, 'C', $fill);
+                    $this->Cell($w[1], 6, date_format($date, "F ".$date2.", Y"), 'LR', 0, 'C', $fill);    
+                    $this->Cell($w[2], 6, number_format(sched->amortAmount, 2), 'LR', 0, 'C', $fill);
+                    $this->Ln();
+
+                    $this->Cell($w[0], 6, ($count++), 'LR', 0, 'C', $fill);
+                    $this->Cell($w[1], 6, date_format($date, "F d, Y"), 'LR', 0, 'C', $fill);    
+                    $this->Cell($w[2], 6, number_format(sched->amortAmount, 2), 'LR', 0, 'C', $fill);
+                    $this->Ln();
+
+                    $count = $count + 1;
+                    $count1 = $count1 + 1;
+                }
+                
+            } else if(sched->mop == 3) {
+                //weekly
+                if(date_format($date, 'd') == sched->pay1) {
+                    
+                    if($flag == 1){
+
+                        $this->Cell($w[0], 6, ($count++), 'LR', 0, 'C', $fill);
+                        $this->Cell($w[1], 6, date_format($date, "F ".sched->pay2.", Y"), 'LR', 0, 'C', $fill);    
+                        $this->Cell($w[2], 6, number_format(sched->amortAmount, 2), 'LR', 0, 'C', $fill);
+                        $this->Ln();
+
+                        $this->Cell($w[0], 6, ($count1++), 'LR', 0, 'C', $fill);
+                        $this->Cell($w[1], 6, date_format($date, "F ".sched->pay3.", Y"), 'LR', 0, 'C', $fill);    
+                        $this->Cell($w[2], 6, number_format(sched->amortAmount, 2), 'LR', 0, 'C', $fill);
+                        $this->Ln();
+
+                        $this->Cell($w[0], 6, ($count2++), 'LR', 0, 'C', $fill);
+                        $this->Cell($w[1], 6, date_format($date, "F ".sched->pay4.", Y"), 'LR', 0, 'C', $fill);    
+                        $this->Cell($w[2], 6, number_format(sched->amortAmount, 2), 'LR', 0, 'C', $fill);
+                        $this->Ln();
+    
+                        date_add($date, date_interval_create_from_date_string("1 months"));
+                        $flag = 0;
+
+                    }else if($flag == 0){
+
+                        $this->Cell($w[0], 6, ($count+2), 'LR', 0, 'C', $fill);
+                        $this->Cell($w[1], 6, date_format($date, "F ".sched->pay1.", Y"), 'LR', 0, 'C', $fill);    
+                        $this->Cell($w[2], 6, number_format(sched->amortAmount, 2), 'LR', 0, 'C', $fill);
+                        $this->Ln();
+
+                        $this->Cell($w[0], 6, ($count1+2), 'LR', 0, 'C', $fill);
+                        $this->Cell($w[1], 6, date_format($date, "F ".sched->pay2.", Y"), 'LR', 0, 'C', $fill);    
+                        $this->Cell($w[2], 6, number_format(sched->amortAmount, 2), 'LR', 0, 'C', $fill);
+                        $this->Ln();
+
+                        $this->Cell($w[0], 6, ($count2+2), 'LR', 0, 'C', $fill);
+                        $this->Cell($w[1], 6, date_format($date, "F ".sched->pay3.", Y"), 'LR', 0, 'C', $fill);    
+                        $this->Cell($w[2], 6, number_format(sched->amortAmount, 2), 'LR', 0, 'C', $fill);
+                        $this->Ln();
+
+                        $this->Cell($w[0], 6, ($count3+3), 'LR', 0, 'C', $fill);
+                        $this->Cell($w[1], 6, date_format($date, "F ".sched->pay4.", Y"), 'LR', 0, 'C', $fill);    
+                        $this->Cell($w[2], 6, number_format(sched->amortAmount, 2), 'LR', 0, 'C', $fill);
+                        $this->Ln();
+                        
+                        $count = $count + 4;
+                        $count1 = $count1 + 4;
+                        $count2 = $count2 + 4;
+                        $count3 = $count3 + 4;
+                        date_add($date, date_interval_create_from_date_string("1 months"));
+                        if(($index+1) == intval(sched->duration)){
+
+                            $this->Cell($w[0], 6, ($count+2), 'LR', 0, 'C', $fill);
+                            $this->Cell($w[1], 6, date_format($date, "F ".sched->pay1.", Y"), 'LR', 0, 'C', $fill);    
+                            $this->Cell($w[2], 6, number_format(sched->amortAmount, 2), 'LR', 0, 'C', $fill);
+                            $this->Ln();
+                            
+                           
+                        }    
+                    }
+                }else if(date_format($date, 'd') == sched->pay2) {
+                    
+                    if($flag == 1){
+
+                        $this->Cell($w[0], 6, ($count++), 'LR', 0, 'C', $fill);
+                        $this->Cell($w[1], 6, date_format($date, "F ".sched->pay3.", Y"), 'LR', 0, 'C', $fill);    
+                        $this->Cell($w[2], 6, number_format(sched->amortAmount, 2), 'LR', 0, 'C', $fill);
+                        $this->Ln();
+
+                        $this->Cell($w[0], 6, ($count1++), 'LR', 0, 'C', $fill);
+                        $this->Cell($w[1], 6, date_format($date, "F ".sched->pay4.", Y"), 'LR', 0, 'C', $fill);    
+                        $this->Cell($w[2], 6, number_format(sched->amortAmount, 2), 'LR', 0, 'C', $fill);
+                        $this->Ln();
+    
+                        date_add($date, date_interval_create_from_date_string("1 months"));
+                        $flag = 0;
+
+                    }else if($flag == 0){
+
+                        $this->Cell($w[0], 6, ($count+1), 'LR', 0, 'C', $fill);
+                        $this->Cell($w[1], 6, date_format($date, "F ".sched->pay1.", Y"), 'LR', 0, 'C', $fill);    
+                        $this->Cell($w[2], 6, number_format(sched->amortAmount, 2), 'LR', 0, 'C', $fill);
+                        $this->Ln();
+
+                        $this->Cell($w[0], 6, ($count1+1), 'LR', 0, 'C', $fill);
+                        $this->Cell($w[1], 6, date_format($date, "F ".sched->pay2.", Y"), 'LR', 0, 'C', $fill);    
+                        $this->Cell($w[2], 6, number_format(sched->amortAmount, 2), 'LR', 0, 'C', $fill);
+                        $this->Ln();
+
+                        $this->Cell($w[0], 6, ($count2+2), 'LR', 0, 'C', $fill);
+                        $this->Cell($w[1], 6, date_format($date, "F ".sched->pay3.", Y"), 'LR', 0, 'C', $fill);    
+                        $this->Cell($w[2], 6, number_format(sched->amortAmount, 2), 'LR', 0, 'C', $fill);
+                        $this->Ln();
+
+                        $this->Cell($w[0], 6, ($count3+2), 'LR', 0, 'C', $fill);
+                        $this->Cell($w[1], 6, date_format($date, "F ".sched->pay4.", Y"), 'LR', 0, 'C', $fill);    
+                        $this->Cell($w[2], 6, number_format(sched->amortAmount, 2), 'LR', 0, 'C', $fill);
+                        $this->Ln();
+                        
+                        $count = $count + 4;
+                        $count1 = $count1 + 4;
+                        $count2 = $count2 + 4;
+                        $count3 = $count3 + 4;
+                        date_add($date, date_interval_create_from_date_string("1 months"));
+                        if(($index+1) == intval(sched->duration)){
+
+                            $this->Cell($w[0], 6, ($count+1), 'LR', 0, 'C', $fill);
+                            $this->Cell($w[1], 6, date_format($date, "F ".sched->pay1.", Y"), 'LR', 0, 'C', $fill);    
+                            $this->Cell($w[2], 6, number_format(sched->amortAmount, 2), 'LR', 0, 'C', $fill);
+                            $this->Ln();
+    
+                            $this->Cell($w[0], 6, ($count1+1), 'LR', 0, 'C', $fill);
+                            $this->Cell($w[1], 6, date_format($date, "F ".sched->pay2.", Y"), 'LR', 0, 'C', $fill);    
+                            $this->Cell($w[2], 6, number_format(sched->amortAmount, 2), 'LR', 0, 'C', $fill);
+                            $this->Ln();
+
+                        }    
+                    }
+                }else if(date_format($date, 'd') == sched->pay3) {
+                    
+                    if($flag == 1){
+
+                        
+                        $this->Cell($w[0], 6, ($count++), 'LR', 0, 'C', $fill);
+                        $this->Cell($w[1], 6, date_format($date, "F ".sched->pay4.", Y"), 'LR', 0, 'C', $fill);    
+                        $this->Cell($w[2], 6, number_format(sched->amortAmount, 2), 'LR', 0, 'C', $fill);
+                        $this->Ln();
+    
+                        date_add($date, date_interval_create_from_date_string("1 months"));
+                        $flag = 0;
+
+                    }else if($flag == 0){
+
+                        
+                        $this->Cell($w[0], 6, ($count++), 'LR', 0, 'C', $fill);
+                        $this->Cell($w[1], 6, date_format($date, "F ".sched->pay1.", Y"), 'LR', 0, 'C', $fill);    
+                        $this->Cell($w[2], 6, number_format(sched->amortAmount, 2), 'LR', 0, 'C', $fill);
+                        $this->Ln();
+
+                        $this->Cell($w[0], 6, ($count1+1), 'LR', 0, 'C', $fill);
+                        $this->Cell($w[1], 6, date_format($date, "F ".sched->pay2.", Y"), 'LR', 0, 'C', $fill);    
+                        $this->Cell($w[2], 6, number_format(sched->amortAmount, 2), 'LR', 0, 'C', $fill);
+                        $this->Ln();
+
+                        $this->Cell($w[0], 6, ($count2+1), 'LR', 0, 'C', $fill);
+                        $this->Cell($w[1], 6, date_format($date, "F ".sched->pay3.", Y"), 'LR', 0, 'C', $fill);    
+                        $this->Cell($w[2], 6, number_format(sched->amortAmount, 2), 'LR', 0, 'C', $fill);
+                        $this->Ln();
+
+                        $this->Cell($w[0], 6, ($count3+1), 'LR', 0, 'C', $fill);
+                        $this->Cell($w[1], 6, date_format($date, "F ".sched->pay4.", Y"), 'LR', 0, 'C', $fill);    
+                        $this->Cell($w[2], 6, number_format(sched->amortAmount, 2), 'LR', 0, 'C', $fill);
+                        $this->Ln();
+                        
+                        $count = $count + 3;
+                        $count1 = $count1 + 4;
+                        $count2 = $count2 + 4;
+                        $count3 = $count3 + 4;
+                        date_add($date, date_interval_create_from_date_string("1 months"));
+                        if(($index+1) == intval(sched->duration)){
+
+                            $this->Cell($w[0], 6, ($count++), 'LR', 0, 'C', $fill);
+                            $this->Cell($w[1], 6, date_format($date, "F ".sched->pay1.", Y"), 'LR', 0, 'C', $fill);    
+                            $this->Cell($w[2], 6, number_format(sched->amortAmount, 2), 'LR', 0, 'C', $fill);
+                            $this->Ln();
+
+                            $this->Cell($w[0], 6, ($count1+1), 'LR', 0, 'C', $fill);
+                            $this->Cell($w[1], 6, date_format($date, "F ".sched->pay2.", Y"), 'LR', 0, 'C', $fill);    
+                            $this->Cell($w[2], 6, number_format(sched->amortAmount, 2), 'LR', 0, 'C', $fill);
+                            $this->Ln();
+
+                            $this->Cell($w[0], 6, ($count2+1), 'LR', 0, 'C', $fill);
+                            $this->Cell($w[1], 6, date_format($date, "F ".sched->pay3.", Y"), 'LR', 0, 'C', $fill);    
+                            $this->Cell($w[2], 6, number_format(sched->amortAmount, 2), 'LR', 0, 'C', $fill);
+                            $this->Ln();
+
+                        }    
+                    }
+                }else{
+
+                    date_add($date, date_interval_create_from_date_string("1 months"));
+
+                    $this->Cell($w[0], 6, ($count++), 'LR', 0, 'C', $fill);
+                    $this->Cell($w[1], 6, date_format($date, "F ".sched->pay1.", Y"), 'LR', 0, 'C', $fill);    
+                    $this->Cell($w[2], 6, number_format(sched->amortAmount, 2), 'LR', 0, 'C', $fill);
+                    $this->Ln();
+
+                    $this->Cell($w[0], 6, ($count1++), 'LR', 0, 'C', $fill);
+                    $this->Cell($w[1], 6, date_format($date, "F ".sched->pay2.", Y"), 'LR', 0, 'C', $fill);    
+                    $this->Cell($w[2], 6, number_format(sched->amortAmount, 2), 'LR', 0, 'C', $fill);
+                    $this->Ln();
+
+                    $this->Cell($w[0], 6, ($count2++), 'LR', 0, 'C', $fill);
+                    $this->Cell($w[1], 6, date_format($date, "F ".sched->pay3.", Y"), 'LR', 0, 'C', $fill);    
+                    $this->Cell($w[2], 6, number_format(sched->amortAmount, 2), 'LR', 0, 'C', $fill);
+                    $this->Ln();
+
+                    $this->Cell($w[0], 6, ($count3++), 'LR', 0, 'C', $fill);
+                    $this->Cell($w[1], 6, date_format($date, "F ".sched->pay4.", Y"), 'LR', 0, 'C', $fill);    
+                    $this->Cell($w[2], 6, number_format(sched->amortAmount, 2), 'LR', 0, 'C', $fill);
+                    $this->Ln();
+                    
+                    $count = $count + 3;
+                    $count1 = $count1 + 3;
+                    $count2 = $count2 + 3;
+                    $count3 = $count3 + 3;
+
+                }
+                
+            }
             
-            $this->Cell($w[0], 6, ($index+1), 'LR', 0, 'C', $fill);
-            $this->Cell($w[1], 6, date_format($date, 'F d, Y'), 'LR', 0, 'C', $fill);    
-            $this->Cell($w[2], 6, number_format(sched->amortAmount, 2), 'LR', 0, 'C', $fill);
-            $this->Ln();
+            
+            
             $fill=!$fill;
         }
             $this->Cell($w[0], 6, '', 'LR', 0, 'C', $fill);

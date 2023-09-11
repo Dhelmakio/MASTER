@@ -20,6 +20,7 @@ class Loan extends DbCon {
     public $otherMonthlyAmortization;
     public $collectionFee;
     public $processingFee;
+    public $base; 
 
     public function __construct(String $id){
         //get emp status, income sources, monthly net salary
@@ -57,7 +58,8 @@ class Loan extends DbCon {
 
 
         //$this->getSemiMonthly();
-        $this->getBorrowingCount();
+        //$this->getBorrowingCount();
+        $this->getBorrowHistoryBase();
         $this->getBorrowingCount();
         $this->getBorrowingSum();
         $this->getSukli();
@@ -71,7 +73,7 @@ class Loan extends DbCon {
         $this->getActiveLoanAmortization();
 
         
-        if ($this->borrowingHistCount > 5){
+        if ($this->borrowingHistCount > $this->base){
             $this->netLoanPerMonth = 8000;
         } else {
             $this->netLoanPerMonth = $this->monthlyNetSal - $this->clientSukli - $this->otherMonthlyAmortization;
@@ -80,7 +82,7 @@ class Loan extends DbCon {
     }
 
     public function getSemiMonthly(){
-        $this->semiMonthlySal = $this->monthlyNetSal / 2;
+        $this->semiMonthlySal = ($this->monthlyNetSal / 2);
     }
 
     public function getSukli(){
@@ -93,6 +95,7 @@ class Loan extends DbCon {
     }
 
     public function getBorrowingCount(){
+        
         $sql = "SELECT COUNT(client_id) FROM loan_applications WHERE paid=1 AND client_id=?";
         $stmt = $this->connect()->prepare($sql);
         $stmt->execute([$this->clientID]);
@@ -119,6 +122,15 @@ class Loan extends DbCon {
         $result = $stmt->fetchColumn();
 
         $this->borrowingCount = $result;
+    }
+
+    public function getBorrowHistoryBase(){
+        $sql = "SELECT base FROM borrowing_history WHERE bh_id =?";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute([1]);
+        $result = $stmt->fetchColumn();
+
+        $this->base = $result;
     }
     
 
@@ -152,7 +164,7 @@ class Loan extends DbCon {
     }
 
 
-    public function checkIfExistInLoanApp(){
+    public function checkIfExistInLoanApp() {
 
         $sql = "SELECT client_id FROM loan_applications WHERE client_id = ?";
         $stmt = $this->connect()->prepare($sql);
@@ -172,7 +184,7 @@ class Loan extends DbCon {
     }
 
     public function getCollectionFee(){
-        $sql = "SELECT collection_percentage FROM collection WHERE collection_id = ?";
+        $sql = "SELECT collection_percentage FROM `collection` WHERE collection_id = ?";
         $stmt = $this->connect()->prepare($sql);
         $stmt->execute([1]);
         $result = $stmt->fetchColumn();
@@ -209,6 +221,7 @@ class Loan extends DbCon {
     }
 
     public function getOutstandingBalance(){
+
         $sql = "SELECT SUM(amount) FROM payments WHERE contract_no = ?";
         $stmt = $this->connect()->prepare($sql);
         $stmt->execute([$this->contractNo]);

@@ -21,6 +21,10 @@ class Schedule extends DbCon {
     public $monthlyInterest;
     public $cashOut;
     public $effectiveDate;
+    public $pay1;
+    public $pay2;
+    public $pay3;
+    public $pay4;
     
 
 
@@ -51,10 +55,14 @@ class Schedule extends DbCon {
         $this->monthlyInterest = $result['udi_percentage']??null;
         $this->cashOut = $result['total_cashout']??null;
         $this->effectiveDate = $result['effective_date']??null;
-
+        $this->pay1 = $result['pay1']??null;
+        $this->pay2 = $result['pay2']??null;
+        $this->pay3 = $result['pay3']??null;
+        $this->pay4 = $result['pay4']??null;
         
         $this->mop();
         //$this->getSalaryPeriod();
+        //$this->startDateBaseOnSP();
         $this->loadTable();
         $this->loanType();
     }
@@ -85,25 +93,316 @@ class Schedule extends DbCon {
         //$date = new DateTime(date('Y-m-d'));
         $date = new DateTime($this->startDate);
 
-        $newDuration;
-        if($this->mop == 1){
-            $newDuration = $this->duration;
-        }else if($this->mop == 2){
-            $newDuration = $this->duration * 2;
-        }else if($this->mop == 3){
-            $newDuration = $this->duration * 4;
-        }
+        // $newDuration;
+        // if($this->mop == 1){
+        //     $newDuration = $this->duration;
+        // }else if($this->mop == 2){
+        //     $newDuration = $this->duration * 2;
+        // }else if($this->mop == 3){
+        //     $newDuration = $this->duration * 4;
+        // }
 
-        for($index = 0; $index < $newDuration; $index++){
+        $count = 1;
+        $count1 = 2;
+        $count2 = 3;
+        $count3 = 4;
+        $flag = 1;
 
-            //will add days for payment schedule based on mop
-            date_add($date, date_interval_create_from_date_string($this->addDate." days"));
+        for($index = 0; $index < $this->duration; $index++){
+            
+            if($this->mop == 1){
 
-            $content .= "<tr>
-                <td>".($index+1)."</td>
-                <td>".date_format($date, "F d, Y")."</td>
-                <td class='text-right'><strong>₱ ".number_format($this->amortAmount, 2)."</strong></td>
-            </tr>";
+                date_add($date, date_interval_create_from_date_string("1 months"));
+
+                $content .= "
+                <tr>
+                    <td>".($index+1)."</td>
+                    <td>".date_format($date, "F d, Y")."</td>
+                    <td class='text-right'><strong>₱ ".number_format($this->amortAmount, 2)."</strong></td>
+                </tr>
+                ";
+
+            } else if($this->mop == 2) {
+                
+                $date2 = (date_format($date, 'd') == $this->pay1) ? $this->pay2 : $this->pay1 ;
+                
+
+                if(date_format($date, 'd') == $this->pay1) {
+
+                    if($flag == 1){
+                        $content .= "
+                        <tr>
+                            <td>".$count++."</td>
+                            <td>".date_format($date, "F ".$date2.", Y")."</td>
+                            <td class='text-right'><strong>₱ ".number_format($this->amortAmount, 2)."</strong></td>
+                        </tr>";
+    
+                        date_add($date, date_interval_create_from_date_string("1 months"));
+                        $flag = 0;
+                    }else if($flag == 0){
+                        $content .= "
+                        <tr>
+                            <td>".($count++)."</td>
+                            <td>".date_format($date, "F d, Y")."</td>
+                            <td class='text-right'><strong>₱ ".number_format($this->amortAmount, 2)."</strong></td>
+                        </tr>
+                        <tr>
+                            <td>".($count1+1)."</td>
+                            <td>".date_format($date, "F ".$date2.", Y")."</td>
+                            <td class='text-right'><strong>₱ ".number_format($this->amortAmount, 2)."</strong></td>
+                        </tr>";
+
+                        $count = $count + 1;
+                        $count1 = $count1 + 2;
+                        date_add($date, date_interval_create_from_date_string("1 months"));
+                        if(($index+1) == intval($this->duration)){
+                            $content .= "
+                            <tr>
+                                <td>".$count++."</td>
+                                <td>".date_format($date, "F d, Y")."</td>
+                                <td class='text-right'><strong>₱ ".number_format($this->amortAmount, 2)."</strong></td>
+                            </tr>";
+                        }    
+                    }
+
+                }else {
+                    date_add($date, date_interval_create_from_date_string("1 months"));
+                    $content .= "
+                    <tr>
+                        <td>".($count++)."</td>
+                        <td>".date_format($date, "F ".$date2.", Y")."</td>
+                        <td class='text-right'><strong>₱ ".number_format($this->amortAmount, 2)."</strong></td>
+                    </tr>
+                    <tr>
+                        <td>".$count1++."</td>
+                        <td>".date_format($date, "F d, Y")."</td>
+                        <td class='text-right'><strong>₱ ".number_format($this->amortAmount, 2)."</strong></td>
+                    </tr>";
+                    $count = $count + 1;
+                    $count1 = $count1 + 1;
+                }
+                
+            } else if($this->mop == 3) {
+                //weekly
+                if(date_format($date, 'd') == $this->pay1) {
+                    
+                    if($flag == 1){
+                        $content .= "
+                        <tr>
+                            <td>".$count++."</td>
+                            <td>".date_format($date, "F ".$this->pay2.", Y")."</td>
+                            <td class='text-right'><strong>₱ ".number_format($this->amortAmount, 2)."</strong></td>
+                        </tr>
+                        <tr>
+                            <td>".$count1++."</td>
+                            <td>".date_format($date, "F ".$this->pay3.", Y")."</td>
+                            <td class='text-right'><strong>₱ ".number_format($this->amortAmount, 2)."</strong></td>
+                        </tr>
+                        <tr>
+                            <td>".$count2++."</td>
+                            <td>".date_format($date, "F ".$this->pay4.", Y")."</td>
+                            <td class='text-right'><strong>₱ ".number_format($this->amortAmount, 2)."</strong></td>
+                        </tr>
+                        ";
+    
+                        date_add($date, date_interval_create_from_date_string("1 months"));
+                        $flag = 0;
+
+                    }else if($flag == 0){
+
+                        $content .= "
+                        <tr>
+                            <td>".($count+2)."</td>
+                            <td>".date_format($date, "F ".$this->pay1.", Y")."</td>
+                            <td class='text-right'><strong>₱ ".number_format($this->amortAmount, 2)."</strong></td>
+                        </tr>
+                        <tr>
+                            <td>".($count1+2)."</td>
+                            <td>".date_format($date, "F ".$this->pay2.", Y")."</td>
+                            <td class='text-right'><strong>₱ ".number_format($this->amortAmount, 2)."</strong></td>
+                        </tr>
+                        <tr>
+                            <td>".(($count2+2))."</td>
+                            <td>".date_format($date, "F ".$this->pay3.", Y")."</td>
+                            <td class='text-right'><strong>₱ ".number_format($this->amortAmount, 2)."</strong></td>
+                        </tr>
+                        <tr>
+                            <td>".($count3+3)."</td>
+                            <td>".date_format($date, "F ".$this->pay4.", Y")."</td>
+                            <td class='text-right'><strong>₱ ".number_format($this->amortAmount, 2)."</strong></td>
+                        </tr>";
+                        
+                        $count = $count + 4;
+                        $count1 = $count1 + 4;
+                        $count2 = $count2 + 4;
+                        $count3 = $count3 + 4;
+                        date_add($date, date_interval_create_from_date_string("1 months"));
+                        if(($index+1) == intval($this->duration)){
+                            $content .= "
+                            <tr>
+                                <td>".($count+2)."</td>
+                                <td>".date_format($date, "F ".$this->pay1.", Y")."</td>
+                                <td class='text-right'><strong>₱ ".number_format($this->amortAmount, 2)."</strong></td>
+                            </tr>";
+                        }    
+                    }
+                }else if(date_format($date, 'd') == $this->pay2) {
+                    
+                    if($flag == 1){
+                        $content .= "
+                        <tr>
+                            <td>".$count++."</td>
+                            <td>".date_format($date, "F ".$this->pay3.", Y")."</td>
+                            <td class='text-right'><strong>₱ ".number_format($this->amortAmount, 2)."</strong></td>
+                        </tr>
+                        <tr>
+                            <td>".$count1++."</td>
+                            <td>".date_format($date, "F ".$this->pay4.", Y")."</td>
+                            <td class='text-right'><strong>₱ ".number_format($this->amortAmount, 2)."</strong></td>
+                        </tr>
+                        ";
+    
+                        date_add($date, date_interval_create_from_date_string("1 months"));
+                        $flag = 0;
+
+                    }else if($flag == 0){
+
+                        $content .= "
+                        <tr>
+                            <td>".($count+1)."</td>
+                            <td>".date_format($date, "F ".$this->pay1.", Y")."</td>
+                            <td class='text-right'><strong>₱ ".number_format($this->amortAmount, 2)."</strong></td>
+                        </tr>
+                        <tr>
+                            <td>".($count1+1)."</td>
+                            <td>".date_format($date, "F ".$this->pay2.", Y")."</td>
+                            <td class='text-right'><strong>₱ ".number_format($this->amortAmount, 2)."</strong></td>
+                        </tr>
+                        <tr>
+                            <td>".(($count2+2))."</td>
+                            <td>".date_format($date, "F ".$this->pay3.", Y")."</td>
+                            <td class='text-right'><strong>₱ ".number_format($this->amortAmount, 2)."</strong></td>
+                        </tr>
+                        <tr>
+                            <td>".($count3+2)."</td>
+                            <td>".date_format($date, "F ".$this->pay4.", Y")."</td>
+                            <td class='text-right'><strong>₱ ".number_format($this->amortAmount, 2)."</strong></td>
+                        </tr>";
+                        
+                        $count = $count + 4;
+                        $count1 = $count1 + 4;
+                        $count2 = $count2 + 4;
+                        $count3 = $count3 + 4;
+                        date_add($date, date_interval_create_from_date_string("1 months"));
+                        if(($index+1) == intval($this->duration)){
+                            $content .= "
+                            <tr>
+                                <td>".($count+1)."</td>
+                                <td>".date_format($date, "F ".$this->pay1.", Y")."</td>
+                                <td class='text-right'><strong>₱ ".number_format($this->amortAmount, 2)."</strong></td>
+                            </tr>
+                            <tr>
+                                <td>".($count1+1)."</td>
+                                <td>".date_format($date, "F ".$this->pay2.", Y")."</td>
+                                <td class='text-right'><strong>₱ ".number_format($this->amortAmount, 2)."</strong></td>
+                            </tr>";
+                        }    
+                    }
+                }else if(date_format($date, 'd') == $this->pay3) {
+                    
+                    if($flag == 1){
+                        $content .= "
+                        <tr>
+                            <td>".$count++."</td>
+                            <td>".date_format($date, "F ".$this->pay4.", Y")."</td>
+                            <td class='text-right'><strong>₱ ".number_format($this->amortAmount, 2)."</strong></td>
+                        </tr>
+                        ";
+    
+                        date_add($date, date_interval_create_from_date_string("1 months"));
+                        $flag = 0;
+
+                    }else if($flag == 0){
+
+                        $content .= "
+                        <tr>
+                            <td>".($count++)."</td>
+                            <td>".date_format($date, "F ".$this->pay1.", Y")."</td>
+                            <td class='text-right'><strong>₱ ".number_format($this->amortAmount, 2)."</strong></td>
+                        </tr>
+                        <tr>
+                            <td>".($count1+1)."</td>
+                            <td>".date_format($date, "F ".$this->pay2.", Y")."</td>
+                            <td class='text-right'><strong>₱ ".number_format($this->amortAmount, 2)."</strong></td>
+                        </tr>
+                        <tr>
+                            <td>".(($count2+1))."</td>
+                            <td>".date_format($date, "F ".$this->pay3.", Y")."</td>
+                            <td class='text-right'><strong>₱ ".number_format($this->amortAmount, 2)."</strong></td>
+                        </tr>
+                        <tr>
+                            <td>".($count3+1)."</td>
+                            <td>".date_format($date, "F ".$this->pay4.", Y")."</td>
+                            <td class='text-right'><strong>₱ ".number_format($this->amortAmount, 2)."</strong></td>
+                        </tr>";
+                        
+                        $count = $count + 3;
+                        $count1 = $count1 + 4;
+                        $count2 = $count2 + 4;
+                        $count3 = $count3 + 4;
+                        date_add($date, date_interval_create_from_date_string("1 months"));
+                        if(($index+1) == intval($this->duration)){
+                            $content .= "
+                            <tr>
+                                <td>".($count++)."</td>
+                                <td>".date_format($date, "F ".$this->pay1.", Y")."</td>
+                                <td class='text-right'><strong>₱ ".number_format($this->amortAmount, 2)."</strong></td>
+                            </tr>
+                            <tr>
+                                <td>".($count1+1)."</td>
+                                <td>".date_format($date, "F ".$this->pay2.", Y")."</td>
+                                <td class='text-right'><strong>₱ ".number_format($this->amortAmount, 2)."</strong></td>
+                            </tr>
+                            <tr>
+                            <td>".($count2+1)."</td>
+                            <td>".date_format($date, "F ".$this->pay3.", Y")."</td>
+                            <td class='text-right'><strong>₱ ".number_format($this->amortAmount, 2)."</strong></td>
+                            </tr>";
+                        }    
+                    }
+                }else{
+
+                    date_add($date, date_interval_create_from_date_string("1 months"));
+                    $content .= "
+                    <tr>
+                        <td>".($count++)."</td>
+                        <td>".date_format($date, "F ".$this->pay1.", Y")."</td>
+                        <td class='text-right'><strong>₱ ".number_format($this->amortAmount, 2)."</strong></td>
+                    </tr>
+                    <tr>
+                        <td>".$count1++."</td>
+                        <td>".date_format($date, "F ".$this->pay2.", Y")."</td>
+                        <td class='text-right'><strong>₱ ".number_format($this->amortAmount, 2)."</strong></td>
+                    </tr>
+                    <tr>
+                        <td>".($count2++)."</td>
+                        <td>".date_format($date, "F ".$this->pay3.", Y")."</td>
+                        <td class='text-right'><strong>₱ ".number_format($this->amortAmount, 2)."</strong></td>
+                    </tr>
+                    <tr>
+                        <td>".$count3++."</td>
+                        <td>".date_format($date, "F ".$this->pay4.", Y")."</td>
+                        <td class='text-right'><strong>₱ ".number_format($this->amortAmount, 2)."</strong></td>
+                    </tr>";
+                    $count = $count + 3;
+                    $count1 = $count1 + 3;
+                    $count2 = $count2 + 3;
+                    $count3 = $count3 + 3;
+
+                }
+                
+            }
+
         }
         $content .= "<tr>
         <td></td>
@@ -164,6 +463,32 @@ class Schedule extends DbCon {
         $this->salaryPeriod = $result;
     }
 
+    // private function startDateBaseOnSP(){
+
+    //     $date = date('d');
+
+    //     $baseDate = new DateTime(date('Y-m-d'));
+        
+    //     $tempDate = new DateTime(date('Y-m-d'));
+
+    //         $static = new DateTime(date('Y-m-'.$this->pay1));
+
+    //         date_add($static, date_interval_create_from_date_string($this->addDate." days"));
+    
+    
+    //         date_add($tempDate, date_interval_create_from_date_string($this->addDate." days"));
+    //         $addDate =  date_format($static, 'd') - date_format($tempDate, 'd');
+                
+    //         //die('<script>alert('.date_format($tempDate, 'd').')</script>');
+    
+    //         date_add($baseDate, date_interval_create_from_date_string($addDate." days"));
+
+    //         //die('<script>alert('.date_format($baseDate, 'd').')</script>');
+                   
+    //         $this->startDate = date_format($baseDate, "Y-m-d");
+       
+    // }
+
     public function setStartDate($date) {
 
         $sql = "UPDATE loan_applications SET effective_date = ?
@@ -175,20 +500,20 @@ class Schedule extends DbCon {
 
     }
 
-    public function setProcessStatus($status) {
+    public function setProcessStatus($status, $name, $now) {
 
-        $sql = "UPDATE loan_applications SET process_status = ?
+        $sql = "UPDATE loan_applications SET process_status = ?, processed_by = ?, processed_date = ?
         WHERE contract_no = ?";
         $stmt = $this->connect()->prepare($sql);
-        $stmt->execute([$status, $this->clientID]); 
+        $stmt->execute([$status, $name, $now, $this->clientID]); 
 
     }
 
-    public function updateLoanDetails($terms, $lamt, $cashout, $amortAmount, $udiValue){
-        $sql = "UPDATE loan_applications SET loan_duration = ?, loan_amount = ?, total_cashout = ?, monthly_amortization = ?, udi_value = ?
+    public function updateLoanDetails($terms, $lamt, $cashout, $amortAmount, $udi_percentage, $udiValue, $status){
+        $sql = "UPDATE loan_applications SET loan_duration = ?, loan_amount = ?, total_cashout = ?, monthly_amortization = ?, udi_percentage = ?, udi_value = ?, process_status = ?
         WHERE contract_no = ?";
         $stmt = $this->connect()->prepare($sql);
-        $stmt->execute([$terms, $lamt, $cashout, $amortAmount, $udiValue, $this->clientID]); 
+        $stmt->execute([$terms, $lamt, $cashout, $amortAmount, $udi_percentage, $udiValue, $status, $this->clientID]); 
     }
 
     public function loadDataApproval($name, $clientEmpStatus, $incomeEarning, $borrowingHistCount, $collectionFee, $processingFee, $clientSukli, $outStandingBalance, $netLoanPerMonth){

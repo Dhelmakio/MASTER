@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 09, 2023 at 05:46 PM
+-- Generation Time: Sep 11, 2023 at 10:41 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.1.17
 
@@ -55,7 +55,9 @@ INSERT INTO `activity_logs` (`log_id`, `user_id`, `name`, `activity`, `date_time
 (13, 0, '', 'Answered Relative Questionnaire: AMG001000000120230905091806', '2023-09-06 23:44:34'),
 (14, 1, 'Kevin Fontanoza', 'Answered Coworker Questionnaire: AMG001000000120230905091806', '2023-09-06 23:44:41'),
 (15, 1, 'Kevin Fontanoza', 'Approved CI', '2023-09-06 23:44:47'),
-(16, 1, 'Kevin Fontanoza', 'Approved loan application: AMG001000000120230905091806', '2023-09-06 23:44:59');
+(16, 1, 'Kevin Fontanoza', 'Approved loan application: AMG001000000120230905091806', '2023-09-06 23:44:59'),
+(17, 1, 'Kevin Fontanoza', 'Logged in', '2023-09-11 16:37:09'),
+(18, 1, 'Kevin Fontanoza', 'Logged out', '2023-09-11 16:38:19');
 
 -- --------------------------------------------------------
 
@@ -444,6 +446,24 @@ CREATE TABLE `archive_work` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `borrowing_history`
+--
+
+CREATE TABLE `borrowing_history` (
+  `bh_id` int(11) NOT NULL,
+  `base` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `borrowing_history`
+--
+
+INSERT INTO `borrowing_history` (`bh_id`, `base`) VALUES
+(1, 5);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `clients`
 --
 
@@ -681,8 +701,8 @@ CREATE TABLE `loan_applications` (
   `processed_by` text NOT NULL,
   `processed_date` datetime DEFAULT NULL,
   `approval` int(11) NOT NULL,
-  `aprroved_by` text NOT NULL,
-  `aprroved_date` datetime DEFAULT NULL,
+  `approved_by` text NOT NULL,
+  `approved_date` datetime DEFAULT NULL,
   `date_flagged` datetime DEFAULT NULL,
   `remarks` text NOT NULL,
   `paid` int(11) NOT NULL,
@@ -956,6 +976,12 @@ ALTER TABLE `archive_work`
   ADD PRIMARY KEY (`ar_work_id`);
 
 --
+-- Indexes for table `borrowing_history`
+--
+ALTER TABLE `borrowing_history`
+  ADD PRIMARY KEY (`bh_id`);
+
+--
 -- Indexes for table `clients`
 --
 ALTER TABLE `clients`
@@ -1041,7 +1067,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `activity_logs`
 --
 ALTER TABLE `activity_logs`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `answers`
@@ -1120,6 +1146,12 @@ ALTER TABLE `archive_spouse`
 --
 ALTER TABLE `archive_work`
   MODIFY `ar_work_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `borrowing_history`
+--
+ALTER TABLE `borrowing_history`
+  MODIFY `bh_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `clients`
